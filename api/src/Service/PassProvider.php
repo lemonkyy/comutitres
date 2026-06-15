@@ -32,6 +32,20 @@ final class PassProvider
         );
     }
 
+    public function updatePass(string $id, string $name, string $description, ?int $price): void
+    {
+        $pass = $this->getPassFromId($id);
+        $pass->setName($name);
+        $pass->setDescription($description);
+        $this->passRepository->save($pass, false);
+
+        if ($price !== null) {
+            // Update the price in Stripe
+            // @todo
+            // $this->stripeBridge->updateProductPrice($id, $price);
+        }
+    }
+
     private function createPassFromProduct(Product $product): Pass
     {
         $pass = $this->getPassFromId($product->id);

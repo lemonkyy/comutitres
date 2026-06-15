@@ -16,12 +16,12 @@ class PassRepository extends ServiceEntityRepository
         parent::__construct($registry, Pass::class);
     }
 
-    public function save(Pass $entity, bool $flush = true): void
+    public function save(Pass $entity, bool $persist = true): void
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        if ($persist) {
+            $this->getEntityManager()->persist($entity);
         }
+
+        $this->getEntityManager()->flush();
     }
 }

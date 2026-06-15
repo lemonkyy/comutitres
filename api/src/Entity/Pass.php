@@ -16,11 +16,11 @@ class Pass implements Translatable
 
     #[ORM\Column(length: 255)]
     #[Gedmo\Translatable]
-    private string $name;
+    private string $name = '';
 
     #[ORM\Column(length: 255)]
     #[Gedmo\Translatable]
-    private string $description;
+    private string $description = '';
 
     #[Gedmo\Locale]
     private $locale;
@@ -42,9 +42,19 @@ class Pass implements Translatable
         return $this->name;
     }
 
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     public function setTranslatableLocale($locale)
