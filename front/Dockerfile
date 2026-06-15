@@ -15,6 +15,7 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm fetch;
+RUN pnpm approve-builds --all;
 RUN pnpm install --frozen-lockfile --ignore-scripts=false;
 
 # Dev image
