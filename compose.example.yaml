@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:80"
 
-  node:
+  front:
     volumes:
       - ./front:/app
     ports:
