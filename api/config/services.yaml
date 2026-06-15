@@ -9,15 +9,28 @@
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    gedmo.mapping.driver.attribute:
+        class: Gedmo\Mapping\Driver\AttributeReader
+
+    gedmo.listener.translatable:
+        class: Gedmo\Translatable\TranslatableListener
+        tags:
+            - { name: doctrine.event_listener, event: 'postLoad' }
+            - { name: doctrine.event_listener, event: 'postPersist' }
+            - { name: doctrine.event_listener, event: 'preFlush' }
+            - { name: doctrine.event_listener, event: 'onFlush' }
+            - { name: doctrine.event_listener, event: 'loadClassMetadata' }
+        calls:
+            - [ setAnnotationReader, [ '@gedmo.mapping.driver.attribute' ] ]
+            # The Kernel's `locale` parameter is used to configure the default locale for the extension
+            - [ setDefaultLocale, [ '%kernel.default_locale%' ] ]
+
+    Gedmo\Translatable\TranslatableListener:
+        alias: gedmo.listener.translatable

@@ -6,17 +6,17 @@ namespace App\Api\State\Provider;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
-use App\Service\StripeBridge;
+use App\Service\PassProvider;
 
 final class ListPassProvider implements ProviderInterface
 {
     public function __construct(
-        private StripeBridge $stripeBridge,
+        private PassProvider $passProvider,
     ) {
     }
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
-        return $this->stripeBridge->getAllProducts();
+        return $this->passProvider->getAllPasses();
     }
 }
