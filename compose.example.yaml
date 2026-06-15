@@ -1,0 +1,24 @@
+services:
+  php:
+    volumes:
+      - ./api:/app
+    ports:
+      - "8000:80"
+
+  node:
+    volumes:
+      - ./front:/app
+    ports:
+      - "3000:3000"
+
+  db:
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: comutitres
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mailbox:
+    ports:
+      - "8025:8025"
+

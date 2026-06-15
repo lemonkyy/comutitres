@@ -1,30 +1,29 @@
 services:
   php:
+    depends_on:
+      - db
     build:
       context: ./api
       target: ${DOCKER_TARGET:-dev}
-    ports:
-      - "8000:80"
     working_dir: /app
-    volumes:
-      - ./api:/app
 
   pma:
     image: phpmyadmin/phpmyadmin
     environment:
       PMA_HOST: db
-    ports:
-      - "8090:80"
     depends_on:
       - db
 
   db:
     image: mariadb:12.3
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: app
-    volumes:
-      - db_data:/var/lib/mysql
+
+  front:
+    build:
+      context: ./front
+      target: ${DOCKER_TARGET:-dev}
+
+  mailbox:
+    image: mailhog/mailhog
 
 volumes:
   db_data:
