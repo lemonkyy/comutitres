@@ -11,7 +11,7 @@ use Gedmo\Translatable\Translatable;
 class Pass implements Translatable
 {
     #[ORM\Id]
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
     private string $id;
 
     #[ORM\Column(length: 255)]

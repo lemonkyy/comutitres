@@ -1,0 +1,9 @@
+App\Entity\Choice:
+    attributes:
+        id:
+            groups:
+                - question:read
+        text:
+            groups:
+                - question:read
+                - question:write
