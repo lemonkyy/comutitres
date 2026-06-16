@@ -1,6 +1,7 @@
-import type { ApiClientError } from "@/lib/api/ApiClientError";
-import { handleApiError } from "@/lib/api/handleApiError";
-import { PassResource } from "./resources/PassResource";
+import { ApiClientError } from '@/lib/api/ApiClientError';
+import { handleApiError } from '@/lib/api/handleApiError';
+import { PassResource } from './resources/PassResource';
+import { WorkflowResource } from './resources/WorkflowResource';
 
 export interface LoginResponse {
   token: string;
@@ -34,12 +35,14 @@ export enum ResponseType {
 
 export class ApiClient {
   pass: PassResource;
+  workflow: WorkflowResource;
 
   constructor(
     public baseUrl: string,
     public token: string | null = null,
   ) {
     this.pass = new PassResource(this);
+    this.workflow = new WorkflowResource(this);
   }
 
   public async get<T>(

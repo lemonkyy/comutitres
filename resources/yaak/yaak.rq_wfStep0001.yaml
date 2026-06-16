@@ -1,10 +1,10 @@
 type: http_request
 model: http_request
-id: rq_kgssiuWxNm
-createdAt: 2026-05-28T09:07:31.206448844
-updatedAt: 2026-06-16T12:55:25.151890325
+id: rq_wfStep0001
+createdAt: 2026-06-16T10:00:00
+updatedAt: 2026-06-16T12:55:45.243321677
 workspaceId: wk_VTFsBwidP6
-folderId: fl_eADiiMWecn
+folderId: fl_8pydsy3tv9
 authentication: {}
 authenticationType: null
 body:
@@ -13,27 +13,23 @@ bodyType: application/json
 description: ''
 headers:
 - enabled: true
-  name: Content-Type
-  value: application/json
-  id: MTvaMJdptv
-- enabled: true
   name: Accept-Language
   value: fr
-  id: RrBkXuJwwC
+  id: wfStepHdr1
 - enabled: true
   name: ''
   value: ''
-  id: DbNNaGxh7I
+  id: wfStepHdr2
 method: GET
-name: Get Pass Collection
-sortPriority: 0.0
-url: http://localhost:8000/api/passes
+name: Workflow Step
+sortPriority: 1000.0
+url: http://localhost:8000/api/workflow/step/c-001
 urlParameters:
 - enabled: true
   name: ''
   value: ''
-  id: Qr7nIEsfJE
+  id: wfStepPrm1
 - enabled: true
   name: ''
   value: ''
-  id: qcKbrxB0IC
+  id: wfStepPrm2

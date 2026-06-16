@@ -1,0 +1,17 @@
+App\Entity\Question:
+    attributes:
+        id:
+            groups:
+                - question:read
+        text:
+            groups:
+                - question:read
+                - question:write
+        isFirst:
+            groups:
+                - question:read
+                - question:write
+        choices:
+            groups:
+                - question:read
+                - question:write

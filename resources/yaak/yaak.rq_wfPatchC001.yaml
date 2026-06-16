@@ -1,0 +1,44 @@
+type: http_request
+model: http_request
+id: rq_wfPatchC001
+createdAt: 2026-06-16T14:00:00
+updatedAt: 2026-06-16T14:28:52.646955981
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication: {}
+authenticationType: null
+body:
+  text: |-
+    {
+      "text": "Nouveau libellé du choix",
+      "nextQuestionId": null,
+      "recommendedPassId": null
+    }
+bodyType: application/merge-patch+json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/merge-patch+json
+  id: wfPC01Hdr1
+- enabled: true
+  name: Content-Language
+  value: fr
+  id: wfPC01Hdr2
+- enabled: true
+  name: ''
+  value: ''
+  id: wfPC01Hdr3
+method: PATCH
+name: Workflow Update Choice
+sortPriority: 4000.0
+url: http://localhost:8000/api/choices/3
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: wfPC01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfPC01Prm2
