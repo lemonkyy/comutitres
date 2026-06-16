@@ -39,6 +39,17 @@ final class PassProvider
         return $passes;
     }
 
+    public function getPass(string $id): Pass
+    {
+        $product = $this->stripeBridge->getProduct($id);
+
+        if (!$product) {
+            throw new \RuntimeException(sprintf('Product with ID %s not found in Stripe.', $id));
+        }
+
+        return $this->createPassFromProduct($product);
+    }
+
     public function updatePass(string $id, string $name, string $description, ?int $price): void
     {
         $pass = $this->getPassFromId($id);

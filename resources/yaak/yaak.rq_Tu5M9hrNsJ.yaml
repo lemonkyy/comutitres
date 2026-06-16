@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_Tu5M9hrNsJ
+createdAt: 2026-06-16T19:03:31.408664752
+updatedAt: 2026-06-16T20:46:08.015946726
+workspaceId: wk_VTFsBwidP6
+folderId: fl_7kgbFGodXv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: '  '
+headers: []
+method: GET
+name: list purchase
+sortPriority: 1000.001
+url: http://localhost:8000/api/invoices
+urlParameters: []

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use Stripe\Checkout\Session;
 use Stripe\Product;
 use Stripe\StripeClient;
 
@@ -32,7 +33,7 @@ final class StripeBridge
         }
     }
 
-    public function startPayment(string $priceId, bool $isSubscription = false): string
+    public function startPayment(string $priceId, string $email, bool $isSubscription = false): string
     {
         $session = $this->client->checkout->sessions->create([
             'payment_method_types' => ['card'],
@@ -43,10 +44,32 @@ final class StripeBridge
                 ],
             ],
             'mode' => $isSubscription ? 'subscription' : 'payment',
+            'customer_email' => $email, // @avoir
             'success_url' => $this->frontUrl.'/payment-success',
             'cancel_url' => $this->frontUrl.'/payment-cancel',
         ]);
 
         return $session->url;
+    }
+
+    public function getAllPurchases(string $email): array
+    {
+        $sessions = $this->client->checkout->sessions->all([
+            'customer_details' => ['email' => $email],
+            'status' => 'complete',
+            'limit' => 100,
+        ]);
+
+        return $sessions->data;
+    }
+
+    public function getProductFromSession(Session $session): string
+    {
+        $product = $this->client->checkout->sessions->allLineItems($session->id, [
+            'limit' => 1,
+            'expand' => ['data.price.product'],
+        ]);
+
+        return $product->data[0]->price->product->id;
     }
 }
