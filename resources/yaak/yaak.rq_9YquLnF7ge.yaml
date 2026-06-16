@@ -1,0 +1,40 @@
+type: http_request
+model: http_request
+id: rq_9YquLnF7ge
+createdAt: 2026-06-16T08:15:29.850283141
+updatedAt: 2026-06-16T08:30:16.197651623
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication: {}
+authenticationType: null
+body:
+  text: |
+    {}
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: PTMk4MiDrs
+- enabled: true
+  name: Content-Language
+  value: en
+  id: Y2zWCxzrSG
+- enabled: true
+  name: ''
+  value: ''
+  id: 8Wrb4udius
+method: POST
+name: Buy
+sortPriority: -1779959251204.999
+url: http://localhost:8000/api/passes/prod_Ui102EIh2XMWhW/buy
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: yiMYpcbEZx
+- enabled: true
+  name: ''
+  value: ''
+  id: HJYTYXGjqD

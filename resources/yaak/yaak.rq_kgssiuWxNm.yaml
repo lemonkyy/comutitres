@@ -1,0 +1,39 @@
+type: http_request
+model: http_request
+id: rq_kgssiuWxNm
+createdAt: 2026-05-28T09:07:31.206448844
+updatedAt: 2026-06-15T20:54:18.980971982
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication: {}
+authenticationType: null
+body:
+  text: ''
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: MTvaMJdptv
+- enabled: true
+  name: Accept-Language
+  value: fr
+  id: RrBkXuJwwC
+- enabled: true
+  name: ''
+  value: ''
+  id: DbNNaGxh7I
+method: GET
+name: Get Pass
+sortPriority: -1779959251205.0
+url: http://localhost:8000/api/passes
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: Qr7nIEsfJE
+- enabled: true
+  name: ''
+  value: ''
+  id: qcKbrxB0IC

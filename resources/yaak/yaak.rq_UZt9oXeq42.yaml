@@ -1,0 +1,44 @@
+type: http_request
+model: http_request
+id: rq_UZt9oXeq42
+createdAt: 2026-06-15T20:20:24.430321594
+updatedAt: 2026-06-15T20:51:20.151160099
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication: {}
+authenticationType: null
+body:
+  text: |-
+    {
+      "name": "name",
+      "description": "desc",
+      "price": 0
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: PTMk4MiDrs
+- enabled: true
+  name: Content-Language
+  value: en
+  id: Y2zWCxzrSG
+- enabled: true
+  name: ''
+  value: ''
+  id: 8Wrb4udius
+method: POST
+name: Update pass
+sortPriority: -1779959251205.0
+url: http://localhost:8000/api/passes/prod_Ui102EIh2XMWhW
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: yiMYpcbEZx
+- enabled: true
+  name: ''
+  value: ''
+  id: HJYTYXGjqD
