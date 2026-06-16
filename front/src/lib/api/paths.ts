@@ -1,7 +1,7 @@
 export const apiPaths = {
   pass: {
-    collection: '/passses',
-    update: '/passses/:id',
-    buy: '/passses/:id/buy',
+    collection: '/passes',
+    update: '/passes/:id',
+    buy: '/passes/:id/buy',
   }
 };
