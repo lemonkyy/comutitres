@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Api\State\Provider\ListPassProvider;
+use App\Domain\Command\BuyPassCommand;
 use App\Domain\Command\UpdateProductCommand;
 
 #[ApiResource(operations: [
@@ -19,6 +20,11 @@ use App\Domain\Command\UpdateProductCommand;
         uriTemplate: '/passes/{id}',
         messenger: true,
         input: UpdateProductCommand::class,
+    ),
+    new Post(
+        uriTemplate: '/passes/{id}/buy',
+        messenger: true,
+        input: BuyPassCommand::class,
     ),
 ])]
 final readonly class Pass
