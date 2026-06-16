@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 
 import "./globals.css";
 import { ApiClientProvider } from "@/contexts/api-client";
+import Navbar from "@/components/partials/navbar";
 
 type ProvidersProps = {
   children: ReactNode;
@@ -16,7 +17,8 @@ const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
       <NextIntlClientProvider>
-				<ApiClientProvider>
+        <ApiClientProvider>
+          <Navbar />
 					{children}
 				</ApiClientProvider>
       </NextIntlClientProvider>
