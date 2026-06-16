@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Model\Price;
 use Stripe\Product;
 use Stripe\StripeClient;
 
@@ -12,6 +11,7 @@ final class StripeBridge
 {
     public function __construct(
         private StripeClient $client,
+        private string $frontUrl,
     ) {}
 
     public function getAllProducts(): array
@@ -30,5 +30,23 @@ final class StripeBridge
         } catch (\Stripe\Exception\ApiErrorException $e) {
             return null;
         }
+    }
+
+    public function startPayment(string $priceId, bool $isSubscription = false): string
+    {
+        $session = $this->client->checkout->sessions->create([
+            'payment_method_types' => ['card'],
+            'line_items' => [
+                [
+                    'price' => $priceId,
+                    'quantity' => 1, // @avoir
+                ],
+            ],
+            'mode' => $isSubscription ? 'subscription' : 'payment',
+            'success_url' => $this->frontUrl.'/payment-success',
+            'cancel_url' => $this->frontUrl.'/payment-cancel',
+        ]);
+
+        return $session->url;
     }
 }
