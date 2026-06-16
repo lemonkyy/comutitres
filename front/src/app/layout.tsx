@@ -1,9 +1,10 @@
-import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import type { ReactNode } from "react";
 
 import "./globals.css";
-import { ApiClientProvider } from "@/contexts/api-client";
 import Navbar from "@/components/partials/navbar";
+import { ApiClientProvider } from "@/contexts/api-client";
+import { routing } from "@/i18n/routing";
 
 type ProvidersProps = {
   children: ReactNode;
@@ -15,27 +16,23 @@ type Props = {
 
 const Providers = ({ children }: ProvidersProps) => {
   return (
-    <>
-      <NextIntlClientProvider>
-        <ApiClientProvider>
-          <Navbar />
-					{children}
-				</ApiClientProvider>
-      </NextIntlClientProvider>
-    </>
+    <NextIntlClientProvider>
+      <ApiClientProvider>
+        <Navbar />
+        {children}
+      </ApiClientProvider>
+    </NextIntlClientProvider>
   );
 };
 
 const RootLayout = async ({ children }: Props) => {
-	return (
-		<html>
-			<body className="min-h-full flex flex-col">
-				<Providers>
-					{children}
-				</Providers>
-			</body>
-		</html>
-	);
-}
+  return (
+    <html lang={routing.defaultLocale}>
+      <body className="min-h-full flex flex-col">
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { createContext, ReactNode, useContext, useEffect } from 'react';
+import { type ReactNode, createContext, useContext, useEffect } from "react";
 
-import { ApiClient } from '@/lib/api/ApiClient';
-import { apiBaseUrl } from '@/utils/tools';
-import { getCookie, setCookie, deleteCookie } from '@/utils/cookie';
+import { ApiClient } from "@/lib/api/ApiClient";
+import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
+import { apiBaseUrl } from "@/utils/tools";
 
 type Props = {
   children: ReactNode;
@@ -14,9 +14,11 @@ type ApiClientContextType = {
   apiClient: ApiClient;
 };
 
-export const ApiClientContext = createContext<ApiClientContextType | undefined>(undefined);
+export const ApiClientContext = createContext<ApiClientContextType | undefined>(
+  undefined,
+);
 
-const TOKEN_COOKIE = 'token';
+const TOKEN_COOKIE = "token";
 
 const apiClient = new ApiClient(apiBaseUrl);
 
@@ -34,14 +36,17 @@ export const ApiClientProvider = ({ children }: Props) => {
     if (savedToken) apiClient.setTokens(savedToken);
   }, []);
 
-  return <ApiClientContext.Provider value={{ apiClient }}>{children}</ApiClientContext.Provider>;
+  return (
+    <ApiClientContext.Provider value={{ apiClient }}>
+      {children}
+    </ApiClientContext.Provider>
+  );
 };
 
 export const useApiClient = () => {
   const context = useContext(ApiClientContext);
   if (!context) {
-    throw new Error('useApiClient must be used within an ApiClientProvider');
+    throw new Error("useApiClient must be used within an ApiClientProvider");
   }
   return context;
 };
-

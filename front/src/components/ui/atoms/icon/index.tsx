@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { IconName, icons } from './config';
+import { type IconName, icons } from "./config";
 
 type Props = {
   name: IconName;
@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-const Icon = ({ name, title = '', className = '', ...props }: Props) => {
+const Icon = ({ name, title = "", className = "", ...props }: Props) => {
   const IconComponent = icons[name];
 
   return (

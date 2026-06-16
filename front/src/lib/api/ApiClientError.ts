@@ -1,10 +1,10 @@
 export class ApiClientError extends Error {
   public constructor(
     public code: number,
-    message: string
+    message: string,
   ) {
     super(message);
 
-    this.name = 'ApiClientError';
+    this.name = "ApiClientError";
   }
 }

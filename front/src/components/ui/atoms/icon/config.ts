@@ -1,5 +1,10 @@
-import { ComponentType, SVGProps } from 'react';
-import { FolderOpen, CreditCard, HelpCircle, LucideIcon } from 'lucide-react';
+import {
+  CreditCard,
+  FolderOpen,
+  HelpCircle,
+  type LucideIcon,
+} from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 
 export type IconName = keyof typeof raw & string;
 export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
