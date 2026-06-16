@@ -1,0 +1,32 @@
+type: http_request
+model: http_request
+id: rq_oHWFGtEtQ8
+createdAt: 2026-06-16T14:13:04.468719300
+updatedAt: 2026-06-16T20:30:29.341528700
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication:
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3ODE2NDE4MjAsImV4cCI6MTc4MTY0NTQyMCwic3ViIjoidXNlci00Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.pxAISGXAMu1CS71kEzeIzKQfoSSIdOW9RBADOLGIElLJt_ETQV3s50f5C4lEDfklTMzFeoiy4bLpJZVfUN-dkeyWL0vvwWwnUVwb7dJNFxA8uhorQ9LW7zv0E7SoVyLr37TleKXYNplCJZmFydS6wy-qJLhrifYMf92hgyJPGKmGIl3eXQedjYraHzJqGLg3PEJkhnZd5VXHoqr-tBoemtGq4zTJpk3T_oXNMwypQShlK5ILIyVWrzYZv5Yd8z6_b_W0LmQZ2YWZCMWrk1uzH0WcONwJ5zxPJOOE1rQuzF-Qz2fJeoBMGGqIzi3cweBQpM1kfi8LKpwxyrYepDvl_Q
+authenticationType: bearer
+body:
+  text: |
+    {
+      "street": "10 Rue de la Paix",
+      "city": "Paris",
+      "country": "France",
+      "postalCode": "75002",
+      "region": "ile_de_france",
+      "department": "75"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: rK3Gc6szzp
+method: POST
+name: create address
+sortPriority: 1000.0
+url: http://localhost:8000/api/me/address
+urlParameters: []
