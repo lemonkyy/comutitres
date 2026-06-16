@@ -1,4 +1,51 @@
 {
+  "home": {
+    "assistant": {
+      "ctaLabel": "Démarrer l'assistant",
+      "description": "Notre assistant analyse votre situation et vous recommande le titre le plus avantageux.",
+      "title": "Trouvez votre forfait en 2 minutes"
+    },
+    "hero": {
+      "brand": "Comutitres",
+      "greeting": "Bonjour, Sophie 👋",
+      "title": "Bienvenue sur Comutitres"
+    },
+    "news": {
+      "heading": "Actualités",
+      "items": {
+        "renewal": {
+          "body": "Votre Imagine R expire le 31 août. Renouvelez dès maintenant.",
+          "title": "Renouvellement en approche"
+        },
+        "solidarity": {
+          "body": "Le pass TST Solidarité est désormais disponible en ligne.",
+          "title": "Nouveauté 2025"
+        }
+      }
+    },
+    "quickAccess": {
+      "heading": "Accès rapide",
+      "items": {
+        "card": {
+          "description": "Imagine R actif",
+          "title": "Mes titres"
+        },
+        "folder": {
+          "description": "En traitement",
+          "title": "Mon dossier"
+        },
+        "help": {
+          "description": "Centre d'aide",
+          "title": "Aide"
+        }
+      }
+    },
+    "region": {
+      "description": "Voir les forfaits par zone",
+      "label": "Île-de-France Mobilités",
+      "title": "Zones 1-5 disponibles"
+    }
+  },
   "startAssistant": "Démarrer l'assistant",
   "welcome": "Bienvenue sur le site de la République Française"
 }
