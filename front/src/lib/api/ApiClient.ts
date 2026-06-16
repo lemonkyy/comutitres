@@ -1,7 +1,7 @@
-import { ApiClientError } from '@/lib/api/ApiClientError';
-import { handleApiError } from '@/lib/api/handleApiError';
-import { PassResource } from './resources/PassResource';
-import { WorkflowResource } from './resources/WorkflowResource';
+import type { ApiClientError } from "@/lib/api/ApiClientError";
+import { handleApiError } from "@/lib/api/handleApiError";
+import { PassResource } from "./resources/PassResource";
+import { WorkflowResource } from "./resources/WorkflowResource";
 
 export interface LoginResponse {
   token: string;

@@ -1,3 +1,4 @@
+import type { IconName } from "@/components/ui/atoms/icon/config";
 import type { pathnames } from "@/i18n/pathnames";
 
 export type NavbarVisibility = "all" | "mobile" | "desktop";
@@ -7,7 +8,7 @@ export type NavbarItem = {
   label: string;
   href: keyof typeof pathnames;
   visibility?: NavbarVisibility;
-  icon?: React.ReactNode | null;
+  icon: IconName;
 };
 
 export const navbarItems: NavbarItem[] = [
@@ -16,27 +17,34 @@ export const navbarItems: NavbarItem[] = [
     label: "Accueil",
     href: "/",
     visibility: "all",
-    icon: null,
+    icon: "house",
   },
   {
-    id: "lobby",
+    id: "assistant",
     label: "Assistant",
     href: "/assistant",
     visibility: "all",
-    icon: null,
+    icon: "messagesquare",
   },
   {
-    id: "roles",
-    label: "Mon dossier",
+    id: "card",
+    label: "Ma carte",
+    href: "/my-card",
+    visibility: "all",
+    icon: "creditcard",
+  },
+  {
+    id: "folder",
+    label: "Dossier",
     href: "/my-folder",
     visibility: "all",
-    icon: null,
+    icon: "folderopen",
   },
   {
-    id: "params",
-    label: "Paramètres",
+    id: "settings",
+    label: "Réglages",
     href: "/settings",
     visibility: "all",
-    icon: null,
+    icon: "settings",
   },
 ];

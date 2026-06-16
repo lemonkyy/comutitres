@@ -6,8 +6,8 @@ export type Pass = {
 };
 
 export type Price = {
-  id: string,
-  amount: number,
+  id: string;
+  amount: number;
 };
 
 export type WorkflowChoice = {
@@ -22,8 +22,8 @@ export type WorkflowQuestion = {
 };
 
 export type WorkflowStepResult =
-  | { type: 'question'; question: WorkflowQuestion }
-  | { type: 'pass'; pass: Pass };
+  | { type: "question"; question: WorkflowQuestion }
+  | { type: "pass"; pass: Pass };
 
 export type CreateChoiceInput = {
   text: string;
