@@ -8,5 +8,9 @@ export const pathnames = {
   '/settings': {
     fr: '/parametres',
     en: '/settings'
+  },
+  '/ui': {
+    fr: '/ui',
+    en: '/ui'
   }
 };
