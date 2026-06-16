@@ -1,31 +1,38 @@
-export const getCookie = (name: string): string|null => {
-  if (typeof document === 'undefined') {
-    return null
+export const getCookie = (name: string): string | null => {
+  if (typeof document === "undefined") {
+    return null;
   }
 
-  const cookies = document.cookie.split('; ')
-  const value = cookies.find(cookie => cookie.startsWith(`${name}=`))?.split('=')[1]
+  const cookies = document.cookie.split("; ");
+  const value = cookies
+    .find((cookie) => cookie.startsWith(`${name}=`))
+    ?.split("=")[1];
 
   if (value === undefined) {
-    return null
+    return null;
   }
 
-  return decodeURIComponent(value)
-}
+  return decodeURIComponent(value);
+};
 
-export const setCookie = (name: string, value: string, expire: Date|null = null) => {
-  if (typeof document === 'undefined') {
-    return
+export const setCookie = (
+  name: string,
+  value: string,
+  expire: Date | null = null,
+) => {
+  if (typeof document === "undefined") {
+    return;
   }
 
-  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; ${expire ? `expires=${expire.toUTCString()};` : ''}`
-}
+  // biome-ignore lint/suspicious/noDocumentCookie: This utility intentionally writes browser cookies directly.
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; ${expire ? `expires=${expire.toUTCString()};` : ""}`;
+};
 
 export const deleteCookie = (name: string) => {
-  if (typeof document === 'undefined') {
-    return
+  if (typeof document === "undefined") {
+    return;
   }
 
+  // biome-ignore lint/suspicious/noDocumentCookie: This utility intentionally clears browser cookies directly.
   document.cookie = `${name}=; Max-Age=-99999999; path=/`;
-}
-
+};

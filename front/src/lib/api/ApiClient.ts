@@ -1,6 +1,6 @@
-import { ApiClientError } from '@/lib/api/ApiClientError';
-import { handleApiError } from '@/lib/api/handleApiError';
-import { PassResource } from './resources/PassResource';
+import type { ApiClientError } from "@/lib/api/ApiClientError";
+import { handleApiError } from "@/lib/api/handleApiError";
+import { PassResource } from "./resources/PassResource";
 
 export interface LoginResponse {
   token: string;
@@ -18,8 +18,8 @@ export interface CollectionResponse<T> {
   member: T[];
   totalItems: number;
   view?: {
-    '@id': string;
-    '@type': string;
+    "@id": string;
+    "@type": string;
     first: string;
     last: string;
     next?: string;
@@ -28,8 +28,8 @@ export interface CollectionResponse<T> {
 }
 
 export enum ResponseType {
-  RAW = 'raw',
-  JSON = 'json',
+  RAW = "raw",
+  JSON = "json",
 }
 
 export class ApiClient {
@@ -47,17 +47,17 @@ export class ApiClient {
     additionnalHeaders: HeadersInit = {},
   ): Promise<T | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        Accept: 'application/json',
-        'Accept-Language': 'fr',
-        'Content-Language': 'fr',
+        Accept: "application/json",
+        "Accept-Language": "fr",
+        "Content-Language": "fr",
         ...additionnalHeaders,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   public async getCollection<T>(
@@ -65,17 +65,17 @@ export class ApiClient {
     additionnalHeaders: HeadersInit = {},
   ): Promise<CollectionResponse<T> | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        Accept: 'application/ld+json',
-        'Accept-Language': 'fr',
-        'Content-Language': 'fr',
+        Accept: "application/ld+json",
+        "Accept-Language": "fr",
+        "Content-Language": "fr",
         ...additionnalHeaders,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   public async post<T>(
@@ -88,21 +88,21 @@ export class ApiClient {
 
     const headers: HeadersInit = isFormData
       ? {
-          Accept: 'application/json',
-          'Accept-Language': 'fr',
-          'Content-Language': 'fr',
+          Accept: "application/json",
+          "Accept-Language": "fr",
+          "Content-Language": "fr",
           ...additionnalHeaders,
         }
       : {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Accept-Language': 'fr',
-          'Content-Language': 'fr',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Accept-Language": "fr",
+          "Content-Language": "fr",
           ...additionnalHeaders,
         };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -110,7 +110,9 @@ export class ApiClient {
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => (responseType === ResponseType.RAW ? response : response.json()))
+      .then((response) =>
+        responseType === ResponseType.RAW ? response : response.json(),
+      );
   }
 
   public async patch<T>(
@@ -119,15 +121,15 @@ export class ApiClient {
     additionnalHeaders: HeadersInit = {},
   ): Promise<T | ApiClientError> {
     const headers: HeadersInit = {
-      Accept: 'application/json',
-      'Content-Type': 'application/merge-patch+json',
-      'Accept-Language': 'fr',
-      'Content-Language': 'fr',
+      Accept: "application/json",
+      "Content-Type": "application/merge-patch+json",
+      "Accept-Language": "fr",
+      "Content-Language": "fr",
       ...additionnalHeaders,
     };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -135,7 +137,7 @@ export class ApiClient {
       body: JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   public async put<T>(
@@ -147,21 +149,21 @@ export class ApiClient {
 
     const headers: HeadersInit = isFormData
       ? {
-          Accept: 'application/json',
-          'Accept-Language': 'fr',
-          'Content-Language': 'fr',
+          Accept: "application/json",
+          "Accept-Language": "fr",
+          "Content-Language": "fr",
           ...additionnalHeaders,
         }
       : {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Accept-Language': 'fr',
-          'Content-Language': 'fr',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Accept-Language": "fr",
+          "Content-Language": "fr",
           ...additionnalHeaders,
         };
 
     return fetch(`${this.baseUrl}${url}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
         ...headers,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
@@ -169,26 +171,26 @@ export class ApiClient {
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => response.json())
+      .then((response) => response.json());
   }
 
   public async delete(url: string): Promise<DeleteResponse | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Accept-Language': 'fr',
-        'Content-Language': 'fr',
+        "Accept-Language": "fr",
+        "Content-Language": "fr",
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => ({ success: response.status === 204 }))
+      .then((response) => ({ success: response.status === 204 }));
   }
 
   public async login(): Promise<LoginResponse | ApiClientError> {
     return {
-      token: 'temp-token',
-    }
+      token: "temp-token",
+    };
   }
 
   private onTokenChange?: (token: string | null) => void;
