@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_9YquLnF7ge
 createdAt: 2026-06-16T08:15:29.850283141
-updatedAt: 2026-06-16T09:09:27.474894762
+updatedAt: 2026-06-16T09:21:06.841166853
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication: {}
@@ -29,7 +29,7 @@ headers:
   id: 8Wrb4udius
 method: POST
 name: Buy
-sortPriority: -1779959251204.999
+sortPriority: 2000.0
 url: http://localhost:8000/api/passes/prod_Ui102EIh2XMWhW/buy
 urlParameters:
 - enabled: true
