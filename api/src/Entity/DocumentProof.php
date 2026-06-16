@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
+use App\Domain\Command\Admin\UpdateDocumentStatusCommand;
 use App\Domain\Command\User\UploadDocumentCommand;
 use App\Enum\DocumentEnum;
+use App\Enum\DocumentProofStatus;
 use App\Repository\DocumentProofRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +17,12 @@ use Doctrine\ORM\Mapping as ORM;
         uriTemplate: 'document-proof/upload',
         messenger: true,
         input: UploadDocumentCommand::class,
-    )
+    ),
+    new Post(
+        uriTemplate: 'document-proof/{id}/status',
+        messenger: true,
+        input: UpdateDocumentStatusCommand::class,
+    ),
 ])]
 class DocumentProof
 {
@@ -33,6 +40,9 @@ class DocumentProof
 
     #[ORM\Column(enumType: DocumentEnum::class)]
     private DocumentEnum $type;
+
+    #[ORM\Column(enumType: DocumentProofStatus::class)]
+    private DocumentProofStatus $status = DocumentProofStatus::PENDING;
 
     public function __construct(
         User $user,
@@ -62,5 +72,17 @@ class DocumentProof
     public function getType(): DocumentEnum
     {
         return $this->type;
+    }
+
+    public function getStatus(): ?DocumentProofStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(DocumentProofStatus $status): static
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

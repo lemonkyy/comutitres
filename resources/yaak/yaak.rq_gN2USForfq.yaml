@@ -1,0 +1,27 @@
+type: http_request
+model: http_request
+id: rq_gN2USForfq
+createdAt: 2026-06-16T18:39:24.298108266
+updatedAt: 2026-06-16T18:48:06.815290170
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication:
+  token: ${[ token ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "status": "approved"
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: tMKZgew5NM
+method: POST
+name: Document status
+sortPriority: 1000.001
+url: http://localhost:8000/api/document-proof/1/status
+urlParameters: []
