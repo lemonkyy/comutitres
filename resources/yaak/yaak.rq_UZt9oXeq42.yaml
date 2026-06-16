@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_UZt9oXeq42
 createdAt: 2026-06-15T20:20:24.430321594
-updatedAt: 2026-06-15T20:51:20.151160099
+updatedAt: 2026-06-16T09:21:06.833832388
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication: {}
@@ -31,7 +31,7 @@ headers:
   id: 8Wrb4udius
 method: POST
 name: Update pass
-sortPriority: -1779959251205.0
+sortPriority: 1000.0
 url: http://localhost:8000/api/passes/prod_Ui102EIh2XMWhW
 urlParameters:
 - enabled: true
