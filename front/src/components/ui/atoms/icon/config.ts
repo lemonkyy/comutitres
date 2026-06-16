@@ -2,7 +2,10 @@ import {
   CreditCard,
   FolderOpen,
   HelpCircle,
+  House,
   type LucideIcon,
+  MessageSquare,
+  Settings,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 
@@ -11,9 +14,12 @@ export type IconType = LucideIcon | ComponentType<SVGProps<SVGSVGElement>>;
 export type Icons = Record<IconName, IconType>;
 
 const raw = {
+  house: House,
+  messagesquare: MessageSquare,
   folderopen: FolderOpen,
   creditcard: CreditCard,
   helpcircle: HelpCircle,
+  settings: Settings,
 };
 
 export const icons: Icons = raw;

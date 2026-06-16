@@ -1,5 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ArrowRight, CreditCard, LoaderCircle, Plus } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronRight,
+  CreditCard,
+  LoaderCircle,
+  MessageSquare,
+  Plus,
+} from "lucide-react";
 import type { ComponentProps } from "react";
 
 import { Button } from "./button";
@@ -24,7 +31,7 @@ const sizes: Array<{ label: string; value: ButtonSize }> = [
 ];
 
 const meta = {
-  title: "Components/Button",
+  title: "Actions/Button",
   component: Button,
   argTypes: {
     variant: {
@@ -58,6 +65,19 @@ export const WithIcon: Story = {
       </>
     ),
   },
+};
+
+export const AssistantLaunch: Story = {
+  render: () => (
+    <Button
+      size={null}
+      className="min-h-20 w-full max-w-[43.25rem] gap-4 rounded-[1.75rem] px-6 text-xl font-bold leading-none [--button-icon-size:1.5rem] has-[>svg]:px-6 sm:min-h-[6.5rem] sm:gap-5 sm:px-10 sm:text-3xl sm:[--button-icon-size:1.875rem]"
+    >
+      <MessageSquare data-icon="inline-start" />
+      Démarrer l&apos;assistant
+      <ChevronRight data-icon="inline-end" />
+    </Button>
+  ),
 };
 
 export const Variants: Story = {

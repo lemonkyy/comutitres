@@ -2,7 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import type { ReactNode } from "react";
 
 import "./globals.css";
-import Navbar from "@/components/partials/navbar";
+import Navbar from "@/components/layout/navbar/navbar";
 import { ApiClientProvider } from "@/contexts/api-client";
 import { routing } from "@/i18n/routing";
 
@@ -28,7 +28,7 @@ const Providers = ({ children }: ProvidersProps) => {
 const RootLayout = async ({ children }: Props) => {
   return (
     <html lang={routing.defaultLocale}>
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-dvh flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pt-[4.5rem] md:pb-0">
         <Providers>{children}</Providers>
       </body>
     </html>
