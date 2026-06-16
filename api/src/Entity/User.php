@@ -5,8 +5,9 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use App\Domain\Command\User\LoginCommand;
-use App\DTO\LoginOutput;
 use App\Entity\Address;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,9 +24,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private int $id;
+    #[ORM\Column(length: 255)]
+    private string $id;
 
     #[ORM\Column(unique: true)]
     private string $sub;
@@ -44,6 +44,18 @@ class User implements UserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', targetEntity: Address::class, cascade: ['persist', 'remove'])]
     private ?Address $address = null;
+
+    /**
+     * @var Collection<int, DocumentProof>
+     */
+    #[ORM\OneToMany(targetEntity: DocumentProof::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $documentProofs;
+
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+        $this->documentProofs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +132,36 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DocumentProof>
+     */
+    public function getDocumentProofs(): Collection
+    {
+        return $this->documentProofs;
+    }
+
+    public function addDocumentProof(DocumentProof $documentProof): static
+    {
+        if (!$this->documentProofs->contains($documentProof)) {
+            $this->documentProofs->add($documentProof);
+            $documentProof->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocumentProof(DocumentProof $documentProof): static
+    {
+        if ($this->documentProofs->removeElement($documentProof)) {
+            // set the owning side to null (unless already changed)
+            if ($documentProof->getUser() === $this) {
+                $documentProof->setUser(null);
+            }
+        }
+
         return $this;
     }
 }

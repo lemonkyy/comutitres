@@ -61,7 +61,7 @@ final class AuthService
         ]);
 
         if (!$user) {
-            $user = new User();
+            $user = new User($userData['sub']);
             $user->setSub($userData['sub']);
             $user->setEmail($userData['email']);
             $user->setGivenName($userData['givenName']);
