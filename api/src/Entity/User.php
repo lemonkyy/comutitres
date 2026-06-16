@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\InvoicesProvider;
 use App\Domain\Command\User\LoginCommand;
 use App\Entity\Address;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,7 +20,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
             uriTemplate: "/login",
             messenger: true,
             input: LoginCommand::class
-        )
+        ),
+        new GetCollection(
+            uriTemplate: "/invoices",
+            provider: InvoicesProvider::class
+        ),
     ]
 )]
 class User implements UserInterface
