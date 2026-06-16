@@ -1,0 +1,18 @@
+knpu_oauth2_client:
+    # clients:
+    #     franceconnect:
+    #         type: generic
+    #         provider_class: League\OAuth2\Client\Provider\GenericProvider
+
+    #         client_id: "%env(FRANCECONNECT_CLIENT_ID)%"
+    #         client_secret: "%env(FRANCECONNECT_CLIENT_SECRET)%"
+
+    #         redirect_route: connect_franceconnect_check
+
+    #         provider_options:
+    #             urlAuthorize: "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/authorize"
+    #             urlAccessToken: "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/token"
+    #             urlResourceOwnerDetails: "https://fcp-low.sbx.dev-franceconnect.fr/api/v2/userinfo"
+    #             scopes: "openid given_name family_name email"
+
+    # configure your clients as described here: https://github.com/knpuniversity/oauth2-client-bundle#configuration
