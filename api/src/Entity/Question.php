@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +15,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
+#[ApiFilter(SearchFilter::class, properties: ['text' => 'partial'])]
 #[ApiResource(operations: [
+    new GetCollection(
+        uriTemplate: '/questions',
+        normalizationContext: ['groups' => ['question:collection:read']],
+    ),
     new Patch(
         uriTemplate: '/questions/{id}',
         normalizationContext: ['groups' => ['question:write']],

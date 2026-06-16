@@ -17,6 +17,8 @@ final class ListPassProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
-        return $this->passProvider->getAllPasses();
+        $name = $context['filters']['name'] ?? null;
+
+        return $this->passProvider->getAllPasses($name);
     }
 }
