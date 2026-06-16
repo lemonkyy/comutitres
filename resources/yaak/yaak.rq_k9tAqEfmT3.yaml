@@ -2,11 +2,11 @@ type: http_request
 model: http_request
 id: rq_k9tAqEfmT3
 createdAt: 2026-06-16T13:30:32.659359027
-updatedAt: 2026-06-16T14:38:19.617973616
+updatedAt: 2026-06-16T18:41:23.429206610
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication:
-  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3ODE2MjA2NjQsImV4cCI6MTc4MTYyNDI2NCwic3ViIjoidXNlci00Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl19.RbsaldW41O5i-i9UUVIBXZ-917fQtLkbCtIW-kQ9oAeKuyv0rjNEkyqMy0_JVCML7Pg65p_7jRlgU6ZIU33CyuJhlTjZ25IK114jPoU5MCNYxFsf3oxoLfE6HuTEeKyOtdxF0GukbMdDp9X0mbQpnP7cxr1wC4w9RSQV8_98S8SUWr7JaBYuOylf4nXFfg97g6fAef9aqvlwMp4XbFYCqXA9SjnXrgWfgm8UB8QRCJCP_Z388uheYAyBTeUGk2kQcaX68oIqp-aevcJYkfTfwD-hX0WbKd6XPmw0CxerTM9WRfyfrmO8313_2KdZSmL7UQi5uTkM1hP_LVweN-TqBA
+  token: ${[ token ]}
 authenticationType: bearer
 body:
   text: |-
