@@ -1,4 +1,51 @@
 {
+  "home": {
+    "assistant": {
+      "ctaLabel": "Start the assistant",
+      "description": "Our assistant reviews your situation and recommends the most advantageous pass.",
+      "title": "Find your pass in 2 minutes"
+    },
+    "hero": {
+      "brand": "Comutitres",
+      "greeting": "Hello, Sophie 👋",
+      "title": "Welcome to Comutitres"
+    },
+    "news": {
+      "heading": "News",
+      "items": {
+        "renewal": {
+          "body": "Your Imagine R expires on August 31. Renew it now.",
+          "title": "Renewal coming soon"
+        },
+        "solidarity": {
+          "body": "The TST Solidarité pass is now available online.",
+          "title": "New for 2025"
+        }
+      }
+    },
+    "quickAccess": {
+      "heading": "Quick access",
+      "items": {
+        "card": {
+          "description": "Active Imagine R",
+          "title": "My passes"
+        },
+        "folder": {
+          "description": "In progress",
+          "title": "My folder"
+        },
+        "help": {
+          "description": "Help center",
+          "title": "Help"
+        }
+      }
+    },
+    "region": {
+      "description": "View passes by zone",
+      "label": "Île-de-France Mobilités",
+      "title": "Zones 1-5 available"
+    }
+  },
   "startAssistant": "Start the assistant",
   "welcome": "Welcome to the French Republic website"
 }
