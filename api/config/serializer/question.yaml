@@ -3,14 +3,17 @@ App\Entity\Question:
         id:
             groups:
                 - question:read
+                - question:collection:read
         text:
             groups:
                 - question:read
                 - question:write
+                - question:collection:read
         isFirst:
             groups:
                 - question:read
                 - question:write
+                - question:collection:read
         choices:
             groups:
                 - question:read

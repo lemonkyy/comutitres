@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_kgssiuWxNm
 createdAt: 2026-05-28T09:07:31.206448844
-updatedAt: 2026-06-16T12:55:25.151890325
+updatedAt: 2026-06-16T18:31:57.151478109
 workspaceId: wk_VTFsBwidP6
 folderId: fl_eADiiMWecn
 authentication: {}
@@ -30,10 +30,10 @@ sortPriority: 0.0
 url: http://localhost:8000/api/passes
 urlParameters:
 - enabled: true
-  name: ''
-  value: ''
+  name: name
+  value: Navigo
   id: Qr7nIEsfJE
 - enabled: true
   name: ''
   value: ''
-  id: qcKbrxB0IC
+  id: Ei9aFVaAui

@@ -20,16 +20,23 @@ final class PassProvider
     ) {
     }
 
-    public function getAllPasses(): array
+    public function getAllPasses(?string $name = null): array
     {
         $this->passesCacheMap = array_reduce($this->passRepository->findAll(),
             fn(array $map, EntityPass $pass) => $map + [$pass->getId() => $pass],
             []
         );
 
-        return array_map($this->createPassFromProduct(...),
-            $this->stripeBridge->getAllProducts()
-        );
+        $passes = array_map($this->createPassFromProduct(...), $this->stripeBridge->getAllProducts());
+
+        if ($name !== null) {
+            $passes = array_values(array_filter(
+                $passes,
+                fn(Pass $pass) => str_contains(strtolower($pass->name), strtolower($name))
+            ));
+        }
+
+        return $passes;
     }
 
     public function updatePass(string $id, string $name, string $description, ?int $price): void

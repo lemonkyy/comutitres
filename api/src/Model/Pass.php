@@ -15,6 +15,7 @@ use App\Domain\Command\UpdateProductCommand;
     new GetCollection(
         uriTemplate: '/passes',
         provider: ListPassProvider::class,
+        normalizationContext: ['groups' => ['pass:collection:read']],
     ),
     new Post(
         uriTemplate: '/passes/{id}',

@@ -1,0 +1,36 @@
+type: http_request
+model: http_request
+id: rq_wfGetQList01
+createdAt: 2026-06-16T15:00:00
+updatedAt: 2026-06-16T18:29:08.076135636
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: ''
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: Accept
+  value: application/ld+json
+  id: wfGQL01Hdr1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfGQL01Hdr2
+method: GET
+name: Workflow Get Questions
+sortPriority: 1000.0
+url: http://localhost:8000/api/questions
+urlParameters:
+- enabled: true
+  name: text
+  value: ''
+  id: wfGQL01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: DtGH7MfweJ
