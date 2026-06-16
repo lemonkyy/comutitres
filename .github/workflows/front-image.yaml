@@ -10,6 +10,7 @@ on:
       - '.github/workflows/callables/build-push/**'
       - '.github/workflows/callables/deployment/**'
       - '.github/workflows/callables/registry/**'
+  pull_request:
 
 env:
   REGISTRY: ghcr.io
