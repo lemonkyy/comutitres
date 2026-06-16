@@ -1,6 +1,3 @@
 {
-  "welcome": "Welcome to the French Republic website",
-  "ui": {
-    "description": "UI playground page to visualize the user interface components with its variants."
-  }
+  "welcome": "Welcome to the French Republic website"
 }

@@ -1,6 +1,3 @@
 {
-  "welcome": "Bienvenue sur le site de la République Française",
-  "ui": {
-    "description": "Page de visualisation des composants de l'interface utilisateur avec ses variants."
-  }
+  "welcome": "Bienvenue sur le site de la République Française"
 }

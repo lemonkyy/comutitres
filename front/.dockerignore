@@ -1,0 +1,14 @@
+.next
+.pnpm-store
+build
+coverage
+node_modules
+out
+storybook-static
+
+.env
+.env.*
+
+.DS_Store
+*.log
+*.tsbuildinfo

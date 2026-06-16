@@ -13,7 +13,7 @@ FROM base AS main
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm fetch;
 RUN pnpm approve-builds --all;
 RUN pnpm install --frozen-lockfile --ignore-scripts=false;
@@ -52,4 +52,3 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 CMD ["node", "server.js"]
-

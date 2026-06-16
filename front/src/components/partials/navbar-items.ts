@@ -39,11 +39,4 @@ export const navbarItems: NavbarItem[] = [
     visibility: "all",
     icon: null,
   },
-  {
-    id: "ui",
-    label: "UI",
-    href: "/ui",
-    visibility: "all",
-    icon: null,
-  },
 ];

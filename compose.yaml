@@ -22,6 +22,18 @@ services:
       context: ./front
       target: ${DOCKER_TARGET:-dev}
 
+  storybook:
+    build:
+      context: ./front
+      target: ${DOCKER_TARGET:-dev}
+    command:
+      - pnpm
+      - storybook
+      - --host
+      - 0.0.0.0
+      - --no-open
+      - --disable-telemetry
+
   mailbox:
     image: mailhog/mailhog
 

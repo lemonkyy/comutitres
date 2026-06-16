@@ -7,9 +7,30 @@ services:
 
   front:
     volumes:
-      - ./front:/app
+      - type: bind
+        source: ./front
+        target: /app
+      - type: volume
+        source: front_node_modules
+        target: /app/node_modules
+        volume:
+          nocopy: true
     ports:
       - "3000:3000"
+
+  storybook:
+    command: sh -c "pnpm install --frozen-lockfile --ignore-scripts=false && pnpm storybook --host 0.0.0.0 --no-open --disable-telemetry"
+    volumes:
+      - type: bind
+        source: ./front
+        target: /app
+      - type: volume
+        source: front_node_modules
+        target: /app/node_modules
+        volume:
+          nocopy: true
+    ports:
+      - "6006:6006"
 
   db:
     environment:
@@ -22,3 +43,5 @@ services:
     ports:
       - "8025:8025"
 
+volumes:
+  front_node_modules:
