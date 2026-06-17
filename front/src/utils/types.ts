@@ -3,6 +3,24 @@ export type LoginInput = {
   password: string;
 };
 
+export type Address = {
+  id: string;
+  street?: string | null;
+  city?: string | null;
+  postalCode?: string | null;
+  region?: string | null;
+  department?: string | null;
+};
+
+export type Me = {
+  id: string;
+  email?: string | null;
+  roles: string[];
+  familyName?: string | null;
+  givenName?: string | null;
+  address?: Address | string | null;
+};
+
 export type Pass = {
   id: string;
   name: string;

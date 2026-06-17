@@ -1,0 +1,20 @@
+type: http_request
+model: http_request
+id: rq_meRoute0001
+createdAt: 2026-06-17T13:14:00
+updatedAt: 2026-06-17T11:40:28.515955552
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication:
+  disabled: false
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Me
+sortPriority: 7000.0
+url: http://localhost:8000/api/me
+urlParameters: []
