@@ -1,11 +1,9 @@
-import type { ApiClientError } from "@/lib/api/ApiClientError";
+import { ApiClientError } from "@/lib/api/ApiClientError";
 import { handleApiError } from "@/lib/api/handleApiError";
+import { apiPaths } from "@/lib/api/paths";
+import type { LoginInput } from "@/utils/types";
 import { PassResource } from "./resources/PassResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
-
-export interface LoginResponse {
-  token: string;
-}
 
 export interface DeleteResponse {
   success: boolean;
@@ -190,20 +188,32 @@ export class ApiClient {
       .then((response) => ({ success: response.status === 204 }));
   }
 
-  public async login(): Promise<LoginResponse | ApiClientError> {
-    return {
-      token: "temp-token",
-    };
+  public async login(
+    credentials: LoginInput,
+  ): Promise<string | ApiClientError> {
+    const response = await this.post<string>(
+      apiPaths.auth.login,
+      credentials,
+    );
+
+    if (response instanceof ApiClientError) {
+      return response;
+    }
+
+    this.setTokens(response);
+
+    return response;
   }
 
   private onTokenChange?: (token: string | null) => void;
 
-  public setOnTokenChange(cb: (token: string | null) => void) {
-    this.onTokenChange = cb;
+  public setOnTokenChange(callback: (token: string | null) => void) {
+    this.onTokenChange = callback;
   }
 
   public setTokens(token?: string | null) {
     this.token = token ?? null;
+    console.log('token la tu c', this.token);
     this.onTokenChange?.(this.token);
   }
 }

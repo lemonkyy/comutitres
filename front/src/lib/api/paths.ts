@@ -1,4 +1,7 @@
 export const apiPaths = {
+  auth: {
+    login: "/login",
+  },
   pass: {
     collection: "/passes",
     update: "/passes/:id",
