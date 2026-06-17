@@ -1,2 +1,127 @@
 @import "tailwindcss";
 @import "./theme.css";
+
+@layer utilities {
+  .assistant-message-motion {
+    animation: assistant-message-enter 180ms cubic-bezier(0.23, 1, 0.32, 1)
+      backwards;
+    animation-delay: var(--assistant-motion-delay, 0ms);
+  }
+
+  .assistant-choice-pill-motion {
+    animation: assistant-pill-enter 170ms cubic-bezier(0.23, 1, 0.32, 1)
+      backwards;
+    animation-delay: var(--assistant-motion-delay, 0ms);
+    transition-property:
+      background-color, border-color, box-shadow, color, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .assistant-footer-motion {
+    animation: assistant-footer-enter 190ms cubic-bezier(0.23, 1, 0.32, 1)
+      backwards;
+  }
+
+  .assistant-pressable-motion {
+    transition-property:
+      background-color, border-color, box-shadow, color, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .assistant-progress-motion {
+    transition: width 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .assistant-choice-pill-motion:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  .assistant-choice-pill-motion:active:not(:focus-visible),
+  .assistant-pressable-motion:active:not(:focus-visible) {
+    transform: scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .assistant-message-motion,
+    .assistant-choice-pill-motion,
+    .assistant-footer-motion {
+      animation: none;
+      transform: none;
+    }
+
+    .assistant-choice-pill-motion,
+    .assistant-pressable-motion,
+    .assistant-progress-motion {
+      transition-property: background-color, border-color, box-shadow, color;
+      transform: none;
+    }
+
+    .assistant-choice-pill-motion:hover,
+    .assistant-choice-pill-motion:active:not(:focus-visible),
+    .assistant-pressable-motion:active:not(:focus-visible) {
+      transform: none;
+    }
+  }
+
+  :where([data-motion="reduced"]) .assistant-message-motion,
+  :where([data-motion="reduced"]) .assistant-choice-pill-motion,
+  :where([data-motion="reduced"]) .assistant-footer-motion {
+    animation: none;
+    transform: none;
+  }
+
+  :where([data-motion="reduced"]) .assistant-choice-pill-motion,
+  :where([data-motion="reduced"]) .assistant-pressable-motion,
+  :where([data-motion="reduced"]) .assistant-progress-motion {
+    transition-property: background-color, border-color, box-shadow, color;
+    transform: none;
+  }
+
+  :where([data-motion="reduced"]) .assistant-choice-pill-motion:hover,
+  :where([data-motion="reduced"])
+    .assistant-choice-pill-motion:active:not(:focus-visible),
+  :where([data-motion="reduced"])
+    .assistant-pressable-motion:active:not(:focus-visible) {
+    transform: none;
+  }
+}
+
+@keyframes assistant-message-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.375rem) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes assistant-pill-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes assistant-footer-enter {
+  from {
+    opacity: 0.94;
+    transform: translateY(0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -34,7 +34,7 @@ export function ChoicePill({
   return (
     <Button
       className={cn(
-        "max-w-full shrink rounded-full bg-card font-semibold leading-tight whitespace-normal shadow-none hover:bg-muted",
+        "assistant-choice-pill-motion max-w-full shrink rounded-full bg-card px-3 text-[0.8125rem] font-semibold leading-tight whitespace-normal shadow-none hover:bg-muted",
         className,
       )}
       data-slot="choice-pill"
@@ -58,11 +58,11 @@ export function ChoicePillGroup({
   return (
     <FieldSet
       aria-label={ariaLabel}
-      className={cn("flex-row flex-wrap gap-3", className)}
+      className={cn("flex-row flex-wrap gap-2", className)}
       data-slot="choice-pill-group"
       {...props}
     >
-      {options.map((option) => {
+      {options.map((option, index) => {
         const optionDisabled = disabled || option.disabled;
 
         return (
@@ -74,6 +74,11 @@ export function ChoicePillGroup({
                 onValueSelect?.(option.value);
               }
             }}
+            style={
+              {
+                "--assistant-motion-delay": `${Math.min(index, 4) * 30}ms`,
+              } as React.CSSProperties
+            }
           >
             {option.label}
           </ChoicePill>

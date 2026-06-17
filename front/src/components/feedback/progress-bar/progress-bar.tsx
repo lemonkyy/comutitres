@@ -29,7 +29,7 @@ export function ProgressBar({
       {...props}
     >
       <span
-        className="block h-full rounded-full bg-primary transition-[width] duration-200"
+        className="assistant-progress-motion block h-full rounded-full bg-primary"
         style={{ width: `${progress}%` }}
       />
     </div>

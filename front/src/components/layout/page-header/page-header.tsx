@@ -85,6 +85,7 @@ export type PageHeaderProps = Omit<React.ComponentProps<"header">, "title"> & {
   subtitleClassName?: string;
   subtitleTone?: SubtitleTone;
   title: React.ReactNode;
+  titleClassName?: string;
 };
 
 export function PageHeader({
@@ -99,6 +100,7 @@ export function PageHeader({
   subtitleClassName,
   subtitleTone = "muted",
   title,
+  titleClassName,
   ...props
 }: PageHeaderProps) {
   const leading = backButton ?? getDefaultBackButton(backHref, backLabel);
@@ -119,7 +121,12 @@ export function PageHeader({
           {leading ? <div className="shrink-0">{leading}</div> : null}
 
           <div className="min-w-0 flex-1">
-            <h1 className="truncate text-2xl font-extrabold leading-tight tracking-normal text-foreground">
+            <h1
+              className={cn(
+                "truncate text-2xl font-extrabold leading-tight tracking-normal text-foreground",
+                titleClassName,
+              )}
+            >
               {title}
             </h1>
             {subtitle ? (

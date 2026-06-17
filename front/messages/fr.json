@@ -1,4 +1,64 @@
 {
+  "assistant": {
+    "assistantAvatarLabel": "Assistant Comutitres",
+    "backLabel": "Retour à l'accueil",
+    "choiceGroupLabel": "Choisir une réponse",
+    "completedMessage": "Parfait ! J'ai tout ce qu'il me faut. Je prépare votre recommandation personnalisée...",
+    "progressLabel": "Progression de l'assistant",
+    "questionLabel": "Question",
+    "recommendationLabel": "Voir ma recommandation",
+    "resetLabel": "Recommencer",
+    "title": "Assistant Comutitres",
+    "questions": {
+      "age": {
+        "choices": {
+          "between16And25": "16–25 ans",
+          "between26And59": "26–59 ans",
+          "over60": "60 ans et plus",
+          "under16": "Moins de 16 ans"
+        },
+        "question": "Quel est votre âge ?"
+      },
+      "location": {
+        "choices": {
+          "innerSuburbs": "Petite couronne (92/93/94)",
+          "outerSuburbs": "Grande couronne",
+          "outsideIdf": "Hors Île-de-France",
+          "paris": "Paris (75)"
+        },
+        "question": "Où habitez-vous principalement ?"
+      },
+      "scholarship": {
+        "choices": {
+          "caf": "Oui, aide CAF ou autre",
+          "crous": "Oui, boursier·ère CROUS",
+          "no": "Non",
+          "unknown": "Je ne sais pas"
+        },
+        "question": "Avez-vous droit à une aide ou bourse ?"
+      },
+      "situation": {
+        "choices": {
+          "employee": "Salarié·e",
+          "jobSeeker": "Demandeur d'emploi",
+          "middleOrHighSchool": "Lycéen·ne / Collégien·ne",
+          "other": "Autre",
+          "senior": "Senior (60+)",
+          "student": "Étudiant·e"
+        },
+        "question": "Bonjour ! Quelle est votre situation actuelle ?"
+      },
+      "zone": {
+        "choices": {
+          "unknown": "Pas sûr·e",
+          "zones1And2": "Zone 1–2 (Paris centre)",
+          "zones1And3": "Zone 1–3",
+          "zones1And5": "Zone 1–5 (toute l'IDF)"
+        },
+        "question": "Quelle zone utilisez-vous le plus souvent ?"
+      }
+    }
+  },
   "home": {
     "assistant": {
       "ctaLabel": "Démarrer l'assistant",

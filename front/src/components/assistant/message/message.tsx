@@ -61,7 +61,7 @@ function MessagePrimitive({
   return (
     <article
       className={cn(
-        "flex w-full gap-3",
+        "assistant-message-motion flex w-full gap-3",
         isAssistant ? "flex-row items-start" : "flex-col items-end",
         className,
       )}

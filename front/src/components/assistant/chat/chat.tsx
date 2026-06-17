@@ -32,7 +32,7 @@ export function Chat({
   return (
     <main
       className={cn(
-        "mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-hidden bg-background",
+        "mx-auto flex h-dvh min-h-0 w-full max-w-md flex-col overflow-hidden bg-background",
         className,
       )}
       data-slot="assistant-chat"
@@ -45,7 +45,8 @@ export function Chat({
         contentClassName="max-w-none gap-3"
         subtitle={subtitle}
         subtitleClassName="text-xs font-normal"
-        title={<span className="text-[0.9375rem] leading-tight">{title}</span>}
+        title={title}
+        titleClassName="text-[0.9375rem] font-bold"
       >
         <ProgressBar
           label={progressLabel}
@@ -63,7 +64,10 @@ export function Chat({
       </section>
 
       {footer ? (
-        <footer className="shrink-0 bg-card" data-slot="assistant-chat-footer">
+        <footer
+          className="assistant-footer-motion shrink-0 bg-card"
+          data-slot="assistant-chat-footer"
+        >
           <Separator />
           <div className="px-4 py-4">{footer}</div>
         </footer>
