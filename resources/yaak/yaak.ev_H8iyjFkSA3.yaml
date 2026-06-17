@@ -3,7 +3,7 @@ model: environment
 id: ev_H8iyjFkSA3
 workspaceId: wk_VTFsBwidP6
 createdAt: 2026-06-16T18:26:05.225516157
-updatedAt: 2026-06-16T18:26:50.890020159
+updatedAt: 2026-06-17T08:32:41.957425411
 name: User
 public: true
 base: false
@@ -12,7 +12,7 @@ parentId: null
 variables:
 - enabled: true
   name: TOKEN
-  value: ${[ response.body.raw(request='rq_iRtQhVRs2u', behavior='smart', ttl='0') ]}
+  value: ${[ response.body.path(request='rq_iRtQhVRs2u', behavior='smart', ttl='0', result='first', join=b64'LCA', path=b64'JA') ]}
   id: udp9bwexfK
 color: var(--info)
 sortPriority: 0.0

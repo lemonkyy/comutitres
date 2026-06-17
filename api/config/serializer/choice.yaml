@@ -3,7 +3,9 @@ App\Entity\Choice:
         id:
             groups:
                 - question:read
+                - workflow:read
         text:
             groups:
                 - question:read
                 - question:write
+                - workflow:read

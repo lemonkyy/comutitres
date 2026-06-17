@@ -18,7 +18,6 @@ final class WorkflowStepProvider implements ProviderInterface
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): WorkflowStepResult
     {
         $choice = $this->choiceRepository->find($uriVariables['choiceId']);
-
         if (null === $choice) {
             throw new NotFoundHttpException('Choice not found.');
         }
@@ -28,7 +27,6 @@ final class WorkflowStepProvider implements ProviderInterface
         }
 
         $pass = $choice->getRecommendedPass();
-
         if (null === $pass) {
             throw new \LogicException('Choice has neither nextQuestion nor recommendedPass.');
         }

@@ -2,11 +2,12 @@ type: http_request
 model: http_request
 id: rq_wfStart001
 createdAt: 2026-06-16T10:00:00
-updatedAt: 2026-06-16T12:55:45.229131205
+updatedAt: 2026-06-17T08:35:10.084877590
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
-authentication: {}
-authenticationType: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
 body:
   text: ''
 bodyType: application/json

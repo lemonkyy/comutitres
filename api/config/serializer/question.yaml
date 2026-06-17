@@ -4,17 +4,21 @@ App\Entity\Question:
             groups:
                 - question:read
                 - question:collection:read
+                - workflow:read
         text:
             groups:
                 - question:read
                 - question:write
                 - question:collection:read
+                - workflow:read
         isFirst:
             groups:
                 - question:read
                 - question:write
                 - question:collection:read
+                - workflow:read
         choices:
             groups:
                 - question:read
                 - question:write
+                - workflow:read

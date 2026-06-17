@@ -1,0 +1,11 @@
+App\Model\WorkflowStepResult:
+    attributes:
+        type:
+            groups:
+                - workflow:read
+        question:
+            groups:
+                - workflow:read
+        pass:
+            groups:
+                - workflow:read
