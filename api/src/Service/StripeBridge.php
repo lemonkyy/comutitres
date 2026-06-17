@@ -72,4 +72,13 @@ final class StripeBridge
 
         return $product->data[0]->price->product->id;
     }
+
+    public function getInvoice(string $invoiceId): ?\Stripe\Invoice
+    {
+        try {
+            return $this->client->invoices->retrieve($invoiceId);
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            return null;
+        }
+    }
 }

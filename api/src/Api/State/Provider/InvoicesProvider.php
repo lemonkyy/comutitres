@@ -30,13 +30,13 @@ final class InvoicesProvider implements ProviderInterface
 
         $purchases = [];
 
-
         foreach ($sessions as $session) {
             $purchases[] = new Purchase(
                 $session->id,
                 $session->amount_total / 100,
                 (new \DateTimeImmutable())->setTimestamp($session->created),
                 $this->passProvider->getPass($this->stripeBridge->getProductFromSession($session)),
+                $session->invoice,
             );
         }
 
