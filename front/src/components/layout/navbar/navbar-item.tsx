@@ -1,6 +1,6 @@
 "use client";
 
-import Icon from "@/components/ui/atoms/icon";
+import Icon from "@/components/assets/icon";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { NavbarItem as NavbarItemConfig } from "./navbar-items";

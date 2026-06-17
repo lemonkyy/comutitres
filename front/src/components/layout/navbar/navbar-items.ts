@@ -1,4 +1,4 @@
-import type { IconName } from "@/components/ui/atoms/icon/config";
+import type { IconName } from "@/components/assets/icon/config";
 import type { pathnames } from "@/i18n/pathnames";
 
 export type NavbarVisibility = "all" | "mobile" | "desktop";
