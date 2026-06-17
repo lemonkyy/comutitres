@@ -17,8 +17,7 @@ final class LoginHandler
     public function __invoke(LoginCommand $command)
     {
         return
-            $this->authService->authenticate($command->email, $command->password)
-        ;
+            $this->authService->authenticate($command->email, $command->password);
     }
 }
 

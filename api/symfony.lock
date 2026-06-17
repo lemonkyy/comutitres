@@ -85,6 +85,18 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "sentry/sentry-symfony": {
+        "version": "5.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "5.0",
+            "ref": "aac2bc5220e9ab5b9e3838a7a4da90e7f74e6148"
+        },
+        "files": [
+            "config/packages/sentry.yaml"
+        ]
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.15",
         "recipe": {
