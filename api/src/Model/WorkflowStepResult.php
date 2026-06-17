@@ -4,14 +4,21 @@ namespace App\Model;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use App\Api\State\Provider\WorkflowStartProvider;
 use App\Api\State\Provider\WorkflowStepProvider;
 use App\Entity\Pass;
 use App\Entity\Question;
 
 #[ApiResource(operations: [
     new Get(
+        uriTemplate: '/workflow/start',
+        provider: WorkflowStartProvider::class,
+        normalizationContext: ['groups' => ['workflow:read']],
+    ),
+    new Get(
         uriTemplate: '/workflow/step/{choiceId}',
         provider: WorkflowStepProvider::class,
+        normalizationContext: ['groups' => ['workflow:read']],
     ),
 ])]
 final readonly class WorkflowStepResult

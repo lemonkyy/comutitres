@@ -1,11 +1,13 @@
-App\Model\Pass:
+App\Entity\Pass:
     attributes:
         id:
             groups:
                 - pass:collection:read
+                - workflow:read
         name:
             groups:
                 - pass:collection:read
+                - workflow:read
         description:
             groups:
                 - pass:collection:read

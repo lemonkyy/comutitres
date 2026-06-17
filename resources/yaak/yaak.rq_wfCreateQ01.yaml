@@ -2,30 +2,31 @@ type: http_request
 model: http_request
 id: rq_wfCreateQ01
 createdAt: 2026-06-16T14:00:00
-updatedAt: 2026-06-16T14:00:00
+updatedAt: 2026-06-17T09:50:09.052384085
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
-authentication: {}
-authenticationType: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
 body:
   text: |-
     {
-      "text": "Quelle est votre situation ?",
+      "text": "Quelle est votre situation first ?",
       "isFirst": true,
       "choices": [
         {
           "text": "Étudiant·e",
-          "nextQuestionId": null,
+          "nextQuestionId": 1,
           "recommendedPassId": null
         },
         {
           "text": "Lycéen·ne / Collégien·ne",
-          "nextQuestionId": null,
+          "nextQuestionId": 2,
           "recommendedPassId": null
         },
         {
           "text": "Salarié·e",
-          "nextQuestionId": null,
+          "nextQuestionId": 2,
           "recommendedPassId": null
         }
       ]

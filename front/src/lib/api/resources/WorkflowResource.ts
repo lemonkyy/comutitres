@@ -12,8 +12,8 @@ import type {
 export class WorkflowResource {
   constructor(private apiClient: ApiClient) {}
 
-  public async start(): Promise<WorkflowQuestion | ApiClientError> {
-    return this.apiClient.get<WorkflowQuestion>(apiPaths.workflow.start);
+  public async start(): Promise<WorkflowStepResult | ApiClientError> {
+    return this.apiClient.get<WorkflowStepResult>(apiPaths.workflow.start);
   }
 
   public async step(

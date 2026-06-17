@@ -2,11 +2,12 @@ type: http_request
 model: http_request
 id: rq_wfPatchQ001
 createdAt: 2026-06-16T14:00:00
-updatedAt: 2026-06-16T14:30:00.420850646
+updatedAt: 2026-06-17T08:34:41.401624216
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
-authentication: {}
-authenticationType: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
 body:
   text: |-
     {

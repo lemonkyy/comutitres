@@ -5,8 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\WorkflowStartProvider;
+use App\Domain\Command\CreateQuestionCommand;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,10 +25,15 @@ use Gedmo\Translatable\Translatable;
         uriTemplate: '/questions',
         normalizationContext: ['groups' => ['question:collection:read']],
     ),
+    new Post(
+        uriTemplate: '/workflow/questions',
+        messenger: true,
+        input: CreateQuestionCommand::class,
+    ),
     new Patch(
         uriTemplate: '/questions/{id}',
-        normalizationContext: ['groups' => ['question:write']],
-        denormalizationContext: ['groups' => ['question:read']],
+        normalizationContext: ['groups' => ['question:read']],
+        denormalizationContext: ['groups' => ['question:write']],
     ),
 ])]
 class Question implements Translatable
