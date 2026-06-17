@@ -34,7 +34,7 @@ export function ChoicePill({
   return (
     <Button
       className={cn(
-        "assistant-choice-pill-motion h-auto min-h-11 max-w-full shrink rounded-full bg-card px-3 py-2 text-[0.8125rem] font-semibold leading-tight whitespace-normal shadow-none hover:bg-muted md:px-4 md:py-2.5 md:text-sm",
+        "assistant-choice-pill-motion h-auto min-h-11 max-w-full shrink rounded-[6px] bg-card px-3 py-2 text-[0.8125rem] font-semibold leading-tight whitespace-normal shadow-none hover:bg-muted md:px-4 md:py-2.5 md:text-sm",
         className,
       )}
       data-slot="choice-pill"

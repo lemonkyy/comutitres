@@ -120,6 +120,16 @@
       "title": "Zones 1-5 available"
     }
   },
+  "navigation": {
+    "ariaLabel": "Main navigation",
+    "items": {
+      "account": "My account",
+      "assistant": "Assistant",
+      "card": "My card",
+      "folder": "Folder",
+      "home": "Home"
+    }
+  },
   "settings": {
     "accommodations": {
       "legend": "Assistance",

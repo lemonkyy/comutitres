@@ -33,7 +33,7 @@ export function AssistantRoute({ copy }: AssistantRouteProps) {
       <div className="md:hidden">
         <AssistantScreen copy={copy} />
       </div>
-      <main className="hidden min-h-[calc(100dvh-4.5rem)] items-center justify-center bg-background px-6 md:flex">
+      <main className="hidden min-h-[calc(100dvh-108px)] items-center justify-center bg-background px-6 md:flex">
         <p className="text-sm font-semibold text-muted-foreground">
           {copy.loadingLabel}
         </p>

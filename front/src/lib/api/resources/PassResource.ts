@@ -9,8 +9,6 @@ export class PassResource {
   public async getCollection(): Promise<
     CollectionResponse<Pass> | ApiClientError
   > {
-    return this.apiClient.get<CollectionResponse<Pass>>(
-      apiPaths.pass.collection,
-    );
+    return this.apiClient.getCollection<Pass>(apiPaths.pass.collection);
   }
 }

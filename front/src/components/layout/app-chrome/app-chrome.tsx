@@ -106,9 +106,9 @@ export function AppChrome({ children }: AppChromeProps) {
             ? "h-dvh min-h-0 overflow-hidden"
             : "min-h-dvh",
           !shouldUseFullscreenShell &&
-            "pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-[4.5rem] md:pb-0",
+            "pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0",
           isAssistantRoute &&
-            "md:h-auto md:min-h-dvh md:overflow-visible md:pt-[4.5rem] md:pb-0",
+            "md:h-auto md:min-h-dvh md:overflow-visible md:pb-0",
         )}
       >
         {children}

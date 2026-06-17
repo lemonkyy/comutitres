@@ -15,7 +15,7 @@ async function readApiErrorMessage(response: Response) {
   const fallback = response.statusText || "Une erreur est survenue.";
   const contentType = response.headers.get("content-type");
 
-  if (contentType?.includes("application/json")) {
+  if (isJsonContentType(contentType)) {
     const serverResponse = await response.json().catch(() => null);
 
     if (serverResponse && typeof serverResponse === "object") {
@@ -43,4 +43,12 @@ async function readApiErrorMessage(response: Response) {
   }
 
   return (await response.text().catch(() => "")) || fallback;
+}
+
+function isJsonContentType(contentType: string | null) {
+  return (
+    contentType?.includes("application/json") ||
+    contentType?.includes("+json") ||
+    false
+  );
 }

@@ -30,7 +30,7 @@ export function PageTabs({
     <nav
       aria-label={label}
       className={cn(
-        "-mx-4 -mb-5 overflow-x-auto border-b px-4 md:-mx-6 md:px-6",
+        "-mx-5 -mb-5 overflow-x-auto border-[var(--gris-moyen)] border-b px-5 md:-mx-5 md:px-5",
         className,
       )}
       data-slot="page-tabs"
@@ -47,7 +47,7 @@ export function PageTabs({
 
 function PageTabsEntry({ item }: { item: PageTabItem }) {
   const entryClassName = cn(
-    "relative flex min-h-12 min-w-[5.75rem] flex-1 items-center justify-center px-4 text-center text-base font-extrabold leading-none text-muted-foreground outline-none transition-[color,background-color] duration-150 after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:rounded-full after:bg-transparent hover:text-primary focus-visible:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/25 disabled:pointer-events-none disabled:opacity-50",
+    "relative flex min-h-12 min-w-[5.75rem] flex-1 items-center justify-center px-4 text-center text-base font-semibold leading-6 text-muted-foreground outline-none transition-[color,background-color] duration-150 after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:bg-transparent hover:bg-[color-mix(in_srgb,var(--primary)_6%,transparent)] hover:text-primary focus-visible:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/25 disabled:pointer-events-none disabled:opacity-50",
     item.current ? "text-primary after:bg-primary" : null,
     item.disabled ? "pointer-events-none opacity-50" : null,
   );

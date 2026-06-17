@@ -25,15 +25,15 @@ export function AuthPrompt({ copy, returnTo = "/account" }: AuthPromptProps) {
         <div className="flex min-w-0 gap-4">
           <span
             aria-hidden="true"
-            className="grid size-11 shrink-0 place-items-center rounded-xl bg-accent text-primary"
+            className="grid size-11 shrink-0 place-items-center rounded-[6px] bg-accent text-primary"
           >
             <LogIn className="size-5 stroke-[1.75]" />
           </span>
           <div className="min-w-0">
-            <h2 className="text-lg font-extrabold leading-tight">
+            <h2 className="text-[1.375rem] font-bold leading-[30.8px]">
               {copy.title}
             </h2>
-            <p className="mt-1 text-sm leading-normal text-muted-foreground">
+            <p className="mt-1 text-base leading-6 text-foreground">
               {copy.description}
             </p>
           </div>

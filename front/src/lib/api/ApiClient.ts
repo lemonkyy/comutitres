@@ -14,8 +14,10 @@ export interface BasicActionResponse {
 }
 
 export interface CollectionResponse<T> {
-  member: T[];
-  totalItems: number;
+  "hydra:member"?: T[];
+  "hydra:totalItems"?: number;
+  member?: T[];
+  totalItems?: number;
   view?: {
     "@id": string;
     "@type": string;

@@ -58,8 +58,10 @@ export function Chat({
         subtitleClassName={cn("text-xs font-normal", !isPanel && "md:text-sm")}
         title={title}
         titleClassName={cn(
-          "text-[0.9375rem] font-bold",
-          !isPanel && "md:text-lg",
+          "font-bold",
+          isPanel
+            ? "text-[1.375rem] leading-[30.8px] md:text-[1.375rem] md:leading-[30.8px]"
+            : "text-[1.125rem] leading-[27px] md:text-[1.375rem] md:leading-[30.8px]",
         )}
       >
         {typeof progressValue === "number" ? (

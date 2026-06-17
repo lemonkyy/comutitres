@@ -18,8 +18,9 @@ const subtitleToneClasses: Record<SubtitleTone, string> = {
 
 const iconButtonToneClasses: Record<IconButtonTone, string> = {
   accent:
-    "border-[color-mix(in_srgb,var(--primary)_18%,transparent)] bg-accent text-primary hover:bg-accent/80 focus-visible:bg-accent",
-  neutral: "border-transparent bg-muted text-foreground hover:bg-muted/80",
+    "border-primary bg-white text-primary hover:bg-[var(--bleu-focus)] hover:text-white focus-visible:bg-white",
+  neutral:
+    "border-[var(--gris-moyen)] bg-white text-primary hover:border-[var(--bleu-focus)] hover:bg-[var(--bleu-focus)] hover:text-white",
 };
 
 export type PageHeaderIconButtonProps = Omit<
@@ -42,7 +43,7 @@ export function PageHeaderIconButton({
   ...props
 }: PageHeaderIconButtonProps) {
   const buttonClassName = cn(
-    "size-11 rounded-[1rem] border [--button-icon-size:1.25rem]",
+    "size-11 rounded-[6px] border [--button-icon-size:1.25rem]",
     iconButtonToneClasses[tone],
     className,
   );
@@ -107,13 +108,16 @@ export function PageHeader({
 
   return (
     <header
-      className={cn("border-b bg-card px-4 pt-8 pb-5 md:px-6", className)}
+      className={cn(
+        "border-b border-[var(--gris-moyen)] bg-white px-5 pt-8 pb-5 md:px-5 md:pt-10 md:pb-8",
+        className,
+      )}
       data-slot="page-header"
       {...props}
     >
       <div
         className={cn(
-          "mx-auto flex w-full max-w-5xl flex-col gap-5",
+          "mx-auto flex w-full max-w-[1080px] flex-col gap-5",
           contentClassName,
         )}
       >
@@ -123,7 +127,7 @@ export function PageHeader({
           <div className="min-w-0 flex-1">
             <h1
               className={cn(
-                "truncate text-2xl font-extrabold leading-tight tracking-normal text-foreground",
+                "truncate text-[1.75rem] font-bold leading-[36.4px] tracking-normal text-foreground md:text-5xl md:leading-[57.6px]",
                 titleClassName,
               )}
             >

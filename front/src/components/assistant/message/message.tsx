@@ -71,7 +71,7 @@ function MessagePrimitive({
       {isAssistant ? (
         <span
           aria-label={avatarLabel}
-          className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_0.25rem_0.75rem_color-mix(in_srgb,var(--primary)_16%,transparent)] md:size-10"
+          className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-[6px] bg-primary text-primary-foreground md:size-10"
           role="img"
         >
           {avatar ?? <MessageSquare aria-hidden="true" className="size-4" />}
@@ -82,8 +82,8 @@ function MessagePrimitive({
         className={cn(
           "max-w-[78%] break-words text-[0.9375rem] leading-6 tracking-normal md:max-w-[min(42rem,82%)] md:text-base",
           isAssistant
-            ? "rounded-[1.125rem] rounded-tl text-foreground"
-            : "rounded-[1.125rem] rounded-tr bg-primary font-semibold text-primary-foreground shadow-none",
+            ? "text-foreground"
+            : "bg-primary font-semibold text-primary-foreground shadow-none",
         )}
         padding="sm"
         variant={isAssistant ? "elevated" : "flat"}

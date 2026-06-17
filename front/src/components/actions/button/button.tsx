@@ -5,26 +5,27 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium outline-none transition-[background-color,border-color,box-shadow,color,opacity,transform] [--button-icon-size:1rem] disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[var(--button-icon-size)]",
+  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] border border-transparent text-base font-semibold leading-6 outline-none transition-[background-color,border-color,box-shadow,color,opacity,transform] duration-150 [--button-icon-size:1rem] disabled:pointer-events-none aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/20 focus-visible:ring-[3px] focus-visible:ring-ring/35 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[var(--button-icon-size)]",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default:
+          "border-primary bg-primary text-primary-foreground hover:border-[var(--bleu-focus)] hover:bg-[var(--bleu-focus)] focus-visible:border-[var(--bleu-focus)] focus-visible:bg-[var(--bleu-focus)] active:border-[var(--bleu-focus)] active:bg-[var(--bleu-focus)] disabled:border-primary disabled:bg-primary disabled:text-primary-foreground",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "border-destructive bg-destructive text-white hover:border-[var(--rouge-clair)] hover:bg-[var(--rouge-clair)] focus-visible:ring-destructive/25 disabled:opacity-70",
         outline:
-          "border bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border-primary bg-white text-primary hover:border-[var(--bleu-focus)] hover:bg-[var(--bleu-focus)] hover:text-white focus-visible:border-[var(--bleu-focus)]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "border-primary bg-white text-primary hover:border-[var(--bleu-focus)] hover:bg-[var(--bleu-focus)] hover:text-white focus-visible:border-[var(--bleu-focus)]",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-transparent bg-transparent text-primary hover:bg-accent hover:text-[var(--bleu-focus)] focus-visible:bg-accent",
+        link: "border-transparent bg-transparent p-0 text-primary underline-offset-4 hover:text-[var(--bleu-focus)] hover:underline",
       },
       size: {
-        default: "h-11 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-10 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-12 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-11 rounded-md",
+        default: "h-12 px-4 py-3 has-[>svg]:px-4",
+        sm: "h-11 gap-1.5 px-5 py-[9px] has-[>svg]:px-4",
+        lg: "h-12 px-6 py-3 has-[>svg]:px-5",
+        icon: "size-11 p-0",
       },
     },
     defaultVariants: {

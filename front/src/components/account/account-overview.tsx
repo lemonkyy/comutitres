@@ -52,29 +52,29 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
 
   return (
     <Card
-      className="overflow-hidden border-primary/10 shadow-[0_0.75rem_2.25rem_color-mix(in_srgb,var(--anthracite)_8%,transparent)]"
+      className="overflow-hidden shadow-[var(--idfm-card-shadow)]"
       padding="none"
       variant="outlined"
     >
       <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
         <section className="p-5 sm:p-6 lg:p-8">
-          <p className="text-sm font-extrabold leading-none text-primary">
+          <p className="text-sm font-semibold leading-none text-primary">
             {copy.title}
           </p>
 
           <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
             <div
               aria-hidden="true"
-              className="grid size-20 shrink-0 place-items-center rounded-[1.35rem] bg-primary text-2xl font-extrabold leading-none text-primary-foreground shadow-[0_0.75rem_1.75rem_color-mix(in_srgb,var(--primary)_24%,transparent)]"
+              className="grid size-20 shrink-0 place-items-center rounded-[6px] bg-primary text-2xl font-bold leading-none text-primary-foreground"
             >
               {getUserInitials(user, copy.missingName)}
             </div>
 
             <div className="min-w-0">
-              <h2 className="break-words text-3xl font-extrabold leading-tight tracking-normal text-foreground">
+              <h2 className="break-words text-[1.75rem] font-bold leading-[36.4px] tracking-normal text-foreground">
                 {displayName}
               </h2>
-              <p className="mt-2 max-w-[42rem] text-base font-semibold leading-relaxed text-muted-foreground">
+              <p className="mt-2 max-w-[42rem] text-base font-normal leading-6 text-foreground">
                 {copy.summary}
               </p>
             </div>
@@ -84,7 +84,7 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
         <aside className="border-t bg-accent p-5 lg:border-t-0 lg:border-l lg:p-6">
           <div className="flex h-full flex-col justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-card px-3 py-2 text-sm font-extrabold text-primary shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--primary)_12%,transparent)]">
+              <div className="inline-flex items-center gap-2 rounded-[6px] bg-card px-3 py-2 text-sm font-semibold text-primary shadow-[inset_0_0_0_1px_var(--primary)]">
                 <ShieldCheck
                   aria-hidden="true"
                   className="size-4 stroke-[1.9]"
@@ -97,7 +97,7 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
             </div>
 
             <Button
-              className="w-full rounded-[0.875rem] border-primary/20 bg-card text-primary shadow-[0_0.5rem_1rem_color-mix(in_srgb,var(--primary)_8%,transparent)] transition-[background-color,border-color,box-shadow,color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:!border-primary hover:!bg-primary hover:!text-primary-foreground hover:shadow-[0_0.625rem_1.25rem_color-mix(in_srgb,var(--primary)_18%,transparent)] active:scale-[0.98] focus-visible:ring-ring/25"
+              className="w-full"
               onClick={() => {
                 void logout();
               }}
@@ -112,11 +112,11 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
       </div>
 
       <section className="border-t px-5 py-5 sm:px-6 lg:px-8 lg:py-7">
-        <h3 className="text-xl font-extrabold leading-tight text-foreground">
+        <h3 className="text-[1.375rem] font-bold leading-[30.8px] text-foreground">
           {copy.detailsTitle}
         </h3>
 
-        <dl className="mt-4 overflow-hidden rounded-[1.25rem] border border-border bg-card">
+        <dl className="mt-4 overflow-hidden rounded-[6px] border border-border bg-card">
           <AccountField
             icon={UserRound}
             label={copy.fields.name}
@@ -154,10 +154,10 @@ function AccountField({
 }: AccountFieldProps) {
   return (
     <div className="grid gap-3 border-b border-border p-4 last:border-b-0 sm:grid-cols-[13rem_minmax(0,1fr)] sm:items-center sm:p-5">
-      <dt className="flex min-w-0 items-center gap-3 text-sm font-extrabold leading-tight text-muted-foreground">
+      <dt className="flex min-w-0 items-center gap-3 text-sm font-semibold leading-tight text-muted-foreground">
         <span
           aria-hidden="true"
-          className="grid size-10 shrink-0 place-items-center rounded-[0.875rem] bg-muted text-primary"
+          className="grid size-10 shrink-0 place-items-center rounded-[6px] bg-muted text-primary"
         >
           <Icon className="size-5 stroke-[1.75]" />
         </span>
@@ -165,7 +165,7 @@ function AccountField({
       </dt>
       <dd
         className={[
-          "min-w-0 break-words text-base font-extrabold leading-relaxed",
+          "min-w-0 break-words text-base font-bold leading-relaxed",
           isMuted ? "text-muted-foreground" : "text-foreground",
         ].join(" ")}
       >
@@ -186,27 +186,27 @@ function AccountOverviewSkeleton({ label }: { label: string }) {
       <span className="sr-only">{label}</span>
       <div className="grid animate-pulse lg:grid-cols-[minmax(0,1fr)_18rem]">
         <section className="p-5 sm:p-6 lg:p-8">
-          <div className="h-4 w-40 rounded-full bg-muted" />
+          <div className="h-4 w-40 rounded-[6px] bg-muted" />
           <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
-            <div className="size-20 rounded-[1.35rem] bg-muted" />
+            <div className="size-20 rounded-[6px] bg-muted" />
             <div className="min-w-0 flex-1">
-              <div className="h-8 w-56 max-w-full rounded-full bg-muted" />
-              <div className="mt-3 h-4 w-full max-w-md rounded-full bg-muted" />
-              <div className="mt-2 h-4 w-3/5 rounded-full bg-muted" />
+              <div className="h-8 w-56 max-w-full rounded-[6px] bg-muted" />
+              <div className="mt-3 h-4 w-full max-w-md rounded-[6px] bg-muted" />
+              <div className="mt-2 h-4 w-3/5 rounded-[6px] bg-muted" />
             </div>
           </div>
         </section>
 
         <aside className="border-t bg-accent p-5 lg:border-t-0 lg:border-l lg:p-6">
-          <div className="h-9 w-36 rounded-full bg-card" />
-          <div className="mt-4 h-4 w-full rounded-full bg-card" />
-          <div className="mt-8 h-11 w-full rounded-[0.875rem] bg-card" />
+          <div className="h-9 w-36 rounded-[6px] bg-card" />
+          <div className="mt-4 h-4 w-full rounded-[6px] bg-card" />
+          <div className="mt-8 h-11 w-full rounded-[6px] bg-card" />
         </aside>
       </div>
 
       <section className="border-t px-5 py-5 sm:px-6 lg:px-8 lg:py-7">
-        <div className="h-6 w-36 rounded-full bg-muted" />
-        <div className="mt-4 overflow-hidden rounded-[1.25rem] border border-border">
+        <div className="h-6 w-36 rounded-[6px] bg-muted" />
+        <div className="mt-4 overflow-hidden rounded-[6px] border border-border">
           <div className="h-20 border-b bg-muted/70" />
           <div className="h-20 border-b bg-muted/70" />
           <div className="h-20 bg-muted/70" />

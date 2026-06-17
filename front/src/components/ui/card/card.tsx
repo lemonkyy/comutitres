@@ -5,12 +5,13 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "rounded-[1.5rem] bg-card text-card-foreground outline-none",
+  "rounded-[6px] bg-card text-card-foreground outline-none",
   {
     variants: {
       variant: {
-        elevated:
-          "border border-border shadow-[0_0.375rem_1.125rem_color-mix(in_srgb,var(--anthracite)_10%,transparent)]",
+        elevated: "border border-transparent shadow-[var(--idfm-card-shadow)]",
+        buttonCard:
+          "border border-transparent shadow-[var(--idfm-card-shadow-large)]",
         outlined: "border border-border",
         flat: "border border-transparent shadow-none",
       },
@@ -23,11 +24,11 @@ const cardVariants = cva(
         none: "p-0",
         sm: "p-4",
         md: "p-5",
-        lg: "p-6",
-        xl: "p-8",
+        lg: "p-5",
+        xl: "p-[30px]",
       },
       interactive: {
-        true: "transition-[background-color,border-color,box-shadow,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-primary/25 hover:shadow-[0_0.625rem_1.5rem_color-mix(in_srgb,var(--anthracite)_14%,transparent)] active:scale-[0.99] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25",
+        true: "transition-[background-color,border-color,box-shadow,text-decoration] duration-200 hover:shadow-[var(--idfm-card-shadow-hover)] hover:no-underline focus-visible:shadow-[var(--idfm-card-shadow-hover)] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25",
         false: "",
       },
     },

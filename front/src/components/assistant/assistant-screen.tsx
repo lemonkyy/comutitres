@@ -334,23 +334,23 @@ function AssistantStateCard({
 }) {
   return (
     <Card
-      className="mx-auto flex w-full max-w-xl flex-col items-start gap-4 rounded-[1.25rem] border-[color-mix(in_srgb,var(--primary)_18%,transparent)] bg-card"
+      className="mx-auto flex w-full max-w-xl flex-col items-start gap-4 border-primary bg-card"
       padding="lg"
       variant="outlined"
     >
-      <span className="grid size-11 place-items-center rounded-full bg-accent text-primary">
+      <span className="grid size-11 place-items-center rounded-[6px] bg-accent text-primary">
         <AlertCircle aria-hidden="true" />
       </span>
       <div className="flex flex-col gap-2">
-        <h2 className="text-lg font-extrabold leading-tight tracking-normal text-foreground">
+        <h2 className="text-[1.375rem] font-bold leading-[30.8px] tracking-normal text-foreground">
           {title}
         </h2>
-        <p className="text-sm font-medium leading-6 text-muted-foreground">
+        <p className="text-base font-normal leading-6 text-foreground">
           {description}
         </p>
       </div>
       <Button
-        className="assistant-pressable-motion rounded-xl font-semibold"
+        className="assistant-pressable-motion font-semibold"
         type="button"
         onClick={onAction}
       >
@@ -369,18 +369,18 @@ function RecommendationCard({
 }) {
   return (
     <Card
-      className="flex flex-col gap-3 rounded-[1.25rem] border-[color-mix(in_srgb,var(--primary)_22%,transparent)] bg-accent"
+      className="flex flex-col gap-3 border-primary bg-accent"
       padding="md"
       variant="outlined"
     >
-      <p className="text-xs font-extrabold uppercase tracking-normal text-primary">
+      <p className="text-xs font-semibold uppercase tracking-[1.1px] text-primary">
         {copy.recommendationTitle}
       </p>
       <div className="flex flex-col gap-1">
-        <h2 className="text-lg font-extrabold leading-tight tracking-normal text-foreground md:text-xl">
+        <h2 className="text-[1.375rem] font-bold leading-[30.8px] tracking-normal text-foreground">
           {pass.name}
         </h2>
-        <p className="text-sm font-medium leading-6 text-muted-foreground">
+        <p className="text-base font-normal leading-6 text-foreground">
           {pass.description || copy.recommendationDescription}
         </p>
       </div>

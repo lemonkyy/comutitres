@@ -40,27 +40,23 @@ export function AssistantPromoCard({
   title,
 }: AssistantPromoCardProps) {
   const buttonClassName =
-    "min-h-14 w-full gap-3 rounded-[1.25rem] px-4 text-base font-extrabold [--button-icon-size:1.25rem] has-[>svg]:px-4 sm:min-h-16 sm:text-xl sm:[--button-icon-size:1.5rem]";
+    "min-h-12 w-full gap-3 rounded-[6px] px-5 text-base font-semibold [--button-icon-size:1.25rem] has-[>svg]:px-5";
 
   return (
-    <Card
-      className="border-[var(--bleu-moyen)] max-[359px]:p-5"
-      padding="lg"
-      variant="elevated"
-    >
+    <Card className="max-[359px]:p-5" padding="lg" variant="buttonCard">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col items-start gap-4 min-[360px]:flex-row sm:gap-5">
           <span
             aria-hidden="true"
-            className="grid size-14 shrink-0 place-items-center rounded-[1.125rem] bg-background text-primary min-[360px]:size-16 min-[360px]:rounded-[1.25rem] sm:size-20"
+            className="grid size-14 shrink-0 place-items-center rounded-[6px] bg-accent text-primary min-[360px]:size-16 sm:size-20"
           >
             <MessageSquare className="size-6 stroke-[1.75] min-[360px]:size-7 sm:size-8" />
           </span>
           <div className="min-w-0">
-            <h2 className="text-balance text-[1.375rem] font-extrabold leading-tight text-foreground min-[360px]:text-2xl md:text-3xl">
+            <h2 className="text-balance text-[1.375rem] font-bold leading-[1.4] text-foreground md:text-[1.75rem] md:leading-[36.4px]">
               {title}
             </h2>
-            <p className="mt-3 max-w-[38rem] text-pretty text-base leading-7 text-muted-foreground min-[360px]:text-lg min-[360px]:leading-8 md:text-xl">
+            <p className="mt-3 max-w-[42.5rem] text-pretty text-base leading-6 text-foreground md:text-lg md:leading-[27px]">
               {description}
             </p>
           </div>
@@ -128,28 +124,29 @@ export function QuickAccessCard({
   return (
     <Card
       asChild
-      className="min-h-[4.75rem] rounded-[1.25rem] min-[360px]:min-h-[8.75rem]"
+      className="min-h-[7.5rem]"
       interactive
       padding="none"
+      variant="buttonCard"
     >
       <Link
         href={href}
-        className="flex h-full flex-row items-center justify-start gap-3 p-4 text-left min-[360px]:flex-col min-[360px]:justify-center min-[360px]:p-3 min-[360px]:text-center sm:p-4"
+        className="flex h-full flex-row items-center justify-start gap-5 p-5 text-left"
       >
         <span
           aria-hidden="true"
           className={cn(
-            "grid size-12 shrink-0 place-items-center rounded-[1rem] min-[360px]:size-14 min-[360px]:rounded-[1.25rem]",
+            "grid size-12 shrink-0 place-items-center rounded-[6px] min-[360px]:size-14",
             iconToneClasses[tone],
           )}
         >
           <Icon className="size-6 stroke-[1.75] min-[360px]:size-7" />
         </span>
-        <span className="flex min-w-0 flex-col gap-1 min-[360px]:gap-2">
-          <span className="text-base font-extrabold leading-tight text-foreground sm:text-lg">
+        <span className="flex min-w-0 flex-col gap-1">
+          <span className="text-[1.375rem] font-bold leading-[30.8px] text-foreground">
             {title}
           </span>
-          <span className="text-sm font-bold leading-snug text-muted-foreground">
+          <span className="text-base font-normal leading-6 text-foreground">
             {description}
           </span>
         </span>
@@ -186,9 +183,10 @@ export function RegionPassCard({
       <>
         <Card
           asChild
-          className="overflow-hidden rounded-[1.5rem] md:hidden"
+          className="overflow-hidden md:hidden"
           interactive
           padding="none"
+          variant="elevated"
         >
           <Link href={href} className="block">
             {content}
@@ -196,9 +194,10 @@ export function RegionPassCard({
         </Card>
         <Card
           asChild
-          className="hidden overflow-hidden rounded-[1.5rem] md:block"
+          className="hidden overflow-hidden md:block"
           interactive
           padding="none"
+          variant="elevated"
         >
           <button
             className="block w-full appearance-none text-left"
@@ -217,9 +216,10 @@ export function RegionPassCard({
   return (
     <Card
       asChild
-      className="overflow-hidden rounded-[1.5rem]"
+      className="overflow-hidden"
       interactive
       padding="none"
+      variant="elevated"
     >
       <Link href={href} className="block">
         {content}
@@ -239,23 +239,23 @@ function RegionPassCardContent({
 }) {
   return (
     <>
-      <div className="flex min-h-32 items-center justify-center bg-[linear-gradient(135deg,var(--bleu-moyen)_0%,var(--bleu-clair)_100%)] px-5 py-10 text-primary">
+      <div className="flex min-h-32 items-center justify-center bg-[var(--bleu-clair)] px-5 py-10 text-primary">
         <div className="flex items-center gap-3 text-center">
           <MapPin
             aria-hidden="true"
             className="size-7 shrink-0 stroke-[1.75] min-[360px]:size-8"
           />
-          <span className="text-lg font-extrabold leading-tight min-[360px]:text-xl sm:text-2xl">
+          <span className="text-[1.375rem] font-bold leading-[30.8px]">
             {label}
           </span>
         </div>
       </div>
       <div className="flex items-center justify-between gap-4 px-5 py-5">
         <span className="min-w-0">
-          <span className="block text-xl font-extrabold leading-tight text-foreground">
+          <span className="block text-[1.375rem] font-bold leading-[30.8px] text-foreground">
             {title}
           </span>
-          <span className="mt-1 block text-base leading-tight text-muted-foreground min-[360px]:text-lg">
+          <span className="mt-1 block text-base leading-6 text-foreground">
             {description}
           </span>
         </span>
@@ -280,7 +280,7 @@ export function NewsCard({ body, icon: Icon, title, tone }: NewsCardProps) {
     <Card
       asChild
       className={cn(
-        "rounded-[1.25rem]",
+        "",
         tone === "primary" && "bg-accent",
         tone === "success" &&
           "bg-[color-mix(in_srgb,var(--profil-senior)_14%,white)]",
@@ -292,17 +292,17 @@ export function NewsCard({ body, icon: Icon, title, tone }: NewsCardProps) {
         <span
           aria-hidden="true"
           className={cn(
-            "grid size-12 shrink-0 place-items-center rounded-[1rem] bg-card/80",
+            "grid size-12 shrink-0 place-items-center rounded-[6px] bg-card/80",
             iconToneClasses[tone],
           )}
         >
           <Icon className="size-6 stroke-[1.75]" />
         </span>
         <div className="min-w-0">
-          <h3 className="text-base font-extrabold leading-snug text-foreground">
+          <h3 className="text-[1.375rem] font-bold leading-[30.8px] text-foreground">
             {title}
           </h3>
-          <p className="mt-1 text-sm leading-6 text-muted-foreground">{body}</p>
+          <p className="mt-1 text-base leading-6 text-foreground">{body}</p>
         </div>
       </article>
     </Card>

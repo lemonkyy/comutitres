@@ -114,7 +114,7 @@ export async function readBackendErrorMessage(response: Response) {
   const fallback = response.statusText || "Une erreur est survenue.";
   const contentType = response.headers.get("content-type");
 
-  if (contentType?.includes("application/json")) {
+  if (isJsonContentType(contentType)) {
     const body = await response.json().catch(() => null);
 
     if (body && typeof body === "object") {
@@ -139,9 +139,17 @@ export async function readBackendErrorMessage(response: Response) {
 async function readBackendJson(response: Response) {
   const contentType = response.headers.get("content-type");
 
-  if (contentType?.includes("application/json")) {
+  if (isJsonContentType(contentType)) {
     return response.json();
   }
 
   return response.text();
+}
+
+function isJsonContentType(contentType: string | null) {
+  return (
+    contentType?.includes("application/json") ||
+    contentType?.includes("+json") ||
+    false
+  );
 }

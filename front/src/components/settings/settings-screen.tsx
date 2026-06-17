@@ -119,21 +119,21 @@ const accommodationOptionConfig: AccommodationOptionConfig[] = [
 
 export function SettingsScreen({ copy, currentLocale }: SettingsScreenProps) {
   return (
-    <main className="min-h-dvh bg-background">
+    <main className="min-h-dvh bg-white">
       <PageHeader
         backButton={
           <PageHeaderIconButton
-            className="size-9 rounded-xl [--button-icon-size:1.125rem]"
+            className="size-9 [--button-icon-size:1.125rem]"
             href="/"
             icon={ChevronLeft}
             label={copy.backLabel}
           />
         }
-        className="border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)]"
+        className="border-[var(--gris-moyen)]"
         contentClassName="max-w-md gap-0"
         subtitle={copy.subtitle}
         subtitleClassName="mt-1 text-xs font-normal"
-        title={<span className="text-lg leading-tight">{copy.title}</span>}
+        title={copy.title}
       />
 
       <div className="px-4 py-5 pb-8">
@@ -252,7 +252,7 @@ function getAccommodationLeading(Icon: LucideIcon, tone: CardOption["tone"]) {
   return ({ selected }: { selected: boolean }) => (
     <span
       className={cn(
-        "grid size-10 place-items-center rounded-xl",
+        "grid size-10 place-items-center rounded-[6px]",
         selected
           ? getIconSelectedClasses(tone)
           : "bg-muted text-muted-foreground",
@@ -276,5 +276,5 @@ function getIconSelectedClasses(tone: CardOption["tone"]) {
     return "bg-[var(--accompagnement-moteur-bg)] text-[var(--accompagnement-moteur)]";
   }
 
-  return "bg-background text-primary";
+  return "bg-white text-primary";
 }

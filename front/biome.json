@@ -14,7 +14,8 @@
       "!!**/out",
       "!!**/build",
       "!!**/coverage",
-      "!!**/storybook-static"
+      "!!**/storybook-static",
+      "!!public/**/*.svg"
     ]
   },
   "formatter": {

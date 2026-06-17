@@ -60,7 +60,7 @@ export function AccountShell({ activeTab, children, copy }: AccountShellProps) {
   ];
 
   return (
-    <main className="min-h-dvh bg-background pb-20 md:pb-0">
+    <main className="min-h-dvh bg-white pb-20 md:pb-0">
       <div className="md:hidden">
         <PageHeader
           backButton={
@@ -77,34 +77,34 @@ export function AccountShell({ activeTab, children, copy }: AccountShellProps) {
         </PageHeader>
       </div>
 
-      <header className="hidden border-b bg-card/80 md:block">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-8 px-6 py-8">
+      <header className="hidden border-[var(--gris-moyen)] border-b bg-white md:block">
+        <div className="mx-auto flex w-full max-w-[1080px] items-center justify-between gap-8 px-5 py-10">
           <div className="min-w-0">
             <Link
-              className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground outline-none transition-[color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-primary active:scale-[0.98] focus-visible:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/25"
+              className="inline-flex items-center gap-2 rounded-[3px] text-sm font-semibold text-primary outline-none transition-[color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[var(--bleu-focus)] active:scale-[0.98] focus-visible:ring-[3px] focus-visible:ring-ring/25"
               href="/"
             >
               <ChevronLeft aria-hidden="true" className="size-4" />
               {copy.backLabel}
             </Link>
-            <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-normal text-foreground">
+            <h1 className="mt-4 text-5xl font-bold leading-[57.6px] tracking-normal text-foreground">
               {copy.title}
             </h1>
-            <p className="mt-2 max-w-2xl text-base font-semibold leading-relaxed text-muted-foreground">
+            <p className="mt-2 max-w-[42.5rem] text-lg font-normal leading-[27px] text-foreground">
               {copy.subtitle}
             </p>
           </div>
 
           <div
             aria-hidden="true"
-            className="hidden size-16 shrink-0 place-items-center rounded-[1.25rem] border border-primary/10 bg-accent text-primary shadow-[0_0.75rem_2rem_color-mix(in_srgb,var(--anthracite)_8%,transparent)] lg:grid"
+            className="hidden size-16 shrink-0 place-items-center rounded-[6px] border border-primary bg-accent text-primary shadow-[var(--idfm-card-shadow)] lg:grid"
           >
             <UserRound className="size-7 stroke-[1.75]" />
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-5 md:grid-cols-[15rem_minmax(0,1fr)] md:px-6 md:py-8">
+      <div className="mx-auto grid w-full max-w-[1080px] gap-6 px-5 py-5 md:grid-cols-[15rem_minmax(0,1fr)] md:px-5 md:py-10">
         <AccountSideNavigation items={tabs} label={copy.title} />
         <div className="min-w-0">{children}</div>
       </div>
@@ -123,7 +123,7 @@ function AccountSideNavigation({
     <aside className="hidden md:block">
       <nav
         aria-label={label}
-        className="sticky top-6 rounded-[1.25rem] border border-border bg-card p-2 shadow-[0_0.5rem_1.5rem_color-mix(in_srgb,var(--anthracite)_6%,transparent)]"
+        className="sticky top-6 rounded-[6px] border border-border bg-card p-2 shadow-[var(--idfm-card-shadow)]"
       >
         <div className="flex flex-col gap-1">
           {items.map((item) => (
@@ -142,17 +142,15 @@ function AccountSideNavigationEntry({ item }: { item: AccountNavigationItem }) {
     <Link
       aria-current={item.current ? "page" : undefined}
       className={cn(
-        "group flex min-h-12 items-center gap-3 rounded-[1rem] px-3 text-sm font-extrabold text-muted-foreground outline-none transition-[background-color,color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-accent hover:text-primary active:scale-[0.98] focus-visible:bg-accent focus-visible:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/25",
-        item.current
-          ? "bg-accent text-primary shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--primary)_12%,transparent)]"
-          : null,
+        "group flex min-h-12 items-center gap-3 rounded-[6px] px-3 text-sm font-semibold text-muted-foreground outline-none transition-[background-color,color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-accent hover:text-primary active:scale-[0.98] focus-visible:bg-accent focus-visible:text-primary focus-visible:ring-[3px] focus-visible:ring-ring/25",
+        item.current ? "bg-accent text-primary" : null,
       )}
       href={item.href}
     >
       <span
         aria-hidden="true"
         className={cn(
-          "grid size-9 shrink-0 place-items-center rounded-[0.875rem] bg-background text-muted-foreground transition-colors duration-150 group-hover:text-primary",
+          "grid size-9 shrink-0 place-items-center rounded-[6px] bg-white text-muted-foreground transition-colors duration-150 group-hover:text-primary",
           item.current ? "text-primary" : null,
         )}
       >

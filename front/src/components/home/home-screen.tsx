@@ -88,27 +88,21 @@ export function HomeScreen({ copy }: HomeScreenProps) {
   const { openAssistant } = useAssistantPanel();
 
   return (
-    <main className="min-h-dvh bg-background">
-      <section className="relative overflow-hidden bg-[var(--anthracite)] px-5 pt-12 pb-24 text-white md:px-8 md:pt-16 md:pb-28">
-        <div
-          aria-hidden="true"
-          className="absolute -top-16 -right-24 size-64 rounded-full bg-[radial-gradient(circle_at_30%_30%,var(--bleu-idf),var(--bleu-focus)_70%)] opacity-45 md:-top-28 md:right-[max(2rem,calc((100vw-64rem)/2))] md:size-96"
-        />
-        <div className="relative mx-auto flex max-w-5xl flex-col gap-8">
+    <main className="min-h-dvh bg-white">
+      <section className="relative overflow-hidden bg-[var(--anthracite)] px-5 pt-12 pb-20 text-white md:px-8 md:pt-16 md:pb-24">
+        <div className="relative mx-auto flex max-w-[1080px] flex-col gap-8">
           <Logo
-            alt={copy.hero.brand}
-            className="w-36 drop-shadow-[0_0.5rem_1.5rem_color-mix(in_srgb,var(--anthracite)_24%,transparent)] min-[360px]:w-40 sm:w-48 md:w-56"
+            className="h-10 w-auto max-w-none md:hidden"
             priority
-            variant="couleur"
+            variant="blanc"
           />
-
-          <h1 className="max-w-[28rem] text-balance text-4xl font-extrabold leading-tight md:text-5xl">
+          <h1 className="max-w-[42.5rem] text-balance text-[2.5rem] font-bold leading-[1.2] md:text-5xl md:leading-[57.6px]">
             {getGreeting(copy, user)}
           </h1>
         </div>
       </section>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 pb-10 md:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1080px] flex-col gap-10 px-5 pb-10 md:px-5">
         <div className="-mt-16">
           <AssistantPromoCard
             ctaLabel={copy.assistant.ctaLabel}
@@ -124,12 +118,12 @@ export function HomeScreen({ copy }: HomeScreenProps) {
           className="flex flex-col gap-4"
         >
           <h2
-            className="text-base font-extrabold uppercase leading-none tracking-[0.14em] text-muted-foreground"
+            className="text-[1.75rem] font-bold leading-[36.4px] text-foreground"
             id="quick-access-title"
           >
             {copy.quickAccess.heading}
           </h2>
-          <div className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-3 md:gap-5">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-10">
             {copy.quickAccess.items.map((item) => {
               const config = quickActionConfig[item.id];
 
@@ -157,12 +151,12 @@ export function HomeScreen({ copy }: HomeScreenProps) {
 
         <section aria-labelledby="news-title" className="flex flex-col gap-4">
           <h2
-            className="text-base font-extrabold uppercase leading-none tracking-[0.14em] text-muted-foreground"
+            className="text-[1.75rem] font-bold leading-[36.4px] text-foreground"
             id="news-title"
           >
             {copy.news.heading}
           </h2>
-          <div className="grid gap-3 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2 md:gap-10">
             {copy.news.items.map((item) => {
               const config = newsConfig[item.id];
 

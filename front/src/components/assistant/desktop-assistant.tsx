@@ -74,7 +74,7 @@ export function DesktopAssistant({
           aria-label={copy.title}
           data-state={panelMotionState}
           className={cn(
-            "assistant-desktop-panel fixed top-[5.25rem] right-4 bottom-4 z-40 hidden w-[min(28rem,calc(100vw-2rem))] origin-bottom-right overflow-hidden rounded-[1.5rem] border border-[color-mix(in_srgb,var(--anthracite)_12%,transparent)] bg-background shadow-[0_1.5rem_4rem_color-mix(in_srgb,var(--anthracite)_22%,transparent)] outline-none md:block",
+            "assistant-desktop-panel fixed top-[7.75rem] right-4 bottom-4 z-40 hidden w-[min(28rem,calc(100vw-2rem))] origin-bottom-right overflow-hidden rounded-[6px] border border-border bg-background shadow-[var(--idfm-card-shadow)] outline-none md:block",
             panelMotionState === "closed" && "pointer-events-none",
           )}
           ref={panelRef}
@@ -98,7 +98,7 @@ export function DesktopAssistant({
         aria-label={openLabel}
         data-state={isPanelMounted ? "open" : "closed"}
         className={cn(
-          "assistant-desktop-trigger assistant-pressable-motion fixed right-6 bottom-6 z-40 hidden size-16 origin-bottom-right rounded-[1.375rem] border border-[color-mix(in_srgb,var(--primary)_18%,transparent)] bg-primary text-primary-foreground shadow-[0_1rem_2rem_color-mix(in_srgb,var(--primary)_24%,transparent)] [--button-icon-size:1.55rem] hover:bg-primary/90 focus-visible:ring-primary/30 md:inline-flex",
+          "assistant-desktop-trigger assistant-pressable-motion fixed right-6 bottom-6 z-40 hidden size-14 origin-bottom-right rounded-[6px] border border-primary bg-primary text-primary-foreground shadow-[var(--idfm-card-shadow)] [--button-icon-size:1.35rem] hover:bg-[var(--bleu-focus)] focus-visible:ring-primary/30 md:inline-flex",
           isPanelMounted && "pointer-events-none",
         )}
         onClick={(event) => {

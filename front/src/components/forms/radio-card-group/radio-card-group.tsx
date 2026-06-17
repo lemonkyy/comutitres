@@ -113,11 +113,13 @@ export function RadioCardGroup({
             <Card
               asChild
               className={cn(
-                "rounded-xl border-2 shadow-[0_1px_3px_color-mix(in_srgb,var(--anthracite)_7%,transparent)] transition-[border-color,box-shadow,transform,opacity]",
-                selected ? selectedCardToneClasses[tone] : "border-transparent",
+                "rounded-[6px] border-2 shadow-[var(--idfm-card-shadow)] transition-[border-color,box-shadow,transform,opacity]",
+                selected
+                  ? selectedCardToneClasses[tone]
+                  : "border-[var(--input)]",
                 invalid && "border-destructive",
                 optionDisabled &&
-                  "border-[color-mix(in_srgb,var(--anthracite)_54%,white)] bg-card shadow-none",
+                  "border-[var(--gris-moyen)] bg-card shadow-none",
               )}
               padding="none"
               variant="flat"
@@ -125,7 +127,7 @@ export function RadioCardGroup({
               <FieldLabel
                 aria-disabled={optionDisabled || undefined}
                 className={cn(
-                  "min-h-16 w-full cursor-pointer items-center justify-between gap-3 rounded-xl px-4 py-3 text-left transition-transform active:scale-[0.98] peer-disabled:opacity-100 group-data-[disabled=true]/field:opacity-100 peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/30",
+                  "min-h-16 w-full cursor-pointer items-center justify-between gap-3 rounded-[6px] px-4 py-3 text-left transition-transform active:scale-[0.98] peer-disabled:opacity-100 group-data-[disabled=true]/field:opacity-100 peer-focus-visible:ring-[3px] peer-focus-visible:ring-ring/30",
                   optionDisabled && "cursor-not-allowed",
                 )}
                 dir={option.dir}

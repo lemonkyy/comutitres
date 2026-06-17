@@ -23,13 +23,13 @@ export function ProgressBar({
       aria-valuemax={max}
       aria-valuemin={0}
       aria-valuenow={value}
-      className={cn("h-1.5 overflow-hidden rounded-full bg-muted", className)}
+      className={cn("h-1.5 overflow-hidden rounded-[6px] bg-muted", className)}
       data-slot="progress-bar"
       role="progressbar"
       {...props}
     >
       <span
-        className="assistant-progress-motion block h-full rounded-full bg-primary"
+        className="assistant-progress-motion block h-full rounded-[6px] bg-primary"
         style={{ width: `${progress}%` }}
       />
     </div>

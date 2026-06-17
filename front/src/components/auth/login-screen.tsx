@@ -21,7 +21,7 @@ type LoginScreenProps = {
 
 export function LoginScreen({ copy, returnTo }: LoginScreenProps) {
   return (
-    <main className="min-h-dvh bg-background">
+    <main className="min-h-dvh bg-white">
       <PageHeader
         backButton={
           <PageHeaderIconButton
