@@ -4,6 +4,7 @@ import { HomeScreen, type HomeScreenCopy } from "@/components/home/home-screen";
 
 export default async function Home() {
   const t = await getTranslations("home");
+
   const copy: HomeScreenCopy = {
     assistant: {
       ctaLabel: t("assistant.ctaLabel"),
@@ -13,7 +14,6 @@ export default async function Home() {
     hero: {
       brand: t("hero.brand"),
       greeting: t("hero.greeting"),
-      title: t("hero.title"),
     },
     news: {
       heading: t("news.heading"),

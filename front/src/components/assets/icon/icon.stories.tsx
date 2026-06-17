@@ -6,7 +6,7 @@ import { iconNames } from "./config";
 const iconClassName = "inline-flex text-[var(--anthracite)] [&_svg]:size-7";
 
 const meta = {
-  title: "Foundations/Icon",
+  title: "Assets/Icon",
   component: Icon,
   argTypes: {
     name: {
