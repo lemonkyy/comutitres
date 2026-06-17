@@ -1,6 +1,15 @@
 "use client";
 
-import { AlertCircle, ChevronLeft, RotateCcw, X } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  ChevronLeft,
+  MessageSquare,
+  RotateCcw,
+  X,
+} from "lucide-react";
+import Image from "next/image";
+import { useLocale } from "next-intl";
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -14,6 +23,7 @@ import {
 import { PageHeaderIconButton } from "@/components/layout/page-header/page-header";
 import { Card } from "@/components/ui/card/card";
 import { useApiClient } from "@/contexts/api-client";
+import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { WorkflowPass, WorkflowQuestion } from "@/utils/types";
 
@@ -28,6 +38,8 @@ export type AssistantScreenCopy = {
   loadingMessage: string;
   questionLabel: string;
   recommendationDescription: string;
+  recommendationCtaLabel: string;
+  recommendationPricePrefix: string;
   recommendationTitle: string;
   resetLabel: string;
   retryLabel: string;
@@ -65,6 +77,7 @@ export function AssistantScreen({
   variant = "page",
 }: AssistantScreenProps) {
   const { apiClient } = useApiClient();
+  const locale = useLocale();
   const bottomRef = useRef<HTMLDivElement>(null);
   const requestIdRef = useRef(0);
   const [currentQuestion, setCurrentQuestion] =
@@ -104,7 +117,7 @@ export function AssistantScreen({
       setMessages([
         {
           content: copy.completedMessage,
-          id: `recommendation-${result.pass.id}`,
+          id: `completed-${result.pass.id}`,
           sender: "assistant",
         },
       ]);
@@ -178,7 +191,7 @@ export function AssistantScreen({
           userMessage,
           {
             content: copy.completedMessage,
-            id: `recommendation-${result.pass.id}`,
+            id: `completed-${result.pass.id}`,
             sender: "assistant",
           },
         ]);
@@ -252,9 +265,7 @@ export function AssistantScreen({
         )
       }
       footer={
-        recommendation ? (
-          <RecommendationCard copy={copy} pass={recommendation} />
-        ) : currentQuestion ? (
+        currentQuestion ? (
           <div className="flex flex-col gap-3">
             <ChoicePillGroup
               disabled={status === "submitting"}
@@ -316,6 +327,14 @@ export function AssistantScreen({
           <UserMessage key={message.id}>{message.content}</UserMessage>
         ),
       )}
+      {recommendation ? (
+        <RecommendationMessage
+          copy={copy}
+          locale={locale}
+          onCtaClick={onClose}
+          pass={recommendation}
+        />
+      ) : null}
       <div ref={bottomRef} />
     </Chat>
   );
@@ -360,32 +379,110 @@ function AssistantStateCard({
   );
 }
 
-function RecommendationCard({
+function RecommendationMessage({
   copy,
+  locale,
+  onCtaClick,
   pass,
 }: {
   copy: AssistantScreenCopy;
+  locale: string;
+  onCtaClick?: () => void;
   pass: WorkflowPass;
 }) {
-  return (
-    <Card
-      className="flex flex-col gap-3 border-primary bg-accent"
-      padding="md"
-      variant="outlined"
-    >
-      <p className="text-xs font-semibold uppercase tracking-[1.1px] text-primary">
-        {copy.recommendationTitle}
-      </p>
-      <div className="flex flex-col gap-1">
-        <h2 className="text-[1.375rem] font-bold leading-[30.8px] tracking-normal text-foreground">
-          {pass.name}
-        </h2>
-        <p className="text-base font-normal leading-6 text-foreground">
-          {pass.description || copy.recommendationDescription}
-        </p>
-      </div>
-    </Card>
+  const priceLabel = getPassPriceLabel(
+    pass,
+    copy.recommendationPricePrefix,
+    locale,
   );
+
+  return (
+    <article
+      className="assistant-message-motion flex w-full items-start gap-3"
+      data-slot="assistant-recommendation-message"
+    >
+      <span
+        aria-label={copy.assistantAvatarLabel}
+        className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-[6px] bg-primary text-primary-foreground md:size-10"
+        role="img"
+      >
+        <MessageSquare aria-hidden="true" className="size-4" />
+      </span>
+
+      <Card
+        className="min-w-0 flex-1 overflow-hidden border-primary bg-card shadow-[var(--idfm-card-shadow-large)]"
+        padding="none"
+        variant="outlined"
+      >
+        <div className="grid min-[390px]:grid-cols-[minmax(0,1fr)_7.5rem] md:grid-cols-[minmax(0,1fr)_8.75rem]">
+          <div className="min-w-0 p-4 md:p-5">
+            <p className="text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-primary">
+              {copy.recommendationTitle}
+            </p>
+            <h2 className="mt-3 text-balance text-[1.5rem] font-bold leading-[1.2] tracking-normal text-foreground md:text-[1.75rem]">
+              {pass.name}
+            </h2>
+            <p className="mt-2 text-pretty text-base font-normal leading-6 text-foreground">
+              {pass.description || copy.recommendationDescription}
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {priceLabel ? (
+                <span className="inline-flex min-h-9 items-center rounded-[6px] bg-[var(--gris-clair-40)] px-3 text-sm font-semibold leading-5 text-foreground">
+                  {priceLabel}
+                </span>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="relative min-h-[8.75rem] overflow-hidden bg-[linear-gradient(145deg,var(--bleu-clair),var(--bleu-moyen))] min-[390px]:min-h-full">
+            <Image
+              alt=""
+              className="object-contain p-3 drop-shadow-[0_14px_22px_rgba(25,114,210,0.22)] min-[390px]:translate-x-3 min-[390px]:rotate-[8deg] min-[390px]:scale-110"
+              fill
+              sizes="(max-width: 767px) 140px, 160px"
+              src="/assets/passes/passe-navigo-full.svg"
+              unoptimized
+            />
+          </div>
+        </div>
+
+        <div className="border-[color-mix(in_srgb,var(--primary)_18%,transparent)] border-t bg-[color-mix(in_srgb,var(--bleu-clair)_70%,white)] p-3 md:p-4">
+          <Button
+            asChild
+            className="assistant-pressable-motion min-h-12 w-full gap-2 rounded-[6px] text-base font-semibold"
+            size={null}
+          >
+            <Link
+              href={{
+                pathname: "/passes",
+                query: { pass: pass.id },
+              }}
+              onClick={onCtaClick}
+            >
+              <span>{copy.recommendationCtaLabel}</span>
+              <ArrowRight aria-hidden="true" className="size-5" />
+            </Link>
+          </Button>
+        </div>
+      </Card>
+    </article>
+  );
+}
+
+function getPassPriceLabel(pass: WorkflowPass, prefix: string, locale: string) {
+  const amount = pass.prices?.[0]?.amount;
+
+  if (typeof amount !== "number" || amount <= 0) {
+    return null;
+  }
+
+  const formattedPrice = new Intl.NumberFormat(locale, {
+    currency: "EUR",
+    style: "currency",
+  }).format(amount / 100);
+
+  return `${prefix} ${formattedPrice}`;
 }
 
 function createQuestionMessage(

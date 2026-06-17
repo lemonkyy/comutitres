@@ -36,11 +36,24 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         placeholder: t("form.password.placeholder"),
         required: t("form.password.required"),
       },
+      franceConnect: {
+        description: t("form.franceConnect.description"),
+        label: t("form.franceConnect.label"),
+        unavailableLabel: t("form.franceConnect.unavailableLabel"),
+      },
+      separatorLabel: t("form.separatorLabel"),
       submitLabel: t("form.submitLabel"),
       submittingLabel: t("form.submittingLabel"),
     },
     subtitle: t("subtitle"),
     title: t("title"),
+    visual: {
+      assistantLabel: t("visual.assistantLabel"),
+      folderLabel: t("visual.folderLabel"),
+      passLabel: t("visual.passLabel"),
+      subtitle: t("visual.subtitle"),
+      title: t("visual.title"),
+    },
   };
 
   return <LoginScreen copy={copy} returnTo={getSafeReturnTo(params.retour)} />;

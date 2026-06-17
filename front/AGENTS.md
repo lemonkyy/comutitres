@@ -17,6 +17,8 @@ Storybook is for design-system components and reusable UI primitives, not applic
 
 Every design-system component should be represented in Storybook. When creating or changing a design-system component, add or update the relevant `.stories.*` file so Storybook reflects the current API, visual states, and expected usage.
 
+Keep React components in their own files. Screen and page modules should compose imported components and may keep small non-component helpers, but visual components such as cards, section headings, panels, and CTAs belong in colocated component files.
+
 When adding new UI, first go to `https://www.iledefrance-mobilites.fr/` and navigate through other relevant pages on the website to look for the same or similar element(s). Reuse the exact same design system patterns consistently whenever a matching pattern exists.
 
 Before considering frontend UI changes complete, visually verify the affected screen or Storybook story in the browser at both smartphone and desktop viewport sizes. Confirm the layout, spacing, typography, colors, and responsive behavior look correct at each size.

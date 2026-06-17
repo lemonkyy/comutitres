@@ -18,6 +18,11 @@ import { useAuth } from "@/contexts/auth-context";
 import { useRouter } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { LoginInput } from "@/utils/types";
+import {
+  LoginFranceConnectOption,
+  type LoginFranceConnectOptionCopy,
+} from "./login-france-connect-option";
+import { LoginMethodSeparator } from "./login-method-separator";
 
 export type LoginFormCopy = {
   email: {
@@ -31,6 +36,8 @@ export type LoginFormCopy = {
     placeholder: string;
     required: string;
   };
+  franceConnect: LoginFranceConnectOptionCopy;
+  separatorLabel: string;
   submitLabel: string;
   submittingLabel: string;
 };
@@ -67,7 +74,7 @@ export function LoginForm({ copy, returnTo }: LoginFormProps) {
 
   return (
     <form
-      className="flex flex-col gap-5"
+      className="flex flex-col gap-6"
       noValidate
       onSubmit={handleSubmit(async (values) => {
         const result = await login(values);
@@ -83,11 +90,17 @@ export function LoginForm({ copy, returnTo }: LoginFormProps) {
         router.replace(returnTo);
       })}
     >
-      <FieldGroup className="gap-4">
+      <LoginFranceConnectOption copy={copy.franceConnect} />
+      <LoginMethodSeparator label={copy.separatorLabel} />
+
+      <FieldGroup className="gap-5">
         <Field data-invalid={Boolean(errors.email)}>
-          <FieldLabel htmlFor="login-email">{copy.email.label}</FieldLabel>
+          <FieldLabel className="font-bold" htmlFor="login-email">
+            {copy.email.label}
+          </FieldLabel>
           <Input
             autoComplete="email"
+            className="px-3 text-base leading-6"
             id="login-email"
             type="email"
             aria-invalid={Boolean(errors.email)}
@@ -98,11 +111,12 @@ export function LoginForm({ copy, returnTo }: LoginFormProps) {
         </Field>
 
         <Field data-invalid={Boolean(errors.password)}>
-          <FieldLabel htmlFor="login-password">
+          <FieldLabel className="font-bold" htmlFor="login-password">
             {copy.password.label}
           </FieldLabel>
           <Input
             autoComplete="current-password"
+            className="px-3 text-base leading-6"
             id="login-password"
             type="password"
             aria-invalid={Boolean(errors.password)}
@@ -115,7 +129,11 @@ export function LoginForm({ copy, returnTo }: LoginFormProps) {
 
       <FieldError errors={[errors.root]} />
 
-      <Button className="min-h-12 w-full" disabled={isSubmitting} type="submit">
+      <Button
+        className="w-full shadow-[0_10px_20px_rgba(25,114,210,0.2)]"
+        disabled={isSubmitting}
+        type="submit"
+      >
         {isSubmitting ? (
           <LoaderCircle className="animate-spin" data-icon="inline-start" />
         ) : (

@@ -42,7 +42,9 @@
     "loadingMessage": "I am fetching the available questions...",
     "openLabel": "Open assistant",
     "questionLabel": "Question",
+    "recommendationCtaLabel": "Buy this pass",
     "recommendationDescription": "This pass seems best suited to the answers you gave.",
+    "recommendationPricePrefix": "From",
     "recommendationTitle": "Your recommendation",
     "resetLabel": "Start over",
     "retryLabel": "Try again",
@@ -50,6 +52,58 @@
     "title": "Comutitres Assistant",
     "unavailableDescription": "No question workflow is configured right now.",
     "unavailableTitle": "Assistant unavailable"
+  },
+  "passes": {
+    "allHeading": "Explore the available tickets and passes, then choose the one that fits your travel rhythm.",
+    "assistantCtaLabel": "Find my pass",
+    "backLabel": "Back to home",
+    "frequencies": {
+      "frequent": {
+        "description": "I travel often",
+        "title": "Frequent trips"
+      },
+      "occasional": {
+        "description": "I travel every now and then",
+        "title": "Occasional trips"
+      }
+    },
+    "frequencyHeading": "Browse by travel frequency",
+    "heroCardDescription": "Compare Navigo passes, tickets, and rider profiles before completing your purchase.",
+    "heroCardTitle": "All available passes in one place",
+    "heroZoneLabel": "Zones 1-5",
+    "popularHeading": "Browse the most popular options",
+    "productsEmptyDescription": "Available passes will appear here once the catalog has loaded.",
+    "productsEmptyTitle": "No passes available",
+    "profileHeading": "Browse by rider profile",
+    "profiles": {
+      "active": {
+        "description": "Ages 26 to 62",
+        "title": "Active"
+      },
+      "reducedMobility": {
+        "description": "People with disabilities",
+        "title": "Reduced mobility"
+      },
+      "senior": {
+        "description": "Over 62",
+        "title": "Senior"
+      },
+      "solidarity": {
+        "description": "Social support beneficiaries",
+        "title": "Solidarity"
+      },
+      "visitor": {
+        "description": "Tourist",
+        "title": "Visitor"
+      },
+      "young": {
+        "description": "Under 26",
+        "title": "Young"
+      }
+    },
+    "subtitle": "Compare available passes",
+    "title": "Passes and fares",
+    "unavailableLabel": "Purchase available soon"
   },
   "auth": {
     "login": {
@@ -66,11 +120,24 @@
           "placeholder": "Your password",
           "required": "Password is required"
         },
+        "franceConnect": {
+          "description": "You are a French resident and/or citizen.",
+          "label": "With FranceConnect",
+          "unavailableLabel": "Available soon"
+        },
+        "separatorLabel": "or",
         "submitLabel": "Sign in",
         "submittingLabel": "Signing in"
       },
       "subtitle": "Access your Comutitres information",
-      "title": "Sign in"
+      "title": "Sign in",
+      "visual": {
+        "assistantLabel": "Assistant",
+        "folderLabel": "Folder",
+        "passLabel": "Passes",
+        "subtitle": "Find your passes, folder, and recommendations in one secure space.",
+        "title": "Your mobility, ready when you are"
+      }
     }
   },
   "home": {

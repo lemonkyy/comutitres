@@ -42,7 +42,9 @@
     "loadingMessage": "Je récupère les questions disponibles...",
     "openLabel": "Ouvrir l'assistant",
     "questionLabel": "Question",
+    "recommendationCtaLabel": "Acheter ce pass",
     "recommendationDescription": "Ce titre semble le plus adapté aux réponses données.",
+    "recommendationPricePrefix": "À partir de",
     "recommendationTitle": "Votre recommandation",
     "resetLabel": "Recommencer",
     "retryLabel": "Réessayer",
@@ -50,6 +52,58 @@
     "title": "Assistant Comutitres",
     "unavailableDescription": "Aucun parcours de questions n'est configuré pour le moment.",
     "unavailableTitle": "Assistant indisponible"
+  },
+  "passes": {
+    "allHeading": "Découvrez les titres et forfaits disponibles, puis choisissez celui qui convient à votre rythme.",
+    "assistantCtaLabel": "Trouver mon titre",
+    "backLabel": "Retour à l'accueil",
+    "frequencies": {
+      "frequent": {
+        "description": "Je voyage souvent",
+        "title": "Fréquents"
+      },
+      "occasional": {
+        "description": "Je voyage une fois de temps en temps",
+        "title": "Occasionnels"
+      }
+    },
+    "frequencyHeading": "Parcourir par fréquence de trajets",
+    "heroCardDescription": "Comparez les forfaits Navigo, les tickets et les profils avant de finaliser votre achat.",
+    "heroCardTitle": "Tous les titres disponibles au même endroit",
+    "heroZoneLabel": "Zones 1-5",
+    "popularHeading": "Parcourir les plus populaires",
+    "productsEmptyDescription": "Les titres disponibles seront affichés ici dès que le catalogue sera chargé.",
+    "productsEmptyTitle": "Aucun titre disponible",
+    "profileHeading": "Parcourir par profil",
+    "profiles": {
+      "active": {
+        "description": "Entre 26 et 62 ans",
+        "title": "Actif"
+      },
+      "reducedMobility": {
+        "description": "Personnes en situation de handicap",
+        "title": "Mobilité réduite"
+      },
+      "senior": {
+        "description": "Plus de 62 ans",
+        "title": "Senior"
+      },
+      "solidarity": {
+        "description": "Bénéficiaires d'aides sociales",
+        "title": "Solidarité"
+      },
+      "visitor": {
+        "description": "Touriste",
+        "title": "Visiteur"
+      },
+      "young": {
+        "description": "Moins de 26 ans",
+        "title": "Jeune"
+      }
+    },
+    "subtitle": "Comparez les titres disponibles",
+    "title": "Titres et tarifs",
+    "unavailableLabel": "Achat bientôt disponible"
   },
   "auth": {
     "login": {
@@ -66,11 +120,24 @@
           "placeholder": "Votre mot de passe",
           "required": "Le mot de passe est obligatoire"
         },
+        "franceConnect": {
+          "description": "Vous êtes résident et/ou citoyen français.",
+          "label": "Avec FranceConnect",
+          "unavailableLabel": "Bientôt disponible"
+        },
+        "separatorLabel": "ou",
         "submitLabel": "Se connecter",
         "submittingLabel": "Connexion en cours"
       },
       "subtitle": "Accédez à vos informations Comutitres",
-      "title": "Connexion"
+      "title": "Connexion",
+      "visual": {
+        "assistantLabel": "Assistant",
+        "folderLabel": "Dossier",
+        "passLabel": "Titres",
+        "subtitle": "Retrouvez vos titres, votre dossier et vos recommandations dans un espace sécurisé.",
+        "title": "Votre mobilité, prête quand vous l'êtes"
+      }
     }
   },
   "home": {

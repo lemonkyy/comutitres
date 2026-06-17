@@ -1,6 +1,10 @@
 export const pathnames = {
   "/": "/",
   "/assistant": "/assistant",
+  "/passes": {
+    fr: "/titres-et-tarifs",
+    en: "/passes",
+  },
   "/login": {
     fr: "/connexion",
     en: "/connexion",
