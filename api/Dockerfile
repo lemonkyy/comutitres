@@ -31,7 +31,14 @@ FROM base AS dev
 
 COPY . /app
 
-RUN composer install
+ARG JWT_PASSPHRASE
+
+ENV JWT_PASSPHRASE=$JWT_PASSPHRASE
+
+RUN composer install;
+
+RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction;
+RUN php bin/console cache:clear;
 
 CMD ["multirun", "php-fpm -R -F", "nginx -g 'daemon off;'"]
 
@@ -44,6 +51,10 @@ ENV APP_ENV=prod
 ENV APP_DEBUG=0
 COPY composer.json composer.lock /app/
 
+ARG JWT_PASSPHRASE
+
+ENV JWT_PASSPHRASE=$JWT_PASSPHRASE
+
 RUN composer install \
     --no-dev \
     --optimize-autoloader \
@@ -52,6 +63,7 @@ RUN composer install \
 
 COPY . /app
 
+RUN php bin/console lexik:jwt:generate-keypair --overwrite --no-interaction;
 RUN php bin/console cache:clear \
  && php bin/console cache:warmup
 
