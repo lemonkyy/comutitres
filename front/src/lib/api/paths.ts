@@ -13,7 +13,7 @@ export const apiPaths = {
   workflow: {
     start: "/workflow/start",
     step: "/workflow/step/:choiceId",
-    createQuestion: "/workflow/questions",
+    createQuestion: "/questions",
   },
   question: {
     update: "/questions/:id",
