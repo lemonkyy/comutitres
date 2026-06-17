@@ -25,6 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
             provider: MeProvider::class,
             normalizationContext: ['groups' => ['me:read']],
         ),
+        new GetCollection(),
         new Post(
             uriTemplate: "/login",
             messenger: true,
