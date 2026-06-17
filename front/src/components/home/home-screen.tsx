@@ -1,6 +1,10 @@
+"use client";
+
 import { Bell, CreditCard, FolderOpen, HelpCircle, Zap } from "lucide-react";
 
 import { Logo } from "@/components/assets/logo/logo";
+import { useAuth } from "@/contexts/auth-context";
+import type { Me } from "@/utils/types";
 import {
   AssistantPromoCard,
   NewsCard,
@@ -18,6 +22,7 @@ export type HomeScreenCopy = {
     title: string;
   };
   hero: {
+    anonymousGreeting: string;
     brand: string;
     greeting: string;
   };
@@ -56,7 +61,7 @@ const quickActionConfig = {
     tone: "primary",
   },
   help: {
-    href: "/settings",
+    href: "/account/settings",
     icon: HelpCircle,
     tone: "neutral",
   },
@@ -78,6 +83,8 @@ type HomeScreenProps = {
 };
 
 export function HomeScreen({ copy }: HomeScreenProps) {
+  const { user } = useAuth();
+
   return (
     <main className="min-h-dvh bg-background">
       <section className="relative overflow-hidden bg-[var(--anthracite)] px-5 pt-12 pb-24 text-white md:px-8 md:pt-16 md:pb-28">
@@ -94,7 +101,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
           />
 
           <h1 className="max-w-[28rem] text-balance text-4xl font-extrabold leading-tight md:text-5xl">
-            {copy.hero.greeting}
+            {getGreeting(copy, user)}
           </h1>
         </div>
       </section>
@@ -170,4 +177,18 @@ export function HomeScreen({ copy }: HomeScreenProps) {
       </div>
     </main>
   );
+}
+
+function getGreeting(copy: HomeScreenCopy, user: Me | null) {
+  if (!user) {
+    return copy.hero.anonymousGreeting;
+  }
+
+  const name = user.givenName || user.familyName || user.email;
+
+  if (!name) {
+    return copy.hero.anonymousGreeting;
+  }
+
+  return `${copy.hero.greeting}, ${name}`;
 }

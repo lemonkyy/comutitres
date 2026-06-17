@@ -12,6 +12,7 @@ export default async function Home() {
       title: t("assistant.title"),
     },
     hero: {
+      anonymousGreeting: t("hero.anonymousGreeting"),
       brand: t("hero.brand"),
       greeting: t("hero.greeting"),
     },

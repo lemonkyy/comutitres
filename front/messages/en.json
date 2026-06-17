@@ -1,4 +1,35 @@
 {
+  "account": {
+    "overview": {
+      "authPrompt": {
+        "ctaLabel": "Sign in",
+        "description": "Sign in to view your personal information and follow your requests.",
+        "title": "Your information will appear here"
+      },
+      "fields": {
+        "address": "Address",
+        "email": "Email",
+        "name": "Name"
+      },
+      "detailsTitle": "Account contact details",
+      "loading": "Loading account...",
+      "logoutLabel": "Sign out",
+      "missingAddress": "No address provided",
+      "missingName": "No name provided",
+      "sessionLabel": "Secure session",
+      "summary": "This information is used to prepare your recommendations and follow your requests.",
+      "title": "Personal information"
+    },
+    "shell": {
+      "backLabel": "Back to home",
+      "subtitle": "Your information and preferences",
+      "tabs": {
+        "account": "My information",
+        "settings": "Settings"
+      },
+      "title": "My account"
+    }
+  },
   "assistant": {
     "assistantAvatarLabel": "Comutitres assistant",
     "backLabel": "Back to home",
@@ -59,6 +90,28 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "backLabel": "Back to home",
+      "form": {
+        "email": {
+          "invalid": "Enter a valid email address",
+          "label": "Email address",
+          "placeholder": "emma.durand@example.com",
+          "required": "Email address is required"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Your password",
+          "required": "Password is required"
+        },
+        "submitLabel": "Sign in",
+        "submittingLabel": "Signing in"
+      },
+      "subtitle": "Access your Comutitres information",
+      "title": "Sign in"
+    }
+  },
   "home": {
     "assistant": {
       "ctaLabel": "Start the assistant",
@@ -67,7 +120,8 @@
     },
     "hero": {
       "brand": "Comutitres",
-      "greeting": "Hello, Sophie 👋"
+      "greeting": "Hello",
+      "anonymousGreeting": "Welcome to Comutitres"
     },
     "news": {
       "heading": "News",

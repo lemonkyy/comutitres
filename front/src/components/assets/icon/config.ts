@@ -6,6 +6,7 @@ import {
   type LucideIcon,
   MessageSquare,
   Settings,
+  UserRound,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 
@@ -20,6 +21,7 @@ const raw = {
   creditcard: CreditCard,
   helpcircle: HelpCircle,
   settings: Settings,
+  userround: UserRound,
 };
 
 export const icons: Icons = raw;

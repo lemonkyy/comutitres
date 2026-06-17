@@ -39,6 +39,7 @@ jobs:
           build_args: |
             NEXT_PUBLIC_URL=${{ secrets.FRONT_URL }}
             NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
+            API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
 
   deploy-image:
     name: Deploy front image
@@ -57,4 +58,3 @@ jobs:
           user: ${{ secrets.PROD_USER }}
           path: ${{ secrets.PROD_PATH }}
           images: 'front'
-

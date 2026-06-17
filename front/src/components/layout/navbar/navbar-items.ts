@@ -41,10 +41,10 @@ export const navbarItems: NavbarItem[] = [
     icon: "folderopen",
   },
   {
-    id: "settings",
-    label: "Réglages",
-    href: "/settings",
+    id: "account",
+    label: "Mon compte",
+    href: "/account",
     visibility: "all",
-    icon: "settings",
+    icon: "userround",
   },
 ];

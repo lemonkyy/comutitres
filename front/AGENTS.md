@@ -27,3 +27,5 @@ Disabled controls and cards:
 - Sources: WCAG 2.2 Contrast Minimum (`https://www.w3.org/TR/WCAG22/#contrast-minimum`), Understanding Contrast Minimum (`https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html`), WCAG 2.2 Non-text Contrast (`https://www.w3.org/TR/WCAG22/#non-text-contrast`), and Understanding Non-text Contrast (`https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html`).
 
 Use the ask user question tool when a frontend change depends on a product, UX, or API decision that cannot be inferred confidently from the codebase or request.
+
+For new user-facing routes in this French-targeted service, use French public slugs. If an internal route key is English for framework ergonomics, map it to a French pathname in `src/i18n/pathnames.ts`.

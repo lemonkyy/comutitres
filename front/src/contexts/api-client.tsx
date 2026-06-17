@@ -1,9 +1,8 @@
 "use client";
 
-import { type ReactNode, createContext, useContext, useEffect } from "react";
+import { type ReactNode, createContext, useContext } from "react";
 
 import { ApiClient } from "@/lib/api/ApiClient";
-import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
 import { apiBaseUrl } from "@/utils/tools";
 
 type Props = {
@@ -18,24 +17,9 @@ export const ApiClientContext = createContext<ApiClientContextType | undefined>(
   undefined,
 );
 
-export const TOKEN_COOKIE = "token";
-
 const apiClient = new ApiClient(apiBaseUrl);
 
 export const ApiClientProvider = ({ children }: Props) => {
-  useEffect(() => {
-    apiClient.setOnTokenChange((token) => {
-      if (token) {
-        setCookie(TOKEN_COOKIE, token);
-      } else {
-        deleteCookie(TOKEN_COOKIE);
-      }
-    });
-
-    const savedToken = getCookie(TOKEN_COOKIE);
-    if (savedToken) apiClient.setTokens(savedToken);
-  }, []);
-
   return (
     <ApiClientContext.Provider value={{ apiClient }}>
       {children}

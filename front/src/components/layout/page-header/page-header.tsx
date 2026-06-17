@@ -117,7 +117,7 @@ export function PageHeader({
           contentClassName,
         )}
       >
-        <div className="flex min-w-0 items-center gap-3 sm:gap-6">
+        <div className="flex min-w-0 items-center gap-6">
           {leading ? <div className="shrink-0">{leading}</div> : null}
 
           <div className="min-w-0 flex-1">

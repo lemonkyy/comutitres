@@ -1,3 +1,4 @@
+import { Logo } from "@/components/assets/logo/logo";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { NavbarItem } from "./navbar-item";
@@ -31,15 +32,13 @@ export default function Navbar({ className = "" }: NavbarProps) {
       <div className="mx-auto flex h-20 w-full items-stretch px-1 pt-2 pb-4 md:h-[4.5rem] md:max-w-6xl md:items-center md:justify-between md:px-6 md:py-0 lg:px-8">
         <Link
           href="/"
-          className="hidden items-center gap-3 rounded-full px-3 py-2 font-semibold text-foreground outline-none transition-[background-color,color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] hover:bg-accent hover:text-primary focus-visible:bg-accent focus-visible:text-primary md:flex"
+          className="hidden items-center rounded-[0.875rem] px-2 py-1.5 outline-none transition-[background-color,box-shadow,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] hover:bg-accent focus-visible:bg-accent focus-visible:ring-[3px] focus-visible:ring-ring/25 md:flex"
         >
-          <span
-            aria-hidden="true"
-            className="grid size-9 place-items-center rounded-full bg-primary text-sm font-bold text-primary-foreground"
-          >
-            C
-          </span>
-          <span className="text-base leading-none">Comutitres</span>
+          <Logo
+            className="h-10 w-auto max-w-none md:h-11"
+            priority
+            variant="couleur"
+          />
         </Link>
 
         <div className="grid w-full grid-cols-5 items-stretch md:w-auto md:flex md:items-center md:justify-end md:gap-1.5">

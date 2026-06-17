@@ -118,6 +118,32 @@ const accommodationOptionConfig: AccommodationOptionConfig[] = [
 ] satisfies AccommodationOptionConfig[];
 
 export function SettingsScreen({ copy, currentLocale }: SettingsScreenProps) {
+  return (
+    <main className="min-h-dvh bg-background">
+      <PageHeader
+        backButton={
+          <PageHeaderIconButton
+            className="size-9 rounded-xl [--button-icon-size:1.125rem]"
+            href="/"
+            icon={ChevronLeft}
+            label={copy.backLabel}
+          />
+        }
+        className="border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)]"
+        contentClassName="max-w-md gap-0"
+        subtitle={copy.subtitle}
+        subtitleClassName="mt-1 text-xs font-normal"
+        title={<span className="text-lg leading-tight">{copy.title}</span>}
+      />
+
+      <div className="px-4 py-5 pb-8">
+        <SettingsPanel copy={copy} currentLocale={currentLocale} />
+      </div>
+    </main>
+  );
+}
+
+export function SettingsPanel({ copy, currentLocale }: SettingsScreenProps) {
   const pathname = usePathname();
   const router = useRouter();
   const form = useForm<SettingsFormValues>({
@@ -140,84 +166,66 @@ export function SettingsScreen({ copy, currentLocale }: SettingsScreenProps) {
   const accommodationOptions = getAccommodationOptions(copy);
 
   return (
-    <main className="min-h-dvh bg-background">
-      <PageHeader
-        backButton={
-          <PageHeaderIconButton
-            className="size-9 rounded-xl [--button-icon-size:1.125rem]"
-            href="/"
-            icon={ChevronLeft}
-            label={copy.backLabel}
+    <form
+      className="mx-auto flex w-full max-w-md flex-col gap-6"
+      noValidate
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
+      <FieldSet className="gap-0">
+        <FieldLegend
+          className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
+          variant="label"
+        >
+          {copy.language.legend}
+        </FieldLegend>
+        <FieldGroup className="gap-3">
+          <RadioCardGroup
+            invalid={languageField.fieldState.invalid}
+            name={languageField.field.name}
+            onBlur={languageField.field.onBlur}
+            onValueChange={(nextLanguage) => {
+              const parsedLanguage =
+                supportedLanguageSchema.safeParse(nextLanguage);
+
+              if (!parsedLanguage.success) {
+                return;
+              }
+
+              languageField.field.onChange(parsedLanguage.data);
+
+              if (parsedLanguage.data !== currentLocale) {
+                router.replace(pathname, { locale: parsedLanguage.data });
+              }
+            }}
+            options={languageOptions}
+            value={languageField.field.value}
           />
-        }
-        className="border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)]"
-        contentClassName="max-w-md gap-0"
-        subtitle={copy.subtitle}
-        subtitleClassName="mt-1 text-xs font-normal"
-        title={<span className="text-lg leading-tight">{copy.title}</span>}
-      />
+          <FieldError errors={[languageField.fieldState.error]} />
+        </FieldGroup>
+      </FieldSet>
 
-      <form
-        className="mx-auto flex w-full max-w-md flex-col gap-6 px-4 py-5 pb-8"
-        noValidate
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
-        <FieldSet className="gap-0">
-          <FieldLegend
-            className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
-            variant="label"
-          >
-            {copy.language.legend}
-          </FieldLegend>
-          <FieldGroup className="gap-3">
-            <RadioCardGroup
-              invalid={languageField.fieldState.invalid}
-              name={languageField.field.name}
-              onBlur={languageField.field.onBlur}
-              onValueChange={(nextLanguage) => {
-                const parsedLanguage =
-                  supportedLanguageSchema.safeParse(nextLanguage);
-
-                if (!parsedLanguage.success) {
-                  return;
-                }
-
-                languageField.field.onChange(parsedLanguage.data);
-
-                if (parsedLanguage.data !== currentLocale) {
-                  router.replace(pathname, { locale: parsedLanguage.data });
-                }
-              }}
-              options={languageOptions}
-              value={languageField.field.value}
-            />
-            <FieldError errors={[languageField.fieldState.error]} />
-          </FieldGroup>
-        </FieldSet>
-
-        <FieldSet className="gap-0">
-          <FieldLegend
-            className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
-            variant="label"
-          >
-            {copy.accommodations.legend}
-          </FieldLegend>
-          <FieldGroup className="gap-3">
-            <CheckboxCardGroup
-              invalid={accommodationsField.fieldState.invalid}
-              name={accommodationsField.field.name}
-              onBlur={accommodationsField.field.onBlur}
-              onValueChange={accommodationsField.field.onChange}
-              options={accommodationOptions}
-              value={accommodationsField.field.value}
-            />
-            <FieldError errors={[accommodationsField.fieldState.error]} />
-          </FieldGroup>
-        </FieldSet>
-      </form>
-    </main>
+      <FieldSet className="gap-0">
+        <FieldLegend
+          className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
+          variant="label"
+        >
+          {copy.accommodations.legend}
+        </FieldLegend>
+        <FieldGroup className="gap-3">
+          <CheckboxCardGroup
+            invalid={accommodationsField.fieldState.invalid}
+            name={accommodationsField.field.name}
+            onBlur={accommodationsField.field.onBlur}
+            onValueChange={accommodationsField.field.onChange}
+            options={accommodationOptions}
+            value={accommodationsField.field.value}
+          />
+          <FieldError errors={[accommodationsField.fieldState.error]} />
+        </FieldGroup>
+      </FieldSet>
+    </form>
   );
 }
 

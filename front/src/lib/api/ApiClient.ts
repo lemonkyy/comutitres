@@ -1,7 +1,6 @@
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import { handleApiError } from "@/lib/api/handleApiError";
-import { apiPaths } from "@/lib/api/paths";
-import type { LoginInput } from "@/utils/types";
+import type { LoginInput, Me } from "@/utils/types";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
@@ -37,10 +36,7 @@ export class ApiClient {
   pass: PassResource;
   workflow: WorkflowResource;
 
-  constructor(
-    public baseUrl: string,
-    public token: string | null = null,
-  ) {
+  constructor(public baseUrl: string) {
     this.me = new MeResource(this);
     this.pass = new PassResource(this);
     this.workflow = new WorkflowResource(this);
@@ -57,11 +53,11 @@ export class ApiClient {
         "Accept-Language": "fr",
         "Content-Language": "fr",
         ...additionnalHeaders,
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .catch(toApiClientError);
   }
 
   public async getCollection<T>(
@@ -75,11 +71,11 @@ export class ApiClient {
         "Accept-Language": "fr",
         "Content-Language": "fr",
         ...additionnalHeaders,
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .catch(toApiClientError);
   }
 
   public async post<T>(
@@ -107,16 +103,14 @@ export class ApiClient {
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "POST",
-      headers: {
-        ...headers,
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
-      },
+      headers,
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
       .then((response) =>
         responseType === ResponseType.RAW ? response : response.json(),
-      );
+      )
+      .catch(toApiClientError);
   }
 
   public async patch<T>(
@@ -134,14 +128,12 @@ export class ApiClient {
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "PATCH",
-      headers: {
-        ...headers,
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
-      },
+      headers,
       body: JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .catch(toApiClientError);
   }
 
   public async put<T>(
@@ -168,14 +160,12 @@ export class ApiClient {
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "PUT",
-      headers: {
-        ...headers,
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
-      },
+      headers,
       body: isFormData ? body : JSON.stringify(body),
     })
       .then(handleApiError)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .catch(toApiClientError);
   }
 
   public async delete(url: string): Promise<DeleteResponse | ApiClientError> {
@@ -184,39 +174,36 @@ export class ApiClient {
       headers: {
         "Accept-Language": "fr",
         "Content-Language": "fr",
-        ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
       .then(handleApiError)
-      .then((response) => ({ success: response.status === 204 }));
+      .then((response) => ({ success: response.status === 204 }))
+      .catch(toApiClientError);
   }
 
-  public async login(
-    credentials: LoginInput,
-  ): Promise<string | ApiClientError> {
-    const response = await this.post<string>(
-      apiPaths.auth.login,
-      credentials,
-    );
+  public async login(credentials: LoginInput): Promise<Me | ApiClientError> {
+    return fetch("/api/auth/login", {
+      body: JSON.stringify(credentials),
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    })
+      .then(handleApiError)
+      .then((response) => response.json())
+      .then((response: { user: Me }) => response.user)
+      .catch(toApiClientError);
+  }
+}
 
-    if (response instanceof ApiClientError) {
-      return response;
-    }
-
-    this.setTokens(response);
-
-    return response;
+function toApiClientError(error: unknown) {
+  if (error instanceof ApiClientError) {
+    return error;
   }
 
-  private onTokenChange?: (token: string | null) => void;
-
-  public setOnTokenChange(callback: (token: string | null) => void) {
-    this.onTokenChange = callback;
-  }
-
-  public setTokens(token?: string | null) {
-    this.token = token ?? null;
-    console.log('token la tu c', this.token);
-    this.onTokenChange?.(this.token);
-  }
+  return new ApiClientError(
+    0,
+    error instanceof Error ? error.message : "Une erreur est survenue.",
+  );
 }

@@ -12,7 +12,7 @@ type AppChromeProps = {
 
 export function AppChrome({ children }: AppChromeProps) {
   const pathname = usePathname();
-  const hideNavbar = isAssistantPath(pathname);
+  const hideNavbar = isAssistantPath(pathname) || isAuthPath(pathname);
 
   return (
     <>
@@ -33,4 +33,8 @@ export function AppChrome({ children }: AppChromeProps) {
 
 function isAssistantPath(pathname: string) {
   return pathname === "/assistant" || pathname.endsWith("/assistant");
+}
+
+function isAuthPath(pathname: string) {
+  return pathname === "/login" || pathname.endsWith("/login");
 }

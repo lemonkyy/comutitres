@@ -1,4 +1,35 @@
 {
+  "account": {
+    "overview": {
+      "authPrompt": {
+        "ctaLabel": "Se connecter",
+        "description": "Connectez-vous pour afficher vos informations personnelles et suivre vos démarches.",
+        "title": "Vos informations apparaîtront ici"
+      },
+      "fields": {
+        "address": "Adresse",
+        "email": "E-mail",
+        "name": "Nom"
+      },
+      "detailsTitle": "Coordonnées du compte",
+      "loading": "Chargement du compte...",
+      "logoutLabel": "Se déconnecter",
+      "missingAddress": "Adresse non renseignée",
+      "missingName": "Nom non renseigné",
+      "sessionLabel": "Session sécurisée",
+      "summary": "Ces informations sont utilisées pour préparer vos recommandations et suivre vos démarches.",
+      "title": "Informations personnelles"
+    },
+    "shell": {
+      "backLabel": "Retour à l'accueil",
+      "subtitle": "Vos informations et préférences",
+      "tabs": {
+        "account": "Mes informations",
+        "settings": "Paramètres"
+      },
+      "title": "Mon compte"
+    }
+  },
   "assistant": {
     "assistantAvatarLabel": "Assistant Comutitres",
     "backLabel": "Retour à l'accueil",
@@ -59,6 +90,28 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "backLabel": "Retour à l'accueil",
+      "form": {
+        "email": {
+          "invalid": "Saisissez une adresse e-mail valide",
+          "label": "Adresse e-mail",
+          "placeholder": "emma.durand@example.com",
+          "required": "L'adresse e-mail est obligatoire"
+        },
+        "password": {
+          "label": "Mot de passe",
+          "placeholder": "Votre mot de passe",
+          "required": "Le mot de passe est obligatoire"
+        },
+        "submitLabel": "Se connecter",
+        "submittingLabel": "Connexion en cours"
+      },
+      "subtitle": "Accédez à vos informations Comutitres",
+      "title": "Connexion"
+    }
+  },
   "home": {
     "assistant": {
       "ctaLabel": "Démarrer l'assistant",
@@ -67,7 +120,8 @@
     },
     "hero": {
       "brand": "Comutitres",
-      "greeting": "Bonjour, Sophie 👋"
+      "greeting": "Bonjour",
+      "anonymousGreeting": "Bienvenue sur Comutitres"
     },
     "news": {
       "heading": "Actualités",
