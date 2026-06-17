@@ -2,6 +2,11 @@ import type { ReactNode } from "react";
 
 import "./globals.css";
 import { routing } from "@/i18n/routing";
+import Script from "next/script";
+
+type ProvidersProps = {
+  children: ReactNode;
+};
 
 type Props = {
   children: ReactNode;
@@ -11,6 +16,11 @@ const RootLayout = async ({ children }: Props) => {
   return (
     <html lang={routing.defaultLocale}>
       <head>
+        <Script
+          src={process.env.NEXT_PUBLIC_UMAMI_SRC}
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+          strategy="afterInteractive"
+        />
         <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link
           crossOrigin="anonymous"

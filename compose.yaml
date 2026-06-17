@@ -36,6 +36,40 @@ services:
 
   mailbox:
     image: mailhog/mailhog
+  
+  glitchtip:
+    image: glitchtip/glitchtip
+    environment:
+      PORT: 8000
+      CACHE_URL: redis://glitchtip-valkey:6379/0
+      REDIS_URL: redis://glitchtip-valkey:6379/0
+      SERVER_ROLE: all_in_one
+    depends_on:
+      - glitchtip-db
+
+  glitchtip-db:
+    image: postgres:17-alpine
+    volumes:
+      - glitchtip_db_data:/var/lib/postgresql/data
+  
+  glitchtip-valkey:
+    image: valkey/valkey:9
+    restart: unless-stopped
+
+  umami:
+    image: elestio/umami:latest
+    environment:
+      DATABASE_TYPE: postgresql
+    depends_on:
+      - umami-db
+
+  umami-db:
+    image: postgres:17-alpine
+    volumes:
+      - umami_db_data:/var/lib/postgresql/data
+
 
 volumes:
+  glitchtip_db_data:
+  umami_db_data:
   db_data:

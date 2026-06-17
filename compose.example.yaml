@@ -4,6 +4,10 @@ services:
       - ./api:/app
     ports:
       - "8000:80"
+    environment:
+      SENTRY_ENV: "dev"
+      SENTRY_RELEASE: "0.0.1"
+      SENTRY_DSN: http://changeme@glitchtip:8001/1
 
   front:
     volumes:
@@ -17,6 +21,12 @@ services:
           nocopy: true
     ports:
       - "3000:3000"
+    environment:
+      NEXT_PUBLIC_SENTRY_ENV: "dev"
+      NEXT_PUBLIC_SENTRY_RELEASE: "0.0.1"
+      NEXT_PUBLIC_SENTRY_DSN: http://changeme@localhost:8001/2
+      NEXT_PUBLIC_UMAMI_SRC: "http://localhost:3001/script.js"
+      NEXT_PUBLIC_UMAMI_WEBSITE_ID: "changeme"
 
   storybook:
     command: sh -c "pnpm install --frozen-lockfile --ignore-scripts=false && pnpm storybook --host 0.0.0.0 --no-open --disable-telemetry"
@@ -42,6 +52,33 @@ services:
   mailbox:
     ports:
       - "8025:8025"
+
+  glitchtip:
+    ports:
+      - "8001:8000"
+    environment:
+      SECRET_KEY: 67
+      DATABASE_URL: postgres://glitchtip:glitchtip@glitchtip-db:5432/glitchtip
+      ALLOWED_HOSTS: localhost,glitchtip
+
+  glitchtip-db:
+    environment:
+      POSTGRES_DB: glitchtip
+      POSTGRES_USER: glitchtip
+      POSTGRES_PASSWORD: glitchtip
+
+  umami:
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
+      APP_SECRET: 67
+
+  umami-db:
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: umami
 
 volumes:
   front_node_modules:
