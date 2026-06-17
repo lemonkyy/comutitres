@@ -88,7 +88,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
         <div className="relative mx-auto flex max-w-5xl flex-col gap-8">
           <Logo
             alt={copy.hero.brand}
-            className="w-48 drop-shadow-[0_0.5rem_1.5rem_color-mix(in_srgb,var(--anthracite)_24%,transparent)] sm:w-56"
+            className="w-36 drop-shadow-[0_0.5rem_1.5rem_color-mix(in_srgb,var(--anthracite)_24%,transparent)] min-[360px]:w-40 sm:w-48 md:w-56"
             priority
             variant="couleur"
           />
@@ -119,7 +119,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
           >
             {copy.quickAccess.heading}
           </h2>
-          <div className="grid grid-cols-3 gap-3 md:gap-5">
+          <div className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-3 md:gap-5">
             {copy.quickAccess.items.map((item) => {
               const config = quickActionConfig[item.id];
 

@@ -28,7 +28,7 @@ const Providers = ({ children }: ProvidersProps) => {
 const RootLayout = async ({ children }: Props) => {
   return (
     <html lang={routing.defaultLocale}>
-      <body className="flex min-h-dvh flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pt-[4.5rem] md:pb-0">
+      <body className="flex min-h-dvh flex-col pb-[calc(5rem+env(safe-area-inset-bottom))] md:pt-[4.5rem] md:pb-0">
         <Providers>{children}</Providers>
       </body>
     </html>

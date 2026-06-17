@@ -39,23 +39,23 @@ export function AssistantPromoCard({
 }: AssistantPromoCardProps) {
   return (
     <Card
-      className="border-[var(--bleu-moyen)]"
+      className="border-[var(--bleu-moyen)] max-[359px]:p-5"
       padding="lg"
       variant="elevated"
     >
       <div className="flex flex-col gap-5">
-        <div className="flex items-start gap-4 sm:gap-5">
+        <div className="flex flex-col items-start gap-4 min-[360px]:flex-row sm:gap-5">
           <span
             aria-hidden="true"
-            className="grid size-16 shrink-0 place-items-center rounded-[1.25rem] bg-background text-primary sm:size-20"
+            className="grid size-14 shrink-0 place-items-center rounded-[1.125rem] bg-background text-primary min-[360px]:size-16 min-[360px]:rounded-[1.25rem] sm:size-20"
           >
-            <MessageSquare className="size-7 stroke-[1.75] sm:size-8" />
+            <MessageSquare className="size-6 stroke-[1.75] min-[360px]:size-7 sm:size-8" />
           </span>
           <div className="min-w-0">
-            <h2 className="text-balance text-2xl font-extrabold leading-tight text-foreground md:text-3xl">
+            <h2 className="text-balance text-[1.375rem] font-extrabold leading-tight text-foreground min-[360px]:text-2xl md:text-3xl">
               {title}
             </h2>
-            <p className="mt-3 max-w-[38rem] text-pretty text-lg leading-8 text-muted-foreground md:text-xl">
+            <p className="mt-3 max-w-[38rem] text-pretty text-base leading-7 text-muted-foreground min-[360px]:text-lg min-[360px]:leading-8 md:text-xl">
               {description}
             </p>
           </div>
@@ -95,28 +95,28 @@ export function QuickAccessCard({
   return (
     <Card
       asChild
-      className="min-h-[8.75rem] rounded-[1.25rem]"
+      className="min-h-[4.75rem] rounded-[1.25rem] min-[360px]:min-h-[8.75rem]"
       interactive
       padding="none"
     >
       <Link
         href={href}
-        className="flex h-full flex-col items-center justify-center gap-3 p-3 text-center sm:p-4"
+        className="flex h-full flex-row items-center justify-start gap-3 p-4 text-left min-[360px]:flex-col min-[360px]:justify-center min-[360px]:p-3 min-[360px]:text-center sm:p-4"
       >
         <span
           aria-hidden="true"
           className={cn(
-            "grid size-14 place-items-center rounded-[1.25rem]",
+            "grid size-12 shrink-0 place-items-center rounded-[1rem] min-[360px]:size-14 min-[360px]:rounded-[1.25rem]",
             iconToneClasses[tone],
           )}
         >
-          <Icon className="size-7 stroke-[1.75]" />
+          <Icon className="size-6 stroke-[1.75] min-[360px]:size-7" />
         </span>
-        <span className="flex min-w-0 flex-col gap-2">
+        <span className="flex min-w-0 flex-col gap-1 min-[360px]:gap-2">
           <span className="text-base font-extrabold leading-tight text-foreground sm:text-lg">
             {title}
           </span>
-          <span className="text-sm font-bold leading-tight text-muted-foreground">
+          <span className="text-sm font-bold leading-snug text-muted-foreground">
             {description}
           </span>
         </span>
@@ -150,9 +150,9 @@ export function RegionPassCard({
           <div className="flex items-center gap-3 text-center">
             <MapPin
               aria-hidden="true"
-              className="size-8 shrink-0 stroke-[1.75]"
+              className="size-7 shrink-0 stroke-[1.75] min-[360px]:size-8"
             />
-            <span className="text-xl font-extrabold leading-tight sm:text-2xl">
+            <span className="text-lg font-extrabold leading-tight min-[360px]:text-xl sm:text-2xl">
               {label}
             </span>
           </div>
@@ -162,7 +162,7 @@ export function RegionPassCard({
             <span className="block text-xl font-extrabold leading-tight text-foreground">
               {title}
             </span>
-            <span className="mt-1 block text-lg leading-tight text-muted-foreground">
+            <span className="mt-1 block text-base leading-tight text-muted-foreground min-[360px]:text-lg">
               {description}
             </span>
           </span>

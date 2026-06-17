@@ -28,7 +28,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
         className,
       )}
     >
-      <div className="mx-auto flex h-[4.5rem] w-full items-stretch px-1 pt-1.5 pb-4 md:h-[4.5rem] md:max-w-6xl md:items-center md:justify-between md:px-6 md:py-0 lg:px-8">
+      <div className="mx-auto flex h-20 w-full items-stretch px-1 pt-2 pb-4 md:h-[4.5rem] md:max-w-6xl md:items-center md:justify-between md:px-6 md:py-0 lg:px-8">
         <Link
           href="/"
           className="hidden items-center gap-3 rounded-full px-3 py-2 font-semibold text-foreground outline-none transition-[background-color,color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] hover:bg-accent hover:text-primary focus-visible:bg-accent focus-visible:text-primary md:flex"

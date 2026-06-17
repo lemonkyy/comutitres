@@ -36,8 +36,8 @@ type Story = StoryObj<typeof meta>;
 
 function MobileItemPreview({ children }: { children: ReactNode }) {
   return (
-    <div className="w-[78px] border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)] border-t bg-card/[0.97] px-1 pt-1.5 pb-4 backdrop-blur-md">
-      <div className="grid h-[3.125rem] items-stretch">{children}</div>
+    <div className="w-[78px] border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)] border-t bg-card/[0.97] px-1 pt-2 pb-4 backdrop-blur-md">
+      <div className="grid h-14 items-stretch">{children}</div>
     </div>
   );
 }
@@ -72,8 +72,8 @@ export const AllItems: Story = {
   },
   render: () => (
     <div className="flex flex-col gap-8">
-      <div className="max-w-[390px] border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)] border-t bg-card/[0.97] px-1 pt-1.5 pb-4 backdrop-blur-md">
-        <div className="grid h-[3.125rem] grid-cols-5 items-stretch">
+      <div className="max-w-[390px] border-[color-mix(in_srgb,var(--anthracite)_10%,transparent)] border-t bg-card/[0.97] px-1 pt-2 pb-4 backdrop-blur-md">
+        <div className="grid h-14 grid-cols-5 items-stretch">
           {navbarItems.map((item) => (
             <NavbarItem key={item.id} item={item} layout="mobile" />
           ))}
