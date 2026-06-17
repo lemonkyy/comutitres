@@ -1,0 +1,20 @@
+App\Entity\User:
+    attributes:
+        id:
+            groups:
+                - me:read
+        email:
+            groups:
+                - me:read
+        roles:
+            groups:
+                - me:read
+        familyName:
+            groups:
+                - me:read
+        givenName:
+            groups:
+                - me:read
+        address:
+            groups:
+                - me:read

@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use App\Api\State\Provider\InvoiceProvider;
 use App\Api\State\Provider\InvoicesProvider;
+use App\Api\State\Provider\MeProvider;
 use App\Domain\Command\User\LoginCommand;
 use App\Entity\Address;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +19,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity]
 #[ApiResource(
     operations: [
+        new Get(
+            name: 'api_me',
+            uriTemplate: '/me',
+            provider: MeProvider::class,
+            normalizationContext: ['groups' => ['me:read']],
+        ),
         new Post(
             uriTemplate: "/login",
             messenger: true,
@@ -69,7 +76,7 @@ class User implements UserInterface
         $this->documentProofs = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

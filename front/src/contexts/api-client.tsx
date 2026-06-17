@@ -18,7 +18,7 @@ export const ApiClientContext = createContext<ApiClientContextType | undefined>(
   undefined,
 );
 
-const TOKEN_COOKIE = "token";
+export const TOKEN_COOKIE = "token";
 
 const apiClient = new ApiClient(apiBaseUrl);
 

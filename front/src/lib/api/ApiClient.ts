@@ -2,6 +2,7 @@ import { ApiClientError } from "@/lib/api/ApiClientError";
 import { handleApiError } from "@/lib/api/handleApiError";
 import { apiPaths } from "@/lib/api/paths";
 import type { LoginInput } from "@/utils/types";
+import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
 
@@ -32,6 +33,7 @@ export enum ResponseType {
 }
 
 export class ApiClient {
+  me: MeResource;
   pass: PassResource;
   workflow: WorkflowResource;
 
@@ -39,6 +41,7 @@ export class ApiClient {
     public baseUrl: string,
     public token: string | null = null,
   ) {
+    this.me = new MeResource(this);
     this.pass = new PassResource(this);
     this.workflow = new WorkflowResource(this);
   }
