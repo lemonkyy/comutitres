@@ -81,9 +81,11 @@ export const AllItems: Story = {
       </div>
 
       <div className="flex w-fit items-center gap-1.5 rounded-full bg-card/[0.97] p-2 shadow-sm">
-        {navbarItems.map((item) => (
-          <NavbarItem key={item.id} item={item} layout="desktop" />
-        ))}
+        {navbarItems
+          .filter((item) => item.visibility !== "mobile")
+          .map((item) => (
+            <NavbarItem key={item.id} item={item} layout="desktop" />
+          ))}
       </div>
     </div>
   ),

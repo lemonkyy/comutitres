@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
+import { ChevronLeft, RotateCcw } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { Button } from "@/components/actions/button/button";
 import {
   ChoicePillGroup,
   type ChoicePillOption,
@@ -12,6 +11,7 @@ import {
   UserMessage,
 } from "@/components/assistant/message/message";
 import { PageHeaderIconButton } from "@/components/layout/page-header/page-header";
+import { Card } from "@/components/ui/card/card";
 import { Chat, type ChatProps } from "./chat";
 
 type ChatMessage = {
@@ -23,7 +23,7 @@ type ChatMessage = {
 type ChatExampleProps = ChatProps & {
   choiceLabel?: string;
   choiceOptions?: ChoicePillOption[];
-  cta?: ReactNode;
+  footerContent?: ReactNode;
   messages: ChatMessage[];
 };
 
@@ -115,7 +115,7 @@ const finalMessages: ChatMessage[] = [
   },
   {
     content:
-      "Parfait ! J'ai tout ce qu'il me faut. Je prépare votre recommandation personnalisée...",
+      "Parfait ! J'ai tout ce qu'il me faut. Voici votre recommandation personnalisée.",
     id: "loading-recommendation",
     sender: "assistant",
   },
@@ -167,25 +167,54 @@ export const InProgress: Story = {
   ),
 };
 
-export const FinalCtaFooter: Story = {
+export const FinalRecommendation: Story = {
   args: {
-    progressLabel: "Question 5 sur 5",
-    progressValue: 5,
-    subtitle: "Question 5/5",
+    progressValue: undefined,
+    subtitle: "Votre recommandation",
   },
   render: (args) => (
     <ChatExample
       {...args}
-      cta={
-        <Button
-          size={null}
-          className="min-h-14 w-full gap-2 rounded-xl text-base font-semibold [--button-icon-size:1.125rem]"
+      footerContent={
+        <Card
+          className="flex flex-col gap-3 rounded-[1.25rem] border-[color-mix(in_srgb,var(--primary)_22%,transparent)] bg-accent"
+          padding="md"
+          variant="outlined"
         >
-          Voir ma recommandation
-          <ChevronRight data-icon="inline-end" />
-        </Button>
+          <p className="text-xs font-extrabold uppercase tracking-normal text-primary">
+            Votre recommandation
+          </p>
+          <div className="flex flex-col gap-1">
+            <h2 className="text-lg font-extrabold leading-tight tracking-normal text-foreground md:text-xl">
+              Forfait Imagine R
+            </h2>
+            <p className="text-sm font-medium leading-6 text-muted-foreground">
+              Ce titre semble le plus adapté aux réponses données.
+            </p>
+          </div>
+        </Card>
       }
       messages={finalMessages}
+    />
+  ),
+};
+
+export const Unavailable: Story = {
+  args: {
+    progressValue: undefined,
+    subtitle: "Assistant indisponible",
+  },
+  render: (args) => (
+    <ChatExample
+      {...args}
+      messages={[
+        {
+          content:
+            "Aucun parcours de questions n'est configuré pour le moment.",
+          id: "unavailable",
+          sender: "assistant",
+        },
+      ]}
     />
   ),
 };
@@ -217,7 +246,7 @@ export const NarrowMobile: Story = {
 function ChatExample({
   choiceLabel,
   choiceOptions,
-  cta,
+  footerContent,
   messages,
   ...props
 }: ChatExampleProps) {
@@ -233,7 +262,7 @@ function ChatExample({
             options={choiceOptions}
           />
         ) : (
-          cta
+          footerContent
         )
       }
     >

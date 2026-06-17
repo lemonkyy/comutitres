@@ -34,6 +34,53 @@
     transition: width 220ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
+  .assistant-desktop-panel {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      transform 260ms cubic-bezier(0.32, 0.72, 0, 1),
+      opacity 170ms cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, opacity;
+  }
+
+  .assistant-desktop-panel[data-state="closed"] {
+    opacity: 0;
+    transform: translate3d(1.5rem, 1rem, 0) scale(0.92);
+    transition-duration: 190ms, 120ms;
+  }
+
+  .assistant-desktop-panel-content {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      transform 210ms cubic-bezier(0.23, 1, 0.32, 1) 45ms,
+      opacity 160ms cubic-bezier(0.23, 1, 0.32, 1) 45ms;
+    will-change: transform, opacity;
+  }
+
+  .assistant-desktop-panel-content[data-state="closed"] {
+    opacity: 0;
+    transform: translate3d(0.35rem, 0.25rem, 0) scale(0.985);
+    transition-duration: 100ms, 90ms;
+    transition-delay: 0ms;
+  }
+
+  .assistant-desktop-trigger {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      transform 170ms cubic-bezier(0.23, 1, 0.32, 1),
+      opacity 120ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 150ms cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, opacity;
+  }
+
+  .assistant-desktop-trigger[data-state="open"] {
+    opacity: 0;
+    transform: translate3d(0.35rem, 0.35rem, 0) scale(0.82);
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .assistant-choice-pill-motion:hover {
       transform: translateY(-1px);
@@ -55,7 +102,10 @@
 
     .assistant-choice-pill-motion,
     .assistant-pressable-motion,
-    .assistant-progress-motion {
+    .assistant-progress-motion,
+    .assistant-desktop-panel,
+    .assistant-desktop-panel-content,
+    .assistant-desktop-trigger {
       transition-property: background-color, border-color, box-shadow, color;
       transform: none;
     }
@@ -76,7 +126,10 @@
 
   :where([data-motion="reduced"]) .assistant-choice-pill-motion,
   :where([data-motion="reduced"]) .assistant-pressable-motion,
-  :where([data-motion="reduced"]) .assistant-progress-motion {
+  :where([data-motion="reduced"]) .assistant-progress-motion,
+  :where([data-motion="reduced"]) .assistant-desktop-panel,
+  :where([data-motion="reduced"]) .assistant-desktop-panel-content,
+  :where([data-motion="reduced"]) .assistant-desktop-trigger {
     transition-property: background-color, border-color, box-shadow, color;
     transform: none;
   }

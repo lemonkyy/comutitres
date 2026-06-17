@@ -44,9 +44,16 @@ export type WorkflowQuestion = {
   choices: WorkflowChoice[];
 };
 
+export type WorkflowPass = {
+  description?: string;
+  id: string;
+  name: string;
+  prices?: Price[];
+};
+
 export type WorkflowStepResult =
   | { type: "question"; question: WorkflowQuestion }
-  | { type: "pass"; pass: Pass };
+  | { type: "pass"; pass: WorkflowPass };
 
 export type CreateChoiceInput = {
   text: string;

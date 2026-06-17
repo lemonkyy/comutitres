@@ -34,61 +34,22 @@
     "assistantAvatarLabel": "Comutitres assistant",
     "backLabel": "Back to home",
     "choiceGroupLabel": "Choose an answer",
-    "completedMessage": "Perfect. I have everything I need. I am preparing your personalized recommendation...",
-    "progressLabel": "Assistant progress",
+    "closeLabel": "Close assistant",
+    "completedMessage": "Perfect. I have everything I need. Here is your personalized recommendation.",
+    "errorDescription": "The assistant cannot be loaded right now. Try again in a moment.",
+    "errorTitle": "The assistant is not responding",
+    "loadingLabel": "Loading",
+    "loadingMessage": "I am fetching the available questions...",
+    "openLabel": "Open assistant",
     "questionLabel": "Question",
-    "recommendationLabel": "View my recommendation",
+    "recommendationDescription": "This pass seems best suited to the answers you gave.",
+    "recommendationTitle": "Your recommendation",
     "resetLabel": "Start over",
+    "retryLabel": "Try again",
+    "stepErrorMessage": "This answer could not be sent. Try again.",
     "title": "Comutitres Assistant",
-    "questions": {
-      "age": {
-        "choices": {
-          "between16And25": "16–25 years old",
-          "between26And59": "26–59 years old",
-          "over60": "60 and over",
-          "under16": "Under 16"
-        },
-        "question": "How old are you?"
-      },
-      "location": {
-        "choices": {
-          "innerSuburbs": "Inner suburbs (92/93/94)",
-          "outerSuburbs": "Outer suburbs",
-          "outsideIdf": "Outside Île-de-France",
-          "paris": "Paris (75)"
-        },
-        "question": "Where do you mainly live?"
-      },
-      "scholarship": {
-        "choices": {
-          "caf": "Yes, CAF or another aid",
-          "crous": "Yes, CROUS grant holder",
-          "no": "No",
-          "unknown": "I don't know"
-        },
-        "question": "Are you eligible for aid or a grant?"
-      },
-      "situation": {
-        "choices": {
-          "employee": "Employee",
-          "jobSeeker": "Job seeker",
-          "middleOrHighSchool": "Middle / high school student",
-          "other": "Other",
-          "senior": "Senior (60+)",
-          "student": "Student"
-        },
-        "question": "Hello! What is your current situation?"
-      },
-      "zone": {
-        "choices": {
-          "unknown": "Not sure",
-          "zones1And2": "Zones 1–2 (central Paris)",
-          "zones1And3": "Zones 1–3",
-          "zones1And5": "Zones 1–5 (all IDF)"
-        },
-        "question": "Which zone do you use most often?"
-      }
-    }
+    "unavailableDescription": "No question workflow is configured right now.",
+    "unavailableTitle": "Assistant unavailable"
   },
   "auth": {
     "login": {

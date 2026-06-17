@@ -3,6 +3,7 @@
 import { Bell, CreditCard, FolderOpen, HelpCircle, Zap } from "lucide-react";
 
 import { Logo } from "@/components/assets/logo/logo";
+import { useAssistantPanel } from "@/contexts/assistant-panel-context";
 import { useAuth } from "@/contexts/auth-context";
 import type { Me } from "@/utils/types";
 import {
@@ -84,6 +85,7 @@ type HomeScreenProps = {
 
 export function HomeScreen({ copy }: HomeScreenProps) {
   const { user } = useAuth();
+  const { openAssistant } = useAssistantPanel();
 
   return (
     <main className="min-h-dvh bg-background">
@@ -112,6 +114,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
             ctaLabel={copy.assistant.ctaLabel}
             description={copy.assistant.description}
             href="/assistant"
+            onAssistantOpen={openAssistant}
             title={copy.assistant.title}
           />
         </div>
@@ -148,6 +151,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
           description={copy.region.description}
           href="/assistant"
           label={copy.region.label}
+          onAssistantOpen={openAssistant}
           title={copy.region.title}
         />
 

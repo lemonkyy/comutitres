@@ -70,3 +70,16 @@ export const NarrowWrap: Story = {
     ),
   ],
 };
+
+export const DesktopWrap: Story = {
+  args: {
+    options: [...situationOptions, ...zoneOptions],
+  },
+  decorators: [
+    (Story) => (
+      <div className="max-w-4xl bg-background p-8">
+        <Story />
+      </div>
+    ),
+  ],
+};

@@ -23,7 +23,7 @@ export const navbarItems: NavbarItem[] = [
     id: "assistant",
     label: "Assistant",
     href: "/assistant",
-    visibility: "all",
+    visibility: "mobile",
     icon: "messagesquare",
   },
   {

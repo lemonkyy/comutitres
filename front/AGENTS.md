@@ -2,6 +2,15 @@ Before considering frontend changes complete, run Biome from `front/`.
 
 Use `pnpm exec biome check --write .` to apply safe fixes, formatting, and import organization, then run `pnpm check` to verify the final state. If Biome still reports diagnostics, fix them or explicitly report why they remain.
 
+Demo users for local API testing all use the password `pass`:
+
+- `jean.dupont@example.com`
+- `alice.martin@example.com`
+- `bob.lefevre@example.com`
+- `emma.durand@example.com`
+
+Yaak currently uses `emma.durand@example.com` / `pass` for its login request.
+
 When verifying the frontend locally, never start dev servers manually. The user runs the app through Docker Compose. First check whether the Docker Compose frontend is already reachable and reuse it. If it is not running or not reachable, ask the user to start Docker Compose instead of running `pnpm dev`, `next dev`, Storybook, or another local server yourself.
 
 Storybook is for design-system components and reusable UI primitives, not application routes, pages, or whole screens. Do not add Storybook stories for page-level compositions such as `HomeScreen` unless the user explicitly asks for a page/screen story.

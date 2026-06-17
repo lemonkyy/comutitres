@@ -39,6 +39,20 @@ export const Conversation: Story = {
   ),
 };
 
+export const DesktopConversation: Story = {
+  render: () => (
+    <div className="flex max-w-4xl flex-col gap-4 bg-background p-8">
+      <AssistantMessage>
+        Bonjour ! Quelle est votre situation actuelle ?
+      </AssistantMessage>
+      <UserMessage>Lycéen·ne / Collégien·ne</UserMessage>
+      <AssistantMessage>
+        Votre établissement est-il situé en Île-de-France ?
+      </AssistantMessage>
+    </div>
+  ),
+};
+
 export const LongMessage: Story = {
   render: () => (
     <div className="max-w-md bg-background p-4">
