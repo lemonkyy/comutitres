@@ -11,6 +11,7 @@ final readonly class Purchase
         public int $total,
         public \DateTimeImmutable $createdAt,
         public Pass $pass,
+        public string $invoiceId,
     ) {
     }
 }

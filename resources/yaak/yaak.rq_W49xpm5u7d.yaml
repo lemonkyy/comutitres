@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_W49xpm5u7d
+createdAt: 2026-06-17T07:47:40.009297775
+updatedAt: 2026-06-17T07:48:37.723268582
+workspaceId: wk_VTFsBwidP6
+folderId: fl_7kgbFGodXv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: get invoice
+sortPriority: 1000.002
+url: http://localhost:8000/api/invoices/in_1Tj2LbA9BCjTSYdKCyUI6IbE
+urlParameters: []

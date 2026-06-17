@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\InvoiceProvider;
 use App\Api\State\Provider\InvoicesProvider;
 use App\Domain\Command\User\LoginCommand;
 use App\Entity\Address;
@@ -24,6 +26,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
         new GetCollection(
             uriTemplate: "/invoices",
             provider: InvoicesProvider::class
+        ),
+        new Get(
+            uriTemplate: "/invoices/{id}",
+            provider: InvoiceProvider::class
         ),
     ]
 )]
