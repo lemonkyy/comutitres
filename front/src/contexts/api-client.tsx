@@ -5,6 +5,7 @@ import { type ReactNode, createContext, useContext, useEffect } from "react";
 import { ApiClient } from "@/lib/api/ApiClient";
 import { deleteCookie, getCookie, setCookie } from "@/utils/cookie";
 import { apiBaseUrl } from "@/utils/tools";
+import { useLocale } from "next-intl";
 
 type Props = {
   children: ReactNode;
@@ -23,6 +24,8 @@ export const TOKEN_COOKIE = "token";
 const apiClient = new ApiClient(apiBaseUrl);
 
 export const ApiClientProvider = ({ children }: Props) => {
+  const locale = useLocale();
+
   useEffect(() => {
     apiClient.setOnTokenChange((token) => {
       if (token) {
@@ -32,9 +35,10 @@ export const ApiClientProvider = ({ children }: Props) => {
       }
     });
 
+    apiClient.setLocale(locale);
     const savedToken = getCookie(TOKEN_COOKIE);
     if (savedToken) apiClient.setTokens(savedToken);
-  }, []);
+  }, [locale]);
 
   return (
     <ApiClientContext.Provider value={{ apiClient }}>

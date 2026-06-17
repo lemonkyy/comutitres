@@ -40,6 +40,7 @@ export class ApiClient {
   constructor(
     public baseUrl: string,
     public token: string | null = null,
+    public locale: string | null = null,
   ) {
     this.me = new MeResource(this);
     this.pass = new PassResource(this);
@@ -54,8 +55,8 @@ export class ApiClient {
       cache: "no-store",
       headers: {
         Accept: "application/json",
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
+        "Accept-Language": this.locale ?? "fr",
+        "Content-Language": this.locale ?? "fr",
         ...additionnalHeaders,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
@@ -72,8 +73,8 @@ export class ApiClient {
       cache: "no-store",
       headers: {
         Accept: "application/ld+json",
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
+        "Accept-Language": this.locale ?? "fr",
+        "Content-Language": this.locale ?? "fr",
         ...additionnalHeaders,
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
@@ -93,15 +94,15 @@ export class ApiClient {
     const headers: HeadersInit = isFormData
       ? {
           Accept: "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
+        "Accept-Language": this.locale ?? "fr",
+        "Content-Language": this.locale ?? "fr",
           ...additionnalHeaders,
         }
       : {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
+          "Accept-Language": this.locale ?? "fr",
+          "Content-Language": this.locale ?? "fr",
           ...additionnalHeaders,
         };
 
@@ -127,8 +128,8 @@ export class ApiClient {
     const headers: HeadersInit = {
       Accept: "application/json",
       "Content-Type": "application/merge-patch+json",
-      "Accept-Language": "fr",
-      "Content-Language": "fr",
+      "Accept-Language": this.locale ?? "fr",
+      "Content-Language": this.locale ?? "fr",
       ...additionnalHeaders,
     };
 
@@ -154,15 +155,15 @@ export class ApiClient {
     const headers: HeadersInit = isFormData
       ? {
           Accept: "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
+          "Accept-Language": this.locale ?? "fr",
+          "Content-Language": this.locale ?? "fr",
           ...additionnalHeaders,
         }
       : {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
+          "Accept-Language": this.locale ?? "fr",
+          "Content-Language": this.locale ?? "fr",
           ...additionnalHeaders,
         };
 
@@ -182,8 +183,8 @@ export class ApiClient {
     return fetch(`${this.baseUrl}${url}`, {
       method: "DELETE",
       headers: {
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
+        "Accept-Language": this.locale ?? "fr",
+        "Content-Language": this.locale ?? "fr",
         ...(this.token ? { Authorization: `Bearer ${this.token}` } : {}),
       },
     })
@@ -218,5 +219,9 @@ export class ApiClient {
     this.token = token ?? null;
     console.log('token la tu c', this.token);
     this.onTokenChange?.(this.token);
+  }
+
+  public setLocale(locale: string) {
+    this.locale = locale;
   }
 }
