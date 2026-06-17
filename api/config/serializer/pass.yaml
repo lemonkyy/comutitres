@@ -14,3 +14,12 @@ App\Entity\Pass:
         prices:
             groups:
                 - pass:collection:read
+
+App\Model\Price:
+    attributes:
+        id:
+            groups:
+                - pass:collection:read
+        amount:
+            groups:
+                - pass:collection:read
