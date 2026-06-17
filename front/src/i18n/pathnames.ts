@@ -11,6 +11,6 @@ export const pathnames = {
   },
   "/settings": {
     fr: "/parametres",
-    en: "/settings",
+    en: "/parametres",
   },
 };

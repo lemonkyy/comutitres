@@ -45,6 +45,56 @@
       "title": "Zones 1-5 available"
     }
   },
+  "settings": {
+    "accommodations": {
+      "legend": "Assistance",
+      "options": {
+        "dyslexia": {
+          "description": "Adapted typeface, wider spacing",
+          "title": "Dyslexia"
+        },
+        "hardOfHearing": {
+          "description": "Subtitles and visual alerts",
+          "title": "Hearing support"
+        },
+        "lowVision": {
+          "description": "Higher contrast, larger text",
+          "title": "Low vision"
+        },
+        "reducedMobility": {
+          "description": "Large buttons, keyboard navigation",
+          "title": "Reduced mobility"
+        }
+      }
+    },
+    "backLabel": "Back to home",
+    "language": {
+      "legend": "Display language",
+      "options": {
+        "ar": {
+          "description": "Arabic",
+          "title": "العربية"
+        },
+        "en": {
+          "title": "English"
+        },
+        "es": {
+          "description": "Spanish",
+          "title": "Español"
+        },
+        "fr": {
+          "title": "Français"
+        },
+        "pt": {
+          "description": "Portuguese",
+          "title": "Português"
+        }
+      },
+      "unavailable": "Available soon"
+    },
+    "subtitle": "Personalize your experience",
+    "title": "Accessibility & language"
+  },
   "startAssistant": "Start the assistant",
   "welcome": "Welcome to the French Republic website"
 }

@@ -45,6 +45,57 @@
       "title": "Zones 1-5 disponibles"
     }
   },
+  "settings": {
+    "accommodations": {
+      "legend": "Accompagnement",
+      "options": {
+        "dyslexia": {
+          "description": "Police adaptée, espacement élargi",
+          "title": "Dyslexie"
+        },
+        "hardOfHearing": {
+          "description": "Sous-titres et alertes visuelles",
+          "title": "Malentendance"
+        },
+        "lowVision": {
+          "description": "Contrastes renforcés, texte agrandi",
+          "title": "Malvoyance"
+        },
+        "reducedMobility": {
+          "description": "Boutons larges, navigation clavier",
+          "title": "Motricité réduite"
+        }
+      }
+    },
+    "backLabel": "Retour à l'accueil",
+    "language": {
+      "legend": "Langue d'affichage",
+      "options": {
+        "ar": {
+          "description": "Arabe",
+          "title": "العربية"
+        },
+        "en": {
+          "title": "English",
+          "description": "Anglais"
+        },
+        "es": {
+          "description": "Espagnol",
+          "title": "Español"
+        },
+        "fr": {
+          "title": "Français"
+        },
+        "pt": {
+          "description": "Portugais",
+          "title": "Português"
+        }
+      },
+      "unavailable": "Bientôt disponible"
+    },
+    "subtitle": "Personnalisez votre expérience",
+    "title": "Accessibilité & langue"
+  },
   "startAssistant": "Démarrer l'assistant",
   "welcome": "Bienvenue sur le site de la République Française"
 }

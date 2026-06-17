@@ -75,7 +75,7 @@ export function PageHeaderIconButton({
   );
 }
 
-export type PageHeaderProps = React.ComponentProps<"header"> & {
+export type PageHeaderProps = Omit<React.ComponentProps<"header">, "title"> & {
   action?: React.ReactNode;
   backButton?: React.ReactNode;
   backHref?: AppHref;
@@ -105,7 +105,7 @@ export function PageHeader({
 
   return (
     <header
-      className={cn("border-b bg-card px-4 pt-14 pb-5 md:px-6", className)}
+      className={cn("border-b bg-card px-4 pt-8 pb-5 md:px-6", className)}
       data-slot="page-header"
       {...props}
     >
@@ -115,7 +115,7 @@ export function PageHeader({
           contentClassName,
         )}
       >
-        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-6">
           {leading ? <div className="shrink-0">{leading}</div> : null}
 
           <div className="min-w-0 flex-1">
