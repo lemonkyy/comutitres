@@ -2,10 +2,11 @@ type: http_request
 model: http_request
 id: rq_wfStep0001
 createdAt: 2026-06-16T10:00:00
-updatedAt: 2026-06-17T10:16:10.459547353
+updatedAt: 2026-06-17T12:29:18.273438182
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
 authentication:
+  disabled: true
   token: ${[ TOKEN ]}
 authenticationType: bearer
 body:

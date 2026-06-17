@@ -26,7 +26,7 @@ use Gedmo\Translatable\Translatable;
         normalizationContext: ['groups' => ['question:collection:read']],
     ),
     new Post(
-        uriTemplate: '/workflow/questions',
+        uriTemplate: '/questions',
         messenger: true,
         input: CreateQuestionCommand::class,
     ),
