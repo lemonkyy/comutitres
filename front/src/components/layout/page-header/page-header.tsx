@@ -2,6 +2,10 @@ import { ChevronLeft, type LucideIcon } from "lucide-react";
 import type * as React from "react";
 
 import { Button } from "@/components/actions/button/button";
+import {
+  type BreadcrumbItem,
+  Breadcrumbs,
+} from "@/components/navigation/breadcrumbs/breadcrumbs";
 import { Link } from "@/i18n/navigation";
 import type { pathnames } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
@@ -152,6 +156,106 @@ export function PageHeader({
         {children ? <div className="min-w-0">{children}</div> : null}
       </div>
     </header>
+  );
+}
+
+export type DesktopPageHeaderProps = Omit<
+  React.ComponentProps<"header">,
+  "title"
+> & {
+  action?: React.ReactNode;
+  breadcrumbAriaLabel?: string;
+  breadcrumbs?: ReadonlyArray<BreadcrumbItem>;
+  backHref?: AppHref;
+  backLabel?: string;
+  contentClassName?: string;
+  subtitle?: React.ReactNode;
+  subtitleClassName?: string;
+  title: React.ReactNode;
+  titleClassName?: string;
+};
+
+export type DesktopPageHeaderBreadcrumb = BreadcrumbItem;
+
+export function DesktopPageHeader({
+  action,
+  breadcrumbAriaLabel,
+  breadcrumbs,
+  backHref,
+  backLabel = "Retour",
+  className,
+  contentClassName,
+  subtitle,
+  subtitleClassName,
+  title,
+  titleClassName,
+  ...props
+}: DesktopPageHeaderProps) {
+  return (
+    <header
+      className={cn("hidden bg-white px-5 pt-10 pb-4 md:block", className)}
+      data-slot="desktop-page-header"
+      {...props}
+    >
+      <div
+        className={cn(
+          "mx-auto flex w-full max-w-[1080px] items-start justify-between gap-8",
+          contentClassName,
+        )}
+      >
+        <div className="min-w-0">
+          {breadcrumbs?.length ? (
+            <Breadcrumbs items={breadcrumbs} label={breadcrumbAriaLabel} />
+          ) : backHref ? (
+            <PageHeaderBackLink href={backHref} label={backLabel} />
+          ) : null}
+          <h1
+            className={cn(
+              "text-5xl font-bold leading-[57.6px] tracking-normal text-foreground",
+              breadcrumbs?.length ? "mt-6" : backHref ? "mt-4" : null,
+              titleClassName,
+            )}
+          >
+            {title}
+          </h1>
+          {subtitle ? (
+            <p
+              className={cn(
+                "mt-2 max-w-[42.5rem] text-lg font-normal leading-[27px] text-foreground",
+                subtitleClassName,
+              )}
+            >
+              {subtitle}
+            </p>
+          ) : null}
+        </div>
+
+        {action ? <div className="shrink-0">{action}</div> : null}
+      </div>
+    </header>
+  );
+}
+
+export function PageHeaderBackLink({
+  className,
+  href,
+  label,
+}: {
+  className?: string;
+  href: AppHref;
+  label: string;
+}) {
+  return (
+    <Link
+      className={cn(
+        "inline-flex items-center gap-2 rounded-[3px] text-sm font-semibold text-primary outline-none transition-[color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[var(--bleu-focus)] active:scale-[0.98] focus-visible:ring-[3px] focus-visible:ring-ring/25",
+        className,
+      )}
+      href={href}
+    >
+      <ChevronLeft aria-hidden="true" className="size-4" />
+      {label}
+    </Link>
   );
 }
 

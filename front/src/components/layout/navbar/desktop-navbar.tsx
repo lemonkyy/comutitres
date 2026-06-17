@@ -32,10 +32,10 @@ export function DesktopNavbar({
       )}
       data-slot="desktop-navbar"
     >
-      <div className="mx-auto flex h-full w-full max-w-[1080px] items-center justify-between gap-8 px-5">
+      <div className="mx-auto flex h-full w-full max-w-[1080px] items-center justify-between gap-8 px-5 md:w-[calc(100%-2.5rem)] md:px-0">
         <Link
           href="/"
-          className="inline-flex h-11 shrink-0 items-center rounded-[6px] px-2 outline-none transition-[background-color,box-shadow,transform] duration-150 hover:bg-white/10 active:scale-[0.98] focus-visible:ring-[3px] focus-visible:ring-white/70"
+          className="inline-flex h-11 shrink-0 items-center rounded-[6px] pr-2 outline-none transition-[background-color,box-shadow,transform] duration-150 hover:bg-white/10 active:scale-[0.98] focus-visible:ring-[3px] focus-visible:ring-white/70"
         >
           <Logo className="h-9 w-auto max-w-none" priority variant="blanc" />
         </Link>

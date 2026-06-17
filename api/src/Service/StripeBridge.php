@@ -33,8 +33,13 @@ final class StripeBridge
         }
     }
 
-    public function startPayment(string $priceId, string $email, bool $isSubscription = false): string
+    public function startPayment(string $priceId, string $email, bool $isSubscription = false, ?string $locale = null): string
     {
+        $frontUrl = rtrim($this->frontUrl, '/');
+        if ($locale !== null && $locale !== 'fr') {
+            $frontUrl .= '/'.rawurlencode($locale);
+        }
+
         $session = $this->client->checkout->sessions->create([
             'payment_method_types' => ['card'],
             'line_items' => [
@@ -45,8 +50,8 @@ final class StripeBridge
             ],
             'mode' => $isSubscription ? 'subscription' : 'payment',
             'customer_email' => $email, // @avoir
-            'success_url' => $this->frontUrl.'/payment-success',
-            'cancel_url' => $this->frontUrl.'/payment-cancel',
+            'success_url' => $frontUrl.'/payment-success',
+            'cancel_url' => $frontUrl.'/payment-cancel',
         ]);
 
         return $session->url;

@@ -15,6 +15,7 @@ export type PassProfileId = (typeof passProfileIds)[number];
 export type PassProductCopy = {
   description: string;
   id: string;
+  priceId?: string;
   price: string;
   title: string;
 };
@@ -32,16 +33,19 @@ export type PassesScreenCopy = {
   heroCardDescription: string;
   heroCardTitle: string;
   heroZoneLabel: string;
+  missingPriceLabel: string;
   productsEmptyDescription: string;
   productsEmptyTitle: string;
   popularHeading: string;
   products: PassProductCopy[];
+  purchaseErrorMessage: string;
+  purchaseLabel: string;
+  purchaseLoadingLabel: string;
   profiles: Record<PassProfileId, PassAudienceCopy>;
   profileHeading: string;
   frequencies: Record<PassFrequencyId, PassAudienceCopy>;
   subtitle: string;
   title: string;
-  unavailableLabel: string;
 };
 
 export type ProductTone = "blue" | "violet" | "green" | "yellow" | "neutral";

@@ -48,17 +48,20 @@ export default async function PassesPage({
     heroCardDescription: t("heroCardDescription"),
     heroCardTitle: t("heroCardTitle"),
     heroZoneLabel: t("heroZoneLabel"),
+    missingPriceLabel: t("missingPriceLabel"),
     products,
     productsEmptyDescription: t("productsEmptyDescription"),
     productsEmptyTitle: t("productsEmptyTitle"),
     popularHeading: t("popularHeading"),
+    purchaseErrorMessage: t("purchaseErrorMessage"),
+    purchaseLabel: t("purchaseLabel"),
+    purchaseLoadingLabel: t("purchaseLoadingLabel"),
     profileHeading: t("profileHeading"),
     profiles: createRecord(passProfileIds, (id) =>
       getAudienceCopy(t, "profiles", id),
     ),
     subtitle: t("subtitle"),
     title: t("title"),
-    unavailableLabel: t("unavailableLabel"),
   };
 
   return (
@@ -92,6 +95,7 @@ async function getPassProducts(
   return getCollectionMembers(response.data).map((pass) => ({
     description: pass.description ?? "",
     id: pass.id,
+    priceId: pass.prices?.[0]?.id,
     price: formatPassPrice(pass.prices?.[0]?.amount, locale),
     title: pass.name,
   }));

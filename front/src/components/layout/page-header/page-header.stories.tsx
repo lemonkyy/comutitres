@@ -4,7 +4,11 @@ import type { ReactNode } from "react";
 
 import { ProgressBar } from "@/components/feedback/progress-bar/progress-bar";
 import { PageTabs } from "@/components/navigation/page-tabs/page-tabs";
-import { PageHeader, PageHeaderIconButton } from "./page-header";
+import {
+  DesktopPageHeader,
+  PageHeader,
+  PageHeaderIconButton,
+} from "./page-header";
 
 const navigationItems = [
   { current: true, href: "/my-card", id: "card", label: "Ma carte" },
@@ -87,6 +91,23 @@ export const WithProgress: Story = {
       >
         <ProgressBar max={5} value={1} />
       </PageHeader>
+    </StoryScreen>
+  ),
+};
+
+export const DesktopWithBreadcrumbs: Story = {
+  render: () => (
+    <StoryScreen>
+      <DesktopPageHeader
+        breadcrumbAriaLabel="Fil d'Ariane"
+        breadcrumbs={[
+          { href: "/", id: "home", label: "Accueil" },
+          { href: "/passes", id: "passes", label: "Titres et tarifs" },
+          { id: "current", label: "Paiement confirmé" },
+        ]}
+        subtitle="Votre paiement a bien été pris en compte. Vous pouvez revenir aux titres disponibles."
+        title="Paiement confirmé"
+      />
     </StoryScreen>
   ),
 };

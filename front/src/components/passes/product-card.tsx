@@ -1,5 +1,9 @@
+"use client";
+
+import { CreditCard, LoaderCircle } from "lucide-react";
 import Image from "next/image";
 
+import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
 import { cn } from "@/lib/utils";
 import { toneClasses } from "./passes-card-tones";
@@ -8,16 +12,31 @@ import type { PassProductCopy, ProductPresentation } from "./passes-config";
 type ProductCardProps = {
   className?: string;
   copy: PassProductCopy;
+  errorMessage?: string;
+  isPurchaseDisabled?: boolean;
+  isPurchasing?: boolean;
+  missingPriceLabel: string;
+  onPurchase: (product: PassProductCopy) => void;
   presentation: ProductPresentation;
-  unavailableLabel: string;
+  purchaseLabel: string;
+  purchaseLoadingLabel: string;
 };
 
 export function ProductCard({
   className,
   copy,
+  errorMessage,
+  isPurchaseDisabled = false,
+  isPurchasing = false,
+  missingPriceLabel,
+  onPurchase,
   presentation,
-  unavailableLabel,
+  purchaseLabel,
+  purchaseLoadingLabel,
 }: ProductCardProps) {
+  const hasPrice = Boolean(copy.priceId);
+  const buttonLabel = hasPrice ? purchaseLabel : missingPriceLabel;
+
   return (
     <Card
       className={cn("flex min-h-[21rem] flex-col overflow-hidden", className)}
@@ -58,9 +77,35 @@ export function ProductCard({
               {copy.price}
             </span>
           ) : null}
-          <span className="inline-flex min-h-10 items-center justify-center rounded-[6px] border border-border bg-[var(--gris-clair-40)] px-3 text-sm font-semibold leading-5 text-muted-foreground">
-            {unavailableLabel}
-          </span>
+          <Button
+            aria-busy={isPurchasing ? "true" : undefined}
+            className="min-h-12 w-full"
+            disabled={isPurchaseDisabled || !hasPrice}
+            onClick={() => {
+              onPurchase(copy);
+            }}
+            type="button"
+            variant={hasPrice ? "default" : "outline"}
+          >
+            {isPurchasing ? (
+              <LoaderCircle
+                aria-hidden="true"
+                className="animate-spin"
+                data-icon="inline-start"
+              />
+            ) : (
+              <CreditCard aria-hidden="true" data-icon="inline-start" />
+            )}
+            {isPurchasing ? purchaseLoadingLabel : buttonLabel}
+          </Button>
+          {errorMessage ? (
+            <p
+              className="text-sm font-semibold leading-5 text-destructive"
+              role="alert"
+            >
+              {errorMessage}
+            </p>
+          ) : null}
         </div>
       </div>
     </Card>

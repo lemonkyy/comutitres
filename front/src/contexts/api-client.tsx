@@ -1,12 +1,13 @@
 "use client";
 
-import { type ReactNode, createContext, useContext } from "react";
+import { type ReactNode, createContext, useContext, useMemo } from "react";
 
 import { ApiClient } from "@/lib/api/ApiClient";
 import { apiBaseUrl } from "@/utils/tools";
 
 type Props = {
   children: ReactNode;
+  locale: string;
 };
 
 type ApiClientContextType = {
@@ -17,9 +18,9 @@ export const ApiClientContext = createContext<ApiClientContextType | undefined>(
   undefined,
 );
 
-const apiClient = new ApiClient(apiBaseUrl);
+export const ApiClientProvider = ({ children, locale }: Props) => {
+  const apiClient = useMemo(() => new ApiClient(apiBaseUrl, locale), [locale]);
 
-export const ApiClientProvider = ({ children }: Props) => {
   return (
     <ApiClientContext.Provider value={{ apiClient }}>
       {children}

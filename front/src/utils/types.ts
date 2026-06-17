@@ -33,6 +33,14 @@ export type Price = {
   amount: number;
 };
 
+export type Purchase = {
+  createdAt: string;
+  id: string;
+  invoiceId?: string | null;
+  pass: Pass;
+  total: number;
+};
+
 export type WorkflowChoice = {
   id: number;
   text: string;

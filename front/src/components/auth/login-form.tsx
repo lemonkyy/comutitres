@@ -44,7 +44,7 @@ export type LoginFormCopy = {
 
 type LoginFormProps = {
   copy: LoginFormCopy;
-  returnTo: "/" | "/account" | "/account/settings";
+  returnTo: "/" | "/account" | "/account/settings" | "/passes";
 };
 
 export function LoginForm({ copy, returnTo }: LoginFormProps) {

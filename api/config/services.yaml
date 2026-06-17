@@ -39,6 +39,7 @@ services:
             - [ setAnnotationReader, [ '@gedmo.mapping.driver.attribute' ] ]
             # The Kernel's `locale` parameter is used to configure the default locale for the extension
             - [ setDefaultLocale, [ '%kernel.default_locale%' ] ]
+            - [ setTranslationFallback, [ '%stof_doctrine_extensions.translation_fallback%' ] ]
 
     Gedmo\Translatable\TranslatableListener:
         alias: gedmo.listener.translatable

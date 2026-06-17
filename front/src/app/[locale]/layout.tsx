@@ -22,7 +22,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={await getMessages()}>
-      <ApiClientProvider>
+      <ApiClientProvider locale={locale}>
         <AuthProvider>
           <AppChrome>{children}</AppChrome>
         </AuthProvider>

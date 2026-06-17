@@ -13,8 +13,10 @@ const allowedReturnTargets = {
   "/": "/",
   "/account": "/account",
   "/account/settings": "/account/settings",
+  "/passes": "/passes",
   "/mon-compte": "/account",
   "/mon-compte/parametres": "/account/settings",
+  "/titres-et-tarifs": "/passes",
 } as const;
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {

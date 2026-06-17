@@ -1,2 +1,3 @@
 stof_doctrine_extensions:
     default_locale: fr
+    translation_fallback: true

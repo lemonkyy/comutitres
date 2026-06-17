@@ -10,6 +10,8 @@ use Gedmo\Translatable\TranslatableListener;
 
 final class SetLocaleSubscriber implements EventSubscriberInterface
 {
+    private const SUPPORTED_LOCALES = ['fr', 'en'];
+
     public function __construct(
         private TranslatableListener $translatableListener,
     ) {}
@@ -27,7 +29,7 @@ final class SetLocaleSubscriber implements EventSubscriberInterface
         if ('GET' !== $request->getMethod() && $request->headers->has('Content-Language')) {
             $request->setLocale($request->headers->get('Content-Language'));
         } elseif ('GET' === $request->getMethod() && $request->headers->has('Accept-Language')) {
-            $request->setLocale($request->headers->get('Accept-Language'));
+            $request->setLocale($request->getPreferredLanguage(self::SUPPORTED_LOCALES));
         }
 
         $this->translatableListener->setTranslatableLocale($request->getLocale());

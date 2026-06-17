@@ -18,6 +18,8 @@ export default async function AccountSettingsPage() {
   ]);
   const shellCopy: AccountShellCopy = {
     backLabel: shellT("backLabel"),
+    breadcrumbAriaLabel: shellT("breadcrumbAriaLabel"),
+    homeLabel: shellT("homeLabel"),
     subtitle: shellT("subtitle"),
     tabs: {
       account: shellT("tabs.account"),

@@ -38,7 +38,10 @@ export class ApiClient {
   pass: PassResource;
   workflow: WorkflowResource;
 
-  constructor(public baseUrl: string) {
+  constructor(
+    public baseUrl: string,
+    private readonly locale = "fr",
+  ) {
     this.me = new MeResource(this);
     this.pass = new PassResource(this);
     this.workflow = new WorkflowResource(this);
@@ -50,12 +53,12 @@ export class ApiClient {
   ): Promise<T | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       cache: "no-store",
-      headers: {
-        Accept: "application/json",
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
-        ...additionnalHeaders,
-      },
+      headers: this.createHeaders(
+        {
+          Accept: "application/json",
+        },
+        additionnalHeaders,
+      ),
     })
       .then(handleApiError)
       .then((response) => response.json())
@@ -68,12 +71,12 @@ export class ApiClient {
   ): Promise<CollectionResponse<T> | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       cache: "no-store",
-      headers: {
-        Accept: "application/ld+json",
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
-        ...additionnalHeaders,
-      },
+      headers: this.createHeaders(
+        {
+          Accept: "application/ld+json",
+        },
+        additionnalHeaders,
+      ),
     })
       .then(handleApiError)
       .then((response) => response.json())
@@ -89,19 +92,19 @@ export class ApiClient {
     const isFormData = body instanceof FormData;
 
     const headers: HeadersInit = isFormData
-      ? {
-          Accept: "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
-          ...additionnalHeaders,
-        }
-      : {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
-          ...additionnalHeaders,
-        };
+      ? this.createHeaders(
+          {
+            Accept: "application/json",
+          },
+          additionnalHeaders,
+        )
+      : this.createHeaders(
+          {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          additionnalHeaders,
+        );
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "POST",
@@ -120,13 +123,13 @@ export class ApiClient {
     body: object = {},
     additionnalHeaders: HeadersInit = {},
   ): Promise<T | ApiClientError> {
-    const headers: HeadersInit = {
-      Accept: "application/json",
-      "Content-Type": "application/merge-patch+json",
-      "Accept-Language": "fr",
-      "Content-Language": "fr",
-      ...additionnalHeaders,
-    };
+    const headers: HeadersInit = this.createHeaders(
+      {
+        Accept: "application/json",
+        "Content-Type": "application/merge-patch+json",
+      },
+      additionnalHeaders,
+    );
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "PATCH",
@@ -146,19 +149,19 @@ export class ApiClient {
     const isFormData = body instanceof FormData;
 
     const headers: HeadersInit = isFormData
-      ? {
-          Accept: "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
-          ...additionnalHeaders,
-        }
-      : {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Accept-Language": "fr",
-          "Content-Language": "fr",
-          ...additionnalHeaders,
-        };
+      ? this.createHeaders(
+          {
+            Accept: "application/json",
+          },
+          additionnalHeaders,
+        )
+      : this.createHeaders(
+          {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          additionnalHeaders,
+        );
 
     return fetch(`${this.baseUrl}${url}`, {
       method: "PUT",
@@ -173,10 +176,7 @@ export class ApiClient {
   public async delete(url: string): Promise<DeleteResponse | ApiClientError> {
     return fetch(`${this.baseUrl}${url}`, {
       method: "DELETE",
-      headers: {
-        "Accept-Language": "fr",
-        "Content-Language": "fr",
-      },
+      headers: this.createHeaders(),
     })
       .then(handleApiError)
       .then((response) => ({ success: response.status === 204 }))
@@ -196,6 +196,21 @@ export class ApiClient {
       .then((response) => response.json())
       .then((response: { user: Me }) => response.user)
       .catch(toApiClientError);
+  }
+
+  private createHeaders(
+    defaultHeaders: HeadersInit = {},
+    additionnalHeaders: HeadersInit = {},
+  ) {
+    const headers = new Headers(defaultHeaders);
+    headers.set("Accept-Language", this.locale);
+    headers.set("Content-Language", this.locale);
+
+    new Headers(additionnalHeaders).forEach((value, key) => {
+      headers.set(key, value);
+    });
+
+    return headers;
   }
 }
 

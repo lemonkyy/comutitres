@@ -5,6 +5,8 @@ export const pathnames = {
     fr: "/titres-et-tarifs",
     en: "/passes",
   },
+  "/payment-cancel": "/payment-cancel",
+  "/payment-success": "/payment-success",
   "/login": {
     fr: "/connexion",
     en: "/connexion",

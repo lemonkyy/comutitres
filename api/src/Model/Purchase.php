@@ -8,7 +8,7 @@ final readonly class Purchase
 {
     public function __construct(
         public string $id,
-        public int $total,
+        public float $total,
         public \DateTimeImmutable $createdAt,
         public Pass $pass,
         public string $invoiceId,

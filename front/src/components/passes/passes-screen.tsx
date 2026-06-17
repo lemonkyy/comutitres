@@ -110,8 +110,11 @@ export function PassesScreen({
           {copy.products.length > 0 ? (
             <ProductCardsGrid
               highlightedPassId={highlightedPassId}
+              missingPriceLabel={copy.missingPriceLabel}
               products={copy.products}
-              unavailableLabel={copy.unavailableLabel}
+              purchaseErrorMessage={copy.purchaseErrorMessage}
+              purchaseLabel={copy.purchaseLabel}
+              purchaseLoadingLabel={copy.purchaseLoadingLabel}
             />
           ) : (
             <PassesEmptyState

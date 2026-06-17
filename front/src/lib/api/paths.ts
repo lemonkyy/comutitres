@@ -5,6 +5,10 @@ export const apiPaths = {
   me: {
     get: "/me",
   },
+  invoice: {
+    collection: "/invoices",
+    item: "/invoices/:id",
+  },
   pass: {
     collection: "/passes",
     update: "/passes/:id",

@@ -22,6 +22,8 @@
     },
     "shell": {
       "backLabel": "Back to home",
+      "breadcrumbAriaLabel": "Breadcrumb",
+      "homeLabel": "Home",
       "subtitle": "Your information and preferences",
       "tabs": {
         "account": "My information",
@@ -71,9 +73,13 @@
     "heroCardDescription": "Compare Navigo passes, tickets, and rider profiles before completing your purchase.",
     "heroCardTitle": "All available passes in one place",
     "heroZoneLabel": "Zones 1-5",
+    "missingPriceLabel": "Price unavailable",
     "popularHeading": "Browse the most popular options",
     "productsEmptyDescription": "Available passes will appear here once the catalog has loaded.",
     "productsEmptyTitle": "No passes available",
+    "purchaseErrorMessage": "The payment could not be started. Try again.",
+    "purchaseLabel": "Buy",
+    "purchaseLoadingLabel": "Redirecting...",
     "profileHeading": "Browse by rider profile",
     "profiles": {
       "active": {
@@ -102,8 +108,31 @@
       }
     },
     "subtitle": "Compare available passes",
-    "title": "Passes and fares",
-    "unavailableLabel": "Purchase available soon"
+    "title": "Passes and fares"
+  },
+  "payment": {
+    "cancel": {
+      "backLabel": "Back to passes",
+      "breadcrumbAriaLabel": "Breadcrumb",
+      "ctaLabel": "Review passes",
+      "description": "Your payment was canceled. No purchase was recorded.",
+      "homeLabel": "Home",
+      "passesLabel": "Passes and fares",
+      "title": "Payment canceled"
+    },
+    "success": {
+      "backLabel": "Back to passes",
+      "breadcrumbAriaLabel": "Breadcrumb",
+      "ctaLabel": "View passes",
+      "description": "Your payment was confirmed. You can return to the available passes.",
+      "homeLabel": "Home",
+      "invoiceCtaLabel": "Download invoice",
+      "passesLabel": "Passes and fares",
+      "purchaseAmountLabel": "Amount paid",
+      "purchaseDateLabel": "Purchased on",
+      "purchasePassLabel": "Your pass",
+      "title": "Payment confirmed"
+    }
   },
   "auth": {
     "login": {

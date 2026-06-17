@@ -22,6 +22,8 @@
     },
     "shell": {
       "backLabel": "Retour à l'accueil",
+      "breadcrumbAriaLabel": "Fil d'Ariane",
+      "homeLabel": "Accueil",
       "subtitle": "Vos informations et préférences",
       "tabs": {
         "account": "Mes informations",
@@ -71,9 +73,13 @@
     "heroCardDescription": "Comparez les forfaits Navigo, les tickets et les profils avant de finaliser votre achat.",
     "heroCardTitle": "Tous les titres disponibles au même endroit",
     "heroZoneLabel": "Zones 1-5",
+    "missingPriceLabel": "Prix indisponible",
     "popularHeading": "Parcourir les plus populaires",
     "productsEmptyDescription": "Les titres disponibles seront affichés ici dès que le catalogue sera chargé.",
     "productsEmptyTitle": "Aucun titre disponible",
+    "purchaseErrorMessage": "Impossible de démarrer le paiement. Réessayez.",
+    "purchaseLabel": "Acheter",
+    "purchaseLoadingLabel": "Redirection...",
     "profileHeading": "Parcourir par profil",
     "profiles": {
       "active": {
@@ -102,8 +108,31 @@
       }
     },
     "subtitle": "Comparez les titres disponibles",
-    "title": "Titres et tarifs",
-    "unavailableLabel": "Achat bientôt disponible"
+    "title": "Titres et tarifs"
+  },
+  "payment": {
+    "cancel": {
+      "backLabel": "Retour aux titres",
+      "breadcrumbAriaLabel": "Fil d'Ariane",
+      "ctaLabel": "Revoir les titres",
+      "description": "Votre paiement a été annulé. Aucun achat n'a été enregistré.",
+      "homeLabel": "Accueil",
+      "passesLabel": "Titres et tarifs",
+      "title": "Paiement annulé"
+    },
+    "success": {
+      "backLabel": "Retour aux titres",
+      "breadcrumbAriaLabel": "Fil d'Ariane",
+      "ctaLabel": "Voir les titres",
+      "description": "Votre paiement a bien été pris en compte. Vous pouvez revenir aux titres disponibles.",
+      "homeLabel": "Accueil",
+      "invoiceCtaLabel": "Télécharger la facture",
+      "passesLabel": "Titres et tarifs",
+      "purchaseAmountLabel": "Montant payé",
+      "purchaseDateLabel": "Acheté le",
+      "purchasePassLabel": "Votre titre",
+      "title": "Paiement confirmé"
+    }
   },
   "auth": {
     "login": {

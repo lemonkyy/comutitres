@@ -19,7 +19,7 @@ export type LoginScreenCopy = {
 
 type LoginScreenProps = {
   copy: LoginScreenCopy;
-  returnTo: "/" | "/account" | "/account/settings";
+  returnTo: "/" | "/account" | "/account/settings" | "/passes";
 };
 
 export function LoginScreen({ copy, returnTo }: LoginScreenProps) {

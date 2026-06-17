@@ -7,6 +7,7 @@ import {
 import type * as React from "react";
 
 import {
+  DesktopPageHeader,
   PageHeader,
   PageHeaderIconButton,
 } from "@/components/layout/page-header/page-header";
@@ -22,6 +23,8 @@ type AppHref = keyof typeof pathnames;
 
 export type AccountShellCopy = {
   backLabel: string;
+  breadcrumbAriaLabel: string;
+  homeLabel: string;
   subtitle: string;
   tabs: {
     account: string;
@@ -77,39 +80,37 @@ export function AccountShell({ activeTab, children, copy }: AccountShellProps) {
         </PageHeader>
       </div>
 
-      <header className="hidden border-[var(--gris-moyen)] border-b bg-white md:block">
-        <div className="mx-auto flex w-full max-w-[1080px] items-center justify-between gap-8 px-5 py-10">
-          <div className="min-w-0">
-            <Link
-              className="inline-flex items-center gap-2 rounded-[3px] text-sm font-semibold text-primary outline-none transition-[color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:text-[var(--bleu-focus)] active:scale-[0.98] focus-visible:ring-[3px] focus-visible:ring-ring/25"
-              href="/"
-            >
-              <ChevronLeft aria-hidden="true" className="size-4" />
-              {copy.backLabel}
-            </Link>
-            <h1 className="mt-4 text-5xl font-bold leading-[57.6px] tracking-normal text-foreground">
-              {copy.title}
-            </h1>
-            <p className="mt-2 max-w-[42.5rem] text-lg font-normal leading-[27px] text-foreground">
-              {copy.subtitle}
-            </p>
-          </div>
+      <DesktopPageHeader
+        breadcrumbAriaLabel={copy.breadcrumbAriaLabel}
+        breadcrumbs={getAccountBreadcrumbs(activeTab, copy)}
+        subtitle={copy.subtitle}
+        title={copy.title}
+      />
 
-          <div
-            aria-hidden="true"
-            className="hidden size-16 shrink-0 place-items-center rounded-[6px] border border-primary bg-accent text-primary shadow-[var(--idfm-card-shadow)] lg:grid"
-          >
-            <UserRound className="size-7 stroke-[1.75]" />
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto grid w-full max-w-[1080px] gap-6 px-5 py-5 md:grid-cols-[15rem_minmax(0,1fr)] md:px-5 md:py-10">
+      <div className="mx-auto grid w-full max-w-[1080px] gap-6 px-5 py-5 md:w-[calc(100%-2.5rem)] md:grid-cols-[15rem_minmax(0,1fr)] md:px-0 md:py-10">
         <AccountSideNavigation items={tabs} label={copy.title} />
         <div className="min-w-0">{children}</div>
       </div>
     </main>
   );
+}
+
+function getAccountBreadcrumbs(
+  activeTab: AccountShellProps["activeTab"],
+  copy: AccountShellCopy,
+) {
+  if (activeTab === "settings") {
+    return [
+      { href: "/" as const, id: "home", label: copy.homeLabel },
+      { href: "/account" as const, id: "account", label: copy.title },
+      { id: "settings", label: copy.tabs.settings },
+    ];
+  }
+
+  return [
+    { href: "/" as const, id: "home", label: copy.homeLabel },
+    { id: "account", label: copy.title },
+  ];
 }
 
 function AccountSideNavigation({
