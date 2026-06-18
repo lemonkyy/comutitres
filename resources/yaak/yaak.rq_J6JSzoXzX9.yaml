@@ -1,0 +1,62 @@
+type: http_request
+model: http_request
+id: rq_J6JSzoXzX9
+createdAt: 2026-06-18T14:16:57.608762587
+updatedAt: 2026-06-18T14:17:09.364178694
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "text": "Quelle est votre situation first ?",
+      "isFirst": false,
+      "questionType": "navigo",
+      "choices": [
+        {
+          "text": "Étudiant·e",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        },
+        {
+          "text": "Lycéen·ne / Collégien·ne",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        },
+        {
+          "text": "Salarié·e",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        }
+      ]
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: wfCQ01Hdr1
+- enabled: true
+  name: Content-Language
+  value: fr
+  id: wfCQ01Hdr2
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Hdr3
+method: DELETE
+name: Delete Choice
+sortPriority: 2000.002
+url: http://localhost:8000/api/choice/1
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Prm2

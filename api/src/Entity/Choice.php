@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Patch;
 use App\Repository\ChoiceRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +13,7 @@ use Gedmo\Translatable\Translatable;
 #[ORM\Entity(repositoryClass: ChoiceRepository::class)]
 #[ApiResource(operations: [
     new Patch(),
+    new Delete(),
 ])]
 class Choice implements Translatable
 {

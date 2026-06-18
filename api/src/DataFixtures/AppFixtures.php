@@ -12,6 +12,8 @@ class AppFixtures extends Fixture
 {
     private const LOCALES = ['fr', 'en'];
 
+    public const PASS_REFERENCE_PREFIX = 'pass_';
+
     public function __construct(
         private StripeBridge $stripeBridge,
     ) {
@@ -19,7 +21,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // PASS
         foreach ($this->stripeBridge->getAllProducts() as $product) {
             $entity = new Pass(
                 $product->id,
@@ -34,6 +35,8 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($entity);
+
+            $this->addReference(self::PASS_REFERENCE_PREFIX.$product->name, $entity);
         }
 
         $admin = new User('admin_zebi');
