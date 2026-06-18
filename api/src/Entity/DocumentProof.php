@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\DocumentContentProvider;
 use App\Api\State\Provider\DocumentProofProvider;
 use App\Domain\Command\Admin\UpdateDocumentStatusCommand;
 use App\Domain\Command\User\UploadDocumentCommand;
@@ -29,6 +31,10 @@ use Doctrine\ORM\Mapping as ORM;
         uriTemplate: 'document_proofs',
         normalizationContext: ['groups' => ['document:read']],
         provider: DocumentProofProvider::class,
+    ),
+    new Get(
+        uriTemplate: 'document_proofs/{id}',
+        provider: DocumentContentProvider::class,
     ),
 ])]
 class DocumentProof

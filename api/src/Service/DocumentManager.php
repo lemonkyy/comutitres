@@ -20,6 +20,17 @@ final class DocumentManager
         return $fullPath;
     }
 
+    public function getDocumentContent(string $fileName): string
+    {
+        $fullPath = $this->getFullPath($fileName);
+
+        if (!file_exists($fullPath)) {
+            throw new \RuntimeException(\sprintf('File %s does not exist', $fullPath));
+        }
+
+        return file_get_contents($fullPath);
+    }
+
     private function getFullPath(string $file): string
     {
         return \sprintf('%s/%s', $this->directory, $file);
