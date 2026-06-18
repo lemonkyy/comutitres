@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_gYmPUDus2X
+createdAt: 2026-06-18T13:07:41.852114232
+updatedAt: 2026-06-18T13:12:05.519377532
+workspaceId: wk_VTFsBwidP6
+folderId: fl_7kgbFGodXv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: get document
+sortPriority: 2000.003
+url: http://localhost:8000/api/document_proofs/5
+urlParameters: []
