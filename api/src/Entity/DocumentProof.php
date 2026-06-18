@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\DocumentProofProvider;
 use App\Domain\Command\Admin\UpdateDocumentStatusCommand;
 use App\Domain\Command\User\UploadDocumentCommand;
 use App\Enum\DocumentEnum;
@@ -22,6 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
         uriTemplate: 'document-proof/{id}/status',
         messenger: true,
         input: UpdateDocumentStatusCommand::class,
+    ),
+    new GetCollection(
+        uriTemplate: 'document_proofs',
+        provider: DocumentProofProvider::class,
     ),
 ])]
 class DocumentProof

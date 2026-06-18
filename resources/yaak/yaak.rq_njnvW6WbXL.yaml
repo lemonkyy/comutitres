@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_njnvW6WbXL
+createdAt: 2026-06-18T10:08:08.811255338
+updatedAt: 2026-06-18T10:17:31.815809933
+workspaceId: wk_VTFsBwidP6
+folderId: fl_7kgbFGodXv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: list documents Copy
+sortPriority: 2000.002
+url: http://localhost:8000/api/document_proofs?status=pending
+urlParameters: []
