@@ -10,6 +10,7 @@ use App\Api\State\Provider\DocumentProvider;
 use App\Api\State\Provider\InvoiceProvider;
 use App\Api\State\Provider\InvoicesProvider;
 use App\Api\State\Provider\MeProvider;
+use App\Api\State\Provider\UserInvoiceProvider;
 use App\Domain\Command\User\LoginCommand;
 use App\Entity\Address;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -27,6 +28,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
             normalizationContext: ['groups' => ['me:read']],
         ),
         new GetCollection(),
+        new GetCollection(
+            'users/{id}/invoices',
+            provider: UserInvoiceProvider::class
+        ),
         new Post(
             uriTemplate: "/login",
             messenger: true,

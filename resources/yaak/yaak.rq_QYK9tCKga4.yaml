@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_QYK9tCKga4
+createdAt: 2026-06-18T13:59:15.432897995
+updatedAt: 2026-06-18T14:00:20.251257153
+workspaceId: wk_VTFsBwidP6
+folderId: fl_7kgbFGodXv
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: get document Copy
+sortPriority: 2000.004
+url: http://localhost:8000/api/users/user-4/invoices
+urlParameters: []
