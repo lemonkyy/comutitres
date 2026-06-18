@@ -5,9 +5,8 @@ createdAt: 2026-06-16T19:03:31.408664752
 updatedAt: 2026-06-18T12:40:53.252462
 workspaceId: wk_VTFsBwidP6
 folderId: fl_7kgbFGodXv
-authentication:
-  token: ${[ TOKEN ]}
-authenticationType: bearer
+authentication: {}
+authenticationType: null
 body: {}
 bodyType: null
 description: '  '
