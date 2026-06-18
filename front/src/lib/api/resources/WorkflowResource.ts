@@ -36,7 +36,7 @@ export class WorkflowResource {
 
   public async getQuestion(id: number): Promise<WorkflowQuestion | ApiClientError> {
     return this.apiClient.get<WorkflowQuestion>(
-      `${apiPaths.question.collection}?text=${text ?? ''}${type ? `&type=${type}` : ''}`,
+      apiPaths.question.details.replace(":id", String(id)),
     );
   }
 
