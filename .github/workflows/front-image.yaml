@@ -41,6 +41,14 @@ jobs:
             NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
             API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
 
+      - name: Build / Push storybook image
+        uses: ./.github/workflows/callables/build-push
+        with:
+          context: ./front
+          dockerfile: ./front/Dockerfile
+          image: storybook
+          target: storybook
+
   deploy-image:
     name: Deploy front image
     runs-on: ubuntu-latest
@@ -57,4 +65,4 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           user: ${{ secrets.PROD_USER }}
           path: ${{ secrets.PROD_PATH }}
-          images: 'front'
+          images: 'front storybook'
