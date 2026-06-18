@@ -51,6 +51,9 @@ class DocumentProof
     #[ORM\Column(enumType: DocumentProofStatus::class)]
     private DocumentProofStatus $status = DocumentProofStatus::PENDING;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $uploadedAt = null;
+
     public function __construct(
         User $user,
         string $path,
@@ -59,6 +62,7 @@ class DocumentProof
         $this->user = $user;
         $this->path = $path;
         $this->type = $type;
+        $this->uploadedAt = new \DateTimeImmutable();
     }
 
     public function getId(): int
@@ -89,6 +93,18 @@ class DocumentProof
     public function setStatus(DocumentProofStatus $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getUploadedAt(): ?\DateTimeImmutable
+    {
+        return $this->uploadedAt;
+    }
+
+    public function setUploadedAt(\DateTimeImmutable $uploadedAt): static
+    {
+        $this->uploadedAt = $uploadedAt;
 
         return $this;
     }

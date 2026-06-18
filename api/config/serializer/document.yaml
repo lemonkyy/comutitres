@@ -12,6 +12,9 @@ App\Entity\DocumentProof:
         status:
             groups:
                 - document:read
+        uploadedAt:
+            groups:
+                - document:read
 
 App\Entity\User:
     attributes:
