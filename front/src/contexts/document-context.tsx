@@ -16,6 +16,7 @@ type DocumentContextType = {
   allUsersDocuments: DocumentProof[] | null;
   setAllUsersDocuments: (documents: DocumentProof[] | null) => void;
   getAllUsersDocuments: () => Promise<DocumentProof[] | ApiClientError>;
+  getDocumentContentUrl: (documentId: string) => string;
   updateDocumentStatus: (
     documentId: string,
     status: DocumentProofStatusEnum,
@@ -76,12 +77,20 @@ export const DocumentProvider = ({ children }: { children: ReactNode }) => {
     [apiClient],
   );
 
+  const getDocumentContentUrl = useCallback(
+    (documentId: string): string => {
+      return apiClient.document.getDocumentContentUrl(documentId);
+    },
+    [apiClient],
+  );
+
   return (
     <DocumentContext.Provider
       value={{
         allUsersDocuments,
         setAllUsersDocuments,
         getAllUsersDocuments,
+        getDocumentContentUrl,
         updateDocumentStatus,
       }}
     >

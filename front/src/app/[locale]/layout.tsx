@@ -7,6 +7,7 @@ import { AppChrome } from "@/components/layout/app-chrome/app-chrome";
 import { ApiClientProvider } from "@/contexts/api-client";
 import { AuthProvider } from "@/contexts/auth-context";
 import { DocumentProvider } from "@/contexts/document-context";
+import { InvoiceProvider } from "@/contexts/invoice-context";
 import { UserProvider } from "@/contexts/user-context";
 import { routing } from "@/i18n/routing";
 
@@ -35,9 +36,11 @@ export default async function LocaleLayout({ children, params }: Props) {
       <ApiClientProvider locale={locale}>
         <AuthProvider>
           <UserProvider>
-            <DocumentProvider>
-              <AppChrome>{children}</AppChrome>
-            </DocumentProvider>
+            <InvoiceProvider>
+              <DocumentProvider>
+                <AppChrome>{children}</AppChrome>
+              </DocumentProvider>
+            </InvoiceProvider>
           </UserProvider>
         </AuthProvider>
       </ApiClientProvider>

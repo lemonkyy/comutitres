@@ -7,6 +7,8 @@ export const apiPaths = {
   },
   invoice: {
     collection: "/invoices",
+    userCollection: "/users/:id/invoices",
+    totalInvoices: "/total_invoice",
     item: "/invoices/:id",
   },
   pass: {

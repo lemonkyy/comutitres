@@ -110,12 +110,23 @@ export default function AdministrationUsersPage() {
                       {user.email || "Email non renseigne"}
                     </p>
                   </div>
-
-                  <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary">
-                    {(user.roles?.[0] || "ROLE_USER")
-                      .replace("ROLE_", "")
-                      .toLowerCase()}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary">
+                      {(user.roles?.[0] || "ROLE_USER")
+                        .replace("ROLE_", "")
+                        .toLowerCase()}
+                    </span>
+                    <Button asChild size="sm" variant="outline">
+                      <Link
+                        href={{
+                          pathname: "/administration/utilisateurs/[userId]",
+                          params: { userId: String(user.id) },
+                        }}
+                      >
+                        Consulter
+                      </Link>
+                    </Button>
+                  </div>
                 </article>
               );
             })}
