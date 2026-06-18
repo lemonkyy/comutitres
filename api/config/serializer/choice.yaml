@@ -4,8 +4,10 @@ App\Entity\Choice:
             groups:
                 - question:read
                 - workflow:read
+                - question:collection:read
         text:
             groups:
                 - question:read
                 - question:write
                 - workflow:read
+                - question:collection:read

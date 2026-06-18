@@ -28,3 +28,4 @@ App\Entity\Question:
                 - question:read
                 - question:write
                 - workflow:read
+                - question:collection:read

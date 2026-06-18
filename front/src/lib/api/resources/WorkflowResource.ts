@@ -34,6 +34,12 @@ export class WorkflowResource {
     );
   }
 
+  public async getQuestion(id: number): Promise<WorkflowQuestion | ApiClientError> {
+    return this.apiClient.get<WorkflowQuestion>(
+      `${apiPaths.question.collection}?text=${text ?? ''}${type ? `&type=${type}` : ''}`,
+    );
+  }
+
   public async getQuestions(text?: string, type?: WorkflowQuestionTypeEnum): Promise<WorkflowQuestion | ApiClientError> {
     return this.apiClient.get<WorkflowQuestion>(
       `${apiPaths.question.collection}?text=${text ?? ''}${type ? `&type=${type}` : ''}`,

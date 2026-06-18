@@ -1,0 +1,37 @@
+type: http_request
+model: http_request
+id: rq_3XhThBJCbx
+createdAt: 2026-06-18T16:24:35.295931051
+updatedAt: 2026-06-18T16:24:46.715027463
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication:
+  disabled: false
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: ''
+bodyType: null
+description: ''
+headers:
+- enabled: true
+  name: Accept
+  value: application/ld+json
+  id: wfGQL01Hdr1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfGQL01Hdr2
+method: GET
+name: Workflow Get Question
+sortPriority: 1000.001
+url: http://localhost:8000/api/questions/1
+urlParameters:
+- enabled: true
+  name: text
+  value: ''
+  id: wfGQL01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: Ij3W4vaFm9

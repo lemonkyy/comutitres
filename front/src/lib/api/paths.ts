@@ -20,6 +20,7 @@ export const apiPaths = {
     createQuestion: "/questions",
   },
   question: {
+    details: "/questions/:id",
     collection: "/questions",
     update: "/questions/:id",
     delete: "/questions/:id",
