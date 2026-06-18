@@ -25,6 +25,14 @@ COPY . .
 
 CMD ["pnpm", "run", "dev"]
 
+# Storybook image
+FROM main AS storybook
+
+COPY . .
+
+EXPOSE 6006
+CMD ["pnpm", "storybook", "--host", "0.0.0.0", "--no-open", "--disable-telemetry"]
+
 # Builder image
 FROM main AS builder
 
