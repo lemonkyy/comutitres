@@ -24,4 +24,8 @@ export class DocumentResource {
       { status },
     );
   }
+
+  public getDocumentContentUrl(documentId: string): string {
+    return `${this.apiClient.baseUrl}${apiPaths.document.item.replace(":id", encodeURIComponent(documentId))}`;
+  }
 }

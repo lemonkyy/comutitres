@@ -1,12 +1,13 @@
 "use client";
 
-import { FileText, UserRound } from "lucide-react";
+import { FileText } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
+import { useApiClient } from "@/contexts/api-client";
 import { useDocument } from "@/contexts/document-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
@@ -85,6 +86,7 @@ export default function AdministrationDocumentDetailPage() {
   const locale = useLocale();
   const params = useParams<{ documentId: string }>();
   const documentId = params.documentId;
+  const { apiClient } = useApiClient();
   const { allUsersDocuments, getAllUsersDocuments, updateDocumentStatus } =
     useDocument();
   const [documentsError, setDocumentsError] = useState<string | null>(null);
@@ -128,6 +130,14 @@ export default function AdministrationDocumentDetailPage() {
     );
   }, [allUsersDocuments, documentId]);
 
+  const documentContentUrl = useMemo(() => {
+    if (!document) {
+      return null;
+    }
+
+    return apiClient.document.getDocumentContentUrl(String(document.id));
+  }, [apiClient, document]);
+
   const handleStatusUpdate = async (status: DocumentProofStatusEnum) => {
     if (!document) {
       return;
@@ -140,6 +150,16 @@ export default function AdministrationDocumentDetailPage() {
 
     if (result instanceof ApiClientError) {
       setActionError(result.message || "Impossible de mettre a jour le statut.");
+      setIsUpdatingStatus(false);
+      return;
+    }
+
+    const refreshedDocuments = await getAllUsersDocuments();
+    if (refreshedDocuments instanceof ApiClientError) {
+      setActionError(
+        refreshedDocuments.message ||
+          "Statut mis a jour, mais impossible de rafraichir les documents.",
+      );
     }
 
     setIsUpdatingStatus(false);
@@ -186,6 +206,19 @@ export default function AdministrationDocumentDetailPage() {
 
         {document ? (
           <Card>
+            {(() => {
+              const finalDecisionLabel =
+                document.status === "approved"
+                  ? "Approuvé"
+                  : document.status === "rejected"
+                    ? "Refusé"
+                    : null;
+              const finalDecisionClassName =
+                document.status === "approved"
+                  ? "bg-[color-mix(in_srgb,var(--profil-senior)_20%,white)] text-(--profil-senior)"
+                  : "bg-[color-mix(in_srgb,var(--destructive)_16%,white)] text-destructive";
+
+              return (
             <div className="flex flex-row justify-between items-center gap-3">
               <div className="flex items-center gap-3">
                 <span className="grid size-10 place-items-center rounded-xl bg-accent text-primary">
@@ -200,25 +233,35 @@ export default function AdministrationDocumentDetailPage() {
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <Button
-                  disabled={isUpdatingStatus || document.status === "approved"}
-                  onClick={() => {
-                    void handleStatusUpdate("approved");
-                  }}
-                  size="sm"
-                >
-                  Approuver
-                </Button>
-                <Button
-                  disabled={isUpdatingStatus || document.status === "rejected"}
-                  onClick={() => {
-                    void handleStatusUpdate("rejected");
-                  }}
-                  size="sm"
-                  variant="destructive"
-                >
-                  Refuser
-                </Button>
+                {finalDecisionLabel ? (
+                  <span className={`rounded-full px-3 py-1 text-sm font-bold ${finalDecisionClassName}`}>
+                    {finalDecisionLabel}
+                  </span>
+                ) : (
+                  <>
+                    <Button
+                      className="cursor-pointer disabled:cursor-not-allowed"
+                      disabled={isUpdatingStatus}
+                      onClick={() => {
+                        void handleStatusUpdate("approved");
+                      }}
+                      size="sm"
+                    >
+                      Approuver
+                    </Button>
+                    <Button
+                      className="cursor-pointer disabled:cursor-not-allowed"
+                      disabled={isUpdatingStatus}
+                      onClick={() => {
+                        void handleStatusUpdate("rejected");
+                      }}
+                      size="sm"
+                      variant="destructive"
+                    >
+                      Refuser
+                    </Button>
+                  </>
+                )}
                 {isUpdatingStatus ? (
                   <span className="text-sm text-muted-foreground">
                     Mise a jour en cours...
@@ -226,6 +269,8 @@ export default function AdministrationDocumentDetailPage() {
                 ) : null}
               </div>
             </div>
+              );
+            })()}
 
             {actionError ? (
               <p className="mt-3 rounded-xl bg-[color-mix(in_srgb,var(--destructive)_14%,white)] p-3 text-sm font-semibold text-destructive">
@@ -277,13 +322,25 @@ export default function AdministrationDocumentDetailPage() {
                 </span>
               </div>
             </div>
-
-            <div className="mt-4 rounded-xl border border-border/70 bg-card p-3">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <UserRound className="size-4 stroke-[1.75]" />
-                Apercu fichier non disponible via API pour le moment.
+            {documentContentUrl ? (
+              <div className="mt-3">
+                <Button asChild size="sm" variant="outline">
+                  <a href={documentContentUrl} rel="noreferrer" target="_blank">
+                    Ouvrir dans un nouvel onglet
+                  </a>
+                </Button>
               </div>
-            </div>
+            ) : null}
+
+            {documentContentUrl ? (
+              <div className="mt-4 rounded-xl border border-border/70 bg-card p-2">
+                <iframe
+                  className="h-[70vh] w-full rounded-lg"
+                  src={documentContentUrl}
+                  title={`Document ${document.id}`}
+                />
+              </div>
+            ) : null}
           </Card>
         ) : null}
       </div>

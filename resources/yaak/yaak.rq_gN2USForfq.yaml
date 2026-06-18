@@ -2,11 +2,11 @@ type: http_request
 model: http_request
 id: rq_gN2USForfq
 createdAt: 2026-06-16T18:39:24.298108266
-updatedAt: 2026-06-16T18:48:06.815290170
+updatedAt: 2026-06-18T13:38:22.888218
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication:
-  token: ${[ token ]}
+  token: ${[ TOKEN ]}
 authenticationType: bearer
 body:
   text: |-
