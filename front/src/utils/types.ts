@@ -117,6 +117,10 @@ export type CreateChoiceInput = {
   recommendedPassId?: string | null;
 };
 
+export type CollectionQuestionInput = {
+  text?: string;
+}
+
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
   questionId: number;
 };
