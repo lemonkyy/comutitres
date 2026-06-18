@@ -2,15 +2,17 @@ import type { ReactNode } from "react";
 
 import "./globals.css";
 import Script from "next/script";
-import { routing } from "@/i18n/routing";
+import { getLocale } from "next-intl/server";
 
 type Props = {
   children: ReactNode;
 };
 
 const RootLayout = async ({ children }: Props) => {
+  const locale = await getLocale();
+
   return (
-    <html lang={routing.defaultLocale}>
+    <html lang={locale}>
       <head>
         <Script
           src={process.env.NEXT_PUBLIC_UMAMI_SRC}

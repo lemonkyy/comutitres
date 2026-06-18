@@ -100,8 +100,10 @@ export function AppChrome({ children }: AppChromeProps) {
         <Navbar className={isAssistantRoute ? "hidden md:block" : undefined} />
       )}
       <div
+        id="main-content"
+        tabIndex={-1}
         className={cn(
-          "flex flex-col",
+          "flex flex-col outline-none",
           shouldUseFullscreenShell
             ? "h-dvh min-h-0 overflow-hidden"
             : "min-h-dvh",

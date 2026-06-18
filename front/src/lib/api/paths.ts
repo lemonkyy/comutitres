@@ -20,10 +20,13 @@ export const apiPaths = {
     createQuestion: "/questions",
   },
   question: {
+    collection: "/questions",
     update: "/questions/:id",
+    delete: "/questions/:id",
   },
   choice: {
     update: "/choices/:id",
+    delete: "/choices/:id",
   },
   user: {
     collection: "/users",

@@ -329,6 +329,7 @@
   },
   "navigation": {
     "ariaLabel": "Main navigation",
+    "skipToContent": "Skip to main content",
     "items": {
       "account": "My account",
       "assistant": "Assistant",

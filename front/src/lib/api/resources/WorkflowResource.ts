@@ -1,4 +1,4 @@
-import type { ApiClient } from "@/lib/api/ApiClient";
+import type { ApiClient, DeleteResponse } from "@/lib/api/ApiClient";
 import type { ApiClientError } from "@/lib/api/ApiClientError";
 import { apiPaths } from "@/lib/api/paths";
 import type {
@@ -6,6 +6,7 @@ import type {
   UpdateChoiceInput,
   UpdateQuestionInput,
   WorkflowQuestion,
+  WorkflowQuestionTypeEnum,
   WorkflowStepResult,
 } from "@/utils/types";
 
@@ -33,6 +34,12 @@ export class WorkflowResource {
     );
   }
 
+  public async getQuestions(text?: string, type?: WorkflowQuestionTypeEnum): Promise<WorkflowQuestion | ApiClientError> {
+    return this.apiClient.get<WorkflowQuestion>(
+      `${apiPaths.question.collection}?text=${text ?? ''}${type ? `&type=${type}` : ''}`,
+    );
+  }
+
   public async updateQuestion(
     id: number,
     data: UpdateQuestionInput,
@@ -51,5 +58,13 @@ export class WorkflowResource {
       apiPaths.choice.update.replace(":id", String(id)),
       data,
     );
+  }
+
+  public async deleteQuestion(id: number): Promise<DeleteResponse | ApiClientError> {
+    return this.apiClient.delete(apiPaths.question.delete.replace(":id", String(id)));
+  }
+
+  public async deleteChoice(id: number): Promise<DeleteResponse | ApiClientError> {
+    return this.apiClient.delete(apiPaths.choice.delete.replace(":id", String(id)));
   }
 }
