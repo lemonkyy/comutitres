@@ -151,7 +151,6 @@ function getMainRole(user: User) {
 
 export default function AdministrationHomePage() {
   const { userList, getAll } = useUser();
-  console.log(userList);
   const [usersError, setUsersError] = useState<string | null>(null);
 
   useEffect(() => {
