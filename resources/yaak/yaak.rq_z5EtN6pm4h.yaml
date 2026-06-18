@@ -2,17 +2,18 @@ type: http_request
 model: http_request
 id: rq_z5EtN6pm4h
 createdAt: 2026-06-18T09:53:51.289705228
-updatedAt: 2026-06-18T09:56:54.816057169
+updatedAt: 2026-06-18T12:27:17.262070
 workspaceId: wk_VTFsBwidP6
 folderId: fl_7kgbFGodXv
-authentication: {}
-authenticationType: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
 body: {}
 bodyType: null
 description: ''
 headers: []
 method: GET
 name: list documents
-sortPriority: 2000.001
+sortPriority: 3000.0
 url: http://localhost:8000/api/my-documents
 urlParameters: []
