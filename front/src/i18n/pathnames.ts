@@ -31,4 +31,5 @@ export const pathnames = {
     fr: "/parametres",
     en: "/parametres",
   },
+  "/administration": "/administration",
 };

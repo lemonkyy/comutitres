@@ -21,6 +21,17 @@ export type Me = {
   address?: Address | string | null;
 };
 
+export type User = {
+  id: string;
+  sub?: string;
+  email?: string | null;
+  roles: string[];
+  familyName?: string | null;
+  givenName?: string | null;
+  address?: Address | string | null;
+  documentProofs?: Array<string | { id: string }>;
+};
+
 export type Pass = {
   id: string;
   name: string;

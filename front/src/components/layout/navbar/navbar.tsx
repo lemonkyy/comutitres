@@ -1,24 +1,44 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
-
+import { useUser } from "@/contexts/user-context";
+import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { DesktopNavbar } from "./desktop-navbar";
 import { MobileNavbar } from "./mobile-navbar";
-import { navbarItems } from "./navbar-items";
+import {
+  administrationMenuItems,
+  administrationNavbarItems,
+  navbarItems,
+} from "./navbar-items";
 
 type NavbarProps = {
   className?: string;
 };
 
 export default function Navbar({ className = "" }: NavbarProps) {
+  const { myUser } = useUser();
+  const pathname = usePathname();
   const t = useTranslations("navigation");
+  const isAdmin = myUser?.roles?.includes("ROLE_ADMIN") ?? false;
+  const isAdministrationPage = pathname.startsWith("/administration");
+
   const items = useMemo(
-    () =>
-      navbarItems.map((item) => ({
-        ...item,
-        label: t(`items.${item.id}`),
-      })),
-    [t],
+    () => {
+      const sourceItems =
+        isAdministrationPage && isAdmin
+          ? administrationNavbarItems
+          : [...navbarItems, ...(isAdmin ? administrationMenuItems : [])];
+
+      return sourceItems.map(
+        (item) => ({
+          ...item,
+          label: t.has(`items.${item.id}`) ? t(`items.${item.id}`) : item.label,
+        }),
+      );
+    },
+    [isAdmin, isAdministrationPage, t],
   );
 
   return (

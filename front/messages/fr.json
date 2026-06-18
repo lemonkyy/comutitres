@@ -228,7 +228,8 @@
       "assistant": "Assistant",
       "card": "Ma carte",
       "home": "Accueil",
-      "passes": "Titres et tarifs"
+      "passes": "Titres et tarifs",
+      "administration": "Administration"
     }
   },
   "settings": {

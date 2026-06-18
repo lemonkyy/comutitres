@@ -2,11 +2,12 @@ type: http_request
 model: http_request
 id: rq_epN9ZViw58
 createdAt: 2026-06-17T12:07:45.937142197
-updatedAt: 2026-06-17T12:07:53.458459674
+updatedAt: 2026-06-18T09:21:10.318566
 workspaceId: wk_VTFsBwidP6
 folderId: fl_7kgbFGodXv
-authentication: {}
-authenticationType: null
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
 body: {}
 bodyType: null
 description: ''
@@ -15,4 +16,12 @@ method: GET
 name: ''
 sortPriority: 0.0
 url: http://localhost:8000/api/users
-urlParameters: []
+urlParameters:
+- enabled: false
+  name: ''
+  value: ''
+  id: YwzN4Wp8gd
+- enabled: true
+  name: ''
+  value: ''
+  id: rK97tGQ8hF
