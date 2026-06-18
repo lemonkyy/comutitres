@@ -40,6 +40,11 @@ jobs:
             NEXT_PUBLIC_URL=${{ secrets.FRONT_URL }}
             NEXT_PUBLIC_API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
             API_BASE_URL=${{ secrets.FRONT_API_BASE_URL }}
+            NEXT_PUBLIC_SENTRY_DSN=${{ secrets.FRONT_SENTRY_DSN }}
+            NEXT_PUBLIC_SENTRY_ENV=prod
+            NEXT_PUBLIC_SENTRY_RELEASE=0.0.1
+            NEXT_PUBLIC_UMAMI_SRC=${{ secrets.FRONT_UMAMI_SRC }}
+            NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.FRONT_UMAMI_WEBSITE_ID }}
 
       - name: Build / Push storybook image
         uses: ./.github/workflows/callables/build-push
