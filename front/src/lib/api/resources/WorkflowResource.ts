@@ -2,6 +2,7 @@ import type { ApiClient, DeleteResponse } from "@/lib/api/ApiClient";
 import type { ApiClientError } from "@/lib/api/ApiClientError";
 import { apiPaths } from "@/lib/api/paths";
 import type {
+  CreateChoiceStandaloneInput,
   CollectionQuestionInput,
   CreateQuestionInput,
   CreateChoiceInput,
@@ -59,6 +60,12 @@ export class WorkflowResource {
     );
   }
 
+  public async createChoice(
+    data: CreateChoiceStandaloneInput,
+  ): Promise<WorkflowChoice | ApiClientError> {
+    return this.apiClient.post<WorkflowChoice>(apiPaths.choice.create, data);
+  }
+
   public async getCollectionQuestion(
     data: CollectionQuestionInput,
   ): Promise<WorkflowQuestion[] | ApiClientError> {
@@ -78,17 +85,7 @@ export class WorkflowResource {
       data,
     );
   }
-
-  public async createChoice(
-    questionId: number,
-    data: CreateChoiceInput
-  ) : Promise <WorkflowChoice | ApiClientError> {
-    return this.apiClient.post<WorkflowChoice>(
-      apiPaths.choice.create,
-      data,
-    );
-  }
-
+  
   public async deleteQuestion(id: number): Promise<DeleteResponse | ApiClientError> {
     return this.apiClient.delete(apiPaths.question.delete.replace(":id", String(id)));
   }
