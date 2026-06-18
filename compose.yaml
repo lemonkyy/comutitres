@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
 
   umami:
-    image: elestio/umami:latest
+    image: docker.umami.is/umami-software/umami:postgresql-latest
     environment:
       DATABASE_TYPE: postgresql
     depends_on:
