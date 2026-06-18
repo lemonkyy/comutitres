@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
+use App\Api\State\Provider\DocumentProvider;
 use App\Api\State\Provider\InvoiceProvider;
 use App\Api\State\Provider\InvoicesProvider;
 use App\Api\State\Provider\MeProvider;
@@ -34,6 +35,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
         new GetCollection(
             uriTemplate: "/invoices",
             provider: InvoicesProvider::class
+        ),
+        new GetCollection(
+            uriTemplate: "/my-documents",
+            provider: DocumentProvider::class
         ),
         new Get(
             uriTemplate: "/invoices/{id}",

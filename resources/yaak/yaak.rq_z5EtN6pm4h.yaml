@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_W49xpm5u7d
-createdAt: 2026-06-17T07:47:40.009297775
-updatedAt: 2026-06-18T09:53:49.243297882
+id: rq_z5EtN6pm4h
+createdAt: 2026-06-18T09:53:51.289705228
+updatedAt: 2026-06-18T09:56:54.816057169
 workspaceId: wk_VTFsBwidP6
 folderId: fl_7kgbFGodXv
 authentication: {}
@@ -12,7 +12,7 @@ bodyType: null
 description: ''
 headers: []
 method: GET
-name: get invoice
-sortPriority: 2000.0
-url: http://localhost:8000/api/invoices/in_1Tj2LbA9BCjTSYdKCyUI6IbE
+name: list documents
+sortPriority: 2000.001
+url: http://localhost:8000/api/my-documents
 urlParameters: []
