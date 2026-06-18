@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use App\Repository\ChoiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,6 +13,7 @@ use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: ChoiceRepository::class)]
 #[ApiResource(operations: [
+    new Post(),
     new Patch(),
     new Delete(),
 ])]

@@ -115,6 +115,10 @@ export type CreateChoiceInput = {
   recommendedPassId?: string | null;
 };
 
+export type CreateChoiceStandaloneInput = CreateChoiceInput & {
+  questionId: number;
+};
+
 export type CreateQuestionInput = {
   text: string;
   isFirst?: boolean;

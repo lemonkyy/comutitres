@@ -2,9 +2,11 @@ import type { ApiClient, DeleteResponse } from "@/lib/api/ApiClient";
 import type { ApiClientError } from "@/lib/api/ApiClientError";
 import { apiPaths } from "@/lib/api/paths";
 import type {
+  CreateChoiceStandaloneInput,
   CreateQuestionInput,
   UpdateChoiceInput,
   UpdateQuestionInput,
+  WorkflowChoice,
   WorkflowQuestion,
   WorkflowQuestionTypeEnum,
   WorkflowStepResult,
@@ -54,6 +56,12 @@ export class WorkflowResource {
       apiPaths.question.update.replace(":id", String(id)),
       data,
     );
+  }
+
+  public async createChoice(
+    data: CreateChoiceStandaloneInput,
+  ): Promise<WorkflowChoice | ApiClientError> {
+    return this.apiClient.post<WorkflowChoice>(apiPaths.choice.create, data);
   }
 
   public async updateChoice(

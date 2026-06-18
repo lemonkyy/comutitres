@@ -1,0 +1,46 @@
+type: http_request
+model: http_request
+id: rq_wfCreateC01
+createdAt: 2026-06-16T14:00:00
+updatedAt: 2026-06-18T19:01:00.000000000
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "text": "Nouveau choix",
+      "questionId": 1,
+      "nextQuestionId": null,
+      "recommendedPassId": null
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: wfCC01Hdr1
+- enabled: true
+  name: Content-Language
+  value: fr
+  id: wfCC01Hdr2
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCC01Hdr3
+method: POST
+name: Workflow Create Choice
+sortPriority: 3500.0
+url: http://localhost:8000/api/choices
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCC01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCC01Prm2
