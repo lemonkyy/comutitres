@@ -28,8 +28,8 @@ class WorkflowFixture extends Fixture implements DependentFixtureInterface
         $questionPlace = $this->createQuestion($manager, 'Où habitez-vous principalement ?', null, true);
         $questionZone = $this->createQuestion($manager, 'Quelle zone utilisez-vous le plus souvent ?');
         $questionSituation = $this->createQuestion($manager, 'Quelle est votre situation actuelle ?');
-        $questionAgeStudent = $this->createQuestion($manager, 'Quel est votre âge ?', null);
-        $questionAgeScholar = $this->createQuestion($manager, 'Quel est votre âge ?', null);
+        $questionAgeStudent = $this->createQuestion($manager, 'Quel est votre âge ?', QuestionTypeEnum::IMAGINE_R_ETUDIANT);
+        $questionAgeScholar = $this->createQuestion($manager, 'Quel est votre âge ?', QuestionTypeEnum::IMAGINE_R_SCOLAIRE);
         $questionScholarship = $this->createQuestion($manager, 'Avez-vous droit à une bourse ?', QuestionTypeEnum::IMAGINE_R_ETUDIANT);
         $questionHelp = $this->createQuestion($manager, 'Avez-vous droit à une aide ?', QuestionTypeEnum::NAVIGO);
 
@@ -55,8 +55,8 @@ class WorkflowFixture extends Fixture implements DependentFixtureInterface
 
         $this->createChoice($manager, $questionAgeStudent, 'Moins de 16 ans', null, $this->pass(self::PASS_ETUDIANT));
         $this->createChoice($manager, $questionAgeStudent, '16 à 25 ans', null, $this->pass(self::PASS_ETUDIANT));
-        $this->createChoice($manager, $questionAgeStudent, '26 à 59 ans', null, $this->pass(self::PASS_NAVIGO));
-        $this->createChoice($manager, $questionAgeStudent, '60 ans et plus', null, $this->pass(self::PASS_SENIOR));
+        $this->createChoice($manager, $questionAgeStudent, '26 à 59 ans', null, $this->pass(self::PASS_ETUDIANT));
+        $this->createChoice($manager, $questionAgeStudent, '60 ans et plus', null, $this->pass(self::PASS_ETUDIANT));
 
         $this->createChoice($manager, $questionAgeScholar, 'Moins de 11 ans', null, $this->pass(self::PASS_JUNIOR));
         $this->createChoice($manager, $questionAgeScholar, '11 à 18 ans', null, $this->pass(self::PASS_SCOLAIRE));
