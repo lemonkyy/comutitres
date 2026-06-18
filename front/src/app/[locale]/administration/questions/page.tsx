@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
-import { Link } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 import { WorkflowQuestion } from "@/utils/types";
 import { useApiClient } from "@/contexts/api-client";
@@ -77,10 +77,22 @@ export default function QuestionsPage() {
                   className="flex flex-col gap-4 rounded-xl bg-accent/55 p-5"
                   key={question.id}
                 >
-                  <h2 className="text-lg font-bold text-foreground">
-                    {question.text}
-                  </h2>
+                  <div className="flex flex-row items-center justify-between w-full">
+                    <h2 className="text-lg font-bold text-foreground">
+                      {question.text}
+                    </h2>
 
+                    <Button asChild size="sm" variant="outline">
+                      <Link
+                        href={{
+                            pathname: "/administration/questions/[questionId]",
+                            params: { questionId: String(question.id) },
+                          }}
+                      >
+                        Consulter
+                      </Link>
+                    </Button>
+                  </div>
                   <div className="flex flex-col gap-2">
                     {!question.choices || question.choices.length === 0 ? (
                       <p className="text-sm text-muted-foreground">
@@ -90,25 +102,13 @@ export default function QuestionsPage() {
                       question.choices.map((choice) => (
                         <div
                           key={choice.id}
-                          className="flex items-center justify-between rounded-lg bg-background px-4 py-3"
+                          className="flex items-center justify-between rounded-lg bg-background px-4 py-3 text-sm text-foreground"
                         >
-                          <span className="text-sm text-foreground">
-                            {choice.text}
-                          </span>
-
-                          <span className="text-xs text-muted-foreground">
-                            ID: {choice.id}
-                          </span>
+                          {choice.text}
                         </div>
                       ))
                     )}
                   </div>
-
-                  <Button asChild size="sm" variant="outline">
-                    <Link href={`/administration/questions/${question.id}`}>
-                      Consulter
-                    </Link>
-                  </Button>
                 </article>
               ))}
             </div>

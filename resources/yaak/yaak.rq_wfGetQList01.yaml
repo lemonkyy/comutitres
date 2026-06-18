@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_wfGetQList01
 createdAt: 2026-06-16T15:00:00
-updatedAt: 2026-06-18T15:49:26.176933
+updatedAt: 2026-06-18T16:54:28.128659900
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
 authentication:

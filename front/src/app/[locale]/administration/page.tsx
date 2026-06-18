@@ -444,7 +444,7 @@ export default function AdministrationHomePage() {
           </Card>
 
           <Card padding="none">
-            <div className="flex items-center justify-between border-b border-border/70 px-5 py-4">
+            <div className="flex items-center justify-between px-5 py-4">
               <h2 className="text-lg font-extrabold text-foreground">
                 Questions du chatbot
               </h2>
@@ -454,8 +454,6 @@ export default function AdministrationHomePage() {
                   <ChevronRight data-icon="inline-end" />
                 </Link>
               </Button>
-            </div>
-            <div className="p-4 md:p-5">
             </div>
           </Card>
         </div>
