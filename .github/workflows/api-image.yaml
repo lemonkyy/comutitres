@@ -38,6 +38,7 @@ jobs:
           target: dev
           build_args: |
             JWT_PASSPHRASE=${{ secrets.BACK_JWT_PASSPHRASE }}
+            SENTRY_DSN=${{ secrets.BACK_SENTRY_DSN }}
 
   deploy-image:
     name: Deploy api image
