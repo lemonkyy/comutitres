@@ -4,6 +4,7 @@ import type { LoginInput, Me } from "@/utils/types";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { UserResource } from "./resources/UserResource";
+import { DocumentResource } from "./resources/DocumentResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
 
 export interface DeleteResponse {
@@ -39,7 +40,7 @@ export class ApiClient {
   pass: PassResource;
   user: UserResource;
   workflow: WorkflowResource;
-
+  document: DocumentResource;
   constructor(
     public baseUrl: string,
     private readonly locale = "fr",
@@ -48,6 +49,7 @@ export class ApiClient {
     this.pass = new PassResource(this);
     this.user = new UserResource(this);
     this.workflow = new WorkflowResource(this);
+    this.document = new DocumentResource(this);
   }
 
   public async get<T>(
