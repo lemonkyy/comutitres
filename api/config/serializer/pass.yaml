@@ -22,6 +22,21 @@ App\Model\Pass:
             groups:
                 - pass:collection:read
 
+App\Model\Pass:
+    attributes:
+        id:
+            groups:
+                - pass:collection:read
+        name:
+            groups:
+                - pass:collection:read
+        description:
+            groups:
+                - pass:collection:read
+        prices:
+            groups:
+                - pass:collection:read
+
 App\Model\Price:
     attributes:
         id:
