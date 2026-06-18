@@ -442,6 +442,22 @@ export default function AdministrationHomePage() {
               </div>
             </div>
           </Card>
+
+          <Card padding="none">
+            <div className="flex items-center justify-between border-b border-border/70 px-5 py-4">
+              <h2 className="text-lg font-extrabold text-foreground">
+                Questions du chatbot
+              </h2>
+              <Button asChild size="sm" variant="ghost">
+                <Link href="/administration/questions">
+                  Configurer les questions
+                  <ChevronRight data-icon="inline-end" />
+                </Link>
+              </Button>
+            </div>
+            <div className="p-4 md:p-5">
+            </div>
+          </Card>
         </div>
       </div>
     </main>

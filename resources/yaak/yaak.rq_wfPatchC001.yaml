@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_wfPatchC001
 createdAt: 2026-06-16T14:00:00
-updatedAt: 2026-06-16T14:28:52.646955981
+updatedAt: 2026-06-18T14:58:30.244543400
 workspaceId: wk_VTFsBwidP6
 folderId: fl_8pydsy3tv9
 authentication: {}

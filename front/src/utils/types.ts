@@ -115,6 +115,10 @@ export type CreateChoiceInput = {
   recommendedPassId?: string | null;
 };
 
+export type CollectionQuestionInput = {
+  text?: string;
+}
+
 export type CreateQuestionInput = {
   text: string;
   isFirst?: boolean;

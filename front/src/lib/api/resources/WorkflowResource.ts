@@ -2,6 +2,7 @@ import type { ApiClient, DeleteResponse } from "@/lib/api/ApiClient";
 import type { ApiClientError } from "@/lib/api/ApiClientError";
 import { apiPaths } from "@/lib/api/paths";
 import type {
+  CollectionQuestionInput,
   CreateQuestionInput,
   UpdateChoiceInput,
   UpdateQuestionInput,
@@ -55,6 +56,16 @@ export class WorkflowResource {
       data,
     );
   }
+
+  public async getCollectionQuestion(
+    data: CollectionQuestionInput,
+  ): Promise<WorkflowQuestion[] | ApiClientError> {
+    return this.apiClient.get<WorkflowQuestion[]>(
+      apiPaths.workflow.collectionQuestion,
+      data,
+    );
+  }
+
 
   public async updateChoice(
     id: number,
