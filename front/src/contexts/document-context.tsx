@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  createContext,
   type ReactNode,
+  createContext,
   useCallback,
   useContext,
   useState,
@@ -19,10 +19,12 @@ type DocumentContextType = {
   updateDocumentStatus: (
     documentId: string,
     status: DocumentProofStatusEnum,
-  ) => Promise<void | ApiClientError>;
+  ) => Promise<undefined | ApiClientError>;
 };
 
-const DocumentContext = createContext<DocumentContextType | undefined>(undefined);
+const DocumentContext = createContext<DocumentContextType | undefined>(
+  undefined,
+);
 
 export const DocumentProvider = ({ children }: { children: ReactNode }) => {
   const { apiClient } = useApiClient();
@@ -30,7 +32,9 @@ export const DocumentProvider = ({ children }: { children: ReactNode }) => {
     DocumentProof[] | null
   >(null);
 
-  const getAllUsersDocuments = useCallback(async (): Promise<DocumentProof[] | ApiClientError> => {
+  const getAllUsersDocuments = useCallback(async (): Promise<
+    DocumentProof[] | ApiClientError
+  > => {
     const result = await apiClient.document.getCollection();
 
     if (result instanceof ApiClientError) {
@@ -45,8 +49,11 @@ export const DocumentProvider = ({ children }: { children: ReactNode }) => {
     async (
       documentId: string,
       status: DocumentProofStatusEnum,
-    ): Promise<void | ApiClientError> => {
-      const result = await apiClient.document.updateDocumentStatus(documentId, status);
+    ): Promise<undefined | ApiClientError> => {
+      const result = await apiClient.document.updateDocumentStatus(
+        documentId,
+        status,
+      );
 
       if (result instanceof ApiClientError) {
         return result;
@@ -64,7 +71,7 @@ export const DocumentProvider = ({ children }: { children: ReactNode }) => {
         );
       });
 
-      return;
+      return undefined;
     },
     [apiClient],
   );

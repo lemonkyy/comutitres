@@ -27,6 +27,7 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 import {
   type Accommodation,
@@ -196,7 +197,9 @@ export function SettingsPanel({ copy, currentLocale }: SettingsScreenProps) {
               languageField.field.onChange(parsedLanguage.data);
 
               if (parsedLanguage.data !== currentLocale) {
-                router.replace(pathname, { locale: parsedLanguage.data });
+                router.replace(pathname as StaticPathname, {
+                  locale: parsedLanguage.data,
+                });
               }
             }}
             options={languageOptions}

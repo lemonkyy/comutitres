@@ -1,5 +1,6 @@
 import {
   ChevronLeft,
+  FileCheck2,
   type LucideIcon,
   Settings,
   Ticket,
@@ -17,10 +18,10 @@ import {
   PageTabs,
 } from "@/components/navigation/page-tabs/page-tabs";
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 export type AccountShellCopy = {
   backLabel: string;
@@ -29,6 +30,7 @@ export type AccountShellCopy = {
   subtitle: string;
   tabs: {
     account: string;
+    documents: string;
     passes: string;
     settings: string;
   };
@@ -36,7 +38,7 @@ export type AccountShellCopy = {
 };
 
 type AccountShellProps = {
-  activeTab: "account" | "passes" | "settings";
+  activeTab: "account" | "documents" | "passes" | "settings";
   children: React.ReactNode;
   copy: AccountShellCopy;
 };
@@ -61,6 +63,13 @@ export function AccountShell({ activeTab, children, copy }: AccountShellProps) {
       icon: Ticket,
       id: "passes",
       label: copy.tabs.passes,
+    },
+    {
+      current: activeTab === "documents",
+      href: "/account/documents",
+      icon: FileCheck2,
+      id: "documents",
+      label: copy.tabs.documents,
     },
     {
       current: activeTab === "settings",
@@ -125,6 +134,14 @@ function getAccountBreadcrumbs(
       { href: "/" as const, id: "home", label: copy.homeLabel },
       { href: "/account" as const, id: "account", label: copy.title },
       { id: "settings", label: copy.tabs.settings },
+    ];
+  }
+
+  if (activeTab === "documents") {
+    return [
+      { href: "/" as const, id: "home", label: copy.homeLabel },
+      { href: "/account" as const, id: "account", label: copy.title },
+      { id: "documents", label: copy.tabs.documents },
     ];
   }
 

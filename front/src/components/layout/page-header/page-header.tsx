@@ -7,10 +7,10 @@ import {
   Breadcrumbs,
 } from "@/components/navigation/breadcrumbs/breadcrumbs";
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 type SubtitleTone = "muted" | "primary" | "profile";
 type IconButtonTone = "neutral" | "accent";
 

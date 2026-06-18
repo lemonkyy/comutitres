@@ -27,10 +27,74 @@
       "subtitle": "Your information and preferences",
       "tabs": {
         "account": "My information",
+        "documents": "My documents",
         "passes": "My passes",
         "settings": "Settings"
       },
       "title": "My account"
+    },
+    "documents": {
+      "authPrompt": {
+        "ctaLabel": "Sign in",
+        "description": "Sign in to upload your documents and follow their review status.",
+        "title": "Your documents will appear here"
+      },
+      "card": {
+        "acceptedFormatsLabel": "PDF, JPG, or PNG up to 8 MB",
+        "browseLabel": "Choose a file",
+        "downloadLabel": "Download",
+        "replaceLabel": "Replace document",
+        "statusLabels": {
+          "approved": "Accepted",
+          "missing": "Missing",
+          "pending": "Pending",
+          "rejected": "Rejected"
+        },
+        "submitLabel": "Upload document",
+        "submittingLabel": "Uploading",
+        "unavailableFileLabel": "No file uploaded",
+        "uploadLabel": "Add a document",
+        "viewDialogDescription": "Preview of the uploaded document. If the file does not display, use download.",
+        "viewLabel": "View"
+      },
+      "fileTooLargeError": "The file is larger than the 8 MB limit.",
+      "infoNoticeDescription": "Documents are reviewed by customer service. A rejected document can be replaced from this page at any time.",
+      "infoNoticeTitle": "Document tracking",
+      "introDescription": "Upload the documents requested to confirm eligibility for youth, student, solidarity, or special-fare passes.",
+      "introTitle": "Eligibility documents",
+      "invalidFileTypeError": "Upload a PDF, JPG, or PNG file.",
+      "loadErrorDescription": "Your documents cannot be loaded right now. Try again in a moment.",
+      "loadErrorTitle": "Documents unavailable",
+      "requiredDocumentsLabel": "Required documents",
+      "requirements": {
+        "grantCertificate": {
+          "description": "Grant certificate or support document used to confirm social fare eligibility.",
+          "title": "Grant certificate"
+        },
+        "identityPhoto": {
+          "description": "Recent, clear identity photo usable for your transport account.",
+          "title": "Identity photo"
+        },
+        "proofOfResidence": {
+          "description": "Bill, rent receipt, or certificate used to confirm your address.",
+          "title": "Proof of residence"
+        },
+        "schoolCertificate": {
+          "description": "School certificate or student-status document for the current year.",
+          "title": "Proof of student status"
+        }
+      },
+      "statusSummaryLabels": {
+        "approved": "Accepted",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      },
+      "submittedFileMeta": "File uploaded and stored in your account",
+      "submittedFileName": "%document% uploaded",
+      "successDescription": "Your document was uploaded. Its status will become accepted or rejected after review.",
+      "successTitle": "Document uploaded",
+      "title": "My documents",
+      "uploadErrorMessage": "This document could not be uploaded. Try again in a moment."
     },
     "titles": {
       "authPrompt": {
@@ -107,6 +171,11 @@
     "heroCardTitle": "All available passes in one place",
     "heroZoneLabel": "Zones 1-5",
     "homeLabel": "Home",
+    "eligibilityNotice": {
+      "ctaLabel": "Prepare documents",
+      "description": "Some youth, student, solidarity, or special-fare passes require an eligibility document after purchase. You can follow their status from your account.",
+      "title": "Documents may be required"
+    },
     "missingPriceLabel": "Price unavailable",
     "popularHeading": "Browse the most popular options",
     "productsEmptyDescription": "Available passes will appear here once the catalog has loaded.",
@@ -161,6 +230,11 @@
       "description": "Your payment was confirmed. You can return to the available passes.",
       "homeLabel": "Home",
       "invoiceCtaLabel": "Download invoice",
+      "eligibilityNotice": {
+        "ctaLabel": "Add my documents",
+        "description": "This pass may require an eligibility document. Upload your documents by {date} to complete your account.",
+        "title": "Documents to upload"
+      },
       "passesLabel": "Passes and fares",
       "purchaseAmountLabel": "Amount paid",
       "purchaseDateLabel": "Purchased on",

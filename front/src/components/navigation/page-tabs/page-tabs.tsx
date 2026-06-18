@@ -1,10 +1,10 @@
 import type * as React from "react";
 
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 export type PageTabItem = {
   ariaLabel?: string;
@@ -30,7 +30,7 @@ export function PageTabs({
     <nav
       aria-label={label}
       className={cn(
-        "relative -mx-5 -mb-5 overflow-x-auto border-[var(--gris-moyen)] border-b px-5 [scrollbar-width:none] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:w-10 after:bg-gradient-to-l after:from-white after:to-transparent md:-mx-5 md:px-5 [&::-webkit-scrollbar]:hidden",
+        "relative -mx-5 -mb-5 overflow-x-auto border-[var(--gris-moyen)] border-b px-5 [scrollbar-width:none] after:pointer-events-none after:absolute after:inset-y-0 after:right-0 after:hidden after:w-10 after:bg-gradient-to-l after:from-white after:to-transparent sm:after:block md:-mx-5 md:px-5 [&::-webkit-scrollbar]:hidden",
         className,
       )}
       data-slot="page-tabs"

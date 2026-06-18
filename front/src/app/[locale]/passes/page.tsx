@@ -42,6 +42,11 @@ export default async function PassesPage({
     assistantCtaLabel: t("assistantCtaLabel"),
     backLabel: t("backLabel"),
     breadcrumbAriaLabel: t("breadcrumbAriaLabel"),
+    eligibilityNotice: {
+      ctaLabel: t("eligibilityNotice.ctaLabel"),
+      description: t("eligibilityNotice.description"),
+      title: t("eligibilityNotice.title"),
+    },
     frequencies: createRecord(passFrequencyIds, (id) =>
       getAudienceCopy(t, "frequencies", id),
     ),

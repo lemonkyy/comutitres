@@ -45,7 +45,9 @@ function normalizePathname(pathname: string) {
     ? `/${segments.slice(2).join("/")}`
     : startsWithSlash;
   const withoutTrailing =
-    localeStripped !== "/" ? localeStripped.replace(/\/+$/, "") : localeStripped;
+    localeStripped !== "/"
+      ? localeStripped.replace(/\/+$/, "")
+      : localeStripped;
 
   return withoutTrailing || "/";
 }

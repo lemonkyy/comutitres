@@ -161,6 +161,7 @@ function createAccountShellCopy(t: AccountTranslator): AccountShellCopy {
     subtitle: t("subtitle"),
     tabs: {
       account: t("tabs.account"),
+      documents: t("tabs.documents"),
       passes: t("tabs.passes"),
       settings: t("tabs.settings"),
     },

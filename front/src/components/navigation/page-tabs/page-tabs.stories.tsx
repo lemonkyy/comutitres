@@ -40,3 +40,26 @@ export const WithDisabledItem: Story = {
     ],
   },
 };
+
+export const NarrowWithLongActiveItem: Story = {
+  args: {
+    items: [
+      { href: "/account", id: "account", label: "Mes informations" },
+      { href: "/account/passes", id: "passes", label: "Mes titres" },
+      {
+        current: true,
+        href: "/account/documents",
+        id: "documents",
+        label: "Mes documents",
+      },
+      { href: "/account/settings", id: "settings", label: "Paramètres" },
+    ],
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-80 max-w-full bg-card px-4 pt-4 pb-5">
+        <Story />
+      </div>
+    ),
+  ],
+};

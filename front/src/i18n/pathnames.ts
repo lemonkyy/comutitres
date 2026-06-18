@@ -19,6 +19,10 @@ export const pathnames = {
     fr: "/mon-compte/mes-titres",
     en: "/mon-compte/mes-titres",
   },
+  "/account/documents": {
+    fr: "/mon-compte/mes-documents",
+    en: "/mon-compte/mes-documents",
+  },
   "/account/settings": {
     fr: "/mon-compte/parametres",
     en: "/mon-compte/parametres",
@@ -38,5 +42,10 @@ export const pathnames = {
   "/administration": "/administration",
   "/administration/utilisateurs": "/administration/utilisateurs",
   "/administration/documents": "/administration/documents",
-  "/administration/documents/[documentId]": "/administration/documents/[documentId]",
+  "/administration/documents/[documentId]":
+    "/administration/documents/[documentId]",
 };
+
+export type AppPathname = keyof typeof pathnames;
+export type DynamicPathname = Extract<AppPathname, `${string}[${string}`>;
+export type StaticPathname = Exclude<AppPathname, DynamicPathname>;

@@ -3,9 +3,9 @@ import { LogIn } from "lucide-react";
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 export type AuthPromptCopy = {
   ctaLabel: string;

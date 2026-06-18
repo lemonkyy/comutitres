@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { getPassAsset } from "@/components/passes/pass-assets";
 import {
+  type PaymentEligibilityNotice,
   type PaymentResultPurchase,
   PaymentResultScreen,
   type PaymentResultScreenCopy,
@@ -10,6 +11,7 @@ import {
 import type { CollectionResponse } from "@/lib/api/ApiClient";
 import { apiPaths } from "@/lib/api/paths";
 import { AUTH_TOKEN_COOKIE, fetchBackendJson } from "@/lib/api/server";
+import { passRequiresDocuments } from "@/utils/document-requirements";
 import type { Purchase } from "@/utils/types";
 
 type PaymentSuccessPageProps = {
@@ -17,6 +19,8 @@ type PaymentSuccessPageProps = {
     locale: string;
   }>;
 };
+
+const eligibilityDeadline = new Date("2026-07-15T12:00:00+02:00");
 
 export default async function PaymentSuccessPage({
   params,
@@ -30,6 +34,9 @@ export default async function PaymentSuccessPage({
     locale,
     cookieStore.get(AUTH_TOKEN_COOKIE)?.value,
   );
+  const eligibilityNotice = latestPurchase
+    ? createEligibilityNotice(latestPurchase, locale, t)
+    : undefined;
   const copy: PaymentResultScreenCopy = {
     backLabel: t("backLabel"),
     breadcrumbAriaLabel: t("breadcrumbAriaLabel"),
@@ -48,11 +55,44 @@ export default async function PaymentSuccessPage({
     <PaymentResultScreen
       ctaHref="/account/passes"
       copy={copy}
+      eligibilityNotice={eligibilityNotice}
       icon={CheckCircle2}
       purchase={latestPurchase}
       tone="success"
     />
   );
+}
+
+function createEligibilityNotice(
+  purchase: PaymentResultPurchase,
+  locale: string,
+  t: (key: string, values?: Record<string, string>) => string,
+): PaymentEligibilityNotice | undefined {
+  if (!requiresEligibilityDocuments(purchase)) {
+    return undefined;
+  }
+
+  return {
+    ctaLabel: t("eligibilityNotice.ctaLabel"),
+    description: t("eligibilityNotice.description", {
+      date: formatEligibilityDeadline(locale),
+    }),
+    title: t("eligibilityNotice.title"),
+  };
+}
+
+function requiresEligibilityDocuments(purchase: PaymentResultPurchase) {
+  return passRequiresDocuments({
+    description: purchase.passDescription,
+    id: purchase.passId,
+    name: purchase.passName,
+  });
+}
+
+function formatEligibilityDeadline(locale: string) {
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "long",
+  }).format(eligibilityDeadline);
 }
 
 async function getLatestPurchase(
@@ -100,6 +140,7 @@ async function getLatestPurchase(
         )}`
       : undefined,
     passDescription: purchase.pass.description,
+    passId: purchase.pass.id,
     passName: purchase.pass.name,
   };
 }

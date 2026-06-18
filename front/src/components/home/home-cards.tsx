@@ -9,10 +9,10 @@ import Image from "next/image";
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 type IconTone = "primary" | "profile" | "neutral" | "success";
 

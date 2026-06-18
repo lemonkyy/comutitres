@@ -2,10 +2,10 @@ import { ChevronRight } from "lucide-react";
 import type * as React from "react";
 
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 export type BreadcrumbItem = {
   href?: AppHref;

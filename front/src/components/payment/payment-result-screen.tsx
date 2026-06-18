@@ -1,7 +1,13 @@
-import { ArrowRight, ChevronLeft, type LucideIcon } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  FileCheck2,
+  type LucideIcon,
+} from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/actions/button/button";
+import { Notice } from "@/components/feedback/notice/notice";
 import {
   DesktopPageHeader,
   PageHeader,
@@ -9,11 +15,11 @@ import {
 } from "@/components/layout/page-header/page-header";
 import { Card } from "@/components/ui/card/card";
 import { Link } from "@/i18n/navigation";
-import type { pathnames } from "@/i18n/pathnames";
+import type { StaticPathname } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
 type PaymentResultTone = "error" | "success";
-type AppHref = keyof typeof pathnames;
+type AppHref = StaticPathname;
 
 export type PaymentResultScreenCopy = {
   backLabel: string;
@@ -29,18 +35,26 @@ export type PaymentResultScreenCopy = {
   title: string;
 };
 
+export type PaymentEligibilityNotice = {
+  ctaLabel: string;
+  description: string;
+  title: string;
+};
+
 export type PaymentResultPurchase = {
   amount: string;
   asset: string;
   date: string;
   invoiceHref?: string;
   passDescription?: string;
+  passId: string;
   passName: string;
 };
 
 type PaymentResultScreenProps = {
   ctaHref?: AppHref;
   copy: PaymentResultScreenCopy;
+  eligibilityNotice?: PaymentEligibilityNotice;
   icon: LucideIcon;
   purchase?: PaymentResultPurchase;
   tone: PaymentResultTone;
@@ -56,6 +70,7 @@ const toneClasses: Record<PaymentResultTone, string> = {
 export function PaymentResultScreen({
   ctaHref = "/passes",
   copy,
+  eligibilityNotice,
   icon: Icon,
   purchase,
   tone,
@@ -98,34 +113,54 @@ export function PaymentResultScreen({
             : "items-start lg:grid-cols-[minmax(0,32rem)] lg:justify-start",
         )}
       >
-        <Card
-          className="flex min-w-0 flex-col gap-5 border-[var(--gris-moyen)] p-5 md:p-[30px]"
-          variant="outlined"
-        >
-          <span
-            aria-hidden="true"
-            className={cn(
-              "grid size-14 place-items-center rounded-[6px]",
-              toneClasses[tone],
-            )}
+        <div className="grid gap-5">
+          <Card
+            className="flex min-w-0 flex-col gap-5 border-[var(--gris-moyen)] p-5 md:p-[30px]"
+            variant="outlined"
           >
-            <Icon className="size-7 stroke-[1.75]" />
-          </span>
-          <div className="min-w-0">
-            <h2 className="text-balance text-[1.75rem] font-bold leading-[36.4px] text-foreground">
-              {copy.title}
-            </h2>
-            <p className="mt-2 max-w-[31rem] text-pretty text-base leading-6 text-muted-foreground md:text-lg md:leading-[27px]">
-              {copy.description}
-            </p>
-          </div>
-          <Button asChild className="w-full md:w-fit">
-            <Link href={ctaHref}>
-              {copy.ctaLabel}
-              <ArrowRight aria-hidden="true" data-icon="inline-end" />
-            </Link>
-          </Button>
-        </Card>
+            <span
+              aria-hidden="true"
+              className={cn(
+                "grid size-14 place-items-center rounded-[6px]",
+                toneClasses[tone],
+              )}
+            >
+              <Icon className="size-7 stroke-[1.75]" />
+            </span>
+            <div className="min-w-0">
+              <h2 className="text-balance text-[1.75rem] font-bold leading-[36.4px] text-foreground">
+                {copy.title}
+              </h2>
+              <p className="mt-2 max-w-[31rem] text-pretty text-base leading-6 text-muted-foreground md:text-lg md:leading-[27px]">
+                {copy.description}
+              </p>
+            </div>
+            <Button asChild className="w-full md:w-fit">
+              <Link href={ctaHref}>
+                {copy.ctaLabel}
+                <ArrowRight aria-hidden="true" data-icon="inline-end" />
+              </Link>
+            </Button>
+          </Card>
+
+          {eligibilityNotice ? (
+            <Notice
+              action={
+                <Button asChild className="w-full sm:w-fit" variant="outline">
+                  <Link href="/account/documents">
+                    <FileCheck2 aria-hidden="true" data-icon="inline-start" />
+                    {eligibilityNotice.ctaLabel}
+                  </Link>
+                </Button>
+              }
+              icon={FileCheck2}
+              title={eligibilityNotice.title}
+              variant="warning"
+            >
+              {eligibilityNotice.description}
+            </Notice>
+          ) : null}
+        </div>
 
         {purchaseDetails ? (
           <Card

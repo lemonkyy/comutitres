@@ -8,9 +8,16 @@ import { Card } from "@/components/ui/card/card";
 import { useDocument } from "@/contexts/document-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
-import type { DocumentEnum, DocumentProof, DocumentProofStatusEnum } from "@/utils/types";
+import type {
+  DocumentEnum,
+  DocumentProof,
+  DocumentProofStatusEnum,
+} from "@/utils/types";
 
-const typeChipByValue: Record<DocumentEnum, { className: string; label: string }> = {
+const typeChipByValue: Record<
+  DocumentEnum,
+  { className: string; label: string }
+> = {
   grant_certificate: {
     className:
       "bg-[color-mix(in_srgb,var(--profil-senior)_20%,white)] text-[var(--profil-senior)]",
@@ -97,7 +104,9 @@ export default function AdministrationDocumentsPage() {
       }
 
       if (result instanceof ApiClientError) {
-        setDocumentsError(result.message || "Impossible de recuperer les documents");
+        setDocumentsError(
+          result.message || "Impossible de recuperer les documents",
+        );
         return;
       }
 
@@ -115,8 +124,8 @@ export default function AdministrationDocumentsPage() {
     }
 
     return [...allUsersDocuments].sort((left, right) => {
-      const leftTime = new Date(left.uploadedAt).getTime();
-      const rightTime = new Date(right.uploadedAt).getTime();
+      const leftTime = getDateTime(left.uploadedAt);
+      const rightTime = getDateTime(right.uploadedAt);
 
       return rightTime - leftTime;
     });
@@ -216,4 +225,13 @@ export default function AdministrationDocumentsPage() {
       </div>
     </main>
   );
+}
+
+function getDateTime(value: string | null | undefined) {
+  if (!value) {
+    return 0;
+  }
+
+  const time = new Date(value).getTime();
+  return Number.isNaN(time) ? 0 : time;
 }

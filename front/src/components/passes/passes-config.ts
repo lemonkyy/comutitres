@@ -30,6 +30,11 @@ export type PassesScreenCopy = {
   assistantCtaLabel: string;
   backLabel: string;
   breadcrumbAriaLabel: string;
+  eligibilityNotice: {
+    ctaLabel: string;
+    description: string;
+    title: string;
+  };
   frequencyHeading: string;
   heroCardDescription: string;
   heroCardTitle: string;

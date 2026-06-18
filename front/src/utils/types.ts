@@ -52,6 +52,33 @@ export type Purchase = {
   total: number;
 };
 
+export const documentKinds = [
+  "identity_photo",
+  "school_certificate",
+  "grant_certificate",
+  "proof_of_residence",
+] as const;
+
+export type DocumentKind = (typeof documentKinds)[number];
+
+export type DocumentProofStatus =
+  | "missing"
+  | "pending"
+  | "approved"
+  | "rejected";
+
+export type DocumentProof = {
+  "@id"?: string;
+  id: number | string;
+  path?: string | null;
+  status: DocumentProofStatus;
+  type: DocumentKind;
+  uploadedAt?: string | null;
+  user: User;
+};
+
+export type MyDocuments = Partial<Record<DocumentKind, DocumentProof | null>>;
+
 export type WorkflowChoice = {
   id: number;
   text: string;
@@ -98,18 +125,10 @@ export type UpdateChoiceInput = {
 };
 
 export type DocumentProofUpload = {
-  type: DocumentEnum;
   file: string;
+  type: DocumentKind;
 };
 
-export type DocumentProof = {
-  id: string;
-  type: DocumentEnum;
-  user: User;
-  status: DocumentProofStatusEnum;
-  uploadedAt: string;
-};
+export type DocumentProofStatusEnum = DocumentProofStatus;
 
-export type DocumentProofStatusEnum = "missing" | "pending" | "approved" | "rejected";
-
-export type DocumentEnum = "identity_photo" | "school_certificate" | "grant_certificate" | "proof_of_residence";
+export type DocumentEnum = DocumentKind;

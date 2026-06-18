@@ -1,8 +1,8 @@
 "use client";
 
 import { FileText } from "lucide-react";
-import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
+import { useLocale } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/actions/button/button";
@@ -11,9 +11,16 @@ import { useApiClient } from "@/contexts/api-client";
 import { useDocument } from "@/contexts/document-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
-import type { DocumentEnum, DocumentProof, DocumentProofStatusEnum } from "@/utils/types";
+import type {
+  DocumentEnum,
+  DocumentProof,
+  DocumentProofStatusEnum,
+} from "@/utils/types";
 
-const typeChipByValue: Record<DocumentEnum, { className: string; label: string }> = {
+const typeChipByValue: Record<
+  DocumentEnum,
+  { className: string; label: string }
+> = {
   grant_certificate: {
     className:
       "bg-[color-mix(in_srgb,var(--profil-senior)_20%,white)] text-[var(--profil-senior)]",
@@ -106,7 +113,9 @@ export default function AdministrationDocumentDetailPage() {
       }
 
       if (result instanceof ApiClientError) {
-        setDocumentsError(result.message || "Impossible de recuperer le document");
+        setDocumentsError(
+          result.message || "Impossible de recuperer le document",
+        );
         return;
       }
 
@@ -149,7 +158,9 @@ export default function AdministrationDocumentDetailPage() {
     const result = await updateDocumentStatus(String(document.id), status);
 
     if (result instanceof ApiClientError) {
-      setActionError(result.message || "Impossible de mettre a jour le statut.");
+      setActionError(
+        result.message || "Impossible de mettre a jour le statut.",
+      );
       setIsUpdatingStatus(false);
       return;
     }
@@ -195,7 +206,9 @@ export default function AdministrationDocumentDetailPage() {
         ) : null}
 
         {!allUsersDocuments ? (
-          <p className="text-sm text-muted-foreground">Chargement du document...</p>
+          <p className="text-sm text-muted-foreground">
+            Chargement du document...
+          </p>
         ) : null}
 
         {allUsersDocuments && !document ? (
@@ -219,56 +232,60 @@ export default function AdministrationDocumentDetailPage() {
                   : "bg-[color-mix(in_srgb,var(--destructive)_16%,white)] text-destructive";
 
               return (
-            <div className="flex flex-row justify-between items-center gap-3">
-              <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center rounded-xl bg-accent text-primary">
-                  <FileText className="size-5 stroke-[1.75]" />
-                </span>
-                <div>
-                  <h2 className="text-lg font-extrabold text-foreground">Document #{document.id}</h2>
-                  <p className="text-sm text-muted-foreground">
-                    Consulte les informations techniques et metier.
-                  </p>
-                </div>
-              </div>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-10 place-items-center rounded-xl bg-accent text-primary">
+                      <FileText className="size-5 stroke-[1.75]" />
+                    </span>
+                    <div>
+                      <h2 className="text-lg font-extrabold text-foreground">
+                        Document #{document.id}
+                      </h2>
+                      <p className="text-sm text-muted-foreground">
+                        Consulte les informations techniques et metier.
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                {finalDecisionLabel ? (
-                  <span className={`rounded-full px-3 py-1 text-sm font-bold ${finalDecisionClassName}`}>
-                    {finalDecisionLabel}
-                  </span>
-                ) : (
-                  <>
-                    <Button
-                      className="cursor-pointer disabled:cursor-not-allowed"
-                      disabled={isUpdatingStatus}
-                      onClick={() => {
-                        void handleStatusUpdate("approved");
-                      }}
-                      size="sm"
-                    >
-                      Approuver
-                    </Button>
-                    <Button
-                      className="cursor-pointer disabled:cursor-not-allowed"
-                      disabled={isUpdatingStatus}
-                      onClick={() => {
-                        void handleStatusUpdate("rejected");
-                      }}
-                      size="sm"
-                      variant="destructive"
-                    >
-                      Refuser
-                    </Button>
-                  </>
-                )}
-                {isUpdatingStatus ? (
-                  <span className="text-sm text-muted-foreground">
-                    Mise a jour en cours...
-                  </span>
-                ) : null}
-              </div>
-            </div>
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    {finalDecisionLabel ? (
+                      <span
+                        className={`rounded-full px-3 py-1 text-sm font-bold ${finalDecisionClassName}`}
+                      >
+                        {finalDecisionLabel}
+                      </span>
+                    ) : (
+                      <>
+                        <Button
+                          className="cursor-pointer disabled:cursor-not-allowed"
+                          disabled={isUpdatingStatus}
+                          onClick={() => {
+                            void handleStatusUpdate("approved");
+                          }}
+                          size="sm"
+                        >
+                          Approuver
+                        </Button>
+                        <Button
+                          className="cursor-pointer disabled:cursor-not-allowed"
+                          disabled={isUpdatingStatus}
+                          onClick={() => {
+                            void handleStatusUpdate("rejected");
+                          }}
+                          size="sm"
+                          variant="destructive"
+                        >
+                          Refuser
+                        </Button>
+                      </>
+                    )}
+                    {isUpdatingStatus ? (
+                      <span className="text-sm text-muted-foreground">
+                        Mise a jour en cours...
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
               );
             })()}
 

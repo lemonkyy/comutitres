@@ -1,6 +1,8 @@
-import { ChevronLeft, CreditCard, Ticket } from "lucide-react";
+import { ChevronLeft, CreditCard, FileCheck2, Ticket } from "lucide-react";
 import Image from "next/image";
 
+import { Button } from "@/components/actions/button/button";
+import { Notice } from "@/components/feedback/notice/notice";
 import {
   DesktopPageHeader,
   PageHeader,
@@ -17,6 +19,7 @@ import { PassesEmptyState } from "@/components/passes/passes-empty-state";
 import { ProductCardsGrid } from "@/components/passes/product-cards-grid";
 import { SectionHeading } from "@/components/passes/section-heading";
 import { Card } from "@/components/ui/card/card";
+import { Link } from "@/i18n/navigation";
 
 export type {
   PassFrequencyId,
@@ -111,6 +114,22 @@ export function PassesScreen({
             />
           </Card>
         </section>
+
+        <Notice
+          action={
+            <Button asChild className="w-full sm:w-fit" variant="outline">
+              <Link href="/account/documents">
+                <FileCheck2 aria-hidden="true" data-icon="inline-start" />
+                {copy.eligibilityNotice.ctaLabel}
+              </Link>
+            </Button>
+          }
+          icon={FileCheck2}
+          title={copy.eligibilityNotice.title}
+          variant="default"
+        >
+          {copy.eligibilityNotice.description}
+        </Notice>
 
         <section aria-labelledby="popular-passes-title" className="grid gap-5">
           <SectionHeading

@@ -13,6 +13,8 @@ Yaak currently uses `emma.durand@example.com` / `pass` for its login request.
 
 When verifying the frontend locally, never start dev servers manually. The user runs the app through Docker Compose. First check whether the Docker Compose frontend is already reachable and reuse it. If it is not running or not reachable, ask the user to start Docker Compose instead of running `pnpm dev`, `next dev`, Storybook, or another local server yourself.
 
+When opening the frontend in the in-app browser for local verification, use `http://localhost:3000` URLs instead of `http://127.0.0.1:3000`.
+
 Storybook is for design-system components and reusable UI primitives, not application routes, pages, or whole screens. Do not add Storybook stories for page-level compositions such as `HomeScreen` unless the user explicitly asks for a page/screen story.
 
 Every design-system component should be represented in Storybook. When creating or changing a design-system component, add or update the relevant `.stories.*` file so Storybook reflects the current API, visual states, and expected usage.

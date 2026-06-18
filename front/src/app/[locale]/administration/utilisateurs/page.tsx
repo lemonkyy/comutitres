@@ -25,7 +25,9 @@ export default function AdministrationUsersPage() {
       }
 
       if (result instanceof ApiClientError) {
-        setUsersError(result.message || "Impossible de recuperer les utilisateurs");
+        setUsersError(
+          result.message || "Impossible de recuperer les utilisateurs",
+        );
         return;
       }
 
@@ -43,8 +45,10 @@ export default function AdministrationUsersPage() {
     }
 
     return [...userList].sort((left, right) => {
-      const leftName = `${left.givenName || ""} ${left.familyName || ""}`.trim();
-      const rightName = `${right.givenName || ""} ${right.familyName || ""}`.trim();
+      const leftName =
+        `${left.givenName || ""} ${left.familyName || ""}`.trim();
+      const rightName =
+        `${right.givenName || ""} ${right.familyName || ""}`.trim();
 
       return leftName.localeCompare(rightName);
     });
@@ -80,7 +84,9 @@ export default function AdministrationUsersPage() {
         ) : null}
 
         {!userList ? (
-          <p className="text-sm text-muted-foreground">Chargement des utilisateurs...</p>
+          <p className="text-sm text-muted-foreground">
+            Chargement des utilisateurs...
+          </p>
         ) : null}
 
         <Card padding="none">
@@ -106,7 +112,9 @@ export default function AdministrationUsersPage() {
                   </div>
 
                   <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary">
-                    {(user.roles?.[0] || "ROLE_USER").replace("ROLE_", "").toLowerCase()}
+                    {(user.roles?.[0] || "ROLE_USER")
+                      .replace("ROLE_", "")
+                      .toLowerCase()}
                   </span>
                 </article>
               );

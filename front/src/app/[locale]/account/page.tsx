@@ -21,6 +21,7 @@ export default async function AccountPage() {
     subtitle: shellT("subtitle"),
     tabs: {
       account: shellT("tabs.account"),
+      documents: shellT("tabs.documents"),
       passes: shellT("tabs.passes"),
       settings: shellT("tabs.settings"),
     },

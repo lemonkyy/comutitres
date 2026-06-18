@@ -27,10 +27,74 @@
       "subtitle": "Vos informations et préférences",
       "tabs": {
         "account": "Mes informations",
+        "documents": "Mes documents",
         "passes": "Mes titres",
         "settings": "Paramètres"
       },
       "title": "Mon compte"
+    },
+    "documents": {
+      "authPrompt": {
+        "ctaLabel": "Se connecter",
+        "description": "Connectez-vous pour transmettre vos justificatifs et suivre leur validation.",
+        "title": "Vos documents apparaîtront ici"
+      },
+      "card": {
+        "acceptedFormatsLabel": "PDF, JPG ou PNG jusqu'à 8 Mo",
+        "browseLabel": "Choisir un fichier",
+        "downloadLabel": "Télécharger",
+        "replaceLabel": "Remplacer le document",
+        "statusLabels": {
+          "approved": "Accepté",
+          "missing": "Manquant",
+          "pending": "En attente",
+          "rejected": "Refusé"
+        },
+        "submitLabel": "Envoyer le document",
+        "submittingLabel": "Envoi en cours",
+        "unavailableFileLabel": "Aucun fichier transmis",
+        "uploadLabel": "Ajouter un document",
+        "viewDialogDescription": "Aperçu du document transmis. Si le fichier ne s'affiche pas, utilisez le téléchargement.",
+        "viewLabel": "Voir"
+      },
+      "fileTooLargeError": "Le fichier dépasse la taille autorisée de 8 Mo.",
+      "infoNoticeDescription": "Les justificatifs sont contrôlés par le service client. Un document refusé peut être remplacé à tout moment depuis cette page.",
+      "infoNoticeTitle": "Suivi des justificatifs",
+      "introDescription": "Ajoutez les justificatifs demandés pour confirmer votre éligibilité aux titres jeunes, étudiants, solidaires ou à tarif spécifique.",
+      "introTitle": "Justificatifs d'éligibilité",
+      "invalidFileTypeError": "Ajoutez un fichier PDF, JPG ou PNG.",
+      "loadErrorDescription": "Impossible de charger vos documents pour le moment. Vous pouvez réessayer dans quelques instants.",
+      "loadErrorTitle": "Documents indisponibles",
+      "requiredDocumentsLabel": "Justificatifs attendus",
+      "requirements": {
+        "grantCertificate": {
+          "description": "Attestation de bourse ou justificatif d'aide permettant de confirmer un tarif social.",
+          "title": "Attestation de bourse"
+        },
+        "identityPhoto": {
+          "description": "Photo d'identité récente, nette et exploitable pour votre dossier de transport.",
+          "title": "Photo d'identité"
+        },
+        "proofOfResidence": {
+          "description": "Facture, quittance ou attestation permettant de confirmer votre adresse.",
+          "title": "Justificatif de domicile"
+        },
+        "schoolCertificate": {
+          "description": "Certificat de scolarité ou justificatif de statut étudiant pour l'année en cours.",
+          "title": "Justificatif de statut étudiant"
+        }
+      },
+      "statusSummaryLabels": {
+        "approved": "Acceptés",
+        "pending": "En attente",
+        "rejected": "Refusés"
+      },
+      "submittedFileMeta": "Fichier transmis et conservé dans votre dossier",
+      "submittedFileName": "%document% transmis",
+      "successDescription": "Votre document a été transmis. Son statut passera à accepté ou refusé après contrôle.",
+      "successTitle": "Document envoyé",
+      "title": "Mes documents",
+      "uploadErrorMessage": "Impossible d'envoyer ce document. Réessayez dans quelques instants."
     },
     "titles": {
       "authPrompt": {
@@ -107,6 +171,11 @@
     "heroCardTitle": "Tous les titres disponibles au même endroit",
     "heroZoneLabel": "Zones 1-5",
     "homeLabel": "Accueil",
+    "eligibilityNotice": {
+      "ctaLabel": "Préparer mes documents",
+      "description": "Certains titres jeunes, étudiants, solidaires ou à tarif spécifique demandent un justificatif après l'achat. Vous pourrez suivre leur statut depuis votre compte.",
+      "title": "Des justificatifs peuvent être nécessaires"
+    },
     "missingPriceLabel": "Prix indisponible",
     "popularHeading": "Parcourir les plus populaires",
     "productsEmptyDescription": "Les titres disponibles seront affichés ici dès que le catalogue sera chargé.",
@@ -161,6 +230,11 @@
       "description": "Votre paiement a bien été pris en compte. Vous pouvez revenir aux titres disponibles.",
       "homeLabel": "Accueil",
       "invoiceCtaLabel": "Télécharger la facture",
+      "eligibilityNotice": {
+        "ctaLabel": "Ajouter mes documents",
+        "description": "Ce titre peut demander un justificatif d'éligibilité. Transmettez vos documents avant le {date} pour finaliser votre dossier.",
+        "title": "Documents à transmettre"
+      },
       "passesLabel": "Titres et tarifs",
       "purchaseAmountLabel": "Montant payé",
       "purchaseDateLabel": "Acheté le",

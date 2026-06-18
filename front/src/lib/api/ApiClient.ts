@@ -1,10 +1,10 @@
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import { handleApiError } from "@/lib/api/handleApiError";
 import type { LoginInput, Me } from "@/utils/types";
+import { DocumentResource } from "./resources/DocumentResource";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { UserResource } from "./resources/UserResource";
-import { DocumentResource } from "./resources/DocumentResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
 
 export interface DeleteResponse {

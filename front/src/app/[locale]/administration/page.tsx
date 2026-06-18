@@ -14,11 +14,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/actions/button/button";
 import Icon from "@/components/assets/icon";
 import { Card } from "@/components/ui/card/card";
+import { useDocument } from "@/contexts/document-context";
 import { useUser } from "@/contexts/user-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { DocumentEnum, User } from "@/utils/types";
-import { useDocument } from "@/contexts/document-context";
 
 type Kpi = {
   id: string;
@@ -201,7 +201,9 @@ export default function AdministrationHomePage() {
 
   const isLoadingUsers = userList === null && usersError === null;
   const usersCount = userList?.length ?? 0;
-  const pendingDocumentsCount = allUsersDocuments?.filter((document) => document.status === "pending").length ?? 0;
+  const pendingDocumentsCount =
+    allUsersDocuments?.filter((document) => document.status === "pending")
+      .length ?? 0;
 
   const kpis = useMemo<ReadonlyArray<Kpi>>(
     () => [
@@ -343,37 +345,40 @@ export default function AdministrationHomePage() {
               ) : null}
 
               <div className="flex flex-col gap-2.5">
-                {allUsersDocuments?.filter((document) => document.status === "pending").map((document) => (
-                  (() => {
-                    const typeChip = documentTypeChips[document.type];
-                    return (
-                  <article
-                    className="flex flex-col gap-2 rounded-xl bg-accent/55 p-3 sm:flex-row sm:items-center sm:justify-between"
-                    key={document.id}
-                  >
-                    <div>
-                      <p className="text-sm font-bold text-foreground">
-                        {document.user.givenName} {document.user.familyName}
-                      </p>
-                      <span
-                        className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${typeChip.className}`}
-                      >
-                        {typeChip.label}
-                      </span>
-                    </div>
+                {allUsersDocuments
+                  ?.filter((document) => document.status === "pending")
+                  .map((document) =>
+                    (() => {
+                      const typeChip = documentTypeChips[document.type];
+                      return (
+                        <article
+                          className="flex flex-col gap-2 rounded-xl bg-accent/55 p-3 sm:flex-row sm:items-center sm:justify-between"
+                          key={document.id}
+                        >
+                          <div>
+                            <p className="text-sm font-bold text-foreground">
+                              {document.user.givenName}{" "}
+                              {document.user.familyName}
+                            </p>
+                            <span
+                              className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${typeChip.className}`}
+                            >
+                              {typeChip.label}
+                            </span>
+                          </div>
 
-                    <div className="flex items-center gap-2 self-start sm:self-auto">
-                      <span className="rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">
-                        {formatDate(document.uploadedAt, locale)}
-                      </span>
-                      <span className="rounded-full bg-[color-mix(in_srgb,var(--profil-junior)_22%,white)] px-2.5 py-1 text-xs font-bold text-[#a87e00]">
-                        En attente
-                      </span>
-                    </div>
-                  </article>
-                    );
-                  })()
-                ))}
+                          <div className="flex items-center gap-2 self-start sm:self-auto">
+                            <span className="rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">
+                              {formatDate(document.uploadedAt, locale)}
+                            </span>
+                            <span className="rounded-full bg-[color-mix(in_srgb,var(--profil-junior)_22%,white)] px-2.5 py-1 text-xs font-bold text-[#a87e00]">
+                              En attente
+                            </span>
+                          </div>
+                        </article>
+                      );
+                    })(),
+                  )}
               </div>
             </div>
           </Card>
