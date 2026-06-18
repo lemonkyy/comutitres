@@ -2,6 +2,7 @@
 
 import Icon from "@/components/assets/icon";
 import { Link, usePathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import type { NavbarItem as NavbarItemConfig } from "./navbar-items";
 
@@ -27,13 +28,39 @@ const desktopIcon =
   "flex size-8 items-center justify-center rounded-[6px] transition-[background-color,transform] duration-150";
 const responsiveIcon =
   "flex h-6 w-10 items-center justify-center rounded-[6px] transition-[background-color,transform] duration-150 md:size-8";
+const sectionPrefixesByTarget: Record<string, string> = {
+  "/account": "/account/",
+  "/administration/documents": "/administration/documents/",
+  "/administration/utilisateurs": "/administration/utilisateurs/",
+};
+
+function normalizePathname(pathname: string) {
+  const withoutQuery = pathname.split("?")[0]?.split("#")[0] ?? pathname;
+  const startsWithSlash = withoutQuery.startsWith("/")
+    ? withoutQuery
+    : `/${withoutQuery}`;
+  const segments = startsWithSlash.split("/");
+  const maybeLocale = segments[1];
+  const localeStripped = routing.locales.includes(maybeLocale as "fr" | "en")
+    ? `/${segments.slice(2).join("/")}`
+    : startsWithSlash;
+  const withoutTrailing =
+    localeStripped !== "/" ? localeStripped.replace(/\/+$/, "") : localeStripped;
+
+  return withoutTrailing || "/";
+}
 
 function isCurrentPath(pathname: string, href: NavbarItemConfig["href"]) {
-  const target = String(href);
+  const current = normalizePathname(pathname);
+  const target = normalizePathname(String(href));
 
-  return (
-    pathname === target || (target !== "/" && pathname.startsWith(`${target}/`))
-  );
+  if (current === target) {
+    return true;
+  }
+
+  const sectionPrefix = sectionPrefixesByTarget[target];
+
+  return sectionPrefix ? current.startsWith(sectionPrefix) : false;
 }
 
 function getRootLayoutClass(layout: NavbarItemLayout) {

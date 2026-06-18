@@ -10,12 +10,16 @@ import {
 
 import { useApiClient } from "@/contexts/api-client";
 import { ApiClientError } from "@/lib/api/ApiClientError";
-import type { DocumentProof } from "@/utils/types";
+import type { DocumentProof, DocumentProofStatusEnum } from "@/utils/types";
 
 type DocumentContextType = {
   allUsersDocuments: DocumentProof[] | null;
   setAllUsersDocuments: (documents: DocumentProof[] | null) => void;
   getAllUsersDocuments: () => Promise<DocumentProof[] | ApiClientError>;
+  updateDocumentStatus: (
+    documentId: string,
+    status: DocumentProofStatusEnum,
+  ) => Promise<void | ApiClientError>;
 };
 
 const DocumentContext = createContext<DocumentContextType | undefined>(undefined);
@@ -37,9 +41,42 @@ export const DocumentProvider = ({ children }: { children: ReactNode }) => {
     return result;
   }, [apiClient]);
 
+  const updateDocumentStatus = useCallback(
+    async (
+      documentId: string,
+      status: DocumentProofStatusEnum,
+    ): Promise<void | ApiClientError> => {
+      const result = await apiClient.document.updateDocumentStatus(documentId, status);
+
+      if (result instanceof ApiClientError) {
+        return result;
+      }
+
+      setAllUsersDocuments((current) => {
+        if (!current) {
+          return current;
+        }
+
+        return current.map((document) =>
+          String(document.id) === String(documentId)
+            ? { ...document, status }
+            : document,
+        );
+      });
+
+      return;
+    },
+    [apiClient],
+  );
+
   return (
     <DocumentContext.Provider
-      value={{ allUsersDocuments, setAllUsersDocuments, getAllUsersDocuments }}
+      value={{
+        allUsersDocuments,
+        setAllUsersDocuments,
+        getAllUsersDocuments,
+        updateDocumentStatus,
+      }}
     >
       {children}
     </DocumentContext.Provider>

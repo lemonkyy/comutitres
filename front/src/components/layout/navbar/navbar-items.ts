@@ -2,11 +2,13 @@ import type { IconName } from "@/components/assets/icon/config";
 import type { pathnames } from "@/i18n/pathnames";
 
 export type NavbarVisibility = "all" | "mobile" | "desktop";
+type DynamicPath = Extract<keyof typeof pathnames, `${string}[${string}`>;
+type NavbarHref = Exclude<keyof typeof pathnames, DynamicPath>;
 
 export type NavbarItem = {
   id: string;
   label: string;
-  href: keyof typeof pathnames;
+  href: NavbarHref;
   visibility?: NavbarVisibility;
   icon: IconName;
 };
@@ -61,9 +63,16 @@ export const administrationNavbarItems: NavbarItem[] = [
     icon: "shield",
   },
   {
+    id: "administration-documents",
+    label: "Documents",
+    href: "/administration/documents",
+    visibility: "all",
+    icon: "filecheck",
+  },
+  {
     id: "administration-users",
     label: "Utilisateurs",
-    href: "/administration",
+    href: "/administration/utilisateurs",
     visibility: "all",
     icon: "users",
   },
