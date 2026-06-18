@@ -14,7 +14,10 @@ export default async function Home() {
     hero: {
       anonymousGreeting: t("hero.anonymousGreeting"),
       brand: t("hero.brand"),
+      description: t("hero.description"),
       greeting: t("hero.greeting"),
+      primaryCtaLabel: t("hero.primaryCtaLabel"),
+      secondaryCtaLabel: t("hero.secondaryCtaLabel"),
     },
     news: {
       heading: t("news.heading"),

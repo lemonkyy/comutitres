@@ -59,6 +59,7 @@
     "allHeading": "Explore the available tickets and passes, then choose the one that fits your travel rhythm.",
     "assistantCtaLabel": "Find my pass",
     "backLabel": "Back to home",
+    "breadcrumbAriaLabel": "Breadcrumb",
     "frequencies": {
       "frequent": {
         "description": "I travel often",
@@ -73,6 +74,7 @@
     "heroCardDescription": "Compare Navigo passes, tickets, and rider profiles before completing your purchase.",
     "heroCardTitle": "All available passes in one place",
     "heroZoneLabel": "Zones 1-5",
+    "homeLabel": "Home",
     "missingPriceLabel": "Price unavailable",
     "popularHeading": "Browse the most popular options",
     "productsEmptyDescription": "Available passes will appear here once the catalog has loaded.",
@@ -172,48 +174,51 @@
   "home": {
     "assistant": {
       "ctaLabel": "Start the assistant",
-      "description": "Our assistant reviews your situation and recommends the most advantageous pass.",
-      "title": "Find your pass in 2 minutes"
+      "description": "Answer a few questions about your trips, rider profile, and zones. The assistant points you toward the most suitable pass.",
+      "title": "Not sure which pass fits?"
     },
     "hero": {
       "brand": "Comutitres",
       "greeting": "Hello",
-      "anonymousGreeting": "Welcome to Comutitres"
+      "anonymousGreeting": "Welcome to Comutitres",
+      "description": "Manage your passes, follow your account, and find the fare that fits your trips across Île-de-France.",
+      "primaryCtaLabel": "View passes",
+      "secondaryCtaLabel": "Ask the assistant"
     },
     "news": {
-      "heading": "News",
+      "heading": "Worth tracking",
       "items": {
         "renewal": {
-          "body": "Your Imagine R expires on August 31. Renew it now.",
-          "title": "Renewal coming soon"
+          "body": "After purchase, the confirmation summarizes the pass, paid amount, and invoice access.",
+          "title": "Invoices available"
         },
         "solidarity": {
-          "body": "The TST Solidarité pass is now available online.",
-          "title": "New for 2025"
+          "body": "Young, senior, solidarity, and reduced-mobility profiles are grouped in the catalog.",
+          "title": "Fare profiles"
         }
       }
     },
     "quickAccess": {
-      "heading": "Quick access",
+      "heading": "Your services",
       "items": {
         "card": {
-          "description": "Active Imagine R",
-          "title": "My passes"
+          "description": "Tickets and passes",
+          "title": "Passes and fares"
         },
         "folder": {
-          "description": "In progress",
-          "title": "My folder"
+          "description": "Details and tracking",
+          "title": "My account"
         },
         "help": {
-          "description": "Help center",
-          "title": "Help"
+          "description": "Guided recommendation",
+          "title": "Assistant"
         }
       }
     },
     "region": {
-      "description": "View passes by zone",
-      "label": "Île-de-France Mobilités",
-      "title": "Zones 1-5 available"
+      "description": "Compare passes that can be used across the regional network.",
+      "label": "Île-de-France",
+      "title": "Passes by zone"
     }
   },
   "navigation": {
@@ -222,8 +227,8 @@
       "account": "My account",
       "assistant": "Assistant",
       "card": "My card",
-      "folder": "Folder",
-      "home": "Home"
+      "home": "Home",
+      "passes": "Fares and passes"
     }
   },
   "settings": {

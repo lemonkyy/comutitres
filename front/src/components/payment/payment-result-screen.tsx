@@ -94,6 +94,35 @@ export function PaymentResultScreen({
             : "items-start lg:grid-cols-[minmax(0,32rem)] lg:justify-start",
         )}
       >
+        <Card
+          className="flex min-w-0 flex-col gap-5 border-[var(--gris-moyen)] p-5 md:p-[30px]"
+          variant="outlined"
+        >
+          <span
+            aria-hidden="true"
+            className={cn(
+              "grid size-14 place-items-center rounded-[6px]",
+              toneClasses[tone],
+            )}
+          >
+            <Icon className="size-7 stroke-[1.75]" />
+          </span>
+          <div className="min-w-0">
+            <h2 className="text-balance text-[1.75rem] font-bold leading-[36.4px] text-foreground">
+              {copy.title}
+            </h2>
+            <p className="mt-2 max-w-[31rem] text-pretty text-base leading-6 text-muted-foreground md:text-lg md:leading-[27px]">
+              {copy.description}
+            </p>
+          </div>
+          <Button asChild className="w-full md:w-fit">
+            <Link href="/passes">
+              {copy.ctaLabel}
+              <ArrowRight aria-hidden="true" data-icon="inline-end" />
+            </Link>
+          </Button>
+        </Card>
+
         {purchaseDetails ? (
           <Card
             className="flex min-w-0 flex-col gap-5 overflow-hidden border-[color-mix(in_srgb,var(--profil-senior)_32%,var(--gris-moyen))]"

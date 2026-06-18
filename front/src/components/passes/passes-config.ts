@@ -29,10 +29,12 @@ export type PassesScreenCopy = {
   allHeading: string;
   assistantCtaLabel: string;
   backLabel: string;
+  breadcrumbAriaLabel: string;
   frequencyHeading: string;
   heroCardDescription: string;
   heroCardTitle: string;
   heroZoneLabel: string;
+  homeLabel: string;
   missingPriceLabel: string;
   productsEmptyDescription: string;
   productsEmptyTitle: string;

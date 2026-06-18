@@ -8,6 +8,7 @@ import { useAuth } from "@/contexts/auth-context";
 import type { Me } from "@/utils/types";
 import {
   AssistantPromoCard,
+  HeroCtaGroup,
   NewsCard,
   QuickAccessCard,
   RegionPassCard,
@@ -25,7 +26,10 @@ export type HomeScreenCopy = {
   hero: {
     anonymousGreeting: string;
     brand: string;
+    description: string;
     greeting: string;
+    primaryCtaLabel: string;
+    secondaryCtaLabel: string;
   };
   news: {
     heading: string;
@@ -52,17 +56,17 @@ export type HomeScreenCopy = {
 
 const quickActionConfig = {
   card: {
-    href: "/my-card",
+    href: "/passes",
     icon: CreditCard,
     tone: "profile",
   },
   folder: {
-    href: "/my-folder",
+    href: "/account",
     icon: FolderOpen,
     tone: "primary",
   },
   help: {
-    href: "/account/settings",
+    href: "/assistant",
     icon: HelpCircle,
     tone: "neutral",
   },
@@ -88,22 +92,35 @@ export function HomeScreen({ copy }: HomeScreenProps) {
   const { openAssistant } = useAssistantPanel();
 
   return (
-    <main className="min-h-dvh bg-white">
-      <section className="relative overflow-hidden bg-[var(--anthracite)] px-5 pt-12 pb-20 text-white md:px-8 md:pt-16 md:pb-24">
-        <div className="relative mx-auto flex max-w-[1080px] flex-col gap-8">
-          <Logo
-            className="h-10 w-auto max-w-none md:hidden"
-            priority
-            variant="blanc"
-          />
-          <h1 className="max-w-[42.5rem] text-balance text-[2.5rem] font-bold leading-[1.2] md:text-5xl md:leading-[57.6px]">
-            {getGreeting(copy, user)}
-          </h1>
+    <main className="min-h-dvh bg-[var(--bleu-clair)]">
+      <section className="relative overflow-hidden bg-[var(--anthracite)] px-5 pt-8 pb-24 text-white md:pt-14 md:pb-28">
+        <div className="relative mx-auto flex max-w-[1080px]">
+          <div className="flex w-full min-w-0 max-w-[42.5rem] flex-col gap-6">
+            <Logo
+              alt={copy.hero.brand}
+              className="w-36 max-w-none min-[390px]:w-40 md:hidden"
+              priority
+              variant="blanc"
+            />
+            <div className="min-w-0">
+              <h1 className="text-balance text-[2.5rem] font-bold leading-[1.12] md:text-5xl md:leading-[57.6px]">
+                {getGreeting(copy, user)}
+              </h1>
+              <p className="mt-4 max-w-[38rem] text-pretty text-base leading-6 text-white/84 md:text-lg md:leading-[27px]">
+                {copy.hero.description}
+              </p>
+            </div>
+            <HeroCtaGroup
+              assistantLabel={copy.hero.secondaryCtaLabel}
+              onAssistantOpen={openAssistant}
+              passesLabel={copy.hero.primaryCtaLabel}
+            />
+          </div>
         </div>
       </section>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1080px] flex-col gap-10 px-5 pb-10 md:px-5">
-        <div className="-mt-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1080px] flex-col gap-10 px-5 pb-10 md:gap-12 md:pb-14">
+        <div className="-mt-14 md:-mt-16">
           <AssistantPromoCard
             ctaLabel={copy.assistant.ctaLabel}
             description={copy.assistant.description}
@@ -115,15 +132,13 @@ export function HomeScreen({ copy }: HomeScreenProps) {
 
         <section
           aria-labelledby="quick-access-title"
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-5"
         >
-          <h2
-            className="text-[1.75rem] font-bold leading-[36.4px] text-foreground"
+          <SectionHeading
             id="quick-access-title"
-          >
-            {copy.quickAccess.heading}
-          </h2>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-10">
+            title={copy.quickAccess.heading}
+          />
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
             {copy.quickAccess.items.map((item) => {
               const config = quickActionConfig[item.id];
 
@@ -133,6 +148,7 @@ export function HomeScreen({ copy }: HomeScreenProps) {
                   href={config.href}
                   icon={config.icon}
                   key={item.id}
+                  onDesktopOpen={item.id === "help" ? openAssistant : undefined}
                   title={item.title}
                   tone={config.tone}
                 />
@@ -141,39 +157,61 @@ export function HomeScreen({ copy }: HomeScreenProps) {
           </div>
         </section>
 
-        <RegionPassCard
-          description={copy.region.description}
-          href="/assistant"
-          label={copy.region.label}
-          onAssistantOpen={openAssistant}
-          title={copy.region.title}
-        />
+        <section className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)] md:items-start">
+          <RegionPassCard
+            description={copy.region.description}
+            href="/passes"
+            label={copy.region.label}
+            title={copy.region.title}
+          />
 
-        <section aria-labelledby="news-title" className="flex flex-col gap-4">
-          <h2
-            className="text-[1.75rem] font-bold leading-[36.4px] text-foreground"
-            id="news-title"
-          >
-            {copy.news.heading}
-          </h2>
-          <div className="grid gap-5 md:grid-cols-2 md:gap-10">
-            {copy.news.items.map((item) => {
-              const config = newsConfig[item.id];
+          <section aria-labelledby="news-title" className="flex flex-col gap-5">
+            <SectionHeading id="news-title" title={copy.news.heading} />
+            <div className="grid gap-4">
+              {copy.news.items.map((item) => {
+                const config = newsConfig[item.id];
 
-              return (
-                <NewsCard
-                  body={item.body}
-                  icon={config.icon}
-                  key={item.id}
-                  title={item.title}
-                  tone={config.tone}
-                />
-              );
-            })}
-          </div>
+                return (
+                  <NewsCard
+                    body={item.body}
+                    icon={config.icon}
+                    key={item.id}
+                    title={item.title}
+                    tone={config.tone}
+                  />
+                );
+              })}
+            </div>
+          </section>
         </section>
       </div>
     </main>
+  );
+}
+
+function SectionHeading({
+  description,
+  id,
+  title,
+}: {
+  description?: string;
+  id: string;
+  title: string;
+}) {
+  return (
+    <div className="max-w-[42.5rem]">
+      <h2
+        className="text-balance text-[1.75rem] font-bold leading-[36.4px] text-foreground md:text-[2rem] md:leading-[38px]"
+        id={id}
+      >
+        {title}
+      </h2>
+      {description ? (
+        <p className="mt-2 text-pretty text-base leading-6 text-muted-foreground md:text-lg md:leading-[27px]">
+          {description}
+        </p>
+      ) : null}
+    </div>
   );
 }
 

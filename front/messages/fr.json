@@ -59,6 +59,7 @@
     "allHeading": "Découvrez les titres et forfaits disponibles, puis choisissez celui qui convient à votre rythme.",
     "assistantCtaLabel": "Trouver mon titre",
     "backLabel": "Retour à l'accueil",
+    "breadcrumbAriaLabel": "Fil d'Ariane",
     "frequencies": {
       "frequent": {
         "description": "Je voyage souvent",
@@ -73,6 +74,7 @@
     "heroCardDescription": "Comparez les forfaits Navigo, les tickets et les profils avant de finaliser votre achat.",
     "heroCardTitle": "Tous les titres disponibles au même endroit",
     "heroZoneLabel": "Zones 1-5",
+    "homeLabel": "Accueil",
     "missingPriceLabel": "Prix indisponible",
     "popularHeading": "Parcourir les plus populaires",
     "productsEmptyDescription": "Les titres disponibles seront affichés ici dès que le catalogue sera chargé.",
@@ -172,48 +174,51 @@
   "home": {
     "assistant": {
       "ctaLabel": "Démarrer l'assistant",
-      "description": "Notre assistant analyse votre situation et vous recommande le titre le plus avantageux.",
-      "title": "Trouvez votre forfait en 2 minutes"
+      "description": "Répondez à quelques questions sur vos trajets, votre profil et vos zones. L'assistant vous oriente vers le titre le plus adapté.",
+      "title": "Un doute sur le bon titre ?"
     },
     "hero": {
       "brand": "Comutitres",
       "greeting": "Bonjour",
-      "anonymousGreeting": "Bienvenue sur Comutitres"
+      "anonymousGreeting": "Bienvenue sur Comutitres",
+      "description": "Gérez vos titres, suivez votre dossier et trouvez le forfait adapté à vos trajets en Île-de-France.",
+      "primaryCtaLabel": "Voir les titres",
+      "secondaryCtaLabel": "Demander à l'assistant"
     },
     "news": {
-      "heading": "Actualités",
+      "heading": "À suivre",
       "items": {
         "renewal": {
-          "body": "Votre Imagine R expire le 31 août. Renouvelez dès maintenant.",
-          "title": "Renouvellement en approche"
+          "body": "Après un achat, la confirmation récapitule le titre, le montant payé et l'accès à la facture.",
+          "title": "Factures disponibles"
         },
         "solidarity": {
-          "body": "Le pass TST Solidarité est désormais disponible en ligne.",
-          "title": "Nouveauté 2025"
+          "body": "Les profils jeunes, seniors, solidarité et mobilité réduite sont regroupés dans le catalogue.",
+          "title": "Profils tarifaires"
         }
       }
     },
     "quickAccess": {
-      "heading": "Accès rapide",
+      "heading": "Vos démarches",
       "items": {
         "card": {
-          "description": "Imagine R actif",
-          "title": "Mes titres"
+          "description": "Forfaits et tickets",
+          "title": "Titres et tarifs"
         },
         "folder": {
-          "description": "En traitement",
-          "title": "Mon dossier"
+          "description": "Coordonnées et suivi",
+          "title": "Mon compte"
         },
         "help": {
-          "description": "Centre d'aide",
-          "title": "Aide"
+          "description": "Recommandation guidée",
+          "title": "Assistant"
         }
       }
     },
     "region": {
-      "description": "Voir les forfaits par zone",
-      "label": "Île-de-France Mobilités",
-      "title": "Zones 1-5 disponibles"
+      "description": "Comparez les titres utilisables sur le réseau francilien.",
+      "label": "Île-de-France",
+      "title": "Forfaits par zone"
     }
   },
   "navigation": {
@@ -222,8 +227,8 @@
       "account": "Mon compte",
       "assistant": "Assistant",
       "card": "Ma carte",
-      "folder": "Dossier",
-      "home": "Accueil"
+      "home": "Accueil",
+      "passes": "Titres et tarifs"
     }
   },
   "settings": {

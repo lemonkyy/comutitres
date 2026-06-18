@@ -27,18 +27,11 @@ export const navbarItems: NavbarItem[] = [
     icon: "messagesquare",
   },
   {
-    id: "card",
-    label: "Ma carte",
-    href: "/my-card",
+    id: "passes",
+    label: "Titres et tarifs",
+    href: "/passes",
     visibility: "all",
-    icon: "creditcard",
-  },
-  {
-    id: "folder",
-    label: "Dossier",
-    href: "/my-folder",
-    visibility: "all",
-    icon: "folderopen",
+    icon: "ticket",
   },
   {
     id: "account",

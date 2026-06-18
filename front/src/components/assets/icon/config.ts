@@ -6,6 +6,7 @@ import {
   type LucideIcon,
   MessageSquare,
   Settings,
+  Ticket,
   UserRound,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -21,6 +22,7 @@ const raw = {
   creditcard: CreditCard,
   helpcircle: HelpCircle,
   settings: Settings,
+  ticket: Ticket,
   userround: UserRound,
 };
 

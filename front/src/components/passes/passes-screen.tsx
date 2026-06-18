@@ -2,6 +2,7 @@ import { ChevronLeft, CreditCard, Ticket } from "lucide-react";
 import Image from "next/image";
 
 import {
+  DesktopPageHeader,
   PageHeader,
   PageHeaderIconButton,
 } from "@/components/layout/page-header/page-header";
@@ -45,9 +46,19 @@ export function PassesScreen({
             label={copy.backLabel}
           />
         }
-        className="border-[var(--gris-moyen)]"
+        className="border-[var(--gris-moyen)] md:hidden"
         subtitle={copy.subtitle}
         subtitleClassName="max-w-[42.5rem] truncate text-sm md:text-base"
+        title={copy.title}
+      />
+
+      <DesktopPageHeader
+        breadcrumbAriaLabel={copy.breadcrumbAriaLabel}
+        breadcrumbs={[
+          { href: "/", id: "home", label: copy.homeLabel },
+          { id: "passes", label: copy.title },
+        ]}
+        subtitle={copy.subtitle}
         title={copy.title}
       />
 

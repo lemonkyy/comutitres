@@ -29,7 +29,7 @@ export function MobileNavbar({
       className={`fixed inset-x-0 bottom-0 z-50 border-[var(--gris-moyen)] border-t bg-white pb-[env(safe-area-inset-bottom)] md:hidden ${className}`}
       data-slot="mobile-navbar"
     >
-      <div className="mx-auto grid h-20 w-full grid-cols-5 items-stretch px-1 pt-2 pb-4">
+      <div className="mx-auto grid h-20 w-full auto-cols-fr grid-flow-col items-stretch px-1 pt-2 pb-4">
         {items.map((item) => (
           <NavbarItem
             key={item.id}

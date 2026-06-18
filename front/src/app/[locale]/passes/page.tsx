@@ -41,6 +41,7 @@ export default async function PassesPage({
     allHeading: t("allHeading"),
     assistantCtaLabel: t("assistantCtaLabel"),
     backLabel: t("backLabel"),
+    breadcrumbAriaLabel: t("breadcrumbAriaLabel"),
     frequencies: createRecord(passFrequencyIds, (id) =>
       getAudienceCopy(t, "frequencies", id),
     ),
@@ -48,6 +49,7 @@ export default async function PassesPage({
     heroCardDescription: t("heroCardDescription"),
     heroCardTitle: t("heroCardTitle"),
     heroZoneLabel: t("heroZoneLabel"),
+    homeLabel: t("homeLabel"),
     missingPriceLabel: t("missingPriceLabel"),
     products,
     productsEmptyDescription: t("productsEmptyDescription"),
