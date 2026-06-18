@@ -7,6 +7,14 @@ import {
   MessageSquare,
   Settings,
   Ticket,
+  Shield,
+  Bell,
+  CheckCircle2,
+  ChevronRight,
+  FileCheck,
+  GitBranch,
+  ShieldAlert,
+  Users,
   UserRound,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -24,6 +32,14 @@ const raw = {
   settings: Settings,
   ticket: Ticket,
   userround: UserRound,
+  shield: Shield,
+  bell: Bell,
+  checkcircle2: CheckCircle2,
+  chevronright: ChevronRight,
+  filecheck: FileCheck,
+  gitbranch: GitBranch,
+  shieldalert: ShieldAlert,
+  users: Users
 };
 
 export const icons: Icons = raw;

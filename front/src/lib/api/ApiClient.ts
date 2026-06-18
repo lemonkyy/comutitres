@@ -4,6 +4,7 @@ import type { LoginInput, Me } from "@/utils/types";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { WorkflowResource } from "./resources/WorkflowResource";
+import { UserResource } from "./resources/UserResource";
 
 export interface DeleteResponse {
   success: boolean;
@@ -36,6 +37,7 @@ export enum ResponseType {
 export class ApiClient {
   me: MeResource;
   pass: PassResource;
+  user: UserResource;
   workflow: WorkflowResource;
 
   constructor(
@@ -44,6 +46,7 @@ export class ApiClient {
   ) {
     this.me = new MeResource(this);
     this.pass = new PassResource(this);
+    this.user = new UserResource(this);
     this.workflow = new WorkflowResource(this);
   }
 

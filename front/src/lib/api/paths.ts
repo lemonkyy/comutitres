@@ -25,4 +25,7 @@ export const apiPaths = {
   choice: {
     update: "/choices/:id",
   },
+  user: {
+    collection: "/users",
+  },
 };

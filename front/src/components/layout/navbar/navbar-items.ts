@@ -41,3 +41,37 @@ export const navbarItems: NavbarItem[] = [
     icon: "userround",
   },
 ];
+
+export const administrationMenuItems: NavbarItem[] = [
+  {
+    id: "administration",
+    label: "Administration",
+    href: "/administration",
+    visibility: "all",
+    icon: "shield",
+  },
+];
+
+export const administrationNavbarItems: NavbarItem[] = [
+  {
+    id: "administration-home",
+    label: "Administration",
+    href: "/administration",
+    visibility: "all",
+    icon: "shield",
+  },
+  {
+    id: "administration-users",
+    label: "Utilisateurs",
+    href: "/administration",
+    visibility: "all",
+    icon: "users",
+  },
+  {
+    id: "administration-chatbot",
+    label: "Chatbot",
+    href: "/assistant",
+    visibility: "all",
+    icon: "messagesquare",
+  },
+];

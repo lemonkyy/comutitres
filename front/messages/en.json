@@ -228,7 +228,8 @@
       "assistant": "Assistant",
       "card": "My card",
       "home": "Home",
-      "passes": "Fares and passes"
+      "passes": "Fares and passes",
+      "administration": "Administration"
     }
   },
   "settings": {

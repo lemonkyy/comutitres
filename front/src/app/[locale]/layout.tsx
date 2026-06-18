@@ -7,6 +7,7 @@ import { AppChrome } from "@/components/layout/app-chrome/app-chrome";
 import { ApiClientProvider } from "@/contexts/api-client";
 import { AuthProvider } from "@/contexts/auth-context";
 import { routing } from "@/i18n/routing";
+import { UserProvider } from "@/contexts/user-context";
 
 type Props = {
   children: ReactNode;
@@ -24,7 +25,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <NextIntlClientProvider locale={locale} messages={await getMessages()}>
       <ApiClientProvider locale={locale}>
         <AuthProvider>
-          <AppChrome>{children}</AppChrome>
+          <UserProvider>
+            <AppChrome>{children}</AppChrome>
+          </UserProvider>
         </AuthProvider>
       </ApiClientProvider>
     </NextIntlClientProvider>
