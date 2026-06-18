@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Api\State\Provider;
 
 use ApiPlatform\Metadata\Operation;
@@ -18,16 +16,22 @@ final class DocumentProvider implements ProviderInterface
     ) {
     }
 
-    public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|Object
     {
         $user = $this->security->getUser();
 
         $documents = $this->documentProofRepository->findBy(['user' => $user]);
 
-        return array_reduce($documents, function ($carry, $document) use ($documents) {
-            $carry[$document->getType()->value] = $document;
+        $a = array_fill_keys(array_map(fn ($d) => $d->value, DocumentEnum::cases()), 'missing');
 
-            return $carry;
-        }, array_fill_keys(array_map(fn ($d) => $d->value, DocumentEnum::cases()), null));
+        foreach ($documents as $document) {
+            $a[$document->getType()->value] = $document ?? 'missing';
+        }
+
+        return (object) $a;
     }
+}
+
+#[\AllowDynamicProperties]
+class R {
 }
