@@ -30,8 +30,9 @@ export const apiPaths = {
   },
   document: {
     collection: "/document_proofs",
-    upload: "/document_proofs/upload",
+    item: "/document_proofs/:id",
+    upload: "/document-proof/upload",
     myDocuments: "/my-documents",
-    updateStatus: "/document_proofs/:id/status",
+    updateStatus: "/document-proof/:id/status",
   },
 };
