@@ -2,9 +2,9 @@ type: http_request
 model: http_request
 id: rq_gN2USForfq
 createdAt: 2026-06-16T18:39:24.298108266
-updatedAt: 2026-06-18T13:38:22.888218
+updatedAt: 2026-06-18T13:42:24.175158
 workspaceId: wk_VTFsBwidP6
-folderId: null
+folderId: fl_7kgbFGodXv
 authentication:
   token: ${[ TOKEN ]}
 authenticationType: bearer
@@ -22,6 +22,6 @@ headers:
   id: tMKZgew5NM
 method: POST
 name: Document status
-sortPriority: 1000.001
+sortPriority: 7000.0
 url: http://localhost:8000/api/document-proof/1/status
 urlParameters: []

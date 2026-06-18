@@ -3,6 +3,7 @@
 import {
   ChevronRight,
   CreditCard,
+  Eye,
   FileCheck,
   GitBranch,
   ShieldAlert,
@@ -14,11 +15,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/actions/button/button";
 import Icon from "@/components/assets/icon";
 import { Card } from "@/components/ui/card/card";
-import { useDocument } from "@/contexts/document-context";
+import { useInvoice } from "@/contexts/invoice-context";
 import { useUser } from "@/contexts/user-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { DocumentEnum, User } from "@/utils/types";
+import { useDocument } from "@/contexts/document-context";
 
 type Kpi = {
   id: string;
@@ -40,11 +42,11 @@ type RecentUser = {
 
 const baseKpis: ReadonlyArray<Kpi> = [
   {
-    id: "subscriptions",
-    label: "Abonnements en cours",
-    value: 978,
-    delta: "+1 cette semaine",
-    deltaTone: "success",
+    id: "invoices",
+    label: "Factures",
+    value: 0,
+    delta: "Synchro API",
+    deltaTone: "default",
     icon: CreditCard,
     tone: "violet",
   },
@@ -154,31 +156,32 @@ function formatDate(value: string | null | undefined, locale: string) {
 export default function AdministrationHomePage() {
   const locale = useLocale();
   const { userList, getAll } = useUser();
-  const { allUsersDocuments, getAllUsersDocuments } = useDocument();
+  const { invoicesCount, getInvoiceCount } = useInvoice();
+  const { allUsersDocuments, getAllUsersDocuments, getDocumentContentUrl } =
+    useDocument();
   const [usersError, setUsersError] = useState<string | null>(null);
   const [documentsError, setDocumentsError] = useState<string | null>(null);
+  const [invoicesError, setInvoicesError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (userList !== null) {
-      return;
-    }
-
     let isMounted = true;
 
-    getAll().then((result) => {
-      if (!isMounted) {
-        return;
-      }
+    if (userList === null) {
+      getAll().then((result) => {
+        if (!isMounted) {
+          return;
+        }
 
-      if (result instanceof ApiClientError) {
-        setUsersError(
-          result.message || "Impossible de recuperer les utilisateurs",
-        );
-        return;
-      }
+        if (result instanceof ApiClientError) {
+          setUsersError(
+            result.message || "Impossible de recuperer les utilisateurs",
+          );
+          return;
+        }
 
-      setUsersError(null);
-    });
+        setUsersError(null);
+      });
+    }
 
     getAllUsersDocuments().then((result) => {
       if (!isMounted) {
@@ -194,10 +197,23 @@ export default function AdministrationHomePage() {
       setDocumentsError(null);
     });
 
+    getInvoiceCount().then((result) => {
+      if (!isMounted) {
+        return;
+      }
+
+      if (result instanceof ApiClientError) {
+        setInvoicesError(result.message || "Impossible de recuperer le nombre de factures");
+        return;
+      }
+
+      // setInvoicesCount(result.member);
+    });
+
     return () => {
       isMounted = false;
     };
-  }, [getAll, userList, getAllUsersDocuments]);
+  }, [getAll, getAllUsersDocuments, getInvoiceCount, userList]);
 
   const isLoadingUsers = userList === null && usersError === null;
   const usersCount = userList?.length ?? 0;
@@ -217,7 +233,7 @@ export default function AdministrationHomePage() {
         tone: "blue",
       },
       {
-        id: "documents",
+        id: "documents-pending",
         label: "Documents en attente",
         value: pendingDocumentsCount,
         delta: "A traiter",
@@ -225,9 +241,21 @@ export default function AdministrationHomePage() {
         icon: FileCheck,
         tone: "amber",
       },
-      ...baseKpis,
+      {
+        ...baseKpis[0],
+        value: invoicesCount,
+        delta: invoicesError ? "Erreur de synchro" : "Synchro API",
+        deltaTone: invoicesError ? "warning" : "success",
+      },
+      ...baseKpis.slice(1),
     ],
-    [isLoadingUsers, pendingDocumentsCount, usersCount],
+    [
+      invoicesCount,
+      invoicesError,
+      isLoadingUsers,
+      pendingDocumentsCount,
+      usersCount,
+    ],
   );
 
   const displayedUsers = useMemo<ReadonlyArray<RecentUser>>(() => {
@@ -249,7 +277,7 @@ export default function AdministrationHomePage() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
         <Card className="bg-[linear-gradient(135deg,var(--bleu-moyen)_0%,color-mix(in_srgb,var(--bleu-clair)_72%,white)_100%)]">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-3">
               <span className="mt-0.5 grid size-10 place-items-center rounded-xl bg-primary text-primary-foreground">
                 <ShieldAlert className="size-5 stroke-[1.75]" />
               </span>
@@ -257,10 +285,6 @@ export default function AdministrationHomePage() {
                 <h2 className="text-lg font-extrabold text-foreground">
                   Espace administration Comutitres
                 </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Le module utilisateurs est branche au contexte et charge la
-                  liste depuis l&apos;API a l&apos;arrivee sur cette page.
-                </p>
               </div>
             </div>
 
@@ -368,6 +392,22 @@ export default function AdministrationHomePage() {
                           </div>
 
                           <div className="flex items-center gap-2 self-start sm:self-auto">
+                            <Button
+                              className="cursor-pointer"
+                              onClick={() =>
+                                window.open(
+                                  getDocumentContentUrl(String(document.id)),
+                                  "_blank",
+                                  "noopener,noreferrer",
+                                )
+                              }
+                              size="sm"
+                              type="button"
+                              variant="outline"
+                            >
+                              <Eye className="size-4" />
+                              Consulter
+                            </Button>
                             <span className="rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">
                               {formatDate(document.uploadedAt, locale)}
                             </span>
@@ -389,7 +429,7 @@ export default function AdministrationHomePage() {
                 Derniers inscrits
               </h2>
               <Button asChild size="sm" variant="ghost">
-                <Link href="/settings">
+                <Link href="/administration/utilisateurs">
                   Gestion comptes
                   <ChevronRight data-icon="inline-end" />
                 </Link>

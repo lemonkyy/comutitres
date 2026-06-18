@@ -2,6 +2,7 @@ import { ApiClientError } from "@/lib/api/ApiClientError";
 import { handleApiError } from "@/lib/api/handleApiError";
 import type { LoginInput, Me } from "@/utils/types";
 import { DocumentResource } from "./resources/DocumentResource";
+import { InvoiceResource } from "./resources/InvoiceResource";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
 import { UserResource } from "./resources/UserResource";
@@ -37,6 +38,7 @@ export enum ResponseType {
 
 export class ApiClient {
   me: MeResource;
+  invoice: InvoiceResource;
   pass: PassResource;
   user: UserResource;
   workflow: WorkflowResource;
@@ -46,6 +48,7 @@ export class ApiClient {
     private readonly locale = "fr",
   ) {
     this.me = new MeResource(this);
+    this.invoice = new InvoiceResource(this);
     this.pass = new PassResource(this);
     this.user = new UserResource(this);
     this.workflow = new WorkflowResource(this);
@@ -67,6 +70,24 @@ export class ApiClient {
     })
       .then(handleApiError)
       .then((response) => response.json())
+      .catch(toApiClientError);
+  }
+
+  public async getBlob(
+    url: string,
+    additionnalHeaders: HeadersInit = {},
+  ): Promise<Blob | ApiClientError> {
+    return fetch(`${this.baseUrl}${url}`, {
+      cache: "no-store",
+      headers: this.createHeaders(
+        {
+          Accept: "application/pdf",
+        },
+        additionnalHeaders,
+      ),
+    })
+      .then(handleApiError)
+      .then((response) => response.blob())
       .catch(toApiClientError);
   }
 

@@ -1,8 +1,8 @@
 type: http_request
 model: http_request
-id: rq_z5EtN6pm4h
-createdAt: 2026-06-18T09:53:51.289705228
-updatedAt: 2026-06-18T13:42:24.170492
+id: rq_vxsXwf4ELr
+createdAt: 2026-06-18T15:28:55.509796
+updatedAt: 2026-06-18T15:29:08.893652
 workspaceId: wk_VTFsBwidP6
 folderId: fl_7kgbFGodXv
 authentication:
@@ -13,7 +13,7 @@ bodyType: null
 description: ''
 headers: []
 method: GET
-name: list documents
-sortPriority: 4000.0
-url: http://localhost:8000/api/my-documents
+name: get total invoice
+sortPriority: 2000.001
+url: http://localhost:8000/api/total_invoice
 urlParameters: []
