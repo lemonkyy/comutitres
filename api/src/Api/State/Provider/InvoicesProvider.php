@@ -23,7 +23,7 @@ final class InvoicesProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
-        $filter = $context['filters']['pass'] ?? null;
+        $filter = $context['filters']['paf'] ?? null;
 
         /** @var User $user */
         $user = $this->security->getUser();
