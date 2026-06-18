@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_tt8ikVdFA4
+createdAt: 2026-06-18T14:10:34.954067789
+updatedAt: 2026-06-18T14:10:41.201455209
+workspaceId: wk_VTFsBwidP6
+folderId: null
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: Me Copy
+sortPriority: 7000.001
+url: http://localhost:8000/api/total_invoice
+urlParameters: []

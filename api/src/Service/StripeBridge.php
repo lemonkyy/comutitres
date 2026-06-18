@@ -86,4 +86,14 @@ final class StripeBridge
             return null;
         }
     }
+
+    public function countPurchases(): int
+    {
+        $data = $this->client->checkout->sessions->all([
+            'status' => 'complete',
+            'limit' => 100,
+        ]);
+
+        return count($data->data);
+    }
 }

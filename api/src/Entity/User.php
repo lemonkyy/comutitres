@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Post;
 use App\Api\State\Provider\DocumentProvider;
 use App\Api\State\Provider\InvoiceProvider;
 use App\Api\State\Provider\InvoicesProvider;
+use App\Api\State\Provider\InvoiceStateProvider;
 use App\Api\State\Provider\MeProvider;
 use App\Api\State\Provider\UserInvoiceProvider;
 use App\Domain\Command\User\LoginCommand;
@@ -26,6 +27,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
             uriTemplate: '/me',
             provider: MeProvider::class,
             normalizationContext: ['groups' => ['me:read']],
+        ),
+        new Get(
+            uriTemplate: '/total_invoice',
+            provider: InvoiceStateProvider::class,
         ),
         new GetCollection(),
         new GetCollection(
