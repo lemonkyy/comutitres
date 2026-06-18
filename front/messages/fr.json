@@ -27,9 +27,41 @@
       "subtitle": "Vos informations et préférences",
       "tabs": {
         "account": "Mes informations",
+        "passes": "Mes titres",
         "settings": "Paramètres"
       },
       "title": "Mon compte"
+    },
+    "titles": {
+      "authPrompt": {
+        "ctaLabel": "Se connecter",
+        "description": "Connectez-vous pour afficher vos titres achetés et télécharger vos factures.",
+        "title": "Vos titres apparaîtront ici"
+      },
+      "downloadInvoiceLabel": "Télécharger",
+      "emptyCtaLabel": "Voir les titres",
+      "emptyDescription": "Vos titres achetés et leurs factures apparaîtront ici après un paiement.",
+      "emptyTitle": "Aucun titre acheté",
+      "errorDescription": "Impossible de charger vos titres pour le moment. Réessayez dans quelques instants.",
+      "errorTitle": "Titres indisponibles",
+      "invoiceLabel": "Facture",
+      "latestPaymentLabel": "Dernier paiement",
+      "noInvoiceLabel": "Facture indisponible",
+      "paidStatusLabel": "Payé",
+      "passListDescription": "Sélectionnez un titre pour afficher ses paiements et factures.",
+      "passListTitle": "Vos titres",
+      "paymentAmountLabel": "Montant",
+      "paymentCountPlural": "paiements",
+      "paymentCountSingular": "paiement",
+      "paymentDateLabel": "Date",
+      "paymentStatusLabel": "Statut",
+      "paymentsTitle": "Paiements et factures",
+      "selectedMissingDescription": "Le titre demandé n'est pas associé à votre compte. Choisissez un titre dans la liste.",
+      "selectedMissingTitle": "Titre introuvable",
+      "summaryTitle": "Titre sélectionné",
+      "title": "Mes titres",
+      "totalPaidLabel": "Total payé",
+      "unknownDateLabel": "Date indisponible"
     }
   },
   "assistant": {
@@ -125,7 +157,7 @@
     "success": {
       "backLabel": "Retour aux titres",
       "breadcrumbAriaLabel": "Fil d'Ariane",
-      "ctaLabel": "Voir les titres",
+      "ctaLabel": "Voir mes titres",
       "description": "Votre paiement a bien été pris en compte. Vous pouvez revenir aux titres disponibles.",
       "homeLabel": "Accueil",
       "invoiceCtaLabel": "Télécharger la facture",

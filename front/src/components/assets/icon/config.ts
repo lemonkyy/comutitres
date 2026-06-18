@@ -1,21 +1,21 @@
 import {
+  Bell,
+  CheckCircle2,
+  ChevronRight,
   CreditCard,
+  FileCheck,
   FolderOpen,
+  GitBranch,
   HelpCircle,
   House,
   type LucideIcon,
   MessageSquare,
   Settings,
-  Ticket,
   Shield,
-  Bell,
-  CheckCircle2,
-  ChevronRight,
-  FileCheck,
-  GitBranch,
   ShieldAlert,
-  Users,
+  Ticket,
   UserRound,
+  Users,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 
@@ -39,7 +39,7 @@ const raw = {
   filecheck: FileCheck,
   gitbranch: GitBranch,
   shieldalert: ShieldAlert,
-  users: Users
+  users: Users,
 };
 
 export const icons: Icons = raw;

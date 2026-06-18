@@ -15,6 +15,10 @@ export const pathnames = {
     fr: "/mon-compte",
     en: "/mon-compte",
   },
+  "/account/passes": {
+    fr: "/mon-compte/mes-titres",
+    en: "/mon-compte/mes-titres",
+  },
   "/account/settings": {
     fr: "/mon-compte/parametres",
     en: "/mon-compte/parametres",

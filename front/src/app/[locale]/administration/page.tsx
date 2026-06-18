@@ -14,10 +14,10 @@ import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/actions/button/button";
 import Icon from "@/components/assets/icon";
-import { useUser } from "@/contexts/user-context";
-import { ApiClientError } from "@/lib/api/ApiClientError";
 import { Card } from "@/components/ui/card/card";
+import { useUser } from "@/contexts/user-context";
 import { Link } from "@/i18n/navigation";
+import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { User } from "@/utils/types";
 
 type Kpi = {
@@ -131,7 +131,10 @@ const roleClassName =
   "rounded-full bg-[color-mix(in_srgb,var(--profil-annuel)_16%,white)] px-2 py-1 text-xs font-bold text-[var(--bleu-focus)]";
 
 function buildDisplayName(user: User) {
-  const fullName = [user.givenName, user.familyName].filter(Boolean).join(" ").trim();
+  const fullName = [user.givenName, user.familyName]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
   return fullName || user.email || "Utilisateur sans nom";
 }
 
@@ -160,19 +163,20 @@ export default function AdministrationHomePage() {
 
     let isMounted = true;
 
-    getAll()
-      .then((result) => {
-        if (!isMounted) {
-          return;
-        }
+    getAll().then((result) => {
+      if (!isMounted) {
+        return;
+      }
 
-        if (result instanceof ApiClientError) {
-          setUsersError(result.message || "Impossible de recuperer les utilisateurs");
-          return;
-        }
+      if (result instanceof ApiClientError) {
+        setUsersError(
+          result.message || "Impossible de recuperer les utilisateurs",
+        );
+        return;
+      }
 
-        setUsersError(null);
-      });
+      setUsersError(null);
+    });
 
     return () => {
       isMounted = false;
@@ -344,11 +348,15 @@ export default function AdministrationHomePage() {
               ) : null}
 
               {isLoadingUsers && !userList ? (
-                <p className="text-sm text-muted-foreground">Chargement des utilisateurs...</p>
+                <p className="text-sm text-muted-foreground">
+                  Chargement des utilisateurs...
+                </p>
               ) : null}
 
               {!isLoadingUsers && displayedUsers.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Aucun utilisateur disponible.</p>
+                <p className="text-sm text-muted-foreground">
+                  Aucun utilisateur disponible.
+                </p>
               ) : null}
 
               <div className="flex flex-col gap-2.5">
@@ -391,8 +399,8 @@ export default function AdministrationHomePage() {
                   Espace administration Comutitres
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Le module utilisateurs est branche au contexte et charge la liste
-                  depuis l&apos;API a l&apos;arrivee sur cette page.
+                  Le module utilisateurs est branche au contexte et charge la
+                  liste depuis l&apos;API a l&apos;arrivee sur cette page.
                 </p>
               </div>
             </div>
@@ -400,7 +408,10 @@ export default function AdministrationHomePage() {
             <div className="flex items-center gap-2">
               <Button asChild variant="outline">
                 <Link href="/">
-                  <Icon name="house" className="[&_svg]:size-4 [&_svg]:stroke-[1.9]" />
+                  <Icon
+                    name="house"
+                    className="[&_svg]:size-4 [&_svg]:stroke-[1.9]"
+                  />
                   Retour appli
                 </Link>
               </Button>

@@ -1,7 +1,7 @@
 import { CheckCircle2 } from "lucide-react";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
-
+import { getPassAsset } from "@/components/passes/pass-assets";
 import {
   type PaymentResultPurchase,
   PaymentResultScreen,
@@ -10,18 +10,7 @@ import {
 import type { CollectionResponse } from "@/lib/api/ApiClient";
 import { apiPaths } from "@/lib/api/paths";
 import { AUTH_TOKEN_COOKIE, fetchBackendJson } from "@/lib/api/server";
-import type { Pass, Purchase } from "@/utils/types";
-
-const passAssetById: Record<string, string> = {
-  prod_Ui102EIh2XMWhW: "/assets/fares/products/navigo-mois-oblique.svg",
-  prod_UijSQtOMSTEyVg: "/assets/fares/products/navigo-annuel-oblique.svg",
-  prod_UijUsBO0JFy1Lz:
-    "/assets/fares/products/navigo-imagine-r-scolaire-oblique.svg",
-  prod_UijUZDKnnNQEOU:
-    "/assets/fares/products/navigo-imagine-r-etudiant-oblique.svg",
-  prod_UijVbWCnE9RT8a:
-    "/assets/fares/products/navigo-imagine-r-junior-oblique.svg",
-};
+import type { Purchase } from "@/utils/types";
 
 type PaymentSuccessPageProps = {
   params: Promise<{
@@ -57,6 +46,7 @@ export default async function PaymentSuccessPage({
 
   return (
     <PaymentResultScreen
+      ctaHref="/account/passes"
       copy={copy}
       icon={CheckCircle2}
       purchase={latestPurchase}
@@ -101,7 +91,7 @@ async function getLatestPurchase(
 
   return {
     amount: formatPurchaseAmount(purchase.total, locale),
-    asset: getPurchaseAsset(purchase.pass),
+    asset: getPassAsset(purchase.pass),
     date: formatPurchaseDate(purchase.createdAt, locale),
     invoiceHref: purchase.invoiceId
       ? `/api/backend${apiPaths.invoice.item.replace(
@@ -136,8 +126,4 @@ function formatPurchaseDate(value: string, locale: string) {
     dateStyle: "long",
     timeStyle: "short",
   }).format(date);
-}
-
-function getPurchaseAsset(pass: Pass) {
-  return passAssetById[pass.id] ?? "/assets/passes/passe-navigo-full.svg";
 }

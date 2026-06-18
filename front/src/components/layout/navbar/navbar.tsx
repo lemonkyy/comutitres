@@ -24,22 +24,17 @@ export default function Navbar({ className = "" }: NavbarProps) {
   const isAdmin = myUser?.roles?.includes("ROLE_ADMIN") ?? false;
   const isAdministrationPage = pathname.startsWith("/administration");
 
-  const items = useMemo(
-    () => {
-      const sourceItems =
-        isAdministrationPage && isAdmin
-          ? administrationNavbarItems
-          : [...navbarItems, ...(isAdmin ? administrationMenuItems : [])];
+  const items = useMemo(() => {
+    const sourceItems =
+      isAdministrationPage && isAdmin
+        ? administrationNavbarItems
+        : [...navbarItems, ...(isAdmin ? administrationMenuItems : [])];
 
-      return sourceItems.map(
-        (item) => ({
-          ...item,
-          label: t.has(`items.${item.id}`) ? t(`items.${item.id}`) : item.label,
-        }),
-      );
-    },
-    [isAdmin, isAdministrationPage, t],
-  );
+    return sourceItems.map((item) => ({
+      ...item,
+      label: t.has(`items.${item.id}`) ? t(`items.${item.id}`) : item.label,
+    }));
+  }, [isAdmin, isAdministrationPage, t]);
 
   return (
     <div className={cn(className)} data-slot="navbar">

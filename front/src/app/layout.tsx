@@ -1,31 +1,11 @@
 import type { ReactNode } from "react";
 
 import "./globals.css";
-import { AppChrome } from "@/components/layout/app-chrome/app-chrome";
-import { ApiClientProvider } from "@/contexts/api-client";
-import { AuthProvider } from "@/contexts/auth-context";
-import { routing } from "@/i18n/routing";
 import Script from "next/script";
-import { NextIntlClientProvider } from "next-intl";
-
-type ProvidersProps = {
-  children: ReactNode;
-};
+import { routing } from "@/i18n/routing";
 
 type Props = {
   children: ReactNode;
-};
-
-const Providers = ({ children }: ProvidersProps) => {
-  return (
-    <NextIntlClientProvider>
-      <ApiClientProvider locale="fr">
-        <AuthProvider>
-          <AppChrome>{children}</AppChrome>
-        </AuthProvider>
-      </ApiClientProvider>
-    </NextIntlClientProvider>
-  );
 };
 
 const RootLayout = async ({ children }: Props) => {

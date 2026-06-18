@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   UserRound,
 } from "lucide-react";
+import Image from "next/image";
 
 import { Button } from "@/components/actions/button/button";
 import { AuthPrompt, type AuthPromptCopy } from "@/components/auth/auth-prompt";
@@ -52,20 +53,20 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
 
   return (
     <Card
-      className="overflow-hidden shadow-[var(--idfm-card-shadow)]"
+      className="overflow-hidden border-[color-mix(in_srgb,var(--primary)_16%,transparent)] shadow-[var(--idfm-card-shadow)]"
       padding="none"
       variant="outlined"
     >
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <section className="p-5 sm:p-6 lg:p-8">
-          <p className="text-sm font-semibold leading-none text-primary">
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <section className="p-5 sm:p-6 lg:p-[30px]">
+          <div className="inline-flex min-h-9 items-center rounded-[6px] bg-[color-mix(in_srgb,var(--bleu-moyen)_62%,white)] px-3 text-sm font-bold leading-5 text-primary">
             {copy.title}
-          </p>
+          </div>
 
-          <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
+          <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center">
             <div
               aria-hidden="true"
-              className="grid size-20 shrink-0 place-items-center rounded-[6px] bg-primary text-2xl font-bold leading-none text-primary-foreground"
+              className="grid size-20 shrink-0 place-items-center rounded-[6px] bg-primary text-2xl font-bold leading-none text-primary-foreground shadow-[var(--idfm-card-shadow)]"
             >
               {getUserInitials(user, copy.missingName)}
             </div>
@@ -74,17 +75,30 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
               <h2 className="break-words text-[1.75rem] font-bold leading-[36.4px] tracking-normal text-foreground">
                 {displayName}
               </h2>
-              <p className="mt-2 max-w-[42rem] text-base font-normal leading-6 text-foreground">
+              <p className="mt-2 max-w-[42rem] text-base font-normal leading-6 text-muted-foreground">
                 {copy.summary}
               </p>
             </div>
           </div>
         </section>
 
-        <aside className="border-t bg-accent p-5 lg:border-t-0 lg:border-l lg:p-6">
-          <div className="flex h-full flex-col justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-[6px] bg-card px-3 py-2 text-sm font-semibold text-primary shadow-[inset_0_0_0_1px_var(--primary)]">
+        <aside className="relative overflow-hidden border-t bg-[linear-gradient(145deg,var(--bleu-clair),white)] p-5 lg:border-t-0 lg:border-l lg:p-6">
+          <div className="pointer-events-none absolute right-0 bottom-0 h-36 w-44 rounded-tl-[24px] bg-[color-mix(in_srgb,var(--bleu-moyen)_82%,white)]" />
+          <div className="pointer-events-none absolute right-2 bottom-0 hidden h-32 w-32 items-end justify-end sm:flex lg:flex">
+            <Image
+              alt=""
+              className="h-32 w-auto object-contain object-bottom drop-shadow-[0_14px_24px_rgba(37,48,59,0.14)]"
+              height={128}
+              loading="eager"
+              src="/assets/passes/passe-navigo-full.svg"
+              style={{ width: "auto" }}
+              unoptimized
+              width={170}
+            />
+          </div>
+          <div className="relative z-10 flex h-full min-h-52 flex-col justify-between gap-6">
+            <div className="max-w-[15rem]">
+              <div className="inline-flex items-center gap-2 rounded-[6px] bg-white px-3 py-2 text-sm font-semibold text-primary shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--primary)_28%,transparent)]">
                 <ShieldCheck
                   aria-hidden="true"
                   className="size-4 stroke-[1.9]"
@@ -97,7 +111,7 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
             </div>
 
             <Button
-              className="w-full"
+              className="w-full bg-white"
               onClick={() => {
                 void logout();
               }}
@@ -111,29 +125,33 @@ export function AccountOverview({ copy }: AccountOverviewProps) {
         </aside>
       </div>
 
-      <section className="border-t px-5 py-5 sm:px-6 lg:px-8 lg:py-7">
-        <h3 className="text-[1.375rem] font-bold leading-[30.8px] text-foreground">
-          {copy.detailsTitle}
-        </h3>
+      <section className="border-t bg-[color-mix(in_srgb,var(--bleu-clair)_48%,white)] px-5 py-5 sm:px-6 lg:px-[30px] lg:py-7">
+        <div className="grid gap-4 lg:grid-cols-[13rem_minmax(0,1fr)]">
+          <div>
+            <h3 className="text-[1.375rem] font-bold leading-[30.8px] text-foreground">
+              {copy.detailsTitle}
+            </h3>
+          </div>
 
-        <dl className="mt-4 overflow-hidden rounded-[6px] border border-border bg-card">
-          <AccountField
-            icon={UserRound}
-            label={copy.fields.name}
-            value={displayName}
-          />
-          <AccountField
-            icon={Mail}
-            label={copy.fields.email}
-            value={user.email || "-"}
-          />
-          <AccountField
-            icon={MapPin}
-            isMuted={!user.address}
-            label={copy.fields.address}
-            value={addressLabel}
-          />
-        </dl>
+          <dl className="overflow-hidden rounded-[6px] border border-[color-mix(in_srgb,var(--primary)_14%,transparent)] bg-white">
+            <AccountField
+              icon={UserRound}
+              label={copy.fields.name}
+              value={displayName}
+            />
+            <AccountField
+              icon={Mail}
+              label={copy.fields.email}
+              value={user.email || "-"}
+            />
+            <AccountField
+              icon={MapPin}
+              isMuted={!user.address}
+              label={copy.fields.address}
+              value={addressLabel}
+            />
+          </dl>
+        </div>
       </section>
     </Card>
   );
@@ -179,13 +197,13 @@ function AccountOverviewSkeleton({ label }: { label: string }) {
   return (
     <Card
       aria-busy="true"
-      className="overflow-hidden border-primary/10"
+      className="overflow-hidden border-primary/10 shadow-[var(--idfm-card-shadow)]"
       padding="none"
       variant="outlined"
     >
       <span className="sr-only">{label}</span>
-      <div className="grid animate-pulse lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <section className="p-5 sm:p-6 lg:p-8">
+      <div className="grid animate-pulse lg:grid-cols-[minmax(0,1fr)_20rem]">
+        <section className="p-5 sm:p-6 lg:p-[30px]">
           <div className="h-4 w-40 rounded-[6px] bg-muted" />
           <div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center">
             <div className="size-20 rounded-[6px] bg-muted" />
@@ -204,12 +222,14 @@ function AccountOverviewSkeleton({ label }: { label: string }) {
         </aside>
       </div>
 
-      <section className="border-t px-5 py-5 sm:px-6 lg:px-8 lg:py-7">
-        <div className="h-6 w-36 rounded-[6px] bg-muted" />
-        <div className="mt-4 overflow-hidden rounded-[6px] border border-border">
-          <div className="h-20 border-b bg-muted/70" />
-          <div className="h-20 border-b bg-muted/70" />
-          <div className="h-20 bg-muted/70" />
+      <section className="border-t px-5 py-5 sm:px-6 lg:px-[30px] lg:py-7">
+        <div className="grid gap-4 lg:grid-cols-[13rem_minmax(0,1fr)]">
+          <div className="h-6 w-36 rounded-[6px] bg-muted" />
+          <div className="overflow-hidden rounded-[6px] border border-border">
+            <div className="h-20 border-b bg-muted/70" />
+            <div className="h-20 border-b bg-muted/70" />
+            <div className="h-20 bg-muted/70" />
+          </div>
         </div>
       </section>
     </Card>

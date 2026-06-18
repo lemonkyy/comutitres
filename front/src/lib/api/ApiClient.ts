@@ -3,8 +3,8 @@ import { handleApiError } from "@/lib/api/handleApiError";
 import type { LoginInput, Me } from "@/utils/types";
 import { MeResource } from "./resources/MeResource";
 import { PassResource } from "./resources/PassResource";
-import { WorkflowResource } from "./resources/WorkflowResource";
 import { UserResource } from "./resources/UserResource";
+import { WorkflowResource } from "./resources/WorkflowResource";
 
 export interface DeleteResponse {
   success: boolean;

@@ -6,8 +6,8 @@ import type { ReactNode } from "react";
 import { AppChrome } from "@/components/layout/app-chrome/app-chrome";
 import { ApiClientProvider } from "@/contexts/api-client";
 import { AuthProvider } from "@/contexts/auth-context";
-import { routing } from "@/i18n/routing";
 import { UserProvider } from "@/contexts/user-context";
+import { routing } from "@/i18n/routing";
 
 type Props = {
   children: ReactNode;

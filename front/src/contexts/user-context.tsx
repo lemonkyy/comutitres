@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  createContext,
   type ReactNode,
+  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -64,7 +64,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, [getMyUser]);
 
   return (
-    <UserContext.Provider value={{ myUser, userList, setUserList, getAll, getMyUser }}>
+    <UserContext.Provider
+      value={{ myUser, userList, setUserList, getAll, getMyUser }}
+    >
       {children}
     </UserContext.Provider>
   );

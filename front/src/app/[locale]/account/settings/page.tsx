@@ -23,6 +23,7 @@ export default async function AccountSettingsPage() {
     subtitle: shellT("subtitle"),
     tabs: {
       account: shellT("tabs.account"),
+      passes: shellT("tabs.passes"),
       settings: shellT("tabs.settings"),
     },
     title: shellT("title"),

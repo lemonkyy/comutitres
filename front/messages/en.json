@@ -27,9 +27,41 @@
       "subtitle": "Your information and preferences",
       "tabs": {
         "account": "My information",
+        "passes": "My passes",
         "settings": "Settings"
       },
       "title": "My account"
+    },
+    "titles": {
+      "authPrompt": {
+        "ctaLabel": "Sign in",
+        "description": "Sign in to view your purchased passes and download your invoices.",
+        "title": "Your passes will appear here"
+      },
+      "downloadInvoiceLabel": "Download",
+      "emptyCtaLabel": "View passes",
+      "emptyDescription": "Your purchased passes and invoices will appear here after a payment.",
+      "emptyTitle": "No purchased passes",
+      "errorDescription": "Your passes cannot be loaded right now. Try again in a moment.",
+      "errorTitle": "Passes unavailable",
+      "invoiceLabel": "Invoice",
+      "latestPaymentLabel": "Latest payment",
+      "noInvoiceLabel": "Invoice unavailable",
+      "paidStatusLabel": "Paid",
+      "passListDescription": "Select a pass to view its payments and invoices.",
+      "passListTitle": "Your passes",
+      "paymentAmountLabel": "Amount",
+      "paymentCountPlural": "payments",
+      "paymentCountSingular": "payment",
+      "paymentDateLabel": "Date",
+      "paymentStatusLabel": "Status",
+      "paymentsTitle": "Payments and invoices",
+      "selectedMissingDescription": "The requested pass is not associated with your account. Choose a pass from the list.",
+      "selectedMissingTitle": "Pass not found",
+      "summaryTitle": "Selected pass",
+      "title": "My passes",
+      "totalPaidLabel": "Total paid",
+      "unknownDateLabel": "Date unavailable"
     }
   },
   "assistant": {
@@ -125,7 +157,7 @@
     "success": {
       "backLabel": "Back to passes",
       "breadcrumbAriaLabel": "Breadcrumb",
-      "ctaLabel": "View passes",
+      "ctaLabel": "View my passes",
       "description": "Your payment was confirmed. You can return to the available passes.",
       "homeLabel": "Home",
       "invoiceCtaLabel": "Download invoice",

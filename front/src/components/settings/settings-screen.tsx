@@ -167,13 +167,13 @@ export function SettingsPanel({ copy, currentLocale }: SettingsScreenProps) {
 
   return (
     <form
-      className="mx-auto flex w-full max-w-md flex-col gap-6"
+      className="grid w-full gap-6 xl:grid-cols-2 xl:items-start xl:gap-8"
       noValidate
       onSubmit={(event) => {
         event.preventDefault();
       }}
     >
-      <FieldSet className="gap-0">
+      <FieldSet className="min-w-0 gap-0">
         <FieldLegend
           className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
           variant="label"
@@ -206,7 +206,7 @@ export function SettingsPanel({ copy, currentLocale }: SettingsScreenProps) {
         </FieldGroup>
       </FieldSet>
 
-      <FieldSet className="gap-0">
+      <FieldSet className="min-w-0 gap-0">
         <FieldLegend
           className="mb-3 text-[0.6875rem] font-bold uppercase leading-none tracking-[0.16em] text-muted-foreground"
           variant="label"

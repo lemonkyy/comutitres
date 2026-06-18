@@ -9,9 +9,11 @@ import {
 } from "@/components/layout/page-header/page-header";
 import { Card } from "@/components/ui/card/card";
 import { Link } from "@/i18n/navigation";
+import type { pathnames } from "@/i18n/pathnames";
 import { cn } from "@/lib/utils";
 
 type PaymentResultTone = "error" | "success";
+type AppHref = keyof typeof pathnames;
 
 export type PaymentResultScreenCopy = {
   backLabel: string;
@@ -37,6 +39,7 @@ export type PaymentResultPurchase = {
 };
 
 type PaymentResultScreenProps = {
+  ctaHref?: AppHref;
   copy: PaymentResultScreenCopy;
   icon: LucideIcon;
   purchase?: PaymentResultPurchase;
@@ -51,6 +54,7 @@ const toneClasses: Record<PaymentResultTone, string> = {
 };
 
 export function PaymentResultScreen({
+  ctaHref = "/passes",
   copy,
   icon: Icon,
   purchase,
@@ -116,7 +120,7 @@ export function PaymentResultScreen({
             </p>
           </div>
           <Button asChild className="w-full md:w-fit">
-            <Link href="/passes">
+            <Link href={ctaHref}>
               {copy.ctaLabel}
               <ArrowRight aria-hidden="true" data-icon="inline-end" />
             </Link>
