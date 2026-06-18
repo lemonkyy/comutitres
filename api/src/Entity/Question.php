@@ -5,12 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
-use App\Api\State\Provider\WorkflowStartProvider;
 use App\Domain\Command\CreateQuestionCommand;
+use App\Enum\QuestionTypeEnum;
 use App\Repository\QuestionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
-#[ApiFilter(SearchFilter::class, properties: ['text' => 'partial'])]
+#[ApiFilter(SearchFilter::class, properties: ['text' => 'partial', 'questionType' => 'exact'])]
 #[ApiResource(operations: [
     new GetCollection(
         uriTemplate: '/questions',
@@ -35,6 +35,9 @@ use Gedmo\Translatable\Translatable;
         normalizationContext: ['groups' => ['question:read']],
         denormalizationContext: ['groups' => ['question:write']],
     ),
+    new Delete(
+        uriTemplate: '/questions/{id}',
+    ),
 ])]
 class Question implements Translatable
 {
@@ -49,6 +52,9 @@ class Question implements Translatable
 
     #[ORM\Column]
     private bool $isFirst = false;
+
+    #[ORM\Column(length: 255, nullable: true, enumType: QuestionTypeEnum::class)]
+    private ?QuestionTypeEnum $questionType = null;
 
     #[Gedmo\Locale]
     private ?string $locale = null;
@@ -86,6 +92,18 @@ class Question implements Translatable
     public function setIsFirst(bool $isFirst): static
     {
         $this->isFirst = $isFirst;
+
+        return $this;
+    }
+
+    public function getQuestionType(): ?QuestionTypeEnum
+    {
+        return $this->questionType;
+    }
+
+    public function setQuestionType(?QuestionTypeEnum $questionType): static
+    {
+        $this->questionType = $questionType;
 
         return $this;
     }

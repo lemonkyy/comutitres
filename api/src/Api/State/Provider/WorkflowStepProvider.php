@@ -28,7 +28,7 @@ final class WorkflowStepProvider implements ProviderInterface
 
         $pass = $choice->getRecommendedPass();
         if (null === $pass) {
-            throw new \LogicException('Choice has neither nextQuestion nor recommendedPass.');
+            throw new NotFoundHttpException('Choice has neither nextQuestion nor recommendedPass.');
         }
 
         return new WorkflowStepResult(type: 'pass', pass: $pass);

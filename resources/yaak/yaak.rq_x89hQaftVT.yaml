@@ -1,0 +1,62 @@
+type: http_request
+model: http_request
+id: rq_x89hQaftVT
+createdAt: 2026-06-18T14:16:39.109564214
+updatedAt: 2026-06-18T14:16:52.459294458
+workspaceId: wk_VTFsBwidP6
+folderId: fl_8pydsy3tv9
+authentication:
+  token: ${[ TOKEN ]}
+authenticationType: bearer
+body:
+  text: |-
+    {
+      "text": "Quelle est votre situation first ?",
+      "isFirst": false,
+      "questionType": "navigo",
+      "choices": [
+        {
+          "text": "Étudiant·e",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        },
+        {
+          "text": "Lycéen·ne / Collégien·ne",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        },
+        {
+          "text": "Salarié·e",
+          "nextQuestionId": 1,
+          "recommendedPassId": null
+        }
+      ]
+    }
+bodyType: application/json
+description: ''
+headers:
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: wfCQ01Hdr1
+- enabled: true
+  name: Content-Language
+  value: fr
+  id: wfCQ01Hdr2
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Hdr3
+method: DELETE
+name: Delete Question
+sortPriority: 2000.001
+url: http://localhost:8000/api/question/1
+urlParameters:
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Prm1
+- enabled: true
+  name: ''
+  value: ''
+  id: wfCQ01Prm2

@@ -17,6 +17,12 @@ App\Entity\Question:
                 - question:write
                 - question:collection:read
                 - workflow:read
+        questionType:
+            groups:
+                - question:read
+                - question:write
+                - question:collection:read
+                - workflow:read
         choices:
             groups:
                 - question:read

@@ -4,6 +4,7 @@ namespace App\Domain\Command;
 
 use App\Entity\Choice;
 use App\Entity\Question;
+use App\Enum\QuestionTypeEnum;
 use App\Repository\PassRepository;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,7 +24,8 @@ final class CreateQuestionHandler
     {
         $question = new Question()
             ->setText($command->text)
-            ->setIsFirst($command->isFirst);
+            ->setIsFirst($command->isFirst)
+            ->setQuestionType(QuestionTypeEnum::tryFrom($command->questionType));
 
         $this->em->persist($question);
 
