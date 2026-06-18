@@ -1,0 +1,29 @@
+App\Entity\DocumentProof:
+    attributes:
+        id:
+            groups:
+                - document:read
+        user:
+            groups:
+                - document:read
+        type:
+            groups:
+                - document:read
+        status:
+            groups:
+                - document:read
+
+App\Entity\User:
+    attributes:
+        id:
+            groups:
+                - document:read
+        email:
+            groups:
+                - document:read
+        familyName:
+            groups:
+                - document:read
+        givenName:
+            groups:
+                - document:read

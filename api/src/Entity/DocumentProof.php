@@ -27,6 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
     ),
     new GetCollection(
         uriTemplate: 'document_proofs',
+        normalizationContext: ['groups' => ['document:read']],
         provider: DocumentProofProvider::class,
     ),
 ])]
