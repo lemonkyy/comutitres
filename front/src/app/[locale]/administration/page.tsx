@@ -328,7 +328,7 @@ export default function AdministrationHomePage() {
                 Documents a valider
               </h2>
               <Button asChild size="sm" variant="ghost">
-                <Link href="/my-folder">
+                <Link href="/administration/documents">
                   Voir tout
                   <ChevronRight data-icon="inline-end" />
                 </Link>

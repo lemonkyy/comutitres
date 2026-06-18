@@ -36,4 +36,7 @@ export const pathnames = {
     en: "/parametres",
   },
   "/administration": "/administration",
+  "/administration/utilisateurs": "/administration/utilisateurs",
+  "/administration/documents": "/administration/documents",
+  "/administration/documents/[documentId]": "/administration/documents/[documentId]",
 };

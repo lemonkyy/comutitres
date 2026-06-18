@@ -32,5 +32,6 @@ export const apiPaths = {
     collection: "/document_proofs",
     upload: "/document_proofs/upload",
     myDocuments: "/my-documents",
+    updateStatus: "/document_proofs/:id/status",
   },
 };
