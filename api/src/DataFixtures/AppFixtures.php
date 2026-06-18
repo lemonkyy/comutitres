@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Pass;
+use App\Entity\User;
 use App\Service\StripeBridge;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -34,6 +35,15 @@ class AppFixtures extends Fixture
 
             $manager->persist($entity);
         }
+
+        $admin = new User('admin_zebi');
+        $admin->setEmail('admin@comutitres.fr')
+            ->setRoles(['ROLE_ADMIN'])
+            ->setSub('admin_sub')
+            ->setGivenName('Admin')
+            ->setFamilyName('Admin')
+        ;
+        $manager->persist($admin);
 
         $manager->flush();
     }

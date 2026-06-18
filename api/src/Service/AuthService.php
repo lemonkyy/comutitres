@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class AuthService
 {
@@ -36,6 +37,14 @@ final class AuthService
             'givenName' => 'Bob',
             'familyName' => 'Lefevre'
         ],
+        'admin@comutitres.fr' => [
+            'id' => 3,
+            'email' => 'admin@comutitres.fr',
+            'password' => 'pass',
+            'sub' => 'admin_sub',
+            'givenName' => 'Bob',
+            'familyName' => 'Lefevre'
+        ],
         'emma.durand@example.com' => [
             'id' => 4,
             'email' => 'emma.durand@example.com',
@@ -53,7 +62,7 @@ final class AuthService
         $userData = self::$users[$email] ?? null;
 
         if (!$userData || $userData['password'] !== $password) {
-            return null;
+            throw new UnauthorizedHttpException('Basic', 'Invalid credentials');
         }
 
         $user = $this->userRepository->findOneBy([
