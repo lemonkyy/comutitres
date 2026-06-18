@@ -28,4 +28,9 @@ export const apiPaths = {
   user: {
     collection: "/users",
   },
+  document: {
+    collection: "/document_proofs",
+    upload: "/document_proofs/upload",
+    myDocuments: "/my-documents",
+  },
 };

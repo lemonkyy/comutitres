@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  Bell,
-  CheckCircle2,
   ChevronRight,
   CreditCard,
   FileCheck,
@@ -10,6 +8,7 @@ import {
   ShieldAlert,
   Users,
 } from "lucide-react";
+import { useLocale } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/actions/button/button";
@@ -18,7 +17,8 @@ import { Card } from "@/components/ui/card/card";
 import { useUser } from "@/contexts/user-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
-import type { User } from "@/utils/types";
+import type { DocumentEnum, User } from "@/utils/types";
+import { useDocument } from "@/contexts/document-context";
 
 type Kpi = {
   id: string;
@@ -28,13 +28,6 @@ type Kpi = {
   deltaTone: "default" | "success" | "warning";
   icon: typeof Users;
   tone: "blue" | "violet" | "amber" | "green";
-};
-
-type PendingDocument = {
-  id: string;
-  name: string;
-  type: string;
-  submittedAt: string;
 };
 
 type RecentUser = {
@@ -56,15 +49,6 @@ const baseKpis: ReadonlyArray<Kpi> = [
     tone: "violet",
   },
   {
-    id: "documents",
-    label: "Documents en attente",
-    value: 24,
-    delta: "A traiter",
-    deltaTone: "warning",
-    icon: FileCheck,
-    tone: "amber",
-  },
-  {
     id: "workflows",
     label: "Workflows actifs",
     value: 7,
@@ -72,33 +56,6 @@ const baseKpis: ReadonlyArray<Kpi> = [
     deltaTone: "default",
     icon: GitBranch,
     tone: "green",
-  },
-];
-
-const pendingDocuments: ReadonlyArray<PendingDocument> = [
-  {
-    id: "d-1",
-    name: "Lea Fontaine",
-    type: "Certificat de scolarite",
-    submittedAt: "16/06/2026",
-  },
-  {
-    id: "d-2",
-    name: "Amina Ouedraogo",
-    type: "Attestation de bourse",
-    submittedAt: "15/06/2026",
-  },
-  {
-    id: "d-3",
-    name: "Karim Benali",
-    type: "Justificatif de domicile",
-    submittedAt: "14/06/2026",
-  },
-  {
-    id: "d-4",
-    name: "Pierre Leroy",
-    type: "Photo d'identite",
-    submittedAt: "14/06/2026",
   },
 ];
 
@@ -130,6 +87,31 @@ const deltaToneClasses: Record<Kpi["deltaTone"], string> = {
 const roleClassName =
   "rounded-full bg-[color-mix(in_srgb,var(--profil-annuel)_16%,white)] px-2 py-1 text-xs font-bold text-[var(--bleu-focus)]";
 
+const documentTypeChips: Record<
+  DocumentEnum,
+  { className: string; label: string }
+> = {
+  grant_certificate: {
+    className:
+      "bg-[color-mix(in_srgb,var(--profil-senior)_20%,white)] text-[var(--profil-senior)]",
+    label: "Attestation de bourse",
+  },
+  identity_photo: {
+    className: "bg-accent text-primary",
+    label: "Photo d'identite",
+  },
+  proof_of_residence: {
+    className:
+      "bg-[color-mix(in_srgb,var(--profil-annuel)_18%,white)] text-[var(--bleu-focus)]",
+    label: "Justificatif de domicile",
+  },
+  school_certificate: {
+    className:
+      "bg-[color-mix(in_srgb,var(--profil-etudiant)_18%,white)] text-[var(--profil-etudiant)]",
+    label: "Certificat de scolarite",
+  },
+};
+
 function buildDisplayName(user: User) {
   const fullName = [user.givenName, user.familyName]
     .filter(Boolean)
@@ -152,9 +134,29 @@ function getMainRole(user: User) {
   return firstRole.replace("ROLE_", "").toLowerCase();
 }
 
+function formatDate(value: string | null | undefined, locale: string) {
+  if (!value) {
+    return "Date inconnue";
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(parsed);
+}
+
 export default function AdministrationHomePage() {
+  const locale = useLocale();
   const { userList, getAll } = useUser();
+  const { allUsersDocuments, getAllUsersDocuments } = useDocument();
   const [usersError, setUsersError] = useState<string | null>(null);
+  const [documentsError, setDocumentsError] = useState<string | null>(null);
 
   useEffect(() => {
     if (userList !== null) {
@@ -178,13 +180,28 @@ export default function AdministrationHomePage() {
       setUsersError(null);
     });
 
+    getAllUsersDocuments().then((result) => {
+      if (!isMounted) {
+        return;
+      }
+
+      if (result instanceof ApiClientError) {
+        setDocumentsError(
+          result.message || "Impossible de recuperer les documents",
+        );
+        return;
+      }
+      setDocumentsError(null);
+    });
+
     return () => {
       isMounted = false;
     };
-  }, [getAll, userList]);
+  }, [getAll, userList, getAllUsersDocuments]);
 
   const isLoadingUsers = userList === null && usersError === null;
   const usersCount = userList?.length ?? 0;
+  const pendingDocumentsCount = allUsersDocuments?.filter((document) => document.status === "pending").length ?? 0;
 
   const kpis = useMemo<ReadonlyArray<Kpi>>(
     () => [
@@ -197,9 +214,18 @@ export default function AdministrationHomePage() {
         icon: Users,
         tone: "blue",
       },
+      {
+        id: "documents",
+        label: "Documents en attente",
+        value: pendingDocumentsCount,
+        delta: "A traiter",
+        deltaTone: "warning",
+        icon: FileCheck,
+        tone: "amber",
+      },
       ...baseKpis,
     ],
-    [isLoadingUsers, usersCount],
+    [isLoadingUsers, pendingDocumentsCount, usersCount],
   );
 
   const displayedUsers = useMemo<ReadonlyArray<RecentUser>>(() => {
@@ -219,6 +245,36 @@ export default function AdministrationHomePage() {
   return (
     <main className="min-h-dvh bg-background px-4 py-6 md:px-8 md:py-8">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
+        <Card className="bg-[linear-gradient(135deg,var(--bleu-moyen)_0%,color-mix(in_srgb,var(--bleu-clair)_72%,white)_100%)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 grid size-10 place-items-center rounded-xl bg-primary text-primary-foreground">
+                <ShieldAlert className="size-5 stroke-[1.75]" />
+              </span>
+              <div>
+                <h2 className="text-lg font-extrabold text-foreground">
+                  Espace administration Comutitres
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Le module utilisateurs est branche au contexte et charge la
+                  liste depuis l&apos;API a l&apos;arrivee sur cette page.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Button asChild variant="outline">
+                <Link href="/">
+                  <Icon
+                    name="house"
+                    className="[&_svg]:size-4 [&_svg]:stroke-[1.9]"
+                  />
+                  Retour appli
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </Card>
         <Card className="overflow-hidden" padding="none">
           <div className="flex flex-col gap-4 border-b border-border/70 bg-card px-5 py-5 md:flex-row md:items-center md:justify-between md:px-7">
             <div>
@@ -231,19 +287,6 @@ export default function AdministrationHomePage() {
               <p className="mt-1 text-sm text-muted-foreground">
                 Plateforme Comutitres - vue d&apos;ensemble
               </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2.5">
-              <Button size="sm" variant="outline">
-                <Bell data-icon="inline-start" />
-                Notifications
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/my-folder">
-                  <FileCheck data-icon="inline-start" />
-                  Documents
-                </Link>
-              </Button>
             </div>
           </div>
 
@@ -293,37 +336,45 @@ export default function AdministrationHomePage() {
             </div>
 
             <div className="p-4 md:p-5">
+              {documentsError ? (
+                <p className="mb-3 rounded-xl bg-[color-mix(in_srgb,var(--destructive)_14%,white)] p-3 text-sm font-semibold text-destructive">
+                  {documentsError}
+                </p>
+              ) : null}
+
               <div className="flex flex-col gap-2.5">
-                {pendingDocuments.map((document) => (
+                {allUsersDocuments?.filter((document) => document.status === "pending").map((document) => (
+                  (() => {
+                    const typeChip = documentTypeChips[document.type];
+                    return (
                   <article
                     className="flex flex-col gap-2 rounded-xl bg-accent/55 p-3 sm:flex-row sm:items-center sm:justify-between"
                     key={document.id}
                   >
                     <div>
                       <p className="text-sm font-bold text-foreground">
-                        {document.name}
+                        {document.user.givenName} {document.user.familyName}
                       </p>
-                      <p className="text-sm text-muted-foreground">
-                        {document.type}
-                      </p>
+                      <span
+                        className={`mt-1 inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${typeChip.className}`}
+                      >
+                        {typeChip.label}
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-2 self-start sm:self-auto">
                       <span className="rounded-full bg-card px-2 py-1 text-xs font-semibold text-muted-foreground">
-                        {document.submittedAt}
+                        {formatDate(document.uploadedAt, locale)}
                       </span>
                       <span className="rounded-full bg-[color-mix(in_srgb,var(--profil-junior)_22%,white)] px-2.5 py-1 text-xs font-bold text-[#a87e00]">
                         En attente
                       </span>
                     </div>
                   </article>
+                    );
+                  })()
                 ))}
               </div>
-
-              <Button className="mt-4 w-full" variant="secondary">
-                <CheckCircle2 data-icon="inline-start" />
-                Lancer la revue des documents
-              </Button>
             </div>
           </Card>
 
@@ -387,37 +438,6 @@ export default function AdministrationHomePage() {
             </div>
           </Card>
         </div>
-
-        <Card className="bg-[linear-gradient(135deg,var(--bleu-moyen)_0%,color-mix(in_srgb,var(--bleu-clair)_72%,white)_100%)]">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-start gap-3">
-              <span className="mt-0.5 grid size-10 place-items-center rounded-xl bg-primary text-primary-foreground">
-                <ShieldAlert className="size-5 stroke-[1.75]" />
-              </span>
-              <div>
-                <h2 className="text-lg font-extrabold text-foreground">
-                  Espace administration Comutitres
-                </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Le module utilisateurs est branche au contexte et charge la
-                  liste depuis l&apos;API a l&apos;arrivee sur cette page.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Button asChild variant="outline">
-                <Link href="/">
-                  <Icon
-                    name="house"
-                    className="[&_svg]:size-4 [&_svg]:stroke-[1.9]"
-                  />
-                  Retour appli
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </Card>
       </div>
     </main>
   );

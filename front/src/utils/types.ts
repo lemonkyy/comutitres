@@ -96,3 +96,20 @@ export type UpdateChoiceInput = {
   nextQuestionId?: number | null;
   recommendedPassId?: string | null;
 };
+
+export type DocumentProofUpload = {
+  type: DocumentEnum;
+  file: string;
+};
+
+export type DocumentProof = {
+  id: string;
+  type: DocumentEnum;
+  user: User;
+  status: DocumentProofStatusEnum;
+  uploadedAt: string;
+};
+
+export type DocumentProofStatusEnum = "missing" | "pending" | "approved" | "rejected";
+
+export type DocumentEnum = "identity_photo" | "school_certificate" | "grant_certificate" | "proof_of_residence";
