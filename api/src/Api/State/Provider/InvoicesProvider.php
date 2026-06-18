@@ -23,6 +23,8 @@ final class InvoicesProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
+        $filter = $context['filters']['pass'] ?? null;
+
         /** @var User $user */
         $user = $this->security->getUser();
 
@@ -31,13 +33,17 @@ final class InvoicesProvider implements ProviderInterface
         $purchases = [];
 
         foreach ($sessions as $session) {
-            $purchases[] = new Purchase(
+            $purchase = new Purchase(
                 $session->id,
                 $session->amount_total / 100,
                 (new \DateTimeImmutable())->setTimestamp($session->created),
-                $this->passProvider->getPass($this->stripeBridge->getProductFromSession($session)),
+                $pass = $this->passProvider->getPass($this->stripeBridge->getProductFromSession($session)),
                 $session->invoice,
             );
+
+            if (!$filter || $filter === $pass->id) {
+                $purchases[] = $purchase;
+            }
         }
 
         return $purchases;
