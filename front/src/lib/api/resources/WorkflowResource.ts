@@ -4,9 +4,7 @@ import { apiPaths } from "@/lib/api/paths";
 import type {
   CollectionQuestionInput,
   CreateChoiceStandaloneInput,
-  CollectionQuestionInput,
   CreateQuestionInput,
-  CreateChoiceInput,
   UpdateChoiceInput,
   UpdateQuestionInput,
   WorkflowQuestion,
@@ -81,16 +79,6 @@ export class WorkflowResource {
   ): Promise<WorkflowChoice | ApiClientError> {
     return this.apiClient.post<WorkflowChoice>(apiPaths.choice.create, data);
   }
-
-  public async getCollectionQuestion(
-    data: CollectionQuestionInput,
-  ): Promise<WorkflowQuestion[] | ApiClientError> {
-    return this.apiClient.get<WorkflowQuestion[]>(
-      apiPaths.workflow.collectionQuestion,
-      data,
-    );
-  }
-
 
   public async updateChoice(
     id: number,

@@ -98,6 +98,7 @@ export type WorkflowQuestion = {
   id: number;
   text: string;
   choices: WorkflowChoice[];
+  isFirst: boolean;
 };
 
 export type WorkflowPass = {
@@ -122,12 +123,8 @@ export type CollectionQuestionInput = {
 }
 
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
-  questionId: number;
+  question: number;
 };
-
-export type CollectionQuestionInput = {
-  text?: string;
-}
 
 export type CreateQuestionInput = {
   text: string;

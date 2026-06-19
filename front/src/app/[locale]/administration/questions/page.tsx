@@ -46,7 +46,7 @@ export default function QuestionsPage() {
                 Liste complète des questions.
               </p>
             </div>
-            <div>
+            <div className="flex flex-row gap-2">
               <Button asChild size="sm" variant="outline">
                 <Link href="/administration/questions/create">Ajouter une question</Link>
               </Button>

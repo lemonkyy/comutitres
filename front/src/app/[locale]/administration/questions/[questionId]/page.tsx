@@ -22,6 +22,7 @@ export default function EditQuestionPage() {
 
   const [question, setQuestion] = useState<WorkflowQuestion | null>(null);
   const [questionText, setQuestionText] = useState("");
+  const [isFirst, setIsFirst] = useState(false);
 
   const [choices, setChoices] = useState<WorkflowChoice[]>([]);
   const [newChoice, setNewChoice] = useState<WorkflowChoice>({
@@ -58,6 +59,7 @@ export default function EditQuestionPage() {
 
       setQuestion(response);
       setQuestionText(response.text);
+      setIsFirst(response.isFirst);
 
       setChoices(
         response.choices.map((c: any) => ({
@@ -75,7 +77,6 @@ export default function EditQuestionPage() {
     fetchData();
   }, [questionId, apiClient]);
   
-  console.log(choices);
   useEffect(() => {
     async function fetchPasses() {
       const response = await apiClient.pass.getCollection();
@@ -105,6 +106,7 @@ export default function EditQuestionPage() {
 
     const response = await apiClient.workflow.updateQuestion(questionId, {
       text: questionText,
+      isFirst: isFirst
     });
 
     if (response instanceof Error) {
@@ -156,10 +158,11 @@ export default function EditQuestionPage() {
 
     if (!question) return;
 
-    const response = await apiClient.workflow.createChoice(question.id, {
+    const response = await apiClient.workflow.createChoice({
       text: newChoice.text,
       nextQuestionId: newChoice.nextQuestionId,
       recommendedPassId: newChoice.recommendedPassId,
+      question: question.id
     });
 
     if (response instanceof Error) {
@@ -224,7 +227,7 @@ export default function EditQuestionPage() {
                 Administration
               </p>
               <h1 className="mt-1 text-2xl font-extrabold text-foreground md:text-3xl">
-                Edition de la question
+                Modifier la question
               </h1>
             </div>
 
@@ -271,7 +274,7 @@ export default function EditQuestionPage() {
                 <Button
                   onClick={saveQuestion}
                   disabled={savingQuestion}
-                  className="min-w-36"
+                  className="min-w-56"
                 >
                   {savingQuestion
                     ? "Sauvegarde..."
@@ -280,6 +283,17 @@ export default function EditQuestionPage() {
                       : "Sauver"}
                 </Button>
               </div>
+              <label className="flex items-center gap-2 text-sm mt-3">
+                <input
+                  type="checkbox"
+                  checked={isFirst}
+                  onChange={(e) =>
+                    setIsFirst(e.target.checked)
+                  }
+                />
+
+                Question de départ
+            </label>
             </Card>
             <Card>
               <div className="flex flex-col gap-3">
@@ -368,20 +382,24 @@ export default function EditQuestionPage() {
 
                     <div className="flex flex-col gap-2">
                       <Button
-                        className="min-w-36"
-                        onClick={() =>
-                          saveChoice(choice)
-                        }
+                        onClick={ () => saveChoice(choice)}
+                        disabled={savingChoiceId === choice.id}
+                        className="min-w-56"
                       >
-                        Sauver
+                        {savingChoiceId === choice.id 
+                          ? "Sauvegarde..."
+                          : choiceStatus === "saved"
+                            ? "Sauvegardé"
+                            : "Sauver"}
                       </Button>
-
                       <Button
-                        className="min-w-36"
-                        variant="outline"
+                        className="min-w-56"
+                        variant={confirmDeleteChoiceId === choice.id ? "destructive" : "outline"}
                         onClick={() => deleteChoice(choice.id)}
                       >
-                        Supprimer
+                        {confirmDeleteChoiceId === choice.id
+                          ? "Confirmer suppression ?"
+                          : "Supprimer"}
                       </Button>
                     </div>
                   </div>
@@ -452,12 +470,16 @@ export default function EditQuestionPage() {
                       ))}
                     </select>
                   </div>
-
                   <Button
-                    className="min-w-36"
-                    onClick={ () => createNewChoice() }
+                  onClick={ () => createNewChoice()}
+                  disabled={savingChoiceId === 0}
+                  className="min-w-56"
                   >
-                    Créer
+                    {savingChoiceId === 0
+                      ? "Sauvegarde..."
+                      : choiceStatus === "saved"
+                        ? "Créé"
+                        : "Créer"}
                   </Button>
                 </div>
               </div>

@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_iRtQhVRs2u
 createdAt: 2026-06-16T11:44:37.165918900
-updatedAt: 2026-06-18T16:54:26.443696900
+updatedAt: 2026-06-19T10:31:42.419363400
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication:
@@ -11,16 +11,16 @@ authenticationType: bearer
 body:
   text: |-
     {
-      "email" : "admin@comutitres.fr",
+      "email" : "emma.durand@example.com",
       "password" : "pass"
     }
 bodyType: application/json
-description: ""
+description: ''
 headers:
-  - enabled: true
-    name: Content-Type
-    value: application/json
-    id: mgvm30rhM5
+- enabled: true
+  name: Content-Type
+  value: application/json
+  id: mgvm30rhM5
 method: POST
 name: Login
 sortPriority: 1000.0
