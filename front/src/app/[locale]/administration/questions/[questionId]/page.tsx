@@ -236,7 +236,7 @@ export default function EditQuestionPage() {
 
             <div className="flex gap-2">
               <Button
-                className="min-w-36"
+                className="min-w-36 cursor-pointer"
                 variant={confirmDeleteQuestion ? "destructive" : "outline"}
                 onClick={deleteQuestion}
               >
@@ -277,7 +277,7 @@ export default function EditQuestionPage() {
                 <Button
                   onClick={saveQuestion}
                   disabled={savingQuestion}
-                  className="min-w-56"
+                  className="min-w-56 cursor-pointer"
                 >
                   {savingQuestion
                     ? "Sauvegarde..."
@@ -387,7 +387,7 @@ export default function EditQuestionPage() {
                       <Button
                         onClick={ () => saveChoice(choice)}
                         disabled={savingChoiceId === choice.id}
-                        className="min-w-56"
+                        className="min-w-56 cursor-pointer"
                       >
                         {savingChoiceId === choice.id 
                           ? "Sauvegarde..."
@@ -396,7 +396,7 @@ export default function EditQuestionPage() {
                             : "Sauver"}
                       </Button>
                       <Button
-                        className="min-w-56"
+                        className="min-w-56 cursor-pointer"
                         variant={confirmDeleteChoiceId === choice.id ? "destructive" : "outline"}
                         onClick={() => deleteChoice(choice.id)}
                       >
@@ -476,7 +476,7 @@ export default function EditQuestionPage() {
                   <Button
                   onClick={ () => createNewChoice()}
                   disabled={savingChoiceId === 0}
-                  className="min-w-56"
+                  className="min-w-56 cursor-pointer"
                   >
                     {savingChoiceId === 0
                       ? "Sauvegarde..."
