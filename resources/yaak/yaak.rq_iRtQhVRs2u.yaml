@@ -2,7 +2,7 @@ type: http_request
 model: http_request
 id: rq_iRtQhVRs2u
 createdAt: 2026-06-16T11:44:37.165918900
-updatedAt: 2026-06-19T10:31:42.419363400
+updatedAt: 2026-06-18T13:54:24.351122
 workspaceId: wk_VTFsBwidP6
 folderId: null
 authentication:
@@ -11,7 +11,7 @@ authenticationType: bearer
 body:
   text: |-
     {
-      "email" : "emma.durand@example.com",
+      "email" : "admin@comutitres.fr",
       "password" : "pass"
     }
 bodyType: application/json

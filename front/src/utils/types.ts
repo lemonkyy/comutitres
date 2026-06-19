@@ -124,7 +124,7 @@ export type CollectionQuestionInput = {
 
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
   question: string;
-};
+}
 
 export type CreateQuestionInput = {
   text: string;

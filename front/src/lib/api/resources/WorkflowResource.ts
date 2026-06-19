@@ -7,6 +7,7 @@ import type {
   CreateQuestionInput,
   UpdateChoiceInput,
   UpdateQuestionInput,
+  WorkflowChoice,
   WorkflowQuestion,
   WorkflowQuestionTypeEnum,
   WorkflowStepResult,
