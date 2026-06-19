@@ -90,12 +90,15 @@ export type MyDocuments = Partial<Record<DocumentKind, DocumentProof | null>>;
 export type WorkflowChoice = {
   id: number;
   text: string;
+  nextQuestionId: number | null;
+  recommendedPassId: string | null;
 };
 
 export type WorkflowQuestion = {
   id: number;
   text: string;
   choices: WorkflowChoice[];
+  isFirst: boolean;
 };
 
 export type WorkflowPass = {
@@ -115,9 +118,13 @@ export type CreateChoiceInput = {
   recommendedPassId?: string | null;
 };
 
+export type CollectionQuestionInput = {
+  text?: string;
+}
+
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
-  questionId: number;
-};
+  question: string;
+}
 
 export type CreateQuestionInput = {
   text: string;

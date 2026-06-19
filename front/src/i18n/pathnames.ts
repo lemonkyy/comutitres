@@ -45,7 +45,10 @@ export const pathnames = {
     "/administration/utilisateurs/[userId]",
   "/administration/documents": "/administration/documents",
   "/administration/documents/[documentId]":
-    "/administration/documents/[documentId]",
+  "/administration/documents/[documentId]",
+  "/administration/questions": "/administration/questions",
+  "/administration/questions/create": "/administration/questions/create",
+  "/administration/questions/[questionId]": "/administration/questions/[questionId]",
 };
 
 export type AppPathname = keyof typeof pathnames;
