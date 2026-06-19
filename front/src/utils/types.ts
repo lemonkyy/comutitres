@@ -90,8 +90,14 @@ export type MyDocuments = Partial<Record<DocumentKind, DocumentProof | null>>;
 export type WorkflowChoice = {
   id: number;
   text: string;
-  nextQuestionId: number | null;
-  recommendedPassId: string | null;
+  nextQuestion?: {
+    id: number;
+    text: string;
+  } | null;
+  recommendedPass?: {
+    id: string;
+    name: string;
+  } | null;
 };
 
 export type WorkflowQuestion = {
