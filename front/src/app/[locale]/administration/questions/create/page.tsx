@@ -292,7 +292,7 @@ export default function CreateQuestionPage() {
                 </div>
 
                 <Button
-                  className="min-w-56"
+                  className="min-w-32 cursor-pointer"
                   variant="outline"
                   onClick={() =>
                     removeChoice(choice.id)
@@ -308,6 +308,7 @@ export default function CreateQuestionPage() {
             <Button
               variant="outline"
               onClick={addChoice}
+              className="cursor-pointer"
             >
               Ajouter un choix
             </Button>
