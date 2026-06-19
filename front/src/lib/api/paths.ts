@@ -27,6 +27,7 @@ export const apiPaths = {
     delete: "/questions/:id",
   },
   choice: {
+    create: "/choices",
     update: "/choices/:id",
     delete: "/choices/:id",
   },

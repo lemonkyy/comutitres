@@ -46,10 +46,14 @@ export default function QuestionsPage() {
                 Liste complète des questions.
               </p>
             </div>
-
-            <Button asChild size="sm" variant="outline">
-              <Link href="/administration">Retour au dashboard</Link>
-            </Button>
+            <div>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/administration/questions/create">Ajouter une question</Link>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/administration">Retour au dashboard</Link>
+              </Button>
+            </div>
           </div>
 
           <div className="p-4 md:p-6">

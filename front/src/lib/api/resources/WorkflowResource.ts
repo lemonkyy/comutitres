@@ -4,11 +4,13 @@ import { apiPaths } from "@/lib/api/paths";
 import type {
   CollectionQuestionInput,
   CreateQuestionInput,
+  CreateChoiceInput,
   UpdateChoiceInput,
   UpdateQuestionInput,
   WorkflowQuestion,
   WorkflowQuestionTypeEnum,
   WorkflowStepResult,
+  WorkflowChoice,
 } from "@/utils/types";
 
 export class WorkflowResource {
@@ -73,6 +75,16 @@ export class WorkflowResource {
   ): Promise<WorkflowQuestion | ApiClientError> {
     return this.apiClient.patch<WorkflowQuestion>(
       apiPaths.choice.update.replace(":id", String(id)),
+      data,
+    );
+  }
+
+  public async createChoice(
+    questionId: number,
+    data: CreateChoiceInput
+  ) : Promise <WorkflowChoice | ApiClientError> {
+    return this.apiClient.post<WorkflowChoice>(
+      apiPaths.choice.create,
       data,
     );
   }

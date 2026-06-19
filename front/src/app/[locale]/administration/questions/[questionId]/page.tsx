@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card/card";
 import { Button } from "@/components/actions/button/button";
 import { Input } from "@/components/ui/input/input";
 import { useApiClient } from "@/contexts/api-client";
-import { WorkflowQuestion } from "@/utils/types";
+import { WorkflowQuestion, type Pass, type WorkflowChoice } from "@/utils/types";
 
 export default function EditQuestionPage() {
   const { apiClient } = useApiClient();
@@ -21,9 +21,18 @@ export default function EditQuestionPage() {
   const [error, setError] = useState<string | null>(null);
 
   const [question, setQuestion] = useState<WorkflowQuestion | null>(null);
-
   const [questionText, setQuestionText] = useState("");
-  const [choiceTexts, setChoiceTexts] = useState<Record<number, string>>({});
+
+  const [choices, setChoices] = useState<WorkflowChoice[]>([]);
+  const [newChoice, setNewChoice] = useState<WorkflowChoice>({
+    id: 0,
+    text: "",
+    nextQuestionId: null,
+    recommendedPassId: null,
+  });
+
+  const [passes, setPasses] = useState<Pass[]>([]);
+  const [allQuestions, setAllQuestions] = useState<WorkflowQuestion[]>([]);
 
   const [savingQuestion, setSavingQuestion] = useState(false);
   const [savingChoiceId, setSavingChoiceId] = useState<number | null>(null);
@@ -40,7 +49,7 @@ export default function EditQuestionPage() {
       setLoading(true);
 
       const response = await apiClient.workflow.getQuestion(questionId);
-
+      
       if (response instanceof Error) {
         setError(response.message);
         setLoading(false);
@@ -50,15 +59,45 @@ export default function EditQuestionPage() {
       setQuestion(response);
       setQuestionText(response.text);
 
-      setChoiceTexts(
-        Object.fromEntries(response.choices.map((c) => [c.id, c.text]))
+      setChoices(
+        response.choices.map((c: any) => ({
+          id: c.id,
+          text: c.text,
+          nextQuestionId: c.nextQuestionId ?? null,
+          recommendedPassId: c.recommendedPassId ?? null,
+        }))
       );
 
+      
       setLoading(false);
     }
-
+    
     fetchData();
   }, [questionId, apiClient]);
+  
+  console.log(choices);
+  useEffect(() => {
+    async function fetchPasses() {
+      const response = await apiClient.pass.getCollection();
+      if (response instanceof Error) return;
+
+      const items = response["hydra:member"] ?? response.member ?? [];
+      setPasses(items);
+    }
+
+    fetchPasses();
+  }, [apiClient]);
+
+  useEffect(() => {
+    async function fetchAllQuestions() {
+      const response = await apiClient.workflow.getCollectionQuestion({});
+      if (response instanceof Error) return;
+
+      setAllQuestions(response);
+    }
+
+    fetchAllQuestions();
+  }, [apiClient]);
 
   async function saveQuestion() {
     setSavingQuestion(true);
@@ -80,12 +119,14 @@ export default function EditQuestionPage() {
     setTimeout(() => setQuestionStatus(null), 1500);
   }
 
-  async function saveChoice(choiceId: number) {
-    setSavingChoiceId(choiceId);
+  async function saveChoice(choice: WorkflowChoice) {
+    setSavingChoiceId(choice.id);
     setError(null);
 
-    const response = await apiClient.workflow.updateChoice(choiceId, {
-      text: choiceTexts[choiceId],
+    const response = await apiClient.workflow.updateChoice(choice.id, {
+      text: choice.text,
+      nextQuestionId: choice.nextQuestionId,
+      recommendedPassId: choice.recommendedPassId,
     });
 
     if (response instanceof Error) {
@@ -98,15 +139,41 @@ export default function EditQuestionPage() {
 
     setChoiceStatus((prev) => ({
       ...prev,
-      [choiceId]: "saved",
+      [choice.id]: "saved",
     }));
 
     setTimeout(() => {
       setChoiceStatus((prev) => ({
         ...prev,
-        [choiceId]: null,
+        [choice.id]: null,
       }));
     }, 1500);
+  }
+
+  async function createNewChoice() {
+    setSavingChoiceId(newChoice.id);
+    setError(null);
+
+    if (!question) return;
+
+    const response = await apiClient.workflow.createChoice(question.id, {
+      text: newChoice.text,
+      nextQuestionId: newChoice.nextQuestionId,
+      recommendedPassId: newChoice.recommendedPassId,
+    });
+
+    if (response instanceof Error) {
+      setError(response.message);
+      setSavingChoiceId(null);
+      return;
+    }
+
+    setNewChoice({
+      id: 0,
+      text: "",
+      nextQuestionId: null,
+      recommendedPassId: null,
+    })
   }
 
   async function deleteQuestion() {
@@ -142,15 +209,7 @@ export default function EditQuestionPage() {
       return;
     }
 
-    setQuestion((prev) =>
-      prev
-        ? {
-            ...prev,
-            choices: prev.choices.filter((c) => c.id !== choiceId),
-          }
-        : prev
-    );
-
+    setChoices((prev) => prev.filter((c) => c.id !== choiceId));
     setConfirmDeleteChoiceId(null);
   }
 
@@ -159,7 +218,7 @@ export default function EditQuestionPage() {
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
 
         <Card className="overflow-hidden" padding="none">
-          <div className="flex flex-col gap-3 border-b border-border/70 px-5 py-5 md:flex-row md:items-center md:justify-between md:px-7">
+          <div className="flex flex-col gap-3 px-5 py-5 md:flex-row md:items-center md:justify-between md:px-7">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
                 Administration
@@ -171,7 +230,7 @@ export default function EditQuestionPage() {
 
             <div className="flex gap-2">
               <Button
-              className="min-w-36"
+                className="min-w-36"
                 variant={confirmDeleteQuestion ? "destructive" : "outline"}
                 onClick={deleteQuestion}
               >
@@ -183,9 +242,7 @@ export default function EditQuestionPage() {
               </Button>
 
               <Button asChild variant="outline">
-                <Link href="/administration/questions">
-                  Retour
-                </Link>
+                <Link href="/administration/questions">Retour</Link>
               </Button>
             </div>
           </div>
@@ -198,75 +255,211 @@ export default function EditQuestionPage() {
         )}
 
         {loading && (
-          <p className="text-sm text-muted-foreground">
-            Chargement...
-          </p>
+          <p className="text-sm text-muted-foreground">Chargement...</p>
         )}
 
         {!loading && question && (
           <>
             <Card>
-              <div className="flex flex-row w-full justify-between gap-4">
+              <h2 className="text-sm font-semibold">Titre</h2>
+              <div className="flex justify-between gap-4 mt-2">
                 <Input
                   value={questionText}
                   onChange={(e) => setQuestionText(e.target.value)}
                 />
 
-                <div className="flex justify-end">
-                  <Button onClick={saveQuestion} disabled={savingQuestion} className="min-w-36">
-                    {savingQuestion
-                      ? "Sauvegarde..."
-                      : questionStatus === "saved"
-                        ? "Sauvegardé"
-                        : "Sauver"}
-                  </Button>
-                </div>
+                <Button
+                  onClick={saveQuestion}
+                  disabled={savingQuestion}
+                  className="min-w-36"
+                >
+                  {savingQuestion
+                    ? "Sauvegarde..."
+                    : questionStatus === "saved"
+                      ? "Sauvegardé"
+                      : "Sauver"}
+                </Button>
               </div>
             </Card>
-
             <Card>
               <div className="flex flex-col gap-3">
                 <h2 className="text-sm font-semibold">Choix</h2>
 
-                {question.choices.map((choice) => (
-                  <div key={choice.id} className="flex gap-2">
+                {choices.map((choice) => (
+                  <div key={choice.id} className="flex gap-3 items-start">
+                    <div className="flex flex-col w-full gap-2">
+                      <Input
+                        value={choice.text}
+                        onChange={(e) =>
+                          setChoices((prev) =>
+                            prev.map((c) =>
+                              c.id === choice.id
+                                ? { ...c, text: e.target.value }
+                                : c
+                            )
+                          )
+                        }
+                      />
+
+                      <select
+                        className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                        value={choice.nextQuestionId ?? ""}
+                        onChange={(e) => {
+                          const value = e.target.value
+                            ? Number(e.target.value)
+                            : null;
+
+                          setChoices((prev) =>
+                            prev.map((c) =>
+                              c.id === choice.id
+                                ? {
+                                    ...c,
+                                    nextQuestionId: value,
+                                    recommendedPassId: value ? null : c.recommendedPassId,
+                                  }
+                                : c
+                            )
+                          );
+                        }}
+                      >
+                        <option value="">
+                          Aucune question suivante
+                        </option>
+
+                        {allQuestions
+                          .filter((q) => q.id !== question.id)
+                          .map((q) => (
+                            <option key={q.id} value={q.id}>
+                              {q.text}
+                            </option>
+                          ))}
+                      </select>
+
+                      <select
+                        className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                        value={choice.recommendedPassId ?? ""}
+                        onChange={(e) => {
+                          const value = e.target.value || null;
+
+                          setChoices((prev) =>
+                            prev.map((c) =>
+                              c.id === choice.id
+                                ? {
+                                    ...c,
+                                    recommendedPassId: value,
+                                    nextQuestionId: value ? null : c.nextQuestionId,
+                                  }
+                                : c
+                            )
+                          );
+                        }}
+                      >
+                        <option value="">
+                          Aucun pass recommandé
+                        </option>
+
+                        {passes.map((pass) => (
+                          <option key={pass.id} value={pass.id}>
+                            {pass.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                      <Button
+                        className="min-w-36"
+                        onClick={() =>
+                          saveChoice(choice)
+                        }
+                      >
+                        Sauver
+                      </Button>
+
+                      <Button
+                        className="min-w-36"
+                        variant="outline"
+                        onClick={() => deleteChoice(choice.id)}
+                      >
+                        Supprimer
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="mt-4 border-t pt-4 flex gap-3 items-start">
+                  <div className="flex flex-col w-full gap-2">
                     <Input
-                      value={choiceTexts[choice.id] ?? ""}
+                      placeholder="Nouveau choix"
+                      value={newChoice.text}
                       onChange={(e) =>
-                        setChoiceTexts((prev) => ({
+                        setNewChoice((prev) => ({
                           ...prev,
-                          [choice.id]: e.target.value,
+                          text: e.target.value,
                         }))
                       }
                     />
 
-                    <Button
-                      onClick={() => saveChoice(choice.id)}
-                      disabled={savingChoiceId === choice.id}
-                      className="min-w-36"
-                    >
-                      {savingChoiceId === choice.id
-                        ? "Sauvegarde..."
-                        : choiceStatus[choice.id] === "saved"
-                          ? "Sauvegardé"
-                          : "Sauver"}
-                    </Button>
+                    <select
+                      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                      value={newChoice.nextQuestionId ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value
+                          ? Number(e.target.value)
+                          : null;
 
-                    <Button
-                      className="min-w-36"
-                      variant={
-                        confirmDeleteChoiceId === choice.id
-                          ? "destructive"
-                          : "outline"
-                      }
-                      onClick={() => deleteChoice(choice.id)}
+                        setNewChoice((prev) => ({
+                          ...prev,
+                          nextQuestionId: value,
+                          recommendedPassId: value ? null : prev.recommendedPassId,
+                        }));
+                      }}
                     >
-                      {confirmDeleteChoiceId === choice.id
-                        ? "Confirmer ?"
-                        : "Supprimer"}
-                    </Button>
+                      <option value="">
+                        Aucune question suivante
+                      </option>
+
+                      {allQuestions
+                        .filter((q) => q.id !== question.id)
+                        .map((q) => (
+                          <option key={q.id} value={q.id}>
+                            {q.text}
+                          </option>
+                        ))}
+                    </select>
+
+                    <select
+                      className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm"
+                      value={newChoice.recommendedPassId ?? ""}
+                      onChange={(e) => {
+                        const value = e.target.value || null;
+
+                        setNewChoice((prev) => ({
+                          ...prev,
+                          recommendedPassId: value,
+                          nextQuestionId: value ? null : prev.nextQuestionId,
+                        }));
+                      }}
+                    >
+                      <option value="">
+                        Aucun pass recommandé
+                      </option>
+
+                      {passes.map((pass) => (
+                        <option key={pass.id} value={pass.id}>
+                          {pass.name}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-                ))}
+
+                  <Button
+                    className="min-w-36"
+                    onClick={ () => createNewChoice() }
+                  >
+                    Créer
+                  </Button>
+                </div>
               </div>
             </Card>
           </>
