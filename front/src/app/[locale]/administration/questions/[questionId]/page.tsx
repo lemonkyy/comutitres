@@ -7,7 +7,14 @@ import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
 import { Input } from "@/components/ui/input/input";
 import { useApiClient } from "@/contexts/api-client";
-import type { Pass, WorkflowChoice, WorkflowQuestion } from "@/utils/types";
+import type { Pass, WorkflowQuestion } from "@/utils/types";
+
+type ChoiceForm = {
+  id: number;
+  text: string;
+  nextQuestionId: number | null;
+  recommendedPassId: string | null;
+};
 
 export default function EditQuestionPage() {
   const { apiClient } = useApiClient();
@@ -23,8 +30,8 @@ export default function EditQuestionPage() {
   const [questionText, setQuestionText] = useState("");
   const [isFirst, setIsFirst] = useState(false);
 
-  const [choices, setChoices] = useState<WorkflowChoice[]>([]);
-  const [newChoice, setNewChoice] = useState<WorkflowChoice>({
+  const [choices, setChoices] = useState<ChoiceForm[]>([]);
+  const [newChoice, setNewChoice] = useState<ChoiceForm>({
     id: 0,
     text: "",
     nextQuestionId: null,
@@ -65,11 +72,11 @@ export default function EditQuestionPage() {
       setIsFirst(response.isFirst);
 
       setChoices(
-        response.choices.map((c: any) => ({
+        response.choices.map((c) => ({
           id: c.id,
           text: c.text,
-          nextQuestionId: c.nextQuestionId ?? null,
-          recommendedPassId: c.recommendedPassId ?? null,
+          nextQuestionId: c.nextQuestion?.id ?? null,
+          recommendedPassId: c.recommendedPass?.id ?? null,
         })),
       );
 
@@ -123,7 +130,7 @@ export default function EditQuestionPage() {
     setTimeout(() => setQuestionStatus(null), 1500);
   }
 
-  async function saveChoice(choice: WorkflowChoice) {
+  async function saveChoice(choice: ChoiceForm) {
     setSavingChoiceId(choice.id);
     setError(null);
 

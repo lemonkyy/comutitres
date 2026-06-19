@@ -7,7 +7,14 @@ import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
 import { Input } from "@/components/ui/input/input";
 import { useApiClient } from "@/contexts/api-client";
-import type { Pass, WorkflowChoice, WorkflowQuestion } from "@/utils/types";
+import type { Pass, WorkflowQuestion } from "@/utils/types";
+
+type ChoiceForm = {
+  id: number;
+  text: string;
+  nextQuestionId: number | null;
+  recommendedPassId: string | null;
+};
 
 export default function CreateQuestionPage() {
   const { apiClient } = useApiClient();
@@ -21,7 +28,7 @@ export default function CreateQuestionPage() {
   const [passes, setPasses] = useState<Pass[]>([]);
   const [allQuestions, setAllQuestions] = useState<WorkflowQuestion[]>([]);
 
-  const [choices, setChoices] = useState<WorkflowChoice[]>([
+  const [choices, setChoices] = useState<ChoiceForm[]>([
     {
       id: 0,
       text: "",
@@ -53,7 +60,7 @@ export default function CreateQuestionPage() {
     loadData();
   }, [apiClient]);
 
-  function updateChoice(id: number, data: Partial<WorkflowChoice>) {
+  function updateChoice(id: number, data: Partial<ChoiceForm>) {
     setChoices((prev) =>
       prev.map((choice) =>
         choice.id === id
