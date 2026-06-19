@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AlertTriangle,
   ArrowRight,
@@ -8,10 +10,21 @@ import {
   Ticket,
 } from "lucide-react";
 import Image from "next/image";
-import type * as React from "react";
+import {
+  usePathname as useNextPathname,
+  useRouter as useNextRouter,
+} from "next/navigation";
+import {
+  type MouseEvent,
+  type ReactNode,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
+import { Skeleton } from "@/components/ui/skeleton/skeleton";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
@@ -41,6 +54,7 @@ export type AccountPassesCopy = {
   errorTitle: string;
   invoiceLabel: string;
   latestPaymentLabel: string;
+  loadingPaymentsLabel: string;
   noInvoiceLabel: string;
   paidStatusLabel: string;
   passListDescription: string;
@@ -75,6 +89,19 @@ export function AccountPasses({
   selectedPassId,
   selectedPassMissing = false,
 }: AccountPassesProps) {
+  const pathname = useNextPathname();
+  const router = useNextRouter();
+  const [pendingPassId, setPendingPassId] = useState<string | null>(null);
+  const [isNavigationPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (!pendingPassId || pendingPassId !== selectedPassId) {
+      return;
+    }
+
+    setPendingPassId(null);
+  }, [pendingPassId, selectedPassId]);
+
   if (errorMessage) {
     return (
       <AccountPassesStatus
@@ -103,8 +130,28 @@ export function AccountPasses({
     );
   }
 
+  const optimisticSelectedPassId = pendingPassId ?? selectedPassId;
   const selectedPass =
-    passes.find((pass) => pass.id === selectedPassId) ?? passes[0];
+    passes.find((pass) => pass.id === optimisticSelectedPassId) ?? passes[0];
+  const isShowingPendingSelection = Boolean(
+    pendingPassId && pendingPassId !== selectedPassId,
+  );
+  const shouldShowPaymentSkeleton =
+    isShowingPendingSelection || isNavigationPending;
+  const showMissingState = selectedPassMissing && !isShowingPendingSelection;
+
+  const selectPass = (passId: string) => {
+    if (passId === selectedPassId && !selectedPassMissing) {
+      return;
+    }
+
+    setPendingPassId(passId);
+    startTransition(() => {
+      router.push(`${pathname}?pass=${encodeURIComponent(passId)}`, {
+        scroll: false,
+      });
+    });
+  };
 
   return (
     <div className="grid gap-5">
@@ -132,23 +179,28 @@ export function AccountPasses({
           <div className="grid gap-2 bg-[color-mix(in_srgb,var(--bleu-clair)_56%,white)] p-3">
             {passes.map((pass) => (
               <AccountPassListItem
-                current={pass.id === selectedPass.id && !selectedPassMissing}
+                current={pass.id === selectedPass.id && !showMissingState}
                 key={pass.id}
+                onSelect={selectPass}
                 pass={pass}
+                pending={pass.id === pendingPassId}
               />
             ))}
           </div>
         </Card>
       </section>
 
-      {selectedPassMissing ? (
+      {showMissingState ? (
         <AccountPassesStatus
           description={copy.selectedMissingDescription}
           icon={AlertTriangle}
           title={copy.selectedMissingTitle}
         />
       ) : (
-        <section aria-labelledby="account-pass-details-title">
+        <section
+          aria-busy={shouldShowPaymentSkeleton ? true : undefined}
+          aria-labelledby="account-pass-details-title"
+        >
           <Card
             className="overflow-hidden border-[color-mix(in_srgb,var(--primary)_16%,transparent)] shadow-[var(--idfm-card-shadow)]"
             padding="none"
@@ -214,89 +266,17 @@ export function AccountPasses({
                 </div>
               </div>
 
-              {detailErrorMessage ? (
-                <div className="mt-5 rounded-[6px] border border-destructive/25 bg-[color-mix(in_srgb,var(--rouge-clair)_10%,white)] p-4 text-sm font-semibold leading-5 text-destructive">
-                  {detailErrorMessage}
-                </div>
-              ) : null}
-
-              <ol className="relative mt-5 grid gap-4 before:absolute before:top-5 before:bottom-5 before:left-[0.5625rem] before:w-px before:bg-[color-mix(in_srgb,var(--primary)_24%,transparent)]">
-                {payments.map((payment, index) => (
-                  <li
-                    className="relative grid grid-cols-[1.25rem_minmax(0,1fr)] gap-4"
-                    key={payment.id}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "relative z-10 mt-4 grid size-5 place-items-center rounded-full border-2 border-white bg-primary shadow-[0_0_0_3px_color-mix(in_srgb,var(--bleu-moyen)_74%,white)]",
-                        index === 0
-                          ? "bg-[var(--profil-senior)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--profil-senior)_18%,white)]"
-                          : null,
-                      )}
-                    >
-                      <span className="size-1.5 rounded-full bg-white" />
-                    </span>
-
-                    <div className="grid gap-4 rounded-[6px] border border-[color-mix(in_srgb,var(--primary)_12%,transparent)] bg-[var(--gris-clair-40)] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="inline-flex min-h-8 items-center gap-2 rounded-[6px] bg-white px-3 text-sm font-bold leading-5 text-[var(--profil-senior)] shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--profil-senior)_28%,transparent)]">
-                            <ReceiptText
-                              aria-hidden="true"
-                              className="size-4 stroke-[1.75]"
-                            />
-                            {copy.paymentStatusLabel} · {copy.paidStatusLabel}
-                          </span>
-                        </div>
-
-                        <dl className="mt-3 grid gap-2 sm:grid-cols-2">
-                          <div className="min-w-0">
-                            <dt className="flex items-center gap-2 text-sm font-semibold leading-5 text-muted-foreground">
-                              <CalendarDays
-                                aria-hidden="true"
-                                className="size-4 stroke-[1.75]"
-                              />
-                              {copy.paymentDateLabel}
-                            </dt>
-                            <dd className="mt-1 text-base font-bold leading-6 text-foreground">
-                              {payment.date}
-                            </dd>
-                          </div>
-                          <div className="min-w-0">
-                            <dt className="text-sm font-semibold leading-5 text-muted-foreground">
-                              {copy.paymentAmountLabel}
-                            </dt>
-                            <dd className="mt-1 text-base font-bold leading-6 text-foreground">
-                              {payment.amount}
-                            </dd>
-                          </div>
-                        </dl>
-                      </div>
-
-                      {payment.invoiceHref ? (
-                        <Button
-                          asChild
-                          className="w-full sm:w-fit"
-                          variant="outline"
-                        >
-                          <a download href={payment.invoiceHref}>
-                            <Download
-                              aria-hidden="true"
-                              data-icon="inline-start"
-                            />
-                            {copy.downloadInvoiceLabel}
-                          </a>
-                        </Button>
-                      ) : (
-                        <span className="inline-flex min-h-11 w-full items-center justify-center rounded-[6px] border border-[var(--gris-moyen)] bg-white px-3 text-sm font-bold leading-5 text-muted-foreground sm:w-fit">
-                          {copy.noInvoiceLabel}
-                        </span>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              {shouldShowPaymentSkeleton ? (
+                <AccountPassPaymentsSkeleton
+                  label={copy.loadingPaymentsLabel}
+                />
+              ) : (
+                <AccountPassPayments
+                  copy={copy}
+                  detailErrorMessage={detailErrorMessage}
+                  payments={payments}
+                />
+              )}
             </div>
           </Card>
         </section>
@@ -307,24 +287,47 @@ export function AccountPasses({
 
 function AccountPassListItem({
   current,
+  onSelect,
   pass,
+  pending,
 }: {
   current: boolean;
+  onSelect: (passId: string) => void;
   pass: AccountPassSummary;
+  pending: boolean;
 }) {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.shiftKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    onSelect(pass.id);
+  };
+
   return (
     <Link
+      aria-busy={pending ? true : undefined}
       aria-current={current ? "page" : undefined}
       className={cn(
         "group grid min-h-36 grid-cols-[8.75rem_minmax(0,1fr)] gap-4 rounded-[6px] border border-transparent bg-white p-3 text-left outline-none transition-[background-color,border-color,box-shadow,transform] duration-150 hover:border-primary/30 hover:shadow-[var(--idfm-card-shadow-hover)] active:scale-[0.99] focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/25",
         current
           ? "border-primary/40 bg-[color-mix(in_srgb,var(--bleu-moyen)_48%,white)] shadow-[var(--idfm-card-shadow)]"
           : null,
+        pending ? "border-primary/50 shadow-[var(--idfm-card-shadow)]" : null,
       )}
       href={{
         pathname: "/account/passes",
         query: { pass: pass.id },
       }}
+      onClick={handleClick}
     >
       <span className="flex h-32 items-end justify-center overflow-hidden rounded-[6px] bg-[var(--bleu-clair)] px-2 pt-3">
         <Image
@@ -348,8 +351,149 @@ function AccountPassListItem({
         <span className="mt-1 block truncate text-sm leading-5 text-primary">
           {pass.latestPaymentDate}
         </span>
+        {pending ? (
+          <span className="mt-3 block h-2 w-20 animate-pulse rounded-full bg-primary/20" />
+        ) : null}
       </span>
     </Link>
+  );
+}
+
+function AccountPassPayments({
+  copy,
+  detailErrorMessage,
+  payments,
+}: {
+  copy: AccountPassesCopy;
+  detailErrorMessage?: string;
+  payments: AccountPassPayment[];
+}) {
+  return (
+    <>
+      {detailErrorMessage ? (
+        <div className="mt-5 rounded-[6px] border border-destructive/25 bg-[color-mix(in_srgb,var(--rouge-clair)_10%,white)] p-4 text-sm font-semibold leading-5 text-destructive">
+          {detailErrorMessage}
+        </div>
+      ) : null}
+
+      <ol className="relative mt-5 grid gap-4 before:absolute before:top-5 before:bottom-5 before:left-[0.5625rem] before:w-px before:bg-[color-mix(in_srgb,var(--primary)_24%,transparent)]">
+        {payments.map((payment, index) => (
+          <li
+            className="relative grid grid-cols-[1.25rem_minmax(0,1fr)] gap-4"
+            key={payment.id}
+          >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "relative z-10 mt-4 grid size-5 place-items-center rounded-full border-2 border-white bg-primary shadow-[0_0_0_3px_color-mix(in_srgb,var(--bleu-moyen)_74%,white)]",
+                index === 0
+                  ? "bg-[var(--profil-senior)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--profil-senior)_18%,white)]"
+                  : null,
+              )}
+            >
+              <span className="size-1.5 rounded-full bg-white" />
+            </span>
+
+            <PaymentCard copy={copy} payment={payment} />
+          </li>
+        ))}
+      </ol>
+    </>
+  );
+}
+
+function AccountPassPaymentsSkeleton({ label }: { label: string }) {
+  return (
+    <div className="relative mt-5 grid gap-4 before:absolute before:top-5 before:bottom-5 before:left-[0.5625rem] before:w-px before:bg-[color-mix(in_srgb,var(--primary)_18%,transparent)]">
+      <span className="sr-only">{label}</span>
+      {["first", "second"].map((item) => (
+        <div
+          className="relative grid grid-cols-[1.25rem_minmax(0,1fr)] gap-4"
+          key={item}
+        >
+          <span
+            aria-hidden="true"
+            className="relative z-10 mt-4 grid size-5 place-items-center rounded-full border-2 border-white bg-[color-mix(in_srgb,var(--primary)_20%,white)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--bleu-moyen)_58%,white)]"
+          />
+          <div className="grid gap-4 rounded-[6px] border border-[color-mix(in_srgb,var(--primary)_12%,transparent)] bg-[var(--gris-clair-40)] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+            <div className="min-w-0">
+              <Skeleton className="h-8 w-44 bg-white" />
+              <dl className="mt-3 grid gap-2 sm:grid-cols-2">
+                <PaymentMetricSkeleton />
+                <PaymentMetricSkeleton />
+              </dl>
+            </div>
+            <Skeleton className="h-11 w-full bg-white sm:w-40" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PaymentMetricSkeleton() {
+  return (
+    <div className="min-w-0">
+      <Skeleton className="h-5 w-28" />
+      <Skeleton className="mt-2 h-6 w-36 max-w-full" />
+    </div>
+  );
+}
+
+function PaymentCard({
+  copy,
+  payment,
+}: {
+  copy: AccountPassesCopy;
+  payment: AccountPassPayment;
+}) {
+  return (
+    <div className="grid gap-4 rounded-[6px] border border-[color-mix(in_srgb,var(--primary)_12%,transparent)] bg-[var(--gris-clair-40)] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex min-h-8 items-center gap-2 rounded-[6px] bg-white px-3 text-sm font-bold leading-5 text-[var(--profil-senior)] shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--profil-senior)_28%,transparent)]">
+            <ReceiptText aria-hidden="true" className="size-4 stroke-[1.75]" />
+            {copy.paymentStatusLabel} · {copy.paidStatusLabel}
+          </span>
+        </div>
+
+        <dl className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div className="min-w-0">
+            <dt className="flex items-center gap-2 text-sm font-semibold leading-5 text-muted-foreground">
+              <CalendarDays
+                aria-hidden="true"
+                className="size-4 stroke-[1.75]"
+              />
+              {copy.paymentDateLabel}
+            </dt>
+            <dd className="mt-1 text-base font-bold leading-6 text-foreground">
+              {payment.date}
+            </dd>
+          </div>
+          <div className="min-w-0">
+            <dt className="text-sm font-semibold leading-5 text-muted-foreground">
+              {copy.paymentAmountLabel}
+            </dt>
+            <dd className="mt-1 text-base font-bold leading-6 text-foreground">
+              {payment.amount}
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      {payment.invoiceHref ? (
+        <Button asChild className="w-full sm:w-fit" variant="outline">
+          <a download href={payment.invoiceHref}>
+            <Download aria-hidden="true" data-icon="inline-start" />
+            {copy.downloadInvoiceLabel}
+          </a>
+        </Button>
+      ) : (
+        <span className="inline-flex min-h-11 w-full items-center justify-center rounded-[6px] border border-[var(--gris-moyen)] bg-white px-3 text-sm font-bold leading-5 text-muted-foreground sm:w-fit">
+          {copy.noInvoiceLabel}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -372,7 +516,7 @@ function AccountPassesStatus({
   icon: Icon,
   title,
 }: {
-  action?: React.ReactNode;
+  action?: ReactNode;
   description: string;
   icon: LucideIcon;
   title: string;

@@ -73,7 +73,6 @@ export class WorkflowResource {
     );
   }
 
-
   public async createChoice(
     data: CreateChoiceStandaloneInput,
   ): Promise<WorkflowChoice | ApiClientError> {

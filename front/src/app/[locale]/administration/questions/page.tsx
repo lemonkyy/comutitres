@@ -1,23 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Button } from "@/components/actions/button/button";
 import { Card } from "@/components/ui/card/card";
-import { Link } from "@/i18n/navigation";
-import { useEffect, useState } from "react";
-import { WorkflowQuestion } from "@/utils/types";
 import { useApiClient } from "@/contexts/api-client";
+import { Link } from "@/i18n/navigation";
+import type { WorkflowQuestion } from "@/utils/types";
 
 export default function QuestionsPage() {
-
   const { apiClient } = useApiClient();
 
   const [questionsError, setQuestionsError] = useState<string | null>(null);
-  const [allQuestions, setAllQuestions] = useState<WorkflowQuestion[] | null>(null);
+  const [allQuestions, setAllQuestions] = useState<WorkflowQuestion[] | null>(
+    null,
+  );
 
   useEffect(() => {
     async function fetchQuestions() {
-      const response = await apiClient.workflow.getCollectionQuestion({
-      });
+      const response = await apiClient.workflow.getCollectionQuestion({});
 
       if (response instanceof Error) {
         setQuestionsError(response.message);
@@ -48,7 +48,9 @@ export default function QuestionsPage() {
             </div>
             <div className="flex flex-row gap-2">
               <Button asChild size="sm" variant="outline">
-                <Link href="/administration/questions/create">Ajouter une question</Link>
+                <Link href="/administration/questions/create">
+                  Ajouter une question
+                </Link>
               </Button>
               <Button asChild size="sm" variant="outline">
                 <Link href="/administration">Retour au dashboard</Link>
@@ -76,45 +78,46 @@ export default function QuestionsPage() {
             ) : null}
 
             <div className="flex flex-col gap-2.5">
-              {allQuestions && allQuestions.map((question) => (
-                <article
-                  className="flex flex-col gap-4 rounded-xl bg-accent/55 p-5"
-                  key={question.id}
-                >
-                  <div className="flex flex-row items-center justify-between w-full">
-                    <h2 className="text-lg font-bold text-foreground">
-                      {question.text}
-                    </h2>
+              {allQuestions &&
+                allQuestions.map((question) => (
+                  <article
+                    className="flex flex-col gap-4 rounded-xl bg-accent/55 p-5"
+                    key={question.id}
+                  >
+                    <div className="flex flex-row items-center justify-between w-full">
+                      <h2 className="text-lg font-bold text-foreground">
+                        {question.text}
+                      </h2>
 
-                    <Button asChild size="sm" variant="outline">
-                      <Link
-                        href={{
+                      <Button asChild size="sm" variant="outline">
+                        <Link
+                          href={{
                             pathname: "/administration/questions/[questionId]",
                             params: { questionId: String(question.id) },
                           }}
-                      >
-                        Consulter
-                      </Link>
-                    </Button>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    {!question.choices || question.choices.length === 0 ? (
-                      <p className="text-sm text-muted-foreground">
-                        Aucun choix disponible.
-                      </p>
-                    ) : (
-                      question.choices.map((choice) => (
-                        <div
-                          key={choice.id}
-                          className="flex items-center justify-between rounded-lg bg-background px-4 py-3 text-sm text-foreground"
                         >
-                          {choice.text}
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </article>
-              ))}
+                          Consulter
+                        </Link>
+                      </Button>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {!question.choices || question.choices.length === 0 ? (
+                        <p className="text-sm text-muted-foreground">
+                          Aucun choix disponible.
+                        </p>
+                      ) : (
+                        question.choices.map((choice) => (
+                          <div
+                            key={choice.id}
+                            className="flex items-center justify-between rounded-lg bg-background px-4 py-3 text-sm text-foreground"
+                          >
+                            {choice.text}
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </article>
+                ))}
             </div>
           </div>
         </Card>

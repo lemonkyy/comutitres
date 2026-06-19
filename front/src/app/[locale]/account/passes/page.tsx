@@ -70,6 +70,7 @@ export default async function AccountPassesPage({
     errorTitle: titlesT("errorTitle"),
     invoiceLabel: titlesT("invoiceLabel"),
     latestPaymentLabel: titlesT("latestPaymentLabel"),
+    loadingPaymentsLabel: titlesT("loadingPaymentsLabel"),
     noInvoiceLabel: titlesT("noInvoiceLabel"),
     paidStatusLabel: titlesT("paidStatusLabel"),
     passListDescription: titlesT("passListDescription"),

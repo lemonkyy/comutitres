@@ -1,14 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-
-import { Card } from "@/components/ui/card/card";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/actions/button/button";
+import { Card } from "@/components/ui/card/card";
 import { Input } from "@/components/ui/input/input";
 import { useApiClient } from "@/contexts/api-client";
-import { WorkflowQuestion, type Pass, type WorkflowChoice } from "@/utils/types";
+import type { Pass, WorkflowChoice, WorkflowQuestion } from "@/utils/types";
 
 export default function EditQuestionPage() {
   const { apiClient } = useApiClient();
@@ -39,10 +38,14 @@ export default function EditQuestionPage() {
   const [savingChoiceId, setSavingChoiceId] = useState<number | null>(null);
 
   const [questionStatus, setQuestionStatus] = useState<null | "saved">(null);
-  const [choiceStatus, setChoiceStatus] = useState<Record<number, "saved" | null>>({});
+  const [choiceStatus, setChoiceStatus] = useState<
+    Record<number, "saved" | null>
+  >({});
 
   const [confirmDeleteQuestion, setConfirmDeleteQuestion] = useState(false);
-  const [confirmDeleteChoiceId, setConfirmDeleteChoiceId] = useState<number | null>(null);
+  const [confirmDeleteChoiceId, setConfirmDeleteChoiceId] = useState<
+    number | null
+  >(null);
   const [questionDeleted, setQuestionDeleted] = useState(false);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function EditQuestionPage() {
       setLoading(true);
 
       const response = await apiClient.workflow.getQuestion(questionId);
-      
+
       if (response instanceof Error) {
         setError(response.message);
         setLoading(false);
@@ -67,16 +70,15 @@ export default function EditQuestionPage() {
           text: c.text,
           nextQuestionId: c.nextQuestionId ?? null,
           recommendedPassId: c.recommendedPassId ?? null,
-        }))
+        })),
       );
 
-      
       setLoading(false);
     }
-    
+
     fetchData();
   }, [questionId, apiClient]);
-  
+
   useEffect(() => {
     async function fetchPasses() {
       const response = await apiClient.pass.getCollection();
@@ -106,7 +108,7 @@ export default function EditQuestionPage() {
 
     const response = await apiClient.workflow.updateQuestion(questionId, {
       text: questionText,
-      isFirst: isFirst
+      isFirst: isFirst,
     });
 
     if (response instanceof Error) {
@@ -162,7 +164,7 @@ export default function EditQuestionPage() {
       text: newChoice.text,
       nextQuestionId: newChoice.nextQuestionId,
       recommendedPassId: newChoice.recommendedPassId,
-      question: '/api/questions/'+question.id
+      question: "/api/questions/" + question.id,
     });
 
     if (response instanceof Error) {
@@ -170,15 +172,15 @@ export default function EditQuestionPage() {
       return;
     }
 
-    setChoices((prev) => [...prev, newChoice])
-    
+    setChoices((prev) => [...prev, newChoice]);
+
     setNewChoice({
       id: 0,
       text: "",
       nextQuestionId: null,
       recommendedPassId: null,
-    })
-    
+    });
+
     setSavingChoiceId(null);
   }
 
@@ -222,7 +224,6 @@ export default function EditQuestionPage() {
   return (
     <main className="min-h-dvh bg-background px-4 py-6 md:px-8 md:py-8">
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-5">
-
         <Card className="overflow-hidden" padding="none">
           <div className="flex flex-col gap-3 px-5 py-5 md:flex-row md:items-center md:justify-between md:px-7">
             <div>
@@ -290,13 +291,10 @@ export default function EditQuestionPage() {
                 <input
                   type="checkbox"
                   checked={isFirst}
-                  onChange={(e) =>
-                    setIsFirst(e.target.checked)
-                  }
+                  onChange={(e) => setIsFirst(e.target.checked)}
                 />
-
                 Question de départ
-            </label>
+              </label>
             </Card>
             <Card>
               <div className="flex flex-col gap-3">
@@ -312,8 +310,8 @@ export default function EditQuestionPage() {
                             prev.map((c) =>
                               c.id === choice.id
                                 ? { ...c, text: e.target.value }
-                                : c
-                            )
+                                : c,
+                            ),
                           )
                         }
                       />
@@ -332,16 +330,16 @@ export default function EditQuestionPage() {
                                 ? {
                                     ...c,
                                     nextQuestionId: value,
-                                    recommendedPassId: value ? null : c.recommendedPassId,
+                                    recommendedPassId: value
+                                      ? null
+                                      : c.recommendedPassId,
                                   }
-                                : c
-                            )
+                                : c,
+                            ),
                           );
                         }}
                       >
-                        <option value="">
-                          Aucune question suivante
-                        </option>
+                        <option value="">Aucune question suivante</option>
 
                         {allQuestions
                           .filter((q) => q.id !== question.id)
@@ -364,16 +362,16 @@ export default function EditQuestionPage() {
                                 ? {
                                     ...c,
                                     recommendedPassId: value,
-                                    nextQuestionId: value ? null : c.nextQuestionId,
+                                    nextQuestionId: value
+                                      ? null
+                                      : c.nextQuestionId,
                                   }
-                                : c
-                            )
+                                : c,
+                            ),
                           );
                         }}
                       >
-                        <option value="">
-                          Aucun pass recommandé
-                        </option>
+                        <option value="">Aucun pass recommandé</option>
 
                         {passes.map((pass) => (
                           <option key={pass.id} value={pass.id}>
@@ -385,11 +383,11 @@ export default function EditQuestionPage() {
 
                     <div className="flex flex-col gap-2">
                       <Button
-                        onClick={ () => saveChoice(choice)}
+                        onClick={() => saveChoice(choice)}
                         disabled={savingChoiceId === choice.id}
                         className="min-w-56 cursor-pointer"
                       >
-                        {savingChoiceId === choice.id 
+                        {savingChoiceId === choice.id
                           ? "Sauvegarde..."
                           : choiceStatus === "saved"
                             ? "Sauvegardé"
@@ -397,7 +395,11 @@ export default function EditQuestionPage() {
                       </Button>
                       <Button
                         className="min-w-56 cursor-pointer"
-                        variant={confirmDeleteChoiceId === choice.id ? "destructive" : "outline"}
+                        variant={
+                          confirmDeleteChoiceId === choice.id
+                            ? "destructive"
+                            : "outline"
+                        }
                         onClick={() => deleteChoice(choice.id)}
                       >
                         {confirmDeleteChoiceId === choice.id
@@ -432,13 +434,13 @@ export default function EditQuestionPage() {
                         setNewChoice((prev) => ({
                           ...prev,
                           nextQuestionId: value,
-                          recommendedPassId: value ? null : prev.recommendedPassId,
+                          recommendedPassId: value
+                            ? null
+                            : prev.recommendedPassId,
                         }));
                       }}
                     >
-                      <option value="">
-                        Aucune question suivante
-                      </option>
+                      <option value="">Aucune question suivante</option>
 
                       {allQuestions
                         .filter((q) => q.id !== question.id)
@@ -462,9 +464,7 @@ export default function EditQuestionPage() {
                         }));
                       }}
                     >
-                      <option value="">
-                        Aucun pass recommandé
-                      </option>
+                      <option value="">Aucun pass recommandé</option>
 
                       {passes.map((pass) => (
                         <option key={pass.id} value={pass.id}>
@@ -474,9 +474,9 @@ export default function EditQuestionPage() {
                     </select>
                   </div>
                   <Button
-                  onClick={ () => createNewChoice()}
-                  disabled={savingChoiceId === 0}
-                  className="min-w-56 cursor-pointer"
+                    onClick={() => createNewChoice()}
+                    disabled={savingChoiceId === 0}
+                    className="min-w-56 cursor-pointer"
                   >
                     {savingChoiceId === 0
                       ? "Création..."

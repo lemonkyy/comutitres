@@ -110,6 +110,7 @@
       "errorTitle": "Passes unavailable",
       "invoiceLabel": "Invoice",
       "latestPaymentLabel": "Latest payment",
+      "loadingPaymentsLabel": "Loading payments...",
       "noInvoiceLabel": "Invoice unavailable",
       "paidStatusLabel": "Paid",
       "passListDescription": "Select a pass to view its payments and invoices.",

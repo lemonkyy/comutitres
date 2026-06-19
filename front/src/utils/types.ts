@@ -120,11 +120,11 @@ export type CreateChoiceInput = {
 
 export type CollectionQuestionInput = {
   text?: string;
-}
+};
 
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
   question: string;
-}
+};
 
 export type CreateQuestionInput = {
   text: string;

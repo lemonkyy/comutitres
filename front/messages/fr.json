@@ -110,6 +110,7 @@
       "errorTitle": "Titres indisponibles",
       "invoiceLabel": "Facture",
       "latestPaymentLabel": "Dernier paiement",
+      "loadingPaymentsLabel": "Chargement des paiements...",
       "noInvoiceLabel": "Facture indisponible",
       "paidStatusLabel": "Payé",
       "passListDescription": "Sélectionnez un titre pour afficher ses paiements et factures.",
