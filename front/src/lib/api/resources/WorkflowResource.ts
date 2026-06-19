@@ -11,7 +11,6 @@ import type {
   WorkflowQuestion,
   WorkflowQuestionTypeEnum,
   WorkflowStepResult,
-  WorkflowChoice,
 } from "@/utils/types";
 
 export class WorkflowResource {
