@@ -24,7 +24,10 @@ use Gedmo\Translatable\Translatable;
 #[ApiResource(operations: [
     new Get(
         uriTemplate: '/questions/{id}',
-        normalizationContext: ['groups' => ['question:read']],
+        normalizationContext: [
+            'groups' => ['question:read'],
+            'call_paf_san' => true,
+        ],
     ),
     new GetCollection(
         uriTemplate: '/questions',
