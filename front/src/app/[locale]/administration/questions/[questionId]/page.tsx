@@ -479,7 +479,7 @@ export default function EditQuestionPage() {
                   className="min-w-56 cursor-pointer"
                   >
                     {savingChoiceId === 0
-                      ? "Sauvegarde..."
+                      ? "Création..."
                       : choiceStatus === "saved"
                         ? "Créé"
                         : "Créer"}
