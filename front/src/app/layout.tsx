@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     title: "Comutitres",
   },
   icons: {
+    icon: [
+      {
+        url: "/assets/logos/comutitres-v-couleur.svg",
+        type: "image/svg+xml",
+      },
+    ],
     apple: "/apple-touch-icon.png",
   },
 };
