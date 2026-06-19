@@ -1,8 +1,8 @@
 "use client";
 
 import { Eye, UserRound } from "lucide-react";
-import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
+import { useLocale } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/actions/button/button";
@@ -47,7 +47,9 @@ export default function AdministrationUserDetailPage() {
       }
 
       if (result instanceof ApiClientError) {
-        setUsersError(result.message || "Impossible de recuperer l'utilisateur");
+        setUsersError(
+          result.message || "Impossible de recuperer l'utilisateur",
+        );
         return;
       }
 
@@ -122,7 +124,8 @@ export default function AdministrationUserDetailPage() {
 
     return [...currentInvoices].sort(
       (left, right) =>
-        new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime(),
+        new Date(right.createdAt).getTime() -
+        new Date(left.createdAt).getTime(),
     );
   }, [currentInvoices]);
 
@@ -206,14 +209,16 @@ export default function AdministrationUserDetailPage() {
                     Rôles
                   </p>
                   <div className="mt-1 flex flex-wrap gap-1.5">
-                    {(user.roles?.length ? user.roles : ["ROLE_USER"]).map((role) => (
-                      <span
-                        className="rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary"
-                        key={role}
-                      >
-                        {role.replace("ROLE_", "")}
-                      </span>
-                    ))}
+                    {(user.roles?.length ? user.roles : ["ROLE_USER"]).map(
+                      (role) => (
+                        <span
+                          className="rounded-full bg-accent px-2.5 py-1 text-xs font-bold text-primary"
+                          key={role}
+                        >
+                          {role.replace("ROLE_", "")}
+                        </span>
+                      ),
+                    )}
                   </div>
                 </div>
 
@@ -292,7 +297,9 @@ export default function AdministrationUserDetailPage() {
                           <Button
                             onClick={() =>
                               window.open(
-                                getInvoicePdfUrl(invoice.invoiceId ?? invoice.id),
+                                getInvoicePdfUrl(
+                                  invoice.invoiceId ?? invoice.id,
+                                ),
                                 "_blank",
                                 "noopener,noreferrer",
                               )

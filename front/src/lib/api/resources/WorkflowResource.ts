@@ -36,15 +36,20 @@ export class WorkflowResource {
     );
   }
 
-  public async getQuestion(id: number): Promise<WorkflowQuestion | ApiClientError> {
+  public async getQuestion(
+    id: number,
+  ): Promise<WorkflowQuestion | ApiClientError> {
     return this.apiClient.get<WorkflowQuestion>(
       apiPaths.question.details.replace(":id", String(id)),
     );
   }
 
-  public async getQuestions(text?: string, type?: WorkflowQuestionTypeEnum): Promise<WorkflowQuestion | ApiClientError> {
+  public async getQuestions(
+    text?: string,
+    type?: WorkflowQuestionTypeEnum,
+  ): Promise<WorkflowQuestion | ApiClientError> {
     return this.apiClient.get<WorkflowQuestion>(
-      `${apiPaths.question.collection}?text=${text ?? ''}${type ? `&type=${type}` : ''}`,
+      `${apiPaths.question.collection}?text=${text ?? ""}${type ? `&type=${type}` : ""}`,
     );
   }
 
@@ -74,11 +79,19 @@ export class WorkflowResource {
     );
   }
 
-  public async deleteQuestion(id: number): Promise<DeleteResponse | ApiClientError> {
-    return this.apiClient.delete(apiPaths.question.delete.replace(":id", String(id)));
+  public async deleteQuestion(
+    id: number,
+  ): Promise<DeleteResponse | ApiClientError> {
+    return this.apiClient.delete(
+      apiPaths.question.delete.replace(":id", String(id)),
+    );
   }
 
-  public async deleteChoice(id: number): Promise<DeleteResponse | ApiClientError> {
-    return this.apiClient.delete(apiPaths.choice.delete.replace(":id", String(id)));
+  public async deleteChoice(
+    id: number,
+  ): Promise<DeleteResponse | ApiClientError> {
+    return this.apiClient.delete(
+      apiPaths.choice.delete.replace(":id", String(id)),
+    );
   }
 }
