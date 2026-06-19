@@ -162,21 +162,24 @@ export default function EditQuestionPage() {
       text: newChoice.text,
       nextQuestionId: newChoice.nextQuestionId,
       recommendedPassId: newChoice.recommendedPassId,
-      question: question.id
+      question: '/api/questions/'+question.id
     });
 
     if (response instanceof Error) {
       setError(response.message);
-      setSavingChoiceId(null);
       return;
     }
 
+    setChoices((prev) => [...prev, newChoice])
+    
     setNewChoice({
       id: 0,
       text: "",
       nextQuestionId: null,
       recommendedPassId: null,
     })
+    
+    setSavingChoiceId(null);
   }
 
   async function deleteQuestion() {

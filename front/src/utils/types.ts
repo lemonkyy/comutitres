@@ -123,7 +123,7 @@ export type CollectionQuestionInput = {
 }
 
 export type CreateChoiceStandaloneInput = CreateChoiceInput & {
-  question: number;
+  question: string;
 };
 
 export type CreateQuestionInput = {
