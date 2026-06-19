@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  createContext,
   type ReactNode,
+  createContext,
   useCallback,
   useContext,
   useState,
@@ -20,7 +20,7 @@ type InvoiceContextType = {
   getInvoiceById: (invoiceId: string) => Promise<Blob | ApiClientError>;
   getInvoicePdf: (invoiceId: string) => Promise<Blob | ApiClientError>;
   getInvoicePdfUrl: (invoiceId: string) => string;
-  getInvoiceCount: () => Promise<{data: number} | ApiClientError>;
+  getInvoiceCount: () => Promise<{ data: number } | ApiClientError>;
   getUserInvoices: (userId: string) => Promise<Purchase[] | ApiClientError>;
 };
 
@@ -65,25 +65,24 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
     },
     [apiClient],
   );
- 
+
   const getUserInvoices = useCallback(
     async (userId: string): Promise<Purchase[] | ApiClientError> => {
       return apiClient.invoice.getUserInvoices(userId);
     },
     [apiClient],
   );
-  
-  const getInvoiceCount = useCallback(
-    async (): Promise<{data: number} | ApiClientError> => {
-      const result = await apiClient.invoice.getTotalInvoiceCount();
-      if (result instanceof ApiClientError) {
-        return result;
-      }
-      setInvoicesCount(result.data);
+
+  const getInvoiceCount = useCallback(async (): Promise<
+    { data: number } | ApiClientError
+  > => {
+    const result = await apiClient.invoice.getTotalInvoiceCount();
+    if (result instanceof ApiClientError) {
       return result;
-    },
-    [apiClient],
-  );
+    }
+    setInvoicesCount(result.data);
+    return result;
+  }, [apiClient]);
 
   return (
     <InvoiceContext.Provider

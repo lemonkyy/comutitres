@@ -41,7 +41,8 @@ export const pathnames = {
   },
   "/administration": "/administration",
   "/administration/utilisateurs": "/administration/utilisateurs",
-  "/administration/utilisateurs/[userId]": "/administration/utilisateurs/[userId]",
+  "/administration/utilisateurs/[userId]":
+    "/administration/utilisateurs/[userId]",
   "/administration/documents": "/administration/documents",
   "/administration/documents/[documentId]":
   "/administration/documents/[documentId]",

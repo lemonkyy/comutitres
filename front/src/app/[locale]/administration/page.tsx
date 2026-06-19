@@ -15,12 +15,12 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/actions/button/button";
 import Icon from "@/components/assets/icon";
 import { Card } from "@/components/ui/card/card";
+import { useDocument } from "@/contexts/document-context";
 import { useInvoice } from "@/contexts/invoice-context";
 import { useUser } from "@/contexts/user-context";
 import { Link } from "@/i18n/navigation";
 import { ApiClientError } from "@/lib/api/ApiClientError";
 import type { DocumentEnum, User } from "@/utils/types";
-import { useDocument } from "@/contexts/document-context";
 
 type Kpi = {
   id: string;
@@ -203,7 +203,9 @@ export default function AdministrationHomePage() {
       }
 
       if (result instanceof ApiClientError) {
-        setInvoicesError(result.message || "Impossible de recuperer le nombre de factures");
+        setInvoicesError(
+          result.message || "Impossible de recuperer le nombre de factures",
+        );
         return;
       }
 

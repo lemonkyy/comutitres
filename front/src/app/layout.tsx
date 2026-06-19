@@ -1,3 +1,4 @@
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
@@ -6,6 +7,22 @@ import { getLocale } from "next-intl/server";
 
 type Props = {
   children: ReactNode;
+};
+
+export const metadata: Metadata = {
+  applicationName: "Comutitres",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Comutitres",
+  },
+  icons: {
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1972d2",
 };
 
 const RootLayout = async ({ children }: Props) => {

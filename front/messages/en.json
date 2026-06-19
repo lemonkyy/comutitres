@@ -339,6 +339,29 @@
       "administration": "Administration"
     }
   },
+  "notFound": {
+    "actions": {
+      "assistant": {
+        "description": "Answer a few questions to find the pass that fits.",
+        "label": "Assistant"
+      },
+      "home": {
+        "description": "Return to the Comutitres dashboard.",
+        "label": "Home"
+      },
+      "passes": {
+        "description": "Compare available tickets and passes.",
+        "label": "Fares and passes"
+      }
+    },
+    "description": "The requested page no longer exists, moved, or is not open yet.",
+    "imageAlt": "Navigo pass",
+    "kicker": "Page not found",
+    "primaryCtaLabel": "Back to home",
+    "secondaryCtaLabel": "View passes",
+    "statusLabel": "Station not served",
+    "title": "This destination is not on our line"
+  },
   "settings": {
     "accommodations": {
       "legend": "Assistance",

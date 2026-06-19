@@ -9,9 +9,16 @@ export class InvoiceResource {
   public async getCollection(): Promise<Purchase[] | ApiClientError> {
     return this.apiClient.get<Purchase[]>(apiPaths.invoice.collection);
   }
-  
-  public async getUserInvoices(userId: string): Promise<Purchase[] | ApiClientError> {
-    return this.apiClient.get<Purchase[]>(apiPaths.invoice.userCollection.replace(":id", encodeURIComponent(userId)));
+
+  public async getUserInvoices(
+    userId: string,
+  ): Promise<Purchase[] | ApiClientError> {
+    return this.apiClient.get<Purchase[]>(
+      apiPaths.invoice.userCollection.replace(
+        ":id",
+        encodeURIComponent(userId),
+      ),
+    );
   }
 
   public async getById(invoiceId: string): Promise<Blob | ApiClientError> {
@@ -23,8 +30,10 @@ export class InvoiceResource {
   public getInvoiceContentUrl(invoiceId: string): string {
     return `${this.apiClient.baseUrl}${apiPaths.invoice.item.replace(":id", encodeURIComponent(invoiceId))}`;
   }
-  
-  public async getTotalInvoiceCount(): Promise<{data: number} | ApiClientError> {
-    return this.apiClient.get<{data: number}>(apiPaths.invoice.totalInvoices);
+
+  public async getTotalInvoiceCount(): Promise<
+    { data: number } | ApiClientError
+  > {
+    return this.apiClient.get<{ data: number }>(apiPaths.invoice.totalInvoices);
   }
 }

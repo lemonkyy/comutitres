@@ -339,6 +339,29 @@
       "administration": "Administration"
     }
   },
+  "notFound": {
+    "actions": {
+      "assistant": {
+        "description": "Répondez à quelques questions pour retrouver le titre adapté.",
+        "label": "Assistant"
+      },
+      "home": {
+        "description": "Revenez au tableau de bord Comutitres.",
+        "label": "Accueil"
+      },
+      "passes": {
+        "description": "Comparez les titres et forfaits disponibles.",
+        "label": "Titres et tarifs"
+      }
+    },
+    "description": "La page demandée n'existe plus, a changé d'adresse ou n'est pas encore ouverte.",
+    "imageAlt": "Passe Navigo",
+    "kicker": "Page introuvable",
+    "primaryCtaLabel": "Retour à l'accueil",
+    "secondaryCtaLabel": "Voir les titres",
+    "statusLabel": "Station non desservie",
+    "title": "Cette destination n'est pas sur notre ligne"
+  },
   "settings": {
     "accommodations": {
       "legend": "Accompagnement",
